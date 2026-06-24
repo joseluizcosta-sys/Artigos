@@ -30,6 +30,13 @@
   .card p{margin:0;color:var(--ink-soft);font-size:17px;max-width:56ch}
   .card .go{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--crop);margin-top:16px;display:inline-block}
   .card:hover .go{text-decoration:underline}
+  .langs{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .langs a{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.04em;
+    text-decoration:none;color:var(--ink);border:1px solid var(--line);padding:8px 14px;
+    transition:background .2s,color .2s}
+  .langs a:hover{background:var(--ink);color:var(--paper)}
+  .langs a b{color:var(--crop);font-weight:500}
+  .langs a:hover b{color:var(--paper)}
   footer{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
     color:var(--slate);margin-top:clamp(40px,7vw,70px);border-top:1px solid var(--line);padding-top:20px}
 </style>
@@ -40,12 +47,15 @@
     <h1>Artigos</h1>
     <p class="sub">Resumos visuais de papers acadêmicos — cada um numa única página, para ler e compartilhar.</p>
 
-    <a class="card" href="algorithmic-monocultures-in-hiring/">
+    <div class="card">
       <div class="tag">Stanford Digital Economy Lab · maio 2026 · arXiv:2605.27371</div>
       <h2>Algorithmic Monocultures in Hiring</h2>
       <p>Quando os mesmos algoritmos triam quase todo mundo, as mesmas pessoas são rejeitadas em todo lugar. O maior estudo empírico de contratação algorítmica — 3,4M candidatos, 4M candidaturas, 156 empregadores.</p>
-      <span class="go">abrir apresentação →</span>
-    </a>
+      <div class="langs">
+        <a href="algorithmic-monocultures-in-hiring/"><b>PT</b> · Português →</a>
+        <a href="algorithmic-monocultures-in-hiring/en/"><b>EN</b> · English →</a>
+      </div>
+    </div>
 
     <footer>José Luiz Costa · github.com/joseluizcosta-sys/Artigos</footer>
   </main>

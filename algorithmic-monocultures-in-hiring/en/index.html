@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Algorithmic Monocultures in Hiring — apresentação</title>
+<title>Algorithmic Monocultures in Hiring — presentation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -216,16 +216,16 @@
 </head>
 <body>
 
-<nav class="langbar" aria-label="Idioma">
-  <a href="./" class="cur" aria-current="page">PT</a>
-  <a href="en/">EN</a>
+<nav class="langbar" aria-label="Language">
+  <a href="../">PT</a>
+  <a href="./" class="cur" aria-current="page">EN</a>
 </nav>
 
 <!-- ===================== HERO ===================== -->
 <header class="hero wrap">
-  <p class="eyebrow">Stanford Digital Economy Lab · arXiv:2605.27371 · 26 maio 2026</p>
+  <p class="eyebrow">Stanford Digital Economy Lab · arXiv:2605.27371 · 26 May 2026</p>
   <h1>Algorithmic <span class="hl">Monocultures</span> in Hiring</h1>
-  <p class="thesis">Quando um punhado de fornecedores fornece os algoritmos que triam quase todo mundo, <b>as mesmas pessoas são rejeitadas em todo lugar</b> — não por acaso, mas porque os sistemas decidem de forma correlacionada.</p>
+  <p class="thesis">When a handful of vendors supply the algorithms that screen nearly everyone, <b>the same people get rejected everywhere</b> — not by chance, but because the systems decide in correlated ways.</p>
 
   <div class="byline">
     <div class="author">Rishi Bommasani<span>Stanford</span></div>
@@ -238,41 +238,41 @@
 
 <!-- ===================== SIGNATURE: THE FIELD ===================== -->
 <section class="field-sec wrap">
-  <p class="field-claim">Plante a mesma semente em todo o campo e <em>uma praga derruba a colheita inteira.</em></p>
-  <p class="body" style="margin-top:10px;max-width:54ch">É a aposta do paper: a <b>monocultura algorítmica</b> faz a rejeição deixar de ser um evento por vaga e virar um destino. Alterne abaixo entre decisões independentes e a monocultura observada — e veja quem é rejeitado em <em>todas</em> as vagas.</p>
+  <p class="field-claim">Plant the same seed across the whole field and <em>one blight wipes out the entire harvest.</em></p>
+  <p class="body" style="margin-top:10px;max-width:54ch">That is the paper's wager: <b>algorithmic monoculture</b> turns rejection from a per-job event into a fate. Toggle below between independent decisions and the observed monoculture — and watch who gets rejected from <em>every</em> position.</p>
 
   <div class="field-grid">
     <!-- left: the field -->
     <div>
       <div class="field-box">
-        <div class="field-toggle" role="tablist" aria-label="Modo de simulação">
-          <button id="btn-indep" role="tab" aria-selected="false">Decisões independentes<br>(esperado por acaso)</button>
-          <button id="btn-mono" role="tab" aria-selected="true" class="on">Monocultura algorítmica<br>(observado)</button>
+        <div class="field-toggle" role="tablist" aria-label="Simulation mode">
+          <button id="btn-indep" role="tab" aria-selected="false">Independent decisions<br>(expected by chance)</button>
+          <button id="btn-mono" role="tab" aria-selected="true" class="on">Algorithmic monoculture<br>(observed)</button>
         </div>
         <div class="field-canvas-wrap">
-          <canvas id="field" width="800" height="440" aria-label="Campo de candidatos: cada quadrado é uma pessoa que se candidatou a várias vagas."></canvas>
+          <canvas id="field" width="800" height="440" aria-label="A field of applicants: each square is a person who applied to several positions."></canvas>
         </div>
         <div class="field-legend">
-          <span><i style="background:var(--accept)"></i>Recomendada em ≥1 vaga</span>
-          <span><i style="background:var(--reject)"></i>Rejeitada em todas</span>
+          <span><i style="background:var(--accept)"></i>Recommended for ≥1 position</span>
+          <span><i style="background:var(--reject)"></i>Rejected from all</span>
         </div>
       </div>
-      <p class="field-cap"><span class="tag">simulação ilustrativa</span>Cada quadrado é um candidato que aplicou a várias vagas. Na monocultura, as rejeições <b>se agrupam</b>: pessoas inteiras somem do mercado de uma vez.</p>
+      <p class="field-cap"><span class="tag">illustrative simulation</span>Each square is an applicant who applied to several positions. Under monoculture, rejections <b>cluster</b>: whole people disappear from the market at once.</p>
     </div>
 
     <!-- right: readout + cited stats -->
     <div>
       <div class="readout" id="readout">
         <div class="num" id="ro-num">10%</div>
-        <div class="lab" id="ro-lab">dos candidatos que enviam <b>4 candidaturas</b> são rejeitados de <b>todas</b> — bem acima do esperado por acaso.</div>
+        <div class="lab" id="ro-lab">of applicants who submit <b>4 applications</b> are rejected from <b>all</b> of them — well above what chance would predict.</div>
       </div>
       <div class="keystat">
-        <div class="k mono">χ²=18.481</div>
-        <div class="v">a taxa de rejeição sistêmica observada excede o limiar de independência (<code>p&lt;0,001</code>).</div>
+        <div class="k mono">χ²=18,481</div>
+        <div class="v">the observed systemic-rejection rate exceeds the independence baseline (<code>p&lt;0.001</code>).</div>
       </div>
       <div class="keystat">
         <div class="k mono">25 ≠ 10</div>
-        <div class="v">na monocultura, é preciso <b>25 candidaturas</b> para ter 99,9% de chance de uma recomendação — contra <b>10</b> se as decisões fossem independentes.</div>
+        <div class="v">under monoculture it takes <b>25 applications</b> for a 99.9% chance of one recommendation — versus <b>10</b> if decisions were independent.</div>
       </div>
     </div>
   </div>
@@ -280,108 +280,108 @@
 
 <!-- ===================== CONTEXT / DEFINITION ===================== -->
 <section class="block wrap">
-  <p class="eyebrow">O problema</p>
-  <h2 class="h2">Poucos fornecedores, um só veredito</h2>
-  <p class="lede">Mais de 90% dos empregadores usam triagem automatizada, e o mercado se concentra em pouquíssimos fornecedores. Uma só lógica passa a guardar o portão de muitas portas.</p>
+  <p class="eyebrow">The problem</p>
+  <h2 class="h2">Few vendors, one verdict</h2>
+  <p class="lede">Over 90% of employers use automated screening, and the market concentrates in very few vendors. A single logic ends up guarding many gates.</p>
 
   <div class="def reveal">
-    <div class="term">Monocultura algorítmica</div>
-    <p class="txt">“Quando o <em>mesmo</em> algoritmo domina um setor — ou algoritmos feitos de modo parecido, com dados parecidos, tomam decisões parecidas.”</p>
-    <p class="src">— Kathleen A. Creel, coautora</p>
+    <div class="term">Algorithmic monoculture</div>
+    <p class="txt">“When the <em>same</em> algorithm dominates a sector — or algorithms built in similar ways, on similar data, make similar decisions.”</p>
+    <p class="src">— Kathleen A. Creel, co-author</p>
   </div>
 
-  <p class="body" style="margin-top:30px">Mais de 60% das empresas da Fortune 100 usam algoritmos de um único fornecedor de triagem por vídeo. O estudo analisa outro caso de escala comparável: a plataforma <b>pymetrics</b> (adquirida pela Harver em 2022), com <b>42 modelos</b> distintos — avaliações “gamificadas” que medem traços comportamentais em vez de pedir o currículo.</p>
+  <p class="body" style="margin-top:30px">Over 60% of Fortune 100 companies use the algorithms of a single video-screening vendor. The study examines another case at comparable scale: the platform <b>pymetrics</b> (acquired by Harver in 2022), with <b>42 distinct models</b> — “gamified” assessments that measure behavioral traits instead of asking for a résumé.</p>
 </section>
 
 <!-- ===================== THE STUDY ===================== -->
 <section class="block wrap">
-  <p class="eyebrow">O estudo</p>
-  <h2 class="h2">O maior estudo empírico de contratação algorítmica</h2>
-  <p class="lede">Os autores são o primeiro grupo a analisar de forma independente algoritmos de contratação <i>de fato em produção</i>, em escala — um nível de acesso que quase ninguém de fora conseguiu.</p>
+  <p class="eyebrow">The study</p>
+  <h2 class="h2">The largest empirical study of algorithmic hiring</h2>
+  <p class="lede">The authors are the first group to independently analyze hiring algorithms <i>actually in production</i>, at scale — a level of access almost no outsider has obtained.</p>
 
   <div class="scale reveal">
-    <div class="s"><div class="n">3,4<u>M</u></div><div class="l">candidatos reais</div></div>
-    <div class="s"><div class="n">4<u>M</u></div><div class="l">candidaturas</div></div>
-    <div class="s"><div class="n">156</div><div class="l">empregadores</div></div>
-    <div class="s"><div class="n">11</div><div class="l">setores do mercado</div></div>
-    <div class="s"><div class="n">42</div><div class="l">modelos do fornecedor</div></div>
+    <div class="s"><div class="n">3.4<u>M</u></div><div class="l">real applicants</div></div>
+    <div class="s"><div class="n">4<u>M</u></div><div class="l">applications</div></div>
+    <div class="s"><div class="n">156</div><div class="l">employers</div></div>
+    <div class="s"><div class="n">11</div><div class="l">market sectors</div></div>
+    <div class="s"><div class="n">42</div><div class="l">vendor models</div></div>
   </div>
 </section>
 
 <!-- ===================== METHOD ===================== -->
 <section class="block wrap">
-  <p class="eyebrow">O método</p>
-  <h2 class="h2">Medir vaga a vaga revela o que a média escondia</h2>
-  <p class="lede">A escolha metodológica decisiva: avaliar o impacto adverso <b>por posição</b> (como manda a Title VII e a regra dos 4/5), não no agregado. É aí que a disparidade aparece.</p>
+  <p class="eyebrow">The method</p>
+  <h2 class="h2">Measuring position by position reveals what averages hid</h2>
+  <p class="lede">The decisive methodological choice: assess adverse impact <b>per position</b> (as Title VII and the four-fifths rule require), not in aggregate. That is where the disparity surfaces.</p>
 
   <div class="compare reveal">
     <div class="c">
-      <div class="tag">Análise agregada</div>
-      <h3>“Nenhum viés mensurável”</h3>
-      <p>Misturando todas as vagas, estudos anteriores — e auditorias publicadas pelo próprio fornecedor — encontravam pouco ou nenhum impacto adverso.</p>
+      <div class="tag">Aggregate analysis</div>
+      <h3>“No measurable bias”</h3>
+      <p>Blending all positions together, prior studies — and audits published by the vendor itself — found little or no adverse impact.</p>
     </div>
     <div class="c reveal-side">
-      <div class="tag">Análise vaga a vaga</div>
-      <h3>Disparidade exposta</h3>
-      <p>Posição por posição, a discriminação que a média diluía reaparece — alinhada ao padrão legal que avalia cada vaga isoladamente.</p>
+      <div class="tag">Position-by-position analysis</div>
+      <h3>Disparity exposed</h3>
+      <p>Position by position, the discrimination the average diluted reappears — aligned with the legal standard that evaluates each job in isolation.</p>
     </div>
   </div>
 </section>
 
 <!-- ===================== RACIAL DISPARITIES ===================== -->
 <section class="block wrap">
-  <p class="eyebrow">O achado</p>
-  <h2 class="h2">A monocultura tem cor</h2>
-  <p class="lede">Sem coletar dados demográficos, os <i>proxies</i> comportamentais dos jogos acabam funcionando como <i>proxies</i> raciais — e a conta recai mais pesado sobre candidatos negros e asiáticos.</p>
+  <p class="eyebrow">The finding</p>
+  <h2 class="h2">The monoculture has a color</h2>
+  <p class="lede">Without collecting demographic data, the games' behavioral <i>proxies</i> end up acting as racial <i>proxies</i> — and the bill falls heaviest on Black and Asian applicants.</p>
 
   <div class="bars">
     <div class="bar-row reveal">
-      <div class="bh"><span class="who">Candidatos negros</span><span class="pct">25,87%</span></div>
+      <div class="bh"><span class="who">Black applicants</span><span class="pct">25.87%</span></div>
       <div class="bar-track"><div class="bar-fill" data-w="25.87"></div></div>
-      <div class="note">das candidaturas vão para vagas que os impactam adversamente · 30% aplicam a ≥1 vaga assim.</div>
+      <div class="note">of applications go to positions that adversely impact them · 30% apply to ≥1 such position.</div>
     </div>
     <div class="bar-row reveal">
-      <div class="bh"><span class="who">Candidatos asiáticos</span><span class="pct">14,74%</span></div>
+      <div class="bh"><span class="who">Asian applicants</span><span class="pct">14.74%</span></div>
       <div class="bar-track"><div class="bar-fill" data-w="14.74"></div></div>
-      <div class="note">das candidaturas vão para vagas que os impactam adversamente · +29.000 seriam recomendadas se igualados ao grupo mais selecionado.</div>
+      <div class="note">of applications go to positions that adversely impact them · +29,000 would be recommended if matched to the highest-selecting group.</div>
     </div>
   </div>
 
   <div class="callout reveal">
-    <p class="q">“Quando você lê que algo que está comprando foi auditado, tende a aceitar o resultado pelo valor de face.”</p>
-    <p class="who">— Sarah H. Bana, sobre a auditoria do fornecedor que dizia não haver viés</p>
+    <p class="q">“When you read that something you're buying has been audited, you tend to take that finding at face value.”</p>
+    <p class="who">— Sarah H. Bana, on the vendor's audit that claimed no bias</p>
   </div>
 </section>
 
 <!-- ===================== RECOMMENDATIONS ===================== -->
 <section class="block wrap">
-  <p class="eyebrow">O que fazer</p>
-  <h2 class="h2">Tratar a concentração como risco sistêmico</h2>
-  <p class="lede">Se um só algoritmo pode reprovar alguém em todo o mercado, a fiscalização precisa olhar o mercado — não só cada empregador.</p>
+  <p class="eyebrow">What to do</p>
+  <h2 class="h2">Treat concentration as systemic risk</h2>
+  <p class="lede">If a single algorithm can reject someone across the whole market, oversight has to watch the market — not just each employer.</p>
 
   <div class="recs reveal">
     <div class="rec">
       <div>
-        <h3>Medir o impacto vaga a vaga</h3>
-        <p>Avaliar o impacto adverso por posição, no padrão da Title VII — não em médias agregadas que escondem a disparidade.</p>
+        <h3>Measure adverse impact per position</h3>
+        <p>Assess adverse impact position by position, to the Title VII standard — not in aggregate averages that hide the disparity.</p>
       </div>
     </div>
     <div class="rec">
       <div>
-        <h3>Vigilância de mercado</h3>
-        <p>Agências federais deveriam quantificar a taxa de resultados homogêneos entre empregadores que dividem o mesmo sistema.</p>
+        <h3>Market-level surveillance</h3>
+        <p>Federal agencies should quantify the rate of homogeneous outcomes across employers that share the same system.</p>
       </div>
     </div>
     <div class="rec">
       <div>
-        <h3>Monitorar dependências concentradas</h3>
-        <p>Acompanhar quanto do mercado depende de um mesmo fornecedor, para antecipar falhas correlacionadas.</p>
+        <h3>Monitor concentrated dependencies</h3>
+        <p>Track how much of the market relies on a single vendor, to anticipate correlated failures.</p>
       </div>
     </div>
     <div class="rec">
       <div>
-        <h3>Abrir acesso a pesquisadores</h3>
-        <p>Garantir acesso independente aos dados — hoje, este foi o único grupo a estudar empiricamente um sistema implantado em escala.</p>
+        <h3>Open access for researchers</h3>
+        <p>Guarantee independent data access — today, this was the only group to empirically study a deployed system at scale.</p>
       </div>
     </div>
   </div>
@@ -393,10 +393,10 @@
     <p class="cite"><b>Bommasani, R., Bana, S. H., Creel, K. A., Jurafsky, D., &amp; Liang, P.</b> (2026). <i>Algorithmic Monocultures in Hiring.</i> Stanford Digital Economy Lab. arXiv:2605.27371.</p>
     <div class="links">
       <a href="https://arxiv.org/abs/2605.27371">arXiv:2605.27371</a>
-      <a href="https://algorithmichiring.github.io/">Página do projeto</a>
+      <a href="https://algorithmichiring.github.io/">Project page</a>
       <a href="https://digitaleconomy.stanford.edu/publication/algorithmic-monocultures-in-hiring/">Stanford Digital Economy Lab</a>
     </div>
-    <p class="colophon">Apresentação · resumo do paper · números citados do estudo original · simulação do campo é ilustrativa do mecanismo</p>
+    <p class="colophon">Presentation · summary of the paper · figures cited from the original study · the field simulation illustrates the mechanism</p>
   </div>
 </footer>
 
@@ -479,7 +479,6 @@
       for(var x=0;x<COLS;x++){
         var idx=y*COLS+x;
         ctx.fillStyle=lerpColor(cur[idx]);
-        ctx.globalAlpha=0.55+0.45*Math.max(cur[idx], (1-cur[idx])); // both states fairly solid
         ctx.globalAlpha=1;
         var px=x*(cell+GAP), py=y*(cell+GAP);
         ctx.fillRect(px,py,cell,cell);
@@ -500,21 +499,18 @@
 
   function setMode(m){
     mode=m; tgt=targetState(m);
-    // readout
-    var frac = (m==='mono')? FRAC_MONO : FRAC_INDEP;
     var ro=document.getElementById('readout');
     var num=document.getElementById('ro-num');
     var lab=document.getElementById('ro-lab');
     if(m==='mono'){
       ro.classList.remove('indep');
       num.textContent='10%';
-      lab.innerHTML='dos candidatos que enviam <b>4 candidaturas</b> são rejeitados de <b>todas</b> — bem acima do esperado por acaso.';
+      lab.innerHTML='of applicants who submit <b>4 applications</b> are rejected from <b>all</b> of them — well above what chance would predict.';
     } else {
       ro.classList.add('indep');
       num.textContent='~2%';
-      lab.innerHTML='seria a rejeição sistêmica se cada decisão fosse <b>independente</b> — rejeições isoladas, não pessoas apagadas do mercado.';
+      lab.innerHTML='would be the systemic rejection if each decision were <b>independent</b> — isolated rejections, not whole people erased from the market.';
     }
-    // buttons
     document.getElementById('btn-mono').classList.toggle('on', m==='mono');
     document.getElementById('btn-mono').setAttribute('aria-selected', m==='mono');
     document.getElementById('btn-indep').classList.toggle('on', m==='indep');
@@ -530,9 +526,7 @@
   init();
   var rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){sizeCanvas();draw();},120);});
 
-  /* reveal on scroll for the field after first paint (animate in from accept->mono) */
   if(!prefersReduced){
-    // start as all-accept, then bloom to monoculture when scrolled into view
     for(var k=0;k<N;k++) cur[k]=0;
     var io0=new IntersectionObserver(function(e){
       if(e[0].isIntersecting){ animing=true; requestAnimationFrame(animate); io0.disconnect(); }
