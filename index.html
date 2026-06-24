@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artigos — José Luiz Costa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Newsreader:ital,wght@0,300;0,400;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F1ECE0;--ink:#1A1E1B;--ink-soft:#34382F;--crop:#9A6E13;--slate:#6A6B5F;--line:rgba(26,30,27,.16)}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;
+    font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased;
+    background-image:linear-gradient(rgba(26,30,27,.06) 1px,transparent 1px);background-size:100% 30px;}
+  .wrap{max-width:780px;margin:0 auto;padding:clamp(48px,9vw,110px) clamp(20px,5vw,40px)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--crop);display:flex;gap:14px;align-items:center;margin:0 0 18px}
+  .eyebrow::before{content:"";width:30px;height:2px;background:var(--crop)}
+  h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(40px,9vw,72px);
+    line-height:.98;letter-spacing:-.02em;margin:0 0 14px}
+  .sub{font-weight:300;color:var(--ink-soft);max-width:46ch;margin:0 0 clamp(36px,6vw,56px);font-size:21px}
+  .card{display:block;text-decoration:none;color:inherit;background:#FAF6EC;border:1px solid var(--line);
+    padding:clamp(22px,4vw,34px);transition:transform .25s,box-shadow .25s;position:relative}
+  .card:hover{transform:translateY(-3px);box-shadow:0 18px 36px -22px rgba(26,30,27,.5)}
+  .card .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--slate);margin-bottom:12px}
+  .card h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(24px,4vw,32px);
+    line-height:1.08;margin:0 0 8px;letter-spacing:-.01em}
+  .card p{margin:0;color:var(--ink-soft);font-size:17px;max-width:56ch}
+  .card .go{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--crop);margin-top:16px;display:inline-block}
+  .card:hover .go{text-decoration:underline}
+  footer{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--slate);margin-top:clamp(40px,7vw,70px);border-top:1px solid var(--line);padding-top:20px}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">Coletânea</p>
+    <h1>Artigos</h1>
+    <p class="sub">Resumos visuais de papers acadêmicos — cada um numa única página, para ler e compartilhar.</p>
+
+    <a class="card" href="algorithmic-monocultures-in-hiring/">
+      <div class="tag">Stanford Digital Economy Lab · maio 2026 · arXiv:2605.27371</div>
+      <h2>Algorithmic Monocultures in Hiring</h2>
+      <p>Quando os mesmos algoritmos triam quase todo mundo, as mesmas pessoas são rejeitadas em todo lugar. O maior estudo empírico de contratação algorítmica — 3,4M candidatos, 4M candidaturas, 156 empregadores.</p>
+      <span class="go">abrir apresentação →</span>
+    </a>
+
+    <footer>José Luiz Costa · github.com/joseluizcosta-sys/Artigos</footer>
+  </main>
+</body>
+</html>
