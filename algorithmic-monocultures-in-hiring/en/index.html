@@ -200,6 +200,23 @@
   .langbar a.cur{background:var(--ink);color:var(--paper)}
   .langbar a:not(.cur):hover{color:var(--ink)}
 
+  .info{position:relative;display:inline-flex;align-items:center;justify-content:center;
+    width:16px;height:16px;margin-left:8px;border:1px solid var(--line);border-radius:50%;
+    font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;font-style:normal;
+    color:var(--slate);background:var(--paper);cursor:help;vertical-align:middle;line-height:1;user-select:none}
+  .info:hover,.info:focus{color:var(--ink);border-color:var(--crop-deep);outline:none}
+  .info .tip{position:absolute;left:-2px;bottom:calc(100% + 10px);
+    width:min(260px,76vw);background:var(--ink);color:var(--paper);
+    font-family:"Newsreader",serif;font-style:normal;font-weight:400;font-size:13.5px;line-height:1.45;
+    letter-spacing:0;text-transform:none;padding:12px 14px;border-radius:3px;
+    box-shadow:0 14px 32px -14px rgba(0,0,0,.6);opacity:0;visibility:hidden;
+    transform:translateY(5px);transition:opacity .18s ease,transform .18s ease;z-index:70;pointer-events:none}
+  .info .tip b{color:var(--crop);font-weight:500}
+  .info .tip code{font-family:"IBM Plex Mono",monospace;font-size:12px}
+  .info .tip::after{content:"";position:absolute;top:100%;left:8px;
+    border:6px solid transparent;border-top-color:var(--ink)}
+  .info:hover .tip,.info:focus .tip,.info:focus-within .tip{opacity:1;visibility:visible;transform:translateY(0)}
+
   @media (max-width:820px){
     body{font-size:18px}
     .field-grid{grid-template-columns:1fr}
@@ -267,7 +284,7 @@
         <div class="lab" id="ro-lab">of applicants who submit <b>4 applications</b> are rejected from <b>all</b> of them — well above what chance would predict.</div>
       </div>
       <div class="keystat">
-        <div class="k mono">χ²=18,481</div>
+        <div class="k mono">χ²=18,481<span class="info" tabindex="0" role="button" aria-label="What is chi-squared">i<span class="tip" role="tooltip"><b>Chi-squared</b> — measures how far the observed result falls from what chance would predict. The larger it is, the less likely it's coincidence. 18,481 is very high; <code>p&lt;0.001</code> = under 0.1% chance it's luck.</span></span></div>
         <div class="v">the observed systemic-rejection rate exceeds the independence baseline (<code>p&lt;0.001</code>).</div>
       </div>
       <div class="keystat">
