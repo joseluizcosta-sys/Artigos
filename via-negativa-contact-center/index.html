@@ -214,6 +214,34 @@
     .hidra-item strong { display: block; font-size: .92rem; margin-bottom: 4px; }
     .hidra-item p { margin: 0; font-size: .84rem; color: var(--slate); line-height: 1.55; }
 
+    /* ── Roadmap ── */
+    .roadmap {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 24px 26px; margin: 40px 0;
+    }
+    .roadmap .toggle-label { margin-bottom: 16px; }
+    .roadmap ol {
+      list-style: none; counter-reset: rm; padding: 0; margin: 0;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 20px;
+    }
+    .roadmap li { counter-increment: rm; display: flex; gap: 9px; }
+    .roadmap li::before {
+      content: counter(rm, decimal-leading-zero);
+      font-family: 'IBM Plex Mono', monospace; font-size: .66rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 2px; font-weight: 500;
+    }
+    .roadmap a.rm-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: .8rem; color: var(--ink); text-decoration: none;
+      display: inline-flex; align-items: baseline; gap: 5px; line-height: 1.25;
+    }
+    .roadmap a.rm-title:hover { color: var(--crop-deep); }
+    .roadmap a.rm-title .arw { color: var(--crop); font-size: .72rem; }
+    .roadmap p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .68rem; color: var(--slate); margin: 4px 0 0; line-height: 1.4;
+    }
+
     /* ── Callout ── */
     .callout {
       background: var(--card); border: 1px solid var(--line);
@@ -262,6 +290,7 @@
     @media (max-width: 600px) {
       .mec-grid    { grid-template-columns: 1fr; }
       .convex-grid { grid-template-columns: 1fr; }
+      .roadmap ol  { grid-template-columns: 1fr; gap: 14px; }
     }
   </style>
 </head>
@@ -286,19 +315,77 @@
   <!-- Intro -->
   <h2>
     <span class="eyebrow">Contexto</span>
-    A Obsessão por Eficiência Está Tornando Seus Sistemas Frágeis?
+    Três bots, três falhas, o mesmo erro de gestão
   </h2>
 
-  <p>Historicamente, os contact centers foram estruturados com foco em eficiência máxima: eliminação de redundâncias, minimização de tempo ocioso e extrema padronização dos processos. Parecia racional. O problema é que <span class="tt">sistemas complexos<sup>i</sup><span class="tt-box">Campo interdisciplinar que estuda como sistemas compostos por muitos componentes interconectados produzem comportamentos emergentes imprevisíveis. Base do framework Cynefin e do pensamento de Taleb.</span></span> não podem ser totalmente previstos. Nenhum modelo antecipa cada variável, cada caso extremo ou cada mudança no comportamento do consumidor. Projetar cada componente estritamente para seu estado atual cria organizações que funcionam bem sob condições conhecidas — e quebram no momento em que algo inesperado acontece.</p>
+  <p>Entre 2022 e 2025, três empresas viram seus chatbots de atendimento falhar em público. Os erros foram diferentes — uma política inventada, uma regra alucinada, um bot que xingou a própria marca. O erro de gestão foi o mesmo: nenhuma das três tinha um mecanismo para transformar aquela falha em aprendizado <em>antes</em> dela virar prejuízo. Cada caso atinge uma frente diferente de dano.</p>
 
-  <p>O comportamento humano e as dinâmicas de mercado são, por natureza, variáveis. Um sistema de atendimento que funciona perfeitamente sob condições normais — e colapsa diante de qualquer desvio — não é eficiente. É um risco sistêmico esperando o momento certo para se materializar.</p>
+  <div class="toggle-block">
+    <div class="toggle-label">Três falhas reais — três tipos de dano</div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab(this,'aircanada')">Air Canada · Jurídico</button>
+      <button class="tab" onclick="switchTab(this,'cursor')">Cursor · Churn</button>
+      <button class="tab" onclick="switchTab(this,'dpd')">DPD · Reputação</button>
+      <button class="tab" onclick="switchTab(this,'alternativa')">O caminho resiliente</button>
+    </div>
+    <div id="tab-aircanada" class="tab-content active">
+      <span class="badge badge-reject">Dano jurídico</span>
+      <p><strong>O bot inventou uma política de reembolso (2022–2024).</strong></p>
+      <p>O chatbot disse a um cliente que ele poderia pedir a tarifa de luto até 90 dias depois do voo — o que não existia. A Air Canada negou o reembolso e, no tribunal, argumentou que o bot era "uma entidade legal separada". Em fevereiro de 2024, o tribunal civil da Colúmbia Britânica rejeitou o argumento e condenou a empresa por <em>negligent misrepresentation</em>. A indenização foi pequena — o custo real foi virar precedente jurídico citado no mundo todo.</p>
+    </div>
+    <div id="tab-cursor" class="tab-content">
+      <span class="badge badge-reject">Dano de receita</span>
+      <p><strong>O bot alucinou uma regra e gerou cancelamentos (abril 2025).</strong></p>
+      <p>Após um bug de sessão deslogar usuários, o agente de suporte "Sam" respondeu que isso era "comportamento esperado" de uma nova política de um dispositivo por assinatura. A política não existia — o bot a inventou e a apresentou como regra oficial. Pior: dava respostas diferentes para a mesma pergunta. Desenvolvedores com fluxo multi-dispositivo leram a regra e cancelaram. O cofundador teve que se desculpar publicamente.</p>
+    </div>
+    <div id="tab-dpd" class="tab-content">
+      <span class="badge badge-reject">Dano reputacional</span>
+      <p><strong>O bot xingou e detonou a própria marca (janeiro 2024).</strong></p>
+      <p>Um cliente que buscava uma encomenda perdida conseguiu fazer o chatbot da DPD xingar, escrever um poema chamando a si mesmo de "inútil" e declarar que "a DPD é o pior serviço de entrega do mundo". O print viralizou — 1,3 milhão de visualizações em horas. A DPD desativou a IA no mesmo dia, atribuindo a falha a uma atualização de sistema.</p>
+    </div>
+    <div id="tab-alternativa" class="tab-content">
+      <span class="badge badge-accept">Sinal</span>
+      <p><strong>O mesmo erro — tratado como informação.</strong></p>
+      <p>Em cada caso, a primeira ocorrência era um sinal barato. A Air Canada poderia ter capturado a primeira resposta errada do bot e corrigido a política antes do processo. A Cursor tinha um sintoma claro — o bot dando respostas diferentes para a mesma pergunta — que sinalizava alucinação dias antes dos cancelamentos. A DPD tinha o jailbreak registrado em log antes de viralizar. Em todas, faltou o mesmo mecanismo: a falha alimentar o próximo ciclo e nunca mais se repetir. O custo de capturar o sinal era próximo de zero; o custo de ignorá-lo foi processo, churn e crise de imagem.</p>
+    </div>
+  </div>
 
-  <p>Alguns sistemas carregam uma vulnerabilidade oculta: sensibilidade negativa a eventos extremos. Quando variações aleatórias são ignoradas, efeitos colaterais invisíveis se acumulam — até que um único evento fora do padrão os expõe todos de uma vez. É por isso que tantas operações de atendimento podem estar errando nas suas projeções: consideram apenas um conjunto limitado de valores possíveis para cada variável — e quando um comportamento ou valor fora desse conjunto aparece, o sistema fica vulnerável.</p>
+  <p>Esse é o ponto de virada que separa dois tipos de operação. A frágil trata o erro como anomalia a ser negada — fecha o ticket, terceiriza a culpa, e o mesmo erro reaparece na semana seguinte com outro cliente. A resiliente trata o mesmo erro como informação: cada falha carrega um dado sobre onde o ambiente mudou, e esse dado torna o sistema mais inteligente na próxima vez.</p>
 
-  <p>Processos e sistemas que aprendem e melhoram com pequenas variações, em contraste, têm uma estrutura de ganhos desproporcionalmente favorável à volatilidade: quanto mais o ambiente muda, mais eles se fortalecem. Para o design de IA com foco em experiência do cliente, isso não é uma metáfora — é um princípio de arquitetura. Abandonar o determinismo e incorporar essa capacidade não é um upgrade opcional. É a condição para que o sistema ainda funcione quando o ambiente mudar — e ele vai mudar.</p>
+  <p>Historicamente, os contact centers foram estruturados para eficiência máxima: eliminar redundâncias, minimizar tempo ocioso, padronizar ao extremo. Parecia racional. Mas <span class="tt">sistemas complexos<sup>i</sup><span class="tt-box">Campo interdisciplinar que estuda como sistemas compostos por muitos componentes interconectados produzem comportamentos emergentes imprevisíveis. Base do framework Cynefin e do pensamento de Taleb.</span></span> que dependem do comportamento humano não podem ser totalmente previstos — e uma operação que funciona perfeitamente sob condições normais e colapsa diante do primeiro desvio não é eficiente. É um risco sistêmico esperando o momento de se materializar. As páginas a seguir tratam de como inverter isso: fazer o erro fortalecer o sistema em vez de quebrá-lo.</p>
+
+  <div class="roadmap">
+    <div class="toggle-label">O que vem a seguir — seis passos</div>
+    <ol>
+      <li><div>
+        <a class="rm-title" href="#s01">O Erro Nutriente <span class="arw">→</span></a>
+        <p>Por que cada falha de compreensão da IA é um dado, não ruído — e como catalogá-la para alimentar o próximo ciclo de treino.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s02">A Liberdade no Design <span class="arw">→</span></a>
+        <p>Como fugir dos fluxos rígidos e fazer a IA gerar opções, não só decisões — preservando a decisão final com o humano.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s03">O Efeito Hidra no CX <span class="arw">→</span></a>
+        <p>Como múltiplos caminhos de resposta fortalecem o sistema a cada ponto de falha eliminado, em vez de só removê-lo.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s04">Os Erros que Não São Nutrientes <span class="arw">→</span></a>
+        <p>A fronteira que separa resiliência de imprudência: quais erros aprender e quais blindar por design.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s05">Se não dá para medir, não dá para gerir <span class="arw">→</span></a>
+        <p>Quatro indicadores que transformam a resiliência de metáfora em algo auditável.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s06">Convexidade não é de graça <span class="arw">→</span></a>
+        <p>Por que a opcionalidade tem custo e como discipliná-la com poda, teto de variância e preço por opção.</p>
+      </div></li>
+    </ol>
+  </div>
 
   <!-- 01 -->
-  <h2>
+  <h2 id="s01">
     <span class="eyebrow">01 — Erros como Sinais</span>
     O Erro Nutriente<span class="fn">*</span>
   </h2>
@@ -346,7 +433,7 @@
   <p>O resultado é um sistema com ciclos de <span class="tt">feedback<sup>i</sup><span class="tt-box">Ciclo de retroalimentação — o tempo entre um erro ocorrer e o sistema se corrigir. Quanto mais curto, mais resiliente o processo.</span></span> tão curtos que o erro é corrigido quase no instante em que ocorre. Não como exceção — como design.</p>
 
   <!-- 02 -->
-  <h2>
+  <h2 id="s02">
     <span class="eyebrow">02 — Opcionalidade nos Processos</span>
     A Liberdade no Design
   </h2>
@@ -390,7 +477,7 @@
   <p>A implicação mais importante não é operacional — é de design: <strong>a IA não deve apenas tomar decisões. Ela deve gerar opções.</strong> Em vez de executar um único caminho, o sistema apresenta ao gestor ou ao agente humano três alternativas com seus respectivos riscos. A decisão final permanece humana; a IA amplia o espaço de possibilidades.</p>
 
   <!-- 03 -->
-  <h2>
+  <h2 id="s03">
     <span class="eyebrow">03 — O Efeito Hidra<span class="fn">†</span> no CX</span>
     Quando o sistema cresce onde é cortado
   </h2>
@@ -427,6 +514,84 @@
     <p>O sistema mais eficiente é o que aprende mais rápido quando o inesperado acontece — e o que preservou caminhos alternativos para continuar operando enquanto aprendia.</p>
   </div>
 
+  <!-- 04 -->
+  <h2 id="s04">
+    <span class="eyebrow">04 — Os Limites</span>
+    Os Erros que Não São Nutrientes
+  </h2>
+
+  <p>Nem todo erro fortalece. Essa é a fronteira que separa resiliência de imprudência. Aprender com a falha só funciona enquanto a falha for <strong>sobrevivível</strong>: nenhum evento isolado pode ser capaz de tirar a operação do jogo. O caso da Air Canada custou pouco em dinheiro e ainda virou aprendizado público — foi reversível. Outros não são.</p>
+
+  <div class="convex-grid">
+    <div class="conv-card convex">
+      <span class="conv-label">Erro reversível (nutriente)</span>
+      <p>IA não entende uma gíria, um fluxo trava, uma resposta fica abaixo do esperado.</p>
+      <p>Custo limitado, recuperável, rico em informação. Deve ser catalogado — é a matéria-prima do aprendizado.</p>
+    </div>
+    <div class="conv-card concave">
+      <span class="conv-label">Erro de ruína (irreversível)</span>
+      <p>Vazamento de dado, orientação regulatória ou jurídica errada, promessa contratual indevida, dano viral.</p>
+      <p>Custo desproporcional, às vezes terminal. Deve ser <strong>eliminado por design</strong>, com barreira rígida — não aprendido por tentativa.</p>
+    </div>
+  </div>
+
+  <p>A regra prática: opcionalidade e aprendizado por erro valem no domínio do reversível. No domínio da ruína, vale o princípio inverso — regras rígidas e proteção. Um sistema maduro não abraça todo erro; sabe, com precisão, qual erro pode abraçar e qual precisa blindar.</p>
+
+  <p>Na prática, isso vira uma regra de governança simples: erros reversíveis podem subir e ser aprendidos; erros de ruína são bloqueados por design — o bot não pode, por configuração, afirmar política de reembolso, jurídica ou contratual. Foi exatamente essa trava que faltou à Air Canada e à Cursor.</p>
+
+  <p>Vale ser preciso sobre o limite do conceito: a antifragilidade descrita aqui se aplica ao domínio do reversível — é nele que o erro vira matéria-prima e o sistema ganha com a volatilidade. A ruína não pede antifragilidade; pede robustez clássica, redução de variância e barreiras determinísticas. Os dois princípios não competem — operam em domínios diferentes, e a maturidade está em saber onde cada um vale.</p>
+
+  <!-- 05 -->
+  <h2 id="s05">
+    <span class="eyebrow">05 — A Medida</span>
+    Se não dá para medir, não dá para gerir
+  </h2>
+
+  <p>Resiliência que não se mede vira retórica. Para sair da metáfora e virar gestão, o ganho precisa de indicadores que liguem o aprendizado ao <strong>desfecho do cliente</strong> — não só à atividade interna da IA. Quatro tornam o conceito auditável, e qualquer gestor pode pontuar a própria operação com eles:</p>
+
+  <div class="hidra-grid">
+    <div class="hidra-item">
+      <span class="m-num">01</span>
+      <div>
+        <strong>Tempo de cicatrização</strong>
+        <p>O intervalo entre o erro ocorrer e a correção entrar em produção. Indicador-mestre: meça em dias, não em trimestres.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">02</span>
+      <div>
+        <strong>Taxa de reincidência do mesmo erro</strong>
+        <p>Das falhas catalogadas, qual percentual volta a acontecer após um ciclo de treinamento? Um sistema que aprende vê esse número cair de forma consistente.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">03</span>
+      <div>
+        <strong>Recontato nos modos de falha já catalogados</strong>
+        <p>A IA resolve tão bem (ou melhor) nos modos de falha que já corrigiu quanto na média? É o único teste que torna a antifragilidade falsificável: se o sistema ficou mais forte onde doeu, o recontato nesses modos cai abaixo da baseline.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">04</span>
+      <div>
+        <strong>Custo por contato resolvido</strong>
+        <p>A âncora de desfecho. Cicatrização rápida não vale nada se cada "sinal" capturado adiciona um passo humano e o custo por resolução sobe. Mede se o aprendizado é eficiente — ou só caro.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>O teste decisivo não é catalogar mais erros — é provar que os modos de falha já cicatrizados voltam a resolver tão bem quanto a baseline, a um custo por contato estável. Se voltam, o sistema ficou de fato mais forte onde foi ferido. Se não, você construiu um sistema de log, não um sistema que aprende.</p>
+
+  <!-- 06 -->
+  <h2 id="s06">
+    <span class="eyebrow">06 — O Custo</span>
+    Convexidade não é de graça
+  </h2>
+
+  <p>A opcionalidade tem um lado que o entusiasmo esconde: cada caminho alternativo preservado tem custo de manutenção, teste e governança. Múltiplos fluxos que ninguém monitora não são resiliência — são dívida técnica e novos pontos de falha disfarçados. A convexidade real exige disciplina em três frentes: <strong>poda ativa</strong> (caminho que nunca é acionado deve ser removido, não acumulado), <strong>teto de variância</strong> (a injeção deliberada de estresse só ocorre em ambiente isolado, nunca sobre o cliente real que afeta NPS e churn) e <strong>custo explícito por opção</strong> (cada rota entra com um preço conhecido, revisado contra o ganho que evita).</p>
+
+  <p>A opcionalidade só compensa enquanto o custo de manter a opção for comprovadamente menor que o custo de não tê-la na hora da crise. Quando essa relação se inverte — e ela se inverte em silêncio —, o que parecia resiliência vira sobrecarga. O design maduro não é o que cria mais opções; é o que sabe quais opções vale a pena pagar para manter.</p>
+
   <!-- Bottom -->
   <div class="bottom">
     <div>
@@ -440,6 +605,9 @@
       <p class="section-label">Referências</p>
       <ul>
         <li>Taleb, N.N. (2012). <em>Antifragile: Things That Gain from Disorder.</em> Random House.</li>
+        <li><em>Moffatt v. Air Canada</em>, 2024 BCCRT 149 (British Columbia Civil Resolution Tribunal). <a href="https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html" target="_blank">CanLII</a></li>
+        <li>Cursor / Anysphere (2025). Agente de suporte "Sam" inventa política de dispositivo único, gerando cancelamentos. <a href="https://incidentdatabase.ai/cite/1039/" target="_blank">AI Incident Database 1039</a></li>
+        <li>DPD (2024). Chatbot desativado após xingar cliente e criticar a própria empresa. <a href="https://time.com/6564726/ai-chatbot-dpd-curses-criticizes-company/" target="_blank">TIME</a></li>
         <li>Pi, S.-T. et al. (2024). <em>Contact Complexity in Customer Service.</em> Amazon Science. <a href="https://arxiv.org/abs/2402.15655" target="_blank">arXiv:2402.15655</a></li>
         <li>Xu, Y. et al. (2020). <em>AI Customer Service: Task Complexity, Problem-Solving Ability, and Usage Intention.</em> Australasian Marketing Journal. <a href="https://www.sciencedirect.com/science/article/pii/S1441358220300240" target="_blank">ScienceDirect</a></li>
         <li>Snowden, D. (2000). <em>Cynefin Framework.</em> Consortium for Service Innovation. <a href="https://library.serviceinnovation.org/Intelligent_Swarming/Practices_Guide/80_Intelligent_Swarming_and_Other_Models/20_Cynefin" target="_blank">Link</a></li>
