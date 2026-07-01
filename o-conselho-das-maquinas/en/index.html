@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Council of Machines — When AIs stop answering and start judging each other</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --paper:      #F1ECE0;
+      --paper-2:    #E8E1D1;
+      --card:       #FAF6EC;
+      --ink:        #1A1E1B;
+      --ink-soft:   #34382F;
+      --slate:      #6A6B5F;
+      --faint:      #9A9886;
+      --crop:       #C18E20;
+      --crop-deep:  #9A6E13;
+      --accept:     #2F6553;
+      --reject:     #A12B22;
+      --line:       rgba(26,30,27,.16);
+      --line-soft:  rgba(26,30,27,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      background-image: linear-gradient(var(--line-soft) 1px, transparent 1px);
+      background-size: 100% 30px;
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Lang nav ── */
+    .lang-nav {
+      position: fixed; top: 0; right: 0;
+      padding: 14px 24px;
+      display: flex; gap: 6px;
+      z-index: 100;
+    }
+    .lang-nav a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; padding: 4px 10px; border-radius: 3px;
+      border: 1px solid transparent; color: var(--faint); transition: all .18s;
+    }
+    .lang-nav a.active { color: var(--ink); border-color: var(--line); background: var(--card); }
+    .lang-nav a:hover:not(.active) { color: var(--slate); }
+
+    /* ── Header ── */
+    header { max-width: 760px; margin: 0 auto; padding: 100px 28px 52px; }
+
+    .meta {
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em;
+      color: var(--faint); margin-bottom: 28px;
+      display: flex; flex-wrap: wrap; gap: 4px 0; align-items: center;
+    }
+    .meta a { color: var(--faint); text-decoration: none; }
+    .meta a:hover { color: var(--crop); }
+    .meta .sep { margin: 0 8px; opacity: .5; }
+
+    h1 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 700;
+      line-height: 1.08; letter-spacing: -.02em; color: var(--ink); margin: 0 0 18px;
+    }
+    .deck {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.15rem;
+      font-style: italic; color: var(--slate); line-height: 1.55; margin-bottom: 36px;
+    }
+    .lede {
+      font-size: 1.05rem; color: var(--ink-soft); line-height: 1.75;
+      border-left: 2.5px solid var(--crop); padding-left: 20px;
+    }
+
+    /* ── Body ── */
+    main { max-width: 760px; margin: 0 auto; padding: 0 28px 80px; }
+
+    p { color: var(--ink-soft); margin: 0 0 22px; }
+    strong { color: var(--ink); font-weight: 600; }
+    em { font-style: italic; }
+
+    h2 {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.5rem;
+      font-weight: 700; color: var(--ink); margin: 40px 0 16px; letter-spacing: -.01em;
+    }
+    h2 .eyebrow {
+      display: block; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;
+      font-weight: 600; text-transform: uppercase; letter-spacing: .1em;
+      color: var(--crop-deep); margin-bottom: 10px;
+    }
+
+    /* ── Pull quote ── */
+    .pull-quote {
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 28px 0; margin: 44px 0;
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.2rem;
+      font-style: italic; color: var(--ink); line-height: 1.5;
+    }
+    .pull-quote cite {
+      display: block; font-style: normal; font-family: 'IBM Plex Mono', monospace;
+      font-size: .75rem; color: var(--faint); margin-top: 14px; letter-spacing: .04em;
+    }
+
+    /* ── Toggle ── */
+    .toggle-block {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 24px; margin: 40px 0;
+    }
+    .toggle-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin-bottom: 14px;
+    }
+    .tabs {
+      display: flex; background: var(--paper-2); border-radius: 4px;
+      padding: 3px; gap: 3px; margin-bottom: 22px; flex-wrap: wrap;
+    }
+    .tab {
+      flex: 1; padding: 8px 14px; border: none; border-radius: 3px;
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .82rem;
+      font-weight: 500; cursor: pointer; background: transparent;
+      color: var(--faint); transition: all .18s; white-space: nowrap;
+    }
+    .tab.active { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px var(--line); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .tab-content p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .88rem; margin-bottom: 10px; color: var(--ink-soft);
+    }
+    .tab-content p:last-child { margin: 0; }
+
+    .badge {
+      display: inline-block; font-family: 'IBM Plex Mono', monospace;
+      font-size: .68rem; font-weight: 500; text-transform: uppercase;
+      letter-spacing: .07em; padding: 2px 8px; border-radius: 3px; margin-bottom: 12px;
+    }
+    .badge-reject { background: rgba(161,43,34,.1); color: var(--reject); }
+    .badge-accept { background: rgba(47,101,83,.1); color: var(--accept); }
+    .badge-crop   { background: rgba(193,142,32,.1); color: var(--crop-deep); }
+
+    /* ── Mechanisms (3 columns) ── */
+    .mec-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px; margin: 36px 0;
+    }
+    .mec-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 5px; padding: 18px 16px;
+    }
+    .mec-card h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .85rem; font-weight: 600; color: var(--ink);
+      margin: 0 0 8px;
+    }
+    .mec-card p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .78rem; color: var(--slate); margin: 0; line-height: 1.5;
+    }
+    .mec-num {
+      font-family: 'IBM Plex Mono', monospace; font-size: .65rem;
+      color: var(--crop); letter-spacing: .08em; display: block; margin-bottom: 8px;
+    }
+
+    /* ── Comparison (2 columns) ── */
+    .convex-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 36px 0; }
+    .conv-card { border-radius: 5px; padding: 20px; }
+    .conv-card.concave { background: rgba(161,43,34,.06); border: 1px solid rgba(161,43,34,.2); }
+    .conv-card.convex  { background: rgba(47,101,83,.06); border: 1px solid rgba(47,101,83,.2); }
+    .conv-card.crop    { background: rgba(193,142,32,.06); border: 1px solid rgba(193,142,32,.25); }
+    .conv-card h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .88rem; font-weight: 600; margin: 0 0 10px;
+    }
+    .conv-card.concave h3 { color: var(--reject); }
+    .conv-card.convex  h3 { color: var(--accept); }
+    .conv-card.crop    h3 { color: var(--crop-deep); }
+    .conv-card p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .8rem; color: var(--slate); margin: 0 0 6px; line-height: 1.5;
+    }
+    .conv-card p:last-child { margin: 0; }
+    .conv-label {
+      display: inline-block; font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem; font-weight: 500; text-transform: uppercase;
+      letter-spacing: .06em; padding: 2px 8px; border-radius: 3px; margin-bottom: 12px;
+    }
+    .conv-card.concave .conv-label { background: rgba(161,43,34,.1); color: var(--reject); }
+    .conv-card.convex  .conv-label { background: rgba(47,101,83,.1);  color: var(--accept); }
+    .conv-card.crop    .conv-label { background: rgba(193,142,32,.12); color: var(--crop-deep); }
+
+    /* ── Property list ── */
+    .hidra-grid { display: flex; flex-direction: column; gap: 14px; margin: 36px 0; }
+    .hidra-item { display: flex; gap: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; }
+    .hidra-item .m-num {
+      font-family: 'IBM Plex Mono', monospace; font-size: .8rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 3px; font-weight: 500;
+    }
+    .hidra-item strong { display: block; font-size: .92rem; margin-bottom: 4px; }
+    .hidra-item p { margin: 0; font-size: .84rem; color: var(--slate); line-height: 1.55; }
+
+    /* ── Roadmap ── */
+    .roadmap {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 24px 26px; margin: 40px 0;
+    }
+    .roadmap .toggle-label { margin-bottom: 16px; }
+    .roadmap ol {
+      list-style: none; counter-reset: rm; padding: 0; margin: 0;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 20px;
+    }
+    .roadmap li { counter-increment: rm; display: flex; gap: 9px; }
+    .roadmap li::before {
+      content: counter(rm, decimal-leading-zero);
+      font-family: 'IBM Plex Mono', monospace; font-size: .66rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 2px; font-weight: 500;
+    }
+    .roadmap a.rm-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: .8rem; color: var(--ink); text-decoration: none;
+      display: inline-flex; align-items: baseline; gap: 5px; line-height: 1.25;
+    }
+    .roadmap a.rm-title:hover { color: var(--crop-deep); }
+    .roadmap a.rm-title .arw { color: var(--crop); font-size: .72rem; }
+    .roadmap p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .68rem; color: var(--slate); margin: 4px 0 0; line-height: 1.4;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--card); border: 1px solid var(--line);
+      border-left: 3px solid var(--crop); border-radius: 0 5px 5px 0;
+      padding: 20px 24px; margin: 36px 0;
+    }
+    .callout p { margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 1.05rem; color: var(--ink); }
+
+    .callout.warn { border-left-color: var(--reject); }
+
+    /* ── Tooltip ── */
+    .tt { display: inline; position: relative; cursor: help; }
+    .tt sup { font-family: 'IBM Plex Mono', monospace; font-size: .65rem; color: var(--crop); }
+    .tt-box {
+      visibility: hidden; opacity: 0; position: absolute; bottom: 130%; left: 50%;
+      transform: translateX(-50%); background: var(--ink); color: var(--paper);
+      border-radius: 5px; padding: 10px 14px; width: 230px;
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .78rem;
+      line-height: 1.45; z-index: 50; transition: opacity .18s; pointer-events: none;
+    }
+    .tt:hover .tt-box { visibility: visible; opacity: 1; }
+
+    /* ── Footnote marker ── */
+    .fn {
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
+      color: var(--crop); vertical-align: super; cursor: default;
+    }
+
+    /* ── References + Footnotes ── */
+    .bottom {
+      border-top: 1px solid var(--line); margin-top: 72px; padding-top: 28px;
+      display: flex; flex-direction: column; gap: 32px;
+    }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .14em; color: var(--faint); margin: 0 0 14px;
+    }
+    .bottom ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .bottom li { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .8rem; color: var(--slate); line-height: 1.55; }
+    .bottom a { color: var(--crop-deep); text-decoration: none; }
+    .bottom a:hover { text-decoration: underline; }
+
+    .article-note {
+      font-family: 'IBM Plex Mono', monospace; font-size: .72rem;
+      color: var(--faint); letter-spacing: .04em; margin-top: 28px;
+    }
+
+    /* ── Going further (ladder) ── */
+    .ladder { display: flex; flex-direction: column; gap: 14px; margin: 36px 0; }
+    .ladder-step {
+      background: var(--card); border: 1px solid var(--line);
+      border-left: 3px solid var(--crop); border-radius: 0 6px 6px 0;
+      padding: 20px 22px;
+    }
+    .ladder-step .step-head {
+      display: flex; align-items: baseline; gap: 12px;
+      margin-bottom: 10px; flex-wrap: wrap;
+    }
+    .ladder-num {
+      font-family: 'IBM Plex Mono', monospace; font-size: .72rem;
+      color: var(--crop); font-weight: 500;
+    }
+    .ladder-step h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1rem;
+      font-weight: 600; color: var(--ink); margin: 0;
+    }
+    .effort {
+      font-family: 'IBM Plex Mono', monospace; font-size: .6rem;
+      text-transform: uppercase; letter-spacing: .1em; padding: 3px 8px;
+      border-radius: 3px; background: rgba(193,142,32,.1); color: var(--crop-deep);
+    }
+    .ladder-step p {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .85rem;
+      color: var(--ink-soft); margin: 0; line-height: 1.6;
+    }
+    .ladder-step a { color: var(--crop-deep); text-decoration: none; }
+    .ladder-step a:hover { text-decoration: underline; }
+    .ladder-step ol {
+      margin: 14px 0 0; padding: 0; list-style: none; counter-reset: ls;
+      display: flex; flex-direction: column; gap: 11px;
+    }
+    .ladder-step ol li {
+      counter-increment: ls; font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .84rem; color: var(--slate); line-height: 1.5;
+      display: flex; gap: 11px;
+    }
+    .ladder-step ol li::before {
+      content: counter(ls); font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem; color: var(--crop); flex-shrink: 0; font-weight: 500; padding-top: 1px;
+    }
+    .ladder-step ol li strong { color: var(--ink); }
+
+    /* ── Infographic ── */
+    .infographic {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 26px 24px 20px; margin: 40px 0;
+    }
+    .infographic .toggle-label { margin-bottom: 18px; }
+    .infographic svg { width: 100%; height: auto; display: block; }
+    .ig-caption {
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
+      color: var(--faint); letter-spacing: .03em; margin: 16px 0 0; line-height: 1.5;
+    }
+
+    /* ── Magazine split (text + side box) ── */
+    .section-split { display: block; }
+
+    /* ── Bio aside ── */
+    .bio-aside {
+      background: var(--card); border: 1px solid var(--line);
+      border-top: 3px solid var(--crop); border-radius: 0 0 6px 6px;
+      padding: 22px 24px; margin: 36px 0;
+    }
+    .bio-aside .toggle-label { margin-bottom: 4px; }
+    .bio-aside h3 {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.25rem;
+      font-weight: 700; color: var(--ink); margin: 8px 0 2px;
+    }
+    .bio-aside .bio-role {
+      font-family: 'IBM Plex Mono', monospace; font-size: .7rem;
+      color: var(--crop-deep); letter-spacing: .03em; margin-bottom: 14px;
+    }
+    .bio-aside p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .82rem; color: var(--ink-soft); line-height: 1.6; margin: 0 0 12px;
+    }
+    .bio-aside p:last-child { margin: 0; }
+    .bio-facts {
+      list-style: none; padding: 0; margin: 0 0 14px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .bio-facts li {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .8rem;
+      color: var(--slate); line-height: 1.45; display: flex; gap: 10px;
+    }
+    .bio-facts .yr {
+      font-family: 'IBM Plex Mono', monospace; font-size: .72rem;
+      color: var(--crop); flex-shrink: 0; width: 64px; font-weight: 500;
+    }
+
+    @media (min-width: 980px) {
+      /* magazine side box: floats in the right gutter, outside the reading
+         column. Text runs to the left and the next section rises right after
+         the text — the box doesn't force height, so there's no gap. */
+      .section-split .split-body > :first-child { margin-top: 0; }
+      .section-split .bio-aside {
+        float: right; width: 300px;
+        margin: 6px -150px 18px 36px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .mec-grid    { grid-template-columns: 1fr; }
+      .convex-grid { grid-template-columns: 1fr; }
+      .roadmap ol  { grid-template-columns: 1fr; gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="lang-nav">
+  <a href="../index.html">PT</a>
+  <a href="./index.html" class="active">EN</a>
+</nav>
+
+<header>
+  <div class="meta">June 2026<span class="sep">·</span>AI applied to decision-making<span class="sep">·</span>By José Luiz da Costa</div>
+
+  <h1>The Council of Machines</h1>
+  <div class="deck">How to put the judgment — and the biases — of AI models to work for you when making decisions</div>
+
+  <p class="lede">Over a single weekend, Andrej Karpathy — one of the most influential AI researchers of the past decade, an OpenAI co-founder and Tesla's former AI director — built an app where several AI models read, critique and vote on one another's answers. The result is less a technical curiosity than an uncomfortable mirror: the machines have preferences, have biases — and, left to themselves, tend to side with the most "popular" one. The value of the experiment isn't in who tops the ranking, but in the method it offers for hard decisions.</p>
+</header>
+
+<main>
+
+  <!-- Roadmap -->
+  <div class="roadmap">
+    <div class="toggle-label">What's ahead — seven sections</div>
+    <ol>
+      <li><div>
+        <a class="rm-title" href="#s01">The Origin Story <span class="arw">→</span></a>
+        <p>A weekend experiment, "vibe coded", opened on GitHub and shared on X.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s02">The Machines' Verdict <span class="arw">→</span></a>
+        <p>Why the council crowned GPT-5.1 — and why its own creator disagrees.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s03">How the Council Works <span class="arw">→</span></a>
+        <p>The three-stage cycle: independent generation, anonymous review and the Chairman's synthesis.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s04">The Submission Bias <span class="arw">→</span></a>
+        <p>The most dangerous finding — and what the literature actually supports about it.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s05">Where the Council Shines <span class="arw">→</span></a>
+        <p>Not on facts, but on high-uncertainty, high-cost-of-error decisions.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s06">The Parallel with De Bono <span class="arw">→</span></a>
+        <p>The Council as a digitized version of the Six Thinking Hats.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s07">Run your own AI council <span class="arw">→</span></a>
+        <p>How to run the council, the research behind it, and a script to apply it.</p>
+      </div></li>
+    </ol>
+  </div>
+
+  <!-- 01 -->
+  <h2 id="s01">
+    <span class="eyebrow">01 — The Origin</span>
+    The Origin Story
+  </h2>
+
+  <div class="section-split">
+    <aside class="bio-aside">
+      <div class="toggle-label">Who he is</div>
+      <h3>Andrej Karpathy</h3>
+      <div class="bio-role">AI researcher · b. Bratislava, 1986</div>
+      <p>One of the most influential names in deep learning. He created and taught a course at Stanford — the university's first major deep learning course — and has a habit of turning complex ideas into open, didactic tools.</p>
+      <ul class="bio-facts">
+        <li><span class="yr">2015</span><span>PhD at Stanford, advised by Fei-Fei Li. Founding member of OpenAI.</span></li>
+        <li><span class="yr">2017–22</span><span>Director of AI and Autopilot Vision at Tesla.</span></li>
+        <li><span class="yr">2024</span><span>Founds Eureka Labs, an AI education platform.</span></li>
+        <li><span class="yr">2026</span><span>Joins Anthropic — the maker of Claude.</span></li>
+      </ul>
+      <p>The irony didn't go unnoticed: the council he built voted Claude the worst model, months before he went to work at Anthropic, the company that makes Claude.</p>
+    </aside>
+    <div class="split-body">
+      <p>The <strong>LLM Council</strong> started as a low-key experiment. Karpathy built the project over a single Saturday using <span class="tt">"vibe coding"<sup>i</sup><span class="tt-box">AI-guided programming, where the developer describes the intent in natural language and lets the model write the code. Karpathy himself popularized the term.</span></span> — AI-guided programming — and published the open repository on GitHub, sharing the early results on X (formerly Twitter). In his own words, the app was "99% vibe coded".</p>
+
+      <p>The question was simple and provocative: what happens if artificial intelligences stop merely answering humans and start evaluating one another? Karpathy used the council for a very concrete use case — reading book chapters side by side with several models and comparing the quality of the readings.</p>
+
+      <div class="callout">
+        <p>The point wasn't to build a product. It was to observe a behavior: AIs that, instead of competing for human approval, are forced to judge one another's work under explicit rules.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <h2 id="s02">
+    <span class="eyebrow">02 — The Result</span>
+    The Machines' Verdict
+  </h2>
+
+  <p>Karpathy's account reveals something counterintuitive: AIs are surprisingly capable and willing to admit when a rival model's answer is better than their own. Reading chapters and scoring answers, the council <strong>consistently crowned OpenAI's GPT-5.1 as the best and sharpest</strong> — while <strong>Claude was just as consistently picked as the worst</strong>, deemed "dry" and too terse in that domain. Gemini 3 and Grok 4 landed in the middle.</p>
+
+  <p>But the experiment's most honest finding is the author's own caveat. Karpathy made clear that the verdict is <strong>subjective</strong> and that he doesn't agree 100% with the machines: qualitatively, he found GPT-5.1 sometimes verbose and too "spread out", at times preferring Gemini 3's more condensed synthesis.</p>
+
+  <div class="pull-quote">
+    "The models consistently pick GPT-5.1 as the best and Claude as the worst. I'm not 100% convinced this matches my own qualitative assessment."
+    <cite>— Andrej Karpathy, on X (November 2025)</cite>
+  </div>
+
+  <p>This contradiction between the machines' preference and the creator's is the method's first warning sign: <strong>a council of evaluators doesn't deliver the truth — it delivers a consensus.</strong> And consensus, as we'll see, carries biases of its own that are eliminated only in how the system is designed — not by asking the model for good judgment.</p>
+
+  <!-- 03 -->
+  <h2 id="s03">
+    <span class="eyebrow">03 — The Mechanics</span>
+    How the Council Works
+  </h2>
+
+  <p>The model runs in a three-stage cycle, designed to extract intelligence by combining competition and consensus. Each stage has a distinct function — and the order matters.</p>
+
+  <div class="mec-grid">
+    <div class="mec-card">
+      <span class="mec-num">STAGE 01</span>
+      <h3>Independent Generation</h3>
+      <p>The question is sent simultaneously to several models. Answers are generated side by side, without any model seeing another's — then anonymized as "Answer A", "Answer B", etc.</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">STAGE 02</span>
+      <h3>Anonymous Peer Review</h3>
+      <p>Each model reads all rival answers — without knowing who wrote them — and rates them for accuracy and insight: which argument is strongest, which has the biggest blind spot, and what everyone missed.</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">STAGE 03</span>
+      <h3>The Chairman's Synthesis</h3>
+      <p>A "Chairman" model takes over. It doesn't generate new ideas: it compiles where there's agreement (high confidence), where there's legitimate disagreement, the blind spots revealed — and delivers a clear verdict with the next step.</p>
+    </div>
+  </div>
+
+  <div class="infographic">
+    <div class="toggle-label">The LLM Council cycle — from question to verdict</div>
+    <svg viewBox="0 0 720 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three-stage flow of the LLM Council">
+      <defs>
+        <marker id="arw" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#C18E20"/>
+        </marker>
+      </defs>
+      <style>
+        .lbl   { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.12em; fill:#9A6E13; text-transform:uppercase; }
+        .ttl   { font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; fill:#1A1E1B; }
+        .chip  { font-family:'Space Grotesk',sans-serif; font-size:12.5px; font-weight:500; fill:#1A1E1B; }
+        .sub   { font-family:'Space Grotesk',sans-serif; font-size:11.5px; fill:#6A6B5F; }
+        .anon  { font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; fill:#34382F; letter-spacing:.04em; }
+        .tag   { font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.1em; }
+      </style>
+
+      <!-- STAGE 01 -->
+      <text class="lbl" x="20" y="24">Stage 01</text>
+      <text class="ttl" x="98" y="25">Independent generation</text>
+      <line x1="20" y1="34" x2="700" y2="34" stroke="rgba(26,30,27,.12)"/>
+
+      <!-- model chips -->
+      <g>
+        <rect x="20"  y="50" width="160" height="42" rx="6" fill="#FAF6EC" stroke="rgba(26,30,27,.18)"/>
+        <text class="chip" x="100" y="76" text-anchor="middle">GPT-5.1</text>
+        <rect x="195" y="50" width="160" height="42" rx="6" fill="#FAF6EC" stroke="rgba(26,30,27,.18)"/>
+        <text class="chip" x="275" y="76" text-anchor="middle">Gemini 3</text>
+        <rect x="365" y="50" width="160" height="42" rx="6" fill="#FAF6EC" stroke="rgba(26,30,27,.18)"/>
+        <text class="chip" x="445" y="76" text-anchor="middle">Claude</text>
+        <rect x="540" y="50" width="160" height="42" rx="6" fill="#FAF6EC" stroke="rgba(26,30,27,.18)"/>
+        <text class="chip" x="620" y="76" text-anchor="middle">Grok 4</text>
+      </g>
+      <text class="sub" x="20" y="112">Same question sent to all · answers generated in parallel, without seeing each other</text>
+
+      <!-- arrows into anon box -->
+      <path d="M100,118 L100,140 L360,140 L360,158" fill="none" stroke="#C18E20" stroke-width="1.4" marker-end="url(#arw)"/>
+      <path d="M275,118 L275,140" fill="none" stroke="#C18E20" stroke-width="1.4"/>
+      <path d="M445,118 L445,140" fill="none" stroke="#C18E20" stroke-width="1.4"/>
+      <path d="M620,118 L620,140 L360,140" fill="none" stroke="#C18E20" stroke-width="1.4"/>
+
+      <!-- anonymization box -->
+      <rect x="170" y="160" width="380" height="46" rx="6" fill="rgba(193,142,32,.08)" stroke="rgba(193,142,32,.4)"/>
+      <text class="anon" x="360" y="182" text-anchor="middle">Anonymized answers</text>
+      <text class="anon" x="360" y="199" text-anchor="middle">A · B · C · D</text>
+
+      <path d="M360,206 L360,236" fill="none" stroke="#C18E20" stroke-width="1.6" marker-end="url(#arw)"/>
+
+      <!-- STAGE 02 -->
+      <text class="lbl" x="20" y="262">Stage 02</text>
+      <text class="ttl" x="98" y="263">Peer review</text>
+      <rect x="262" y="251" width="78" height="16" rx="8" fill="rgba(161,43,34,.1)"/>
+      <text class="tag" x="301" y="263" text-anchor="middle" fill="#A12B22">BLIND</text>
+      <line x1="20" y1="272" x2="700" y2="272" stroke="rgba(26,30,27,.12)"/>
+
+      <rect x="20" y="288" width="680" height="118" rx="6" fill="#FAF6EC" stroke="rgba(26,30,27,.18)"/>
+      <text class="sub" x="40" y="314">Each model reads all answers — without knowing who wrote them — and rates:</text>
+      <g>
+        <circle cx="120" cy="356" r="6" fill="#2F6553"/>
+        <text class="chip" x="138" y="360">Which argument is strongest</text>
+        <circle cx="120" cy="384" r="6" fill="#A12B22"/>
+        <text class="chip" x="138" y="388">Which has the biggest blind spot</text>
+        <circle cx="455" cy="356" r="6" fill="#C18E20"/>
+        <text class="chip" x="473" y="360">What everyone missed</text>
+        <circle cx="455" cy="384" r="6" fill="#6A6B5F"/>
+        <text class="chip" x="473" y="388">Ranks A · B · C · D</text>
+      </g>
+
+      <path d="M360,406 L360,436" fill="none" stroke="#C18E20" stroke-width="1.6" marker-end="url(#arw)"/>
+
+      <!-- STAGE 03 -->
+      <text class="lbl" x="20" y="462">Stage 03</text>
+      <text class="ttl" x="98" y="463">Chairman's synthesis</text>
+      <line x1="20" y1="472" x2="700" y2="472" stroke="rgba(26,30,27,.12)"/>
+
+      <rect x="20" y="488" width="330" height="56" rx="6" fill="#FAF6EC" stroke="rgba(26,30,27,.18)"/>
+      <text class="chip" x="40" y="508">Chairman compiles the council</text>
+      <text class="sub" x="40" y="524">doesn't create ideas — organizes</text>
+      <text class="sub" x="40" y="538">consensus, dispute and blind spots</text>
+
+      <path d="M350,516 L378,516" fill="none" stroke="#C18E20" stroke-width="1.6" marker-end="url(#arw)"/>
+
+      <rect x="386" y="488" width="314" height="56" rx="6" fill="rgba(47,101,83,.08)" stroke="rgba(47,101,83,.4)"/>
+      <text class="chip" x="403" y="512" fill="#2F6553">Clear verdict</text>
+      <text class="sub" x="403" y="530">+ recommended next step</text>
+    </svg>
+    <p class="ig-caption">Models and ranking reflect the council Karpathy configured in Nov 2025. The anonymity lock in Stage 02 is what keeps the system from becoming a popularity contest.</p>
+  </div>
+
+  <p>The most important engineering detail is in <strong>stage 02</strong>. Anonymization isn't cosmetic: it exists precisely to stop a model from "playing to the crowd" and favoring the one it recognizes. It's the piece that separates an honest evaluation from a popularity contest — and, as we'll see next, it's also the exact point where the system most easily breaks.</p>
+
+  <!-- 04 -->
+  <h2 id="s04">
+    <span class="eyebrow">04 — The Risk</span>
+    The Submission Bias
+  </h2>
+
+  <p>Here is the most fascinating — and at the same time most dangerous — finding. When the anonymity stage is removed — when the models know whose answer is whose — a <strong>"submission bias"</strong> effect is reported: models like Claude or Gemini would tend to "give up" their own logic and correct themselves to agree with GPT's answer, simply because they recognize the source.</p>
+
+  <div class="callout warn">
+    <p><strong>Critical note.</strong> We should treat this as a <strong>hypothesis, not a fact</strong>. What <em>is</em> well documented in the literature is only the underlying mechanism: <strong>sycophancy</strong> (the tendency to agree with the apparently endorsed position) and <strong>self-preference / familiarity bias</strong> in LLMs used as judges. These two effects lend support to the "submission bias" — but an indication isn't proof. To elevate it from hypothesis to fact, you'd need to run the same set of answers with and without anonymity, across several rounds, and measure whether — and how much — the scores change when the model's identity is revealed.</p>
+  </div>
+
+  <p>The practical consequence is direct and doesn't depend on the hypothesis being true: <strong>the anonymization in stage 02 is a risk control.</strong> Remove it and you swap a council of peers for an echo chamber that converges on the most "prestigious" model. For anyone who intends to use the method on real decisions, the rule is non-negotiable: answers must be evaluated blind. It's the model-world equivalent of double-blind review in science.</p>
+
+  <!-- 05 -->
+  <h2 id="s05">
+    <span class="eyebrow">05 — The Application</span>
+    Where the Council Shines
+  </h2>
+
+  <p>The LLM Council is a terrible tool for factual questions. "What's the capital of France?" doesn't need a council — it needs a search. The value shows up in exactly the opposite territory: <strong>high-uncertainty scenarios, where there's no obvious right answer and the cost of deciding wrong is high.</strong> In those cases, the divergence between models isn't noise — it's information about where the risks are.</p>
+
+  <div class="toggle-block">
+    <div class="toggle-label">Three real contact center decisions where the council adds value</div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab(this,'dimens')">Capacity Planning</button>
+      <button class="tab" onclick="switchTab(this,'transbordo')">Script &amp; Escalation</button>
+      <button class="tab" onclick="switchTab(this,'modelo')">Operating Model</button>
+    </div>
+    <div id="tab-dimens" class="tab-content active">
+      <span class="badge badge-crop">Strategy</span>
+      <p><strong>"Do I reinforce the human team for the demand peak, or invest first in automating service?"</strong></p>
+      <p>There's no single answer — it depends on volume, seasonality, cost per contact and operational maturity. The council forces you to make explicit the trade-offs of each path (fixed headcount cost vs. the cost and time to deploy AI) and reveals the blind spot a single AI would hide by "choosing" too quickly.</p>
+    </div>
+    <div id="tab-transbordo" class="tab-content">
+      <span class="badge badge-crop">Experience</span>
+      <p><strong>At what point should the bot hand off to a human — and what should it say before handing off?</strong></p>
+      <p>Evaluate the service flow before putting it into production. Peer review works as a cheap pre-test: it flags where the script creates frustration, which answer becomes a legal or reputational risk, and the missing escalation trigger — before a real customer pays to find out.</p>
+    </div>
+    <div id="tab-modelo" class="tab-content">
+      <span class="badge badge-crop">Operations</span>
+      <p><strong>"Do I keep service in-house or outsource to a BPO — and in what order do I make the transition?"</strong></p>
+      <p>Structural decisions and drastic pivots. The council organizes the case for and against each path, separating what is consensus (proceed with confidence) from what is legitimate dispute (where it's worth pausing and measuring before committing the operation).</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="toggle-label" style="margin-bottom:12px;">The evidence that the method works</div>
+    <p style="margin-bottom:14px;">Karpathy's council is too new to have a published operational case. But the <em>mechanism</em> behind it — several models that read each other before concluding — has already been measured. In <strong>Mixture-of-Agents</strong> (ICLR 2025), a council of open-source models reached a <strong>65.1% win rate</strong> on the AlpacaEval 2.0 benchmark, beating GPT-4 Omni alone (<strong>57.5%</strong>). And in <em>Multiagent Debate</em> (Du et al., ICML 2024), forcing the models to debate before answering raised factuality and reasoning above any single model.</p>
+    <p style="margin:0;">The honest caveat comes from the same field: the <strong>Self-MoA</strong> study showed that, across several tests, a single top-tier model — queried multiple times with its best answers combined — beats the council of different models. The right reading isn't "more models is always better", but that <strong>the gain comes from structured deliberation, not from the number of brands at the table</strong> — sometimes a single model wearing several lenses is enough.</p>
+  </div>
+
+  <p>Translated to operations: the question the method improves isn't "automate or not", but <strong>where</strong> automation destroys value — the boundary between the repetitive contact, which AI handles well and cheaply, and the high-friction contact, where a poorly calibrated <strong>escalation</strong> turns into a repeat call, legal risk and brand erosion. Costs that don't show up on the cost-per-contact spreadsheet in the month of the decision, only the following quarter. A single AI, optimistic by nature, tends to underweight that risk; a council, forced to diverge, puts it on the table.</p>
+
+  <p>The pattern is clear: the council doesn't replace the decision-maker — it <strong>improves the quality of the question</strong> before the decision. It delivers a map of agreements, divergences and blind spots. The final choice remains human; what changes is that it's now made with the terrain lit up.</p>
+
+  <!-- 06 -->
+  <h2 id="s06">
+    <span class="eyebrow">06 — The Genealogy</span>
+    The Parallel with De Bono
+  </h2>
+
+  <p>There's a more precise way to understand the LLM Council than "several AIs chatting": it's the <strong>structured digitization of Edward de Bono's method</strong>. In <em>Six Thinking Hats</em> (1985), De Bono proposes human parallel thinking — separating perspectives into "hats" so the group looks at the same problem from one angle at a time, without ego and debate stalling the analysis.</p>
+
+  <p>The council operationalizes exactly that, swapping hats for specialized advisors. The mapping is almost one-to-one:</p>
+
+  <div class="convex-grid">
+    <div class="conv-card concave">
+      <span class="conv-label">De Bono — Black Hat</span>
+      <h3>The Contrarian</h3>
+      <p>Focus on what can go wrong: risks, failures, objections. In the council, it's the advisor tasked with hunting the blind spot and the argument that doesn't hold up.</p>
+    </div>
+    <div class="conv-card convex">
+      <span class="conv-label">De Bono — Yellow Hat</span>
+      <h3>The Expansionist</h3>
+      <p>Focus on maximizing the upside: benefits, opportunities, the best case. In the council, it's the one who widens the option space instead of closing the decision too early.</p>
+    </div>
+  </div>
+
+  <p>And the parallel culminates in the most important function of both systems — <strong>orchestration</strong>. De Bono's <strong>Blue Hat</strong> and Karpathy's <strong>Chairman</strong> play an identical role: they don't generate new ideas, they organize the chaos of competing perspectives, remove the biases and ensure all voices culminate in a final decision that is practical and smart.</p>
+
+  <div class="pull-quote">
+    "The genius, in both models, isn't in any single advisor. It's in whoever orchestrates — the Blue in De Bono, the Chairman in Karpathy."
+    <cite>— Author's synthesis</cite>
+  </div>
+
+  <p>That's where the transferable lesson lies, regardless of which model wins the ranking of the day: <strong>good decisions rarely come from a single voice, however brilliant.</strong> They come from a process that forces perspectives to diverge before converging — and from someone, human or machine, with the discipline to separate consensus from echo. The LLM Council is, at bottom, the old wisdom of parallel thinking dressed up as software. What it adds isn't the idea. It's the ability to run it on demand, at any hour, over any hard decision.</p>
+
+  <p>A distinction makes the parallel even sharper. De Bono doesn't switch people for each hat — it's the same mind taking on, one at a time, a different role. The version of the council closest to that doesn't use distinct models, but <strong>a single model wearing several lenses</strong>: the same "brain" instructed to think now as the Contrarian, now as the Expansionist. And there's a gain the multi-model version doesn't have — when the advisor is always the same model, the <strong>submission bias simply doesn't exist</strong>: there's no rival brand to defer to, because all voices come from the same source. What varies is the role, not the prestige.</p>
+
+  <p>The cost of that choice is the flip side of its advantage: a single model carries <strong>correlated blind spots</strong> — every lens inherits the same base biases, and the "disagreement" may be more role-play than real divergence. The practical rule that emerges is direct: to force perspectives (what De Bono does best) and escape the herd effect, a single model with several lenses usually suffices — it's cheaper and faster; when what's at stake demands genuine diversity of reasoning, it's worth paying the price of orchestrating rival models and living with the identity bias they bring back.</p>
+
+  <!-- Going further -->
+  <h2 id="s07">
+    <span class="eyebrow">Hands-on</span>
+    Run your own AI council
+  </h2>
+
+  <p>If the topic caught your interest, the most useful path isn't to read more about the council — it's to put it to work and then adapt it to your own decision. Three steps, in increasing depth:</p>
+
+  <div class="ladder">
+    <div class="ladder-step">
+      <div class="step-head">
+        <span class="ladder-num">01</span>
+        <h3>Experiment</h3>
+        <span class="effort">~15 min</span>
+      </div>
+      <p>Run the council yourself. Karpathy's original repository runs locally and fans out to several models via OpenRouter (you need an API key): <a href="https://github.com/karpathy/llm-council" target="_blank">karpathy/llm-council</a>. If you already use Claude Code, there are Markdown versions that reproduce the cycle within a single session, with subagents as advisors — for example <a href="https://github.com/ngmeyer/council-review" target="_blank">ngmeyer/council-review</a>. Start with a real decision, not a test.</p>
+    </div>
+    <div class="ladder-step">
+      <div class="step-head">
+        <span class="ladder-num">02</span>
+        <h3>Understand the foundation</h3>
+        <span class="effort">1 read</span>
+      </div>
+      <p>The council didn't come out of nowhere — it operationalizes peer-reviewed research. To understand why cross-model evaluation works <em>and where it fails</em>, read <strong>Zheng et al., "Judging LLM-as-a-Judge"</strong> (NeurIPS 2023): it's the work that formally documents the position and verbosity biases of LLM judges — exactly the grounding for this article's critical note. <a href="https://arxiv.org/abs/2306.05685" target="_blank">arXiv:2306.05685</a>. For the model-debate side, go to Du, Tenenbaum &amp; Mordatch, <em>Multiagent Debate</em> (ICML 2024). <a href="https://composable-models.github.io/llm_debate/" target="_blank">Link</a>.</p>
+    </div>
+    <div class="ladder-step">
+      <div class="step-head">
+        <span class="ladder-num">03</span>
+        <h3>Apply it to your context</h3>
+        <span class="effort">playbook</span>
+      </div>
+      <p>The real value appears when you adapt the method to a concrete decision — say, in your contact center. A minimal playbook to avoid misusing it:</p>
+      <ol>
+        <li><strong>Frame a decision, not a factual question.</strong> Make the cost of being wrong explicit. If the question has a single answer, it doesn't need a council.</li>
+        <li><strong>Define the advisors as lenses.</strong> Instead of five models, five angles: the Contrarian (risks), the Expansionist (gains), the Operational one (cost and deployment). It's De Bono digitized.</li>
+        <li><strong>Guarantee anonymity in the evaluation.</strong> Without that lock, the council becomes a popularity contest. Evaluate the answers blind.</li>
+        <li><strong>Read the verdict skeptically.</strong> Use consensus as a confidence signal and divergence as a risk map — but the final decision stays yours, not the chairman's.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom">
+    <div>
+      <p class="section-label">Author's Notes</p>
+      <ul>
+        <li><span class="fn">i</span> The experiment dates from November 2025; the models cited (GPT-5.1, Gemini 3, Claude Sonnet 4.5, Grok 4) reflect the council Karpathy configured at the time. Rankings between models change fast — it's the method, not the table, that ages well.</li>
+        <li><strong>Submission Bias</strong> — treated in this text as a plausible hypothesis anchored in the literature on <em>sycophancy</em> and <em>self-preference bias</em>, not as a verified experimental result. See the Critical Note in section 04.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="section-label">References</p>
+      <ul>
+        <li>Karpathy, A. (2025). <em>llm-council</em> — project repository. GitHub. <a href="https://github.com/karpathy/llm-council" target="_blank">github.com/karpathy/llm-council</a></li>
+        <li>Karpathy, A. (2025). Project announcement ("fun Saturday vibe code project"). X. <a href="https://x.com/karpathy/status/1992381094667411768" target="_blank">x.com/karpathy</a></li>
+        <li>VentureBeat (2025). <em>A weekend 'vibe code' hack by Andrej Karpathy quietly sketches the missing layer of enterprise AI orchestration.</em> <a href="https://venturebeat.com/ai/a-weekend-vibe-code-hack-by-andrej-karpathy-quietly-sketches-the-missing" target="_blank">Link</a></li>
+        <li>Analytics India Magazine (2025). <em>GPT 5.1 Is The Best, As Declared By Gemini 3, Claude &amp; Grok On Andrej Karpathy's 'LLM Council'.</em> <a href="https://analyticsindiamag.com/ai-news-updates/gpt-5-1-is-the-best-as-declared-by-gemini-3-0-claude-grok-on-andrej-karpathys-llm-council/" target="_blank">Link</a></li>
+        <li>de Bono, E. (1985). <em>Six Thinking Hats.</em> Little, Brown and Company.</li>
+        <li>Wang, J. et al. (2024). <em>Mixture-of-Agents Enhances Large Language Model Capabilities.</em> ICLR 2025. <a href="https://arxiv.org/abs/2406.04692" target="_blank">arXiv:2406.04692</a></li>
+        <li>Li, W. et al. (2025). <em>Rethinking Mixture-of-Agents: Is Mixing Different Large Language Models Beneficial?</em> (Self-MoA). <a href="https://arxiv.org/abs/2502.00674" target="_blank">arXiv:2502.00674</a></li>
+        <li>CNBC (2026). <em>Anthropic hires OpenAI co-founder Andrej Karpathy, former Tesla AI leader.</em> <a href="https://www.cnbc.com/2026/05/19/anthropic-hires-openai-cofounder-andrej-karpathy-former-tesla-ai-lead.html" target="_blank">Link</a></li>
+        <li>Sycophancy in LLMs — discussion of the "first dark pattern" of models. <a href="https://www.seangoedecke.com/ai-sycophancy/" target="_blank">Sean Goedecke</a></li>
+        <li>Position / self-preference bias in LLMs used as judges — measurement and mitigation. <a href="https://mbrenndoerfer.com/writing/position-bias-in-llm-judges" target="_blank">Brenndoerfer</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="article-note">Summary and original argument based on the sources listed · Unverified claims flagged in the text</p>
+
+</main>
+
+<script>
+  function switchTab(btn, id) {
+    btn.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    btn.closest('.toggle-block').querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
