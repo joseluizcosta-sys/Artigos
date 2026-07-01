@@ -13,32 +13,33 @@
   body{margin:0;background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;
     font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased;
     background-image:linear-gradient(rgba(26,30,27,.06) 1px,transparent 1px);background-size:100% 30px;}
-  .wrap{max-width:780px;margin:0 auto;padding:clamp(48px,9vw,110px) clamp(20px,5vw,40px)}
+  .wrap{max-width:780px;margin:0 auto;padding:clamp(32px,6vw,64px) clamp(20px,5vw,40px)}
   .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--crop);display:flex;gap:14px;align-items:center;margin:0 0 18px}
+    color:var(--crop);display:flex;gap:14px;align-items:center;margin:0 0 14px}
   .eyebrow::before{content:"";width:30px;height:2px;background:var(--crop)}
-  h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(40px,9vw,72px);
-    line-height:.98;letter-spacing:-.02em;margin:0 0 14px}
-  .sub{font-weight:300;color:var(--ink-soft);max-width:46ch;margin:0 0 clamp(36px,6vw,56px);font-size:21px}
+  h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(34px,7vw,56px);
+    line-height:.98;letter-spacing:-.02em;margin:0 0 10px}
+  .sub{font-weight:300;color:var(--ink-soft);max-width:46ch;margin:0 0 clamp(24px,4vw,36px);font-size:18px}
   .card{display:block;text-decoration:none;color:inherit;background:#FAF6EC;border:1px solid var(--line);
-    padding:clamp(22px,4vw,34px);transition:transform .25s,box-shadow .25s;position:relative}
-  .card:hover{transform:translateY(-3px);box-shadow:0 18px 36px -22px rgba(26,30,27,.5)}
-  .card .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--slate);margin-bottom:12px}
-  .card h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(24px,4vw,32px);
-    line-height:1.08;margin:0 0 8px;letter-spacing:-.01em}
-  .card p{margin:0;color:var(--ink-soft);font-size:17px;max-width:56ch}
+    padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);transition:transform .2s,box-shadow .2s;position:relative}
+  .card + .card{margin-top:clamp(8px,1.5vw,12px)}
+  .card:hover{transform:translateY(-2px);box-shadow:0 12px 26px -18px rgba(26,30,27,.5)}
+  .card .tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--slate);margin-bottom:6px}
+  .card h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(18px,2.6vw,22px);
+    line-height:1.15;margin:0 0 5px;letter-spacing:-.01em}
+  .card p{margin:0;color:var(--ink-soft);font-size:14.5px;line-height:1.45;max-width:60ch}
   .card .go{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--crop);margin-top:16px;display:inline-block}
   .card:hover .go{text-decoration:underline}
-  .langs{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-  .langs a{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.04em;
-    text-decoration:none;color:var(--ink);border:1px solid var(--line);padding:8px 14px;
+  .langs{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .langs a{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;
+    text-decoration:none;color:var(--ink);border:1px solid var(--line);padding:5px 11px;
     transition:background .2s,color .2s}
   .langs a:hover{background:var(--ink);color:var(--paper)}
   .langs a b{color:var(--crop);font-weight:500}
   .langs a:hover b{color:var(--paper)}
   footer{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--slate);margin-top:clamp(40px,7vw,70px);border-top:1px solid var(--line);padding-top:20px}
+    color:var(--slate);margin-top:clamp(28px,5vw,44px);border-top:1px solid var(--line);padding-top:16px}
 </style>
 </head>
 <body>
@@ -48,16 +49,16 @@
     <p class="sub">Resumos visuais de papers acadêmicos — cada um numa única página, para ler e compartilhar.</p>
 
     <div class="card">
-      <div class="tag">Stanford Digital Economy Lab · maio 2026 · arXiv:2605.27371</div>
-      <h2>Algorithmic Monocultures in Hiring</h2>
-      <p>Quando os mesmos algoritmos triam quase todo mundo, as mesmas pessoas são rejeitadas em todo lugar. O maior estudo empírico de contratação algorítmica — 3,4M candidatos, 4M candidaturas, 156 empregadores.</p>
+      <div class="tag">White Paper · Junho 2026 · IA aplicada à decisão</div>
+      <h2>O Conselho das Máquinas</h2>
+      <p>Como aproveitar o julgamento — e os vieses — dos modelos de IA a seu favor na hora de decidir. O LLM Council de Andrej Karpathy, o paralelo com os Seis Chapéus de De Bono e um roteiro para aplicar o método a decisões reais.</p>
       <div class="langs">
-        <a href="algorithmic-monocultures-in-hiring/"><b>PT</b> · Português →</a>
-        <a href="algorithmic-monocultures-in-hiring/en/"><b>EN</b> · English →</a>
+        <a href="o-conselho-das-maquinas/"><b>PT</b> · Português →</a>
+        <a href="o-conselho-das-maquinas/en/"><b>EN</b> · English →</a>
       </div>
     </div>
 
-    <div class="card" style="margin-top:clamp(16px,3vw,24px)">
+    <div class="card">
       <div class="tag">White Paper · Junho 2026</div>
       <h2>O Erro que Fortalece</h2>
       <p>Como contact centers com IA ficam mais fortes a cada falha — Erro Nutriente, Opcionalidade e o Efeito Hidra aplicados ao design de sistemas de atendimento.</p>
@@ -67,13 +68,13 @@
       </div>
     </div>
 
-    <div class="card" style="margin-top:clamp(16px,3vw,24px)">
-      <div class="tag">White Paper · Junho 2026 · IA aplicada à decisão</div>
-      <h2>O Conselho das Máquinas</h2>
-      <p>Como aproveitar o julgamento — e os vieses — dos modelos de IA a seu favor na hora de decidir. O LLM Council de Andrej Karpathy, o paralelo com os Seis Chapéus de De Bono e um roteiro para aplicar o método a decisões reais.</p>
+    <div class="card">
+      <div class="tag">Stanford Digital Economy Lab · maio 2026 · arXiv:2605.27371</div>
+      <h2>Algorithmic Monocultures in Hiring</h2>
+      <p>Quando os mesmos algoritmos triam quase todo mundo, as mesmas pessoas são rejeitadas em todo lugar. O maior estudo empírico de contratação algorítmica — 3,4M candidatos, 4M candidaturas, 156 empregadores.</p>
       <div class="langs">
-        <a href="o-conselho-das-maquinas/"><b>PT</b> · Português →</a>
-        <a href="o-conselho-das-maquinas/en/"><b>EN</b> · English →</a>
+        <a href="algorithmic-monocultures-in-hiring/"><b>PT</b> · Português →</a>
+        <a href="algorithmic-monocultures-in-hiring/en/"><b>EN</b> · English →</a>
       </div>
     </div>
 
