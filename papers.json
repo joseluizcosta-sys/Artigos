@@ -1,0 +1,53 @@
+{
+  "base": "https://joseluizcosta-sys.github.io/Artigos/",
+  "papers": [
+    {
+      "slug": "o-conselho-das-maquinas",
+      "hasEn": true,
+      "tag": {
+        "pt": "IA aplicada à decisão · Junho 2026",
+        "en": "AI for decision-making · June 2026"
+      },
+      "title": {
+        "pt": "O Conselho das Máquinas",
+        "en": "The Council of Machines"
+      },
+      "dek": {
+        "pt": "Andrej Karpathy montou um app onde vários modelos de IA leem, criticam e votam nas respostas uns dos outros. As máquinas têm preferências e vieses — e o valor está no método que isso oferece para decisões difíceis.",
+        "en": "Andrej Karpathy built an app where several AI models read, critique and vote on each other's answers. The machines have preferences and biases — and the value lies in the method it offers for hard decisions."
+      }
+    },
+    {
+      "slug": "algorithmic-monocultures-in-hiring",
+      "hasEn": true,
+      "tag": {
+        "pt": "Stanford Digital Economy Lab · maio 2026 · arXiv:2605.27371",
+        "en": "Stanford Digital Economy Lab · May 2026 · arXiv:2605.27371"
+      },
+      "title": {
+        "pt": "Algorithmic Monocultures in Hiring",
+        "en": "Algorithmic Monocultures in Hiring"
+      },
+      "dek": {
+        "pt": "Quando os mesmos algoritmos triam quase todo mundo, as mesmas pessoas são rejeitadas em todo lugar. O maior estudo empírico de contratação algorítmica — 3,4M candidatos, 4M candidaturas, 156 empregadores.",
+        "en": "When the same algorithms screen nearly everyone, the same people are rejected everywhere. The largest empirical study of algorithmic hiring — 3.4M applicants, 4M applications, 156 employers."
+      }
+    },
+    {
+      "slug": "via-negativa-contact-center",
+      "hasEn": true,
+      "tag": {
+        "pt": "White Paper · Junho 2026",
+        "en": "White Paper · June 2026"
+      },
+      "title": {
+        "pt": "O Erro que Fortalece",
+        "en": "The Error that Strengthens"
+      },
+      "dek": {
+        "pt": "Como contact centers com IA ficam mais fortes a cada falha — Erro Nutriente, Opcionalidade e o Efeito Hidra aplicados ao design de sistemas de atendimento.",
+        "en": "How AI contact centers grow stronger with every failure — Nutrient Error, Optionality and the Hydra Effect applied to service design."
+      }
+    }
+  ]
+}

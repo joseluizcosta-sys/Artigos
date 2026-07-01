@@ -1,82 +1,395 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Papers — José Luiz Costa</title>
+<title>José Luiz Costa — CX & Conversational AI</title>
+<meta name="description" content="José Luiz Costa — executivo de Customer Experience e Serviços Profissionais na América Latina. Papers e ensaios sobre CX, IA e sistemas.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Newsreader:ital,wght@0,300;0,400;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--paper:#F1ECE0;--ink:#1A1E1B;--ink-soft:#34382F;--crop:#9A6E13;--slate:#6A6B5F;--line:rgba(26,30,27,.16)}
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;
-    font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased;
-    background-image:linear-gradient(rgba(26,30,27,.06) 1px,transparent 1px);background-size:100% 30px;}
-  .wrap{max-width:780px;margin:0 auto;padding:clamp(32px,6vw,64px) clamp(20px,5vw,40px)}
-  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--crop);display:flex;gap:14px;align-items:center;margin:0 0 14px}
-  .eyebrow::before{content:"";width:30px;height:2px;background:var(--crop)}
-  h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(34px,7vw,56px);
-    line-height:.98;letter-spacing:-.02em;margin:0 0 clamp(24px,4vw,36px)}
-  .card{display:block;text-decoration:none;color:inherit;background:#FAF6EC;border:1px solid var(--line);
-    padding:clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);transition:transform .2s,box-shadow .2s;position:relative}
-  .card + .card{margin-top:clamp(8px,1.5vw,12px)}
-  .card:hover{transform:translateY(-2px);box-shadow:0 12px 26px -18px rgba(26,30,27,.5)}
-  .card .tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--slate);margin-bottom:6px}
-  .card h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(18px,2.6vw,22px);
-    line-height:1.15;margin:0 0 5px;letter-spacing:-.01em}
-  .card p{margin:0;color:var(--ink-soft);font-size:14.5px;line-height:1.45;max-width:60ch}
-  .card .go{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--crop);margin-top:16px;display:inline-block}
-  .card:hover .go{text-decoration:underline}
-  .langs{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-  .langs a{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;
-    text-decoration:none;color:var(--ink);border:1px solid var(--line);padding:5px 11px;
-    transition:background .2s,color .2s}
-  .langs a:hover{background:var(--ink);color:var(--paper)}
-  .langs a b{color:var(--crop);font-weight:500}
-  .langs a:hover b{color:var(--paper)}
-  footer{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--slate);margin-top:clamp(28px,5vw,44px);border-top:1px solid var(--line);padding-top:16px}
+  :root {
+    --font-serif: "Newsreader", Georgia, serif;
+    --font-sans: "Space Grotesk", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    /* light theme */
+    --bg: #F1ECE0; --bg90: rgba(241,236,224,.82); --card: #FAF6EC; --sunk: #E8E1D1;
+    --head: #1A1E1B; --body: #34382F; --muted: #6A6B5F; --faint: #9A9886;
+    --line: rgba(26,30,27,.16); --line-soft: rgba(26,30,27,.08);
+    --acc: #9A6E13; --on-acc: #FAF6EC; --acc-band: #C18E20;
+    --invert-bg: #1A1E1B; --invert-fg: #F1ECE0; --invert-soft: #D8D2C2;
+    --rule: linear-gradient(rgba(26,30,27,.06) 1px, transparent 1px);
+  }
+  [data-theme="dark"] {
+    --bg: #161914; --bg90: rgba(22,25,20,.82); --card: #1F231C; --sunk: #20241D;
+    --head: #F3EEE2; --body: #CFCABA; --muted: #9A9886; --faint: #6A6B5F;
+    --line: rgba(243,238,226,.16); --line-soft: rgba(243,238,226,.08);
+    --acc: #C18E20; --on-acc: #1A1E1B; --acc-band: #C18E20;
+    --invert-bg: #0E2547; --invert-fg: #EAF1FC; --invert-soft: #C9D8F2;
+    --rule: linear-gradient(rgba(243,238,226,.05) 1px, transparent 1px);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); background-image: var(--rule); background-size: 100% 30px;
+    color: var(--body); font-family: var(--font-serif); -webkit-font-smoothing: antialiased;
+    transition: background .3s, color .3s;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px); }
+  .eyebrow { display: flex; align-items: center; gap: 14px; margin: 0 0 22px; font-family: var(--font-mono);
+    font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--acc); }
+  .eyebrow::before { content: ""; width: 30px; height: 2px; background: var(--acc); flex: none; }
+
+  /* header */
+  header.top { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.1) blur(6px);
+    background: var(--bg90); border-bottom: 1px solid var(--line); }
+  header.top .bar { max-width: 1080px; margin: 0 auto; padding: 14px clamp(20px,5vw,48px);
+    display: flex; align-items: center; gap: 20px; }
+  .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+  .brand img { display: block; border-radius: 22%; }
+  .brand span { font-family: var(--font-sans); font-weight: 600; font-size: 16px; letter-spacing: -.01em; color: var(--head); }
+  nav.links { display: flex; gap: 26px; margin-left: 18px; }
+  nav.links a { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+    text-decoration: none; color: var(--muted); }
+  nav.links a:hover { color: var(--head); }
+  .actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .btn-ghost { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; padding: 7px 11px;
+    border: 1px solid var(--line); background: transparent; color: var(--head); cursor: pointer; border-radius: 3px; }
+  .btn-ghost:hover { background: var(--head); color: var(--bg); }
+  .btn-acc { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; padding: 8px 13px;
+    background: var(--acc); color: var(--on-acc); text-decoration: none; border-radius: 3px; }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: 1.35fr .85fr; gap: clamp(32px,6vw,72px); align-items: center;
+    padding: clamp(56px,9vw,120px) 0 clamp(48px,7vw,90px); }
+  .hero h1 { font-family: var(--font-sans); font-weight: 700; font-size: clamp(40px,6vw,80px); line-height: .98;
+    letter-spacing: -.025em; margin: 0 0 20px; color: var(--head); }
+  .hero .role { font-family: var(--font-sans); font-weight: 500; font-size: clamp(19px,2.4vw,27px);
+    letter-spacing: -.01em; margin: 0 0 12px; color: var(--acc); }
+  .hero .tag { font-family: var(--font-serif); font-weight: 300; font-size: clamp(18px,2vw,22px); line-height: 1.5;
+    max-width: 42ch; color: var(--body); margin: 0 0 32px; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .cta-primary { font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em; padding: 13px 22px;
+    background: var(--acc); color: var(--on-acc); text-decoration: none; border-radius: 3px; }
+  .cta-secondary { font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em; padding: 12px 21px;
+    border: 1px solid var(--line); color: var(--head); text-decoration: none; border-radius: 3px; }
+  .cta-secondary:hover { background: var(--head); color: var(--bg); }
+  .hero-photo { display: flex; justify-content: center; }
+  .photo-frame { position: relative; padding: clamp(14px,2vw,20px); background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+  .photo-frame img { display: block; width: clamp(190px,26vw,300px); height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 4px; }
+  .photo-frame .accent { position: absolute; left: 0; bottom: -1px; width: 46px; height: 3px; background: var(--acc); }
+
+  /* sections */
+  section.blk { border-top: 1px solid var(--line); }
+  section.blk .wrap { padding: clamp(48px,7vw,90px) clamp(20px,5vw,48px); }
+  h2.sec { font-family: var(--font-sans); font-weight: 700; font-size: clamp(28px,4vw,46px); line-height: 1.04;
+    letter-spacing: -.02em; margin: 0 0 clamp(28px,4vw,44px); max-width: 20ch; color: var(--head); }
+  .about-lead { font-family: var(--font-serif); font-weight: 300; font-size: clamp(22px,3vw,34px); line-height: 1.4;
+    max-width: 30ch; color: var(--head); margin: 0 0 28px; }
+  .about-body { font-family: var(--font-serif); font-size: clamp(18px,2vw,21px); line-height: 1.65; max-width: 62ch; color: var(--body); margin: 0; }
+
+  /* papers */
+  .papers { display: grid; gap: clamp(16px,2.5vw,22px); }
+  .paper { background: var(--card); border: 1px solid var(--line); padding: clamp(24px,3.5vw,38px);
+    transition: transform .25s, box-shadow .25s; }
+  .paper:hover { transform: translateY(-3px); box-shadow: 0 18px 36px -22px rgba(26,30,27,.5); }
+  .paper .ptag { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .paper h3 { font-family: var(--font-sans); font-weight: 600; font-size: clamp(23px,3vw,32px); line-height: 1.1; letter-spacing: -.01em; margin: 0 0 10px; color: var(--head); }
+  .paper p { font-family: var(--font-serif); font-size: clamp(16px,1.8vw,18px); line-height: 1.6; max-width: 64ch; color: var(--body); margin: 0 0 20px; }
+  .paper .plangs { display: flex; gap: 10px; flex-wrap: wrap; }
+  .plink { font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; padding: 9px 15px; background: var(--acc); color: var(--on-acc); text-decoration: none; border-radius: 3px; }
+  .plink.alt { padding: 8px 14px; background: transparent; border: 1px solid var(--line); color: var(--head); }
+  .plink.alt:hover { background: var(--head); color: var(--bg); }
+  .papers-all { display: inline-block; margin-top: clamp(24px,3.5vw,36px); font-family: var(--font-mono); font-size: 13px;
+    letter-spacing: .04em; color: var(--acc); text-decoration: none; border-bottom: 1px solid var(--acc); padding-bottom: 2px; }
+
+  /* trajectory */
+  .creds { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: clamp(26px,4vw,40px); }
+  .creds span { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+  .exp { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-bottom: 30px; }
+  .exp > div { background: var(--card); padding: clamp(22px,3vw,30px); }
+  .exp h3 { font-family: var(--font-sans); font-weight: 600; font-size: clamp(18px,2.2vw,22px); margin: 0 0 8px; color: var(--head); }
+  .exp p { font-family: var(--font-serif); font-size: 16px; line-height: 1.55; color: var(--body); margin: 0; }
+  .cv-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .cv-view { font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em; padding: 12px 20px; background: var(--acc); color: var(--on-acc); text-decoration: none; border-radius: 3px; }
+  .cv-link { font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em; color: var(--acc); text-decoration: none; border-bottom: 1px solid var(--acc); padding-bottom: 2px; }
+
+  /* contact */
+  .contact { background: var(--invert-bg); color: var(--invert-fg); }
+  .contact .wrap { padding: clamp(56px,8vw,104px) clamp(20px,5vw,48px); }
+  .contact .eyebrow { color: var(--acc-band); }
+  .contact .eyebrow::before { background: var(--acc-band); }
+  .contact h2 { font-family: var(--font-sans); font-weight: 700; font-size: clamp(32px,5.5vw,68px); line-height: 1;
+    letter-spacing: -.025em; margin: 0 0 18px; max-width: 18ch; color: var(--invert-fg); }
+  .contact .lede { font-family: var(--font-serif); font-weight: 300; font-size: clamp(18px,2.2vw,23px); line-height: 1.5;
+    max-width: 50ch; color: var(--invert-soft); margin: 0 0 36px; }
+  .contact .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .contact .row .cta-primary { padding: 14px 24px; }
+  .contact .row a.mail { font-family: var(--font-mono); font-size: 14px; letter-spacing: .02em; color: var(--invert-fg);
+    text-decoration: none; border-bottom: 1px solid var(--acc-band); padding-bottom: 3px; }
+
+  /* footer */
+  footer.foot { background: var(--bg); border-top: 1px solid var(--line); }
+  footer.foot .bar { max-width: 1080px; margin: 0 auto; padding: clamp(28px,4vw,40px) clamp(20px,5vw,48px);
+    display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+  footer.foot img { display: block; border-radius: 24%; }
+  footer.foot span, footer.foot a { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+
+  @media (max-width: 880px) {
+    .hero { grid-template-columns: 1fr; }
+    .exp { grid-template-columns: 1fr; }
+    nav.links { display: none; }
+  }
 </style>
 </head>
 <body>
-  <main class="wrap">
-    <p class="eyebrow">Coletânea</p>
-    <h1>Papers</h1>
 
-    <div class="card">
-      <div class="tag">White Paper · Junho 2026 · IA aplicada à decisão</div>
-      <h2>O Conselho das Máquinas</h2>
-      <p>Como aproveitar o julgamento — e os vieses — dos modelos de IA a seu favor na hora de decidir. O LLM Council de Andrej Karpathy, o paralelo com os Seis Chapéus de De Bono e um roteiro para aplicar o método a decisões reais.</p>
-      <div class="langs">
-        <a href="o-conselho-das-maquinas/"><b>PT</b> · Português →</a>
-        <a href="o-conselho-das-maquinas/en/"><b>EN</b> · English →</a>
+  <header class="top">
+    <div class="bar">
+      <a class="brand" href="#topo"><img src="jc-logo.png" alt="jC" width="34" height="34"><span>José Luiz Costa</span></a>
+      <nav class="links">
+        <a href="#sobre" data-i18n="navAbout">Sobre</a>
+        <a href="#papers" data-i18n="navWriting">Papers</a>
+        <a href="#trajetoria" data-i18n="navBackground">Trajetória</a>
+        <a href="#contato" data-i18n="navContact">Contato</a>
+      </nav>
+      <div class="actions">
+        <button class="btn-ghost" id="langBtn">EN</button>
+        <button class="btn-ghost" id="themeBtn" data-i18n="themeLabel">Escuro</button>
+        <a class="btn-acc" href="https://www.linkedin.com/in/jose-luiz-da-costa-407255200" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </div>
+  </header>
 
-    <div class="card">
-      <div class="tag">White Paper · Junho 2026</div>
-      <h2>O Erro que Fortalece</h2>
-      <p>Como contact centers com IA ficam mais fortes a cada falha — Erro Nutriente, Opcionalidade e o Efeito Hidra aplicados ao design de sistemas de atendimento.</p>
-      <div class="langs">
-        <a href="via-negativa-contact-center/"><b>PT</b> · Português →</a>
-        <a href="via-negativa-contact-center/en/"><b>EN</b> · English →</a>
+  <a id="topo"></a>
+
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">José Luiz Costa</p>
+        <h1>José Luiz Costa</h1>
+        <p class="role">CX &amp; Conversational AI</p>
+        <p class="tag" data-i18n="heroTagline">Inovação com foco na experiência do cliente. 20+ anos construindo atendimento que cresce sem perder a relação — América Latina.</p>
+        <div class="hero-cta">
+          <a class="cta-primary" href="https://www.linkedin.com/in/jose-luiz-da-costa-407255200" target="_blank" rel="noopener" data-i18n="ctaPrimaryArrow">Conectar no LinkedIn ↗</a>
+          <a class="cta-secondary" href="#papers" data-i18n="ctaSecondaryArrow">Ler os papers →</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-frame">
+          <img src="jose-luiz-costa.jpeg" alt="José Luiz Costa" width="300" height="300">
+          <span class="accent"></span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="blk" id="sobre">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="navAbout">Sobre</p>
+      <p class="about-lead" data-i18n="aboutLead">Penso em voz alta sobre experiência do cliente e tecnologia.</p>
+      <p class="about-body" data-i18n="aboutBody">Sou executivo de Customer Experience e Serviços Profissionais na América Latina, hoje Diretor Regional na Avaya — reporto ao VP de Serviços das Américas e lidero um time de 80+ pessoas e uma unidade de negócio de US$ 10M+ (Caribe e Latam). Ao longo de 20+ anos, transformei feedback do cliente em estratégia operacional, construí times multiculturais (AR, BR, CO, MX) e conduzi transformações de entrega que melhoraram margem, NPS e renovação. Meu foco atual é IA conversacional aplicada ao CX — sistemas que aprendem com cada interação e ficam mais resilientes a cada falha. Escrevo resumos visuais de papers e ensaios próprios para organizar e compartilhar essas ideias.</p>
+    </div>
+  </section>
+
+  <section class="blk" id="papers">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="navWriting">Papers</p>
+      <h2 class="sec" data-i18n="writingTitle">Resumos visuais e ensaios sobre CX, IA e sistemas</h2>
+      <div class="papers" id="papersList"></div>
+      <a class="papers-all" href="https://joseluizcosta-sys.github.io/Artigos/" target="_blank" rel="noopener" data-i18n="papersAll">Ver todos os papers no GitHub ↗</a>
+    </div>
+  </section>
+
+  <section class="blk" id="trajetoria">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="navBackground">Trajetória</p>
+      <h2 class="sec" data-i18n="backgroundTitle">Onde concentro minha experiência</h2>
+      <div class="creds" id="credsList"></div>
+      <div class="exp" id="expList"></div>
+      <div class="cv-row">
+        <a class="cv-view" href="cv.html" target="_blank" rel="noopener" data-i18n="cvView">Ver currículo →</a>
+        <a class="cv-link" href="https://www.linkedin.com/in/jose-luiz-da-costa-407255200" target="_blank" rel="noopener" data-i18n="cvLabel">Trajetória completa no LinkedIn ↗</a>
       </div>
     </div>
+  </section>
 
-    <div class="card">
-      <div class="tag">Stanford Digital Economy Lab · maio 2026 · arXiv:2605.27371</div>
-      <h2>Algorithmic Monocultures in Hiring</h2>
-      <p>Quando os mesmos algoritmos triam quase todo mundo, as mesmas pessoas são rejeitadas em todo lugar. O maior estudo empírico de contratação algorítmica — 3,4M candidatos, 4M candidaturas, 156 empregadores.</p>
-      <div class="langs">
-        <a href="algorithmic-monocultures-in-hiring/"><b>PT</b> · Português →</a>
-        <a href="algorithmic-monocultures-in-hiring/en/"><b>EN</b> · English →</a>
+  <section class="contact" id="contato">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="navContact">Contato</p>
+      <h2 data-i18n="contactTitle">Vamos conversar.</h2>
+      <p class="lede" data-i18n="contactLede">Para oportunidades, colaborações ou só para trocar ideias sobre CX e IA conversacional — o LinkedIn é o caminho mais rápido.</p>
+      <div class="row">
+        <a class="cta-primary" href="https://www.linkedin.com/in/jose-luiz-da-costa-407255200" target="_blank" rel="noopener" data-i18n="ctaPrimaryArrow">Conectar no LinkedIn ↗</a>
+        <a class="mail" href="mailto:joseluiz.costa@gmail.com">joseluiz.costa@gmail.com</a>
       </div>
     </div>
+  </section>
 
-    <footer>José Luiz Costa · github.com/joseluizcosta-sys/Artigos</footer>
-  </main>
+  <footer class="foot">
+    <div class="bar">
+      <img src="jc-logo.png" alt="jC" width="26" height="26">
+      <span>© <span id="year"></span> José Luiz Costa</span>
+      <a href="https://github.com/joseluizcosta-sys/Artigos" target="_blank" rel="noopener" style="margin-left:auto">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/jose-luiz-da-costa-407255200" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </footer>
+
+<script>
+(function () {
+  var BASE = "https://joseluizcosta-sys.github.io/Artigos/";
+
+  var I18N = {
+    pt: {
+      navAbout: "Sobre", navWriting: "Papers", navBackground: "Trajetória", navContact: "Contato",
+      themeLabelLight: "Escuro", themeLabelDark: "Claro", langBtn: "EN",
+      heroTagline: "Inovação com foco na experiência do cliente. 20+ anos construindo atendimento que cresce sem perder a relação — América Latina.",
+      ctaPrimaryArrow: "Conectar no LinkedIn ↗", ctaSecondaryArrow: "Ler os papers →",
+      aboutLead: "Penso em voz alta sobre experiência do cliente e tecnologia.",
+      aboutBody: "Sou executivo de Customer Experience e Serviços Profissionais na América Latina, hoje Diretor Regional na Avaya — reporto ao VP de Serviços das Américas e lidero um time de 80+ pessoas e uma unidade de negócio de US$ 10M+ (Caribe e Latam). Ao longo de 20+ anos, transformei feedback do cliente em estratégia operacional, construí times multiculturais (AR, BR, CO, MX) e conduzi transformações de entrega que melhoraram margem, NPS e renovação. Meu foco atual é IA conversacional aplicada ao CX — sistemas que aprendem com cada interação e ficam mais resilientes a cada falha. Escrevo resumos visuais de papers e ensaios próprios para organizar e compartilhar essas ideias.",
+      writingTitle: "Resumos visuais e ensaios sobre CX, IA e sistemas",
+      papersAll: "Ver todos os papers no GitHub ↗",
+      backgroundTitle: "Onde concentro minha experiência",
+      cvView: "Ver currículo →", cvLabel: "Trajetória completa no LinkedIn ↗",
+      contactTitle: "Vamos conversar.",
+      contactLede: "Para oportunidades, colaborações ou só para trocar ideias sobre CX e IA conversacional — o LinkedIn é o caminho mais rápido.",
+      creds: ["PMP", "ITIL Foundations", "Six Sigma Green Belt", "MBA · FIA", "PT · EN · ES"],
+      exp: [
+        { area: "Serviços Profissionais & P&L", line: "Liderança de unidade de negócio de US$ 10M+ e 80+ pessoas, com crescimento de receita e margem ano a ano." },
+        { area: "Experiência do Cliente (CX)", line: "Feedback do cliente vira estratégia operacional — ganhos em CSAT/NPS e redução de churn." },
+        { area: "IA Conversacional & Inovação", line: "Plataformas digitais e automação que escalam a entrega sem crescer o headcount na mesma proporção." },
+        { area: "Liderança na América Latina", line: "Times multiculturais na Argentina, Brasil, Colômbia e México, do operacional à estratégia." }
+      ]
+    },
+    en: {
+      navAbout: "About", navWriting: "Papers", navBackground: "Background", navContact: "Contact",
+      themeLabelLight: "Dark", themeLabelDark: "Light", langBtn: "PT",
+      heroTagline: "Customer-experience-led innovation. 20+ years building service operations that scale without losing the relationship — across Latin America.",
+      ctaPrimaryArrow: "Connect on LinkedIn ↗", ctaSecondaryArrow: "Read the papers →",
+      aboutLead: "I think out loud about customer experience and technology.",
+      aboutBody: "I'm a Customer Experience and Professional Services executive in Latin America — currently Regional Director at Avaya, reporting to the Americas VP of Services and leading an 80+ person team and a US$10M+ business unit (Caribbean and Latam). Over 20+ years I've turned customer feedback into operational strategy, built multicultural teams (AR, BR, CO, MX) and led delivery transformations that improved margin, NPS and renewals. My focus today is conversational AI applied to CX — systems that learn from every interaction and grow more resilient with every failure. I write visual paper summaries and original essays to organize and share these ideas.",
+      writingTitle: "Visual summaries and essays on CX, AI and systems",
+      papersAll: "See all papers on GitHub ↗",
+      backgroundTitle: "Where my experience is focused",
+      cvView: "View résumé →", cvLabel: "Full background on LinkedIn ↗",
+      contactTitle: "Let's talk.",
+      contactLede: "For opportunities, collaborations or just to trade ideas on CX and conversational AI — LinkedIn is the fastest way to reach me.",
+      creds: ["PMP", "ITIL Foundations", "Six Sigma Green Belt", "MBA · FIA", "Portuguese · English · Spanish"],
+      exp: [
+        { area: "Professional Services & P&L", line: "Leading a US$10M+ business unit and 80+ people, with year-over-year revenue and margin growth." },
+        { area: "Customer Experience (CX)", line: "Turning customer feedback into operational strategy — CSAT/NPS gains and churn reduction." },
+        { area: "Conversational AI & Innovation", line: "Digital platforms and automation that scale delivery without a proportional headcount increase." },
+        { area: "Leadership across Latin America", line: "Multicultural teams in Argentina, Brazil, Colombia and Mexico, from operations to strategy." }
+      ]
+    }
+  };
+
+  var FALLBACK = [
+    { slug: "o-conselho-das-maquinas", hasEn: true,
+      tag: { pt: "IA aplicada à decisão · Junho 2026", en: "AI for decision-making · June 2026" },
+      title: { pt: "O Conselho das Máquinas", en: "The Council of Machines" },
+      dek: { pt: "Andrej Karpathy montou um app onde vários modelos de IA leem, criticam e votam nas respostas uns dos outros. As máquinas têm preferências e vieses — e o valor está no método que isso oferece para decisões difíceis.",
+             en: "Andrej Karpathy built an app where several AI models read, critique and vote on each other's answers. The machines have preferences and biases — and the value lies in the method it offers for hard decisions." } },
+    { slug: "algorithmic-monocultures-in-hiring", hasEn: true,
+      tag: { pt: "Stanford Digital Economy Lab · maio 2026 · arXiv:2605.27371", en: "Stanford Digital Economy Lab · May 2026 · arXiv:2605.27371" },
+      title: { pt: "Algorithmic Monocultures in Hiring", en: "Algorithmic Monocultures in Hiring" },
+      dek: { pt: "Quando os mesmos algoritmos triam quase todo mundo, as mesmas pessoas são rejeitadas em todo lugar. O maior estudo empírico de contratação algorítmica — 3,4M candidatos, 4M candidaturas, 156 empregadores.",
+             en: "When the same algorithms screen nearly everyone, the same people are rejected everywhere. The largest empirical study of algorithmic hiring — 3.4M applicants, 4M applications, 156 employers." } },
+    { slug: "via-negativa-contact-center", hasEn: true,
+      tag: { pt: "White Paper · Junho 2026", en: "White Paper · June 2026" },
+      title: { pt: "O Erro que Fortalece", en: "The Error that Strengthens" },
+      dek: { pt: "Como contact centers com IA ficam mais fortes a cada falha — Erro Nutriente, Opcionalidade e o Efeito Hidra aplicados ao design de sistemas de atendimento.",
+             en: "How AI contact centers grow stronger with every failure — Nutrient Error, Optionality and the Hydra Effect applied to service design." } }
+  ];
+
+  var state = { lang: "pt", theme: "light", manifest: null };
+  try {
+    var sl = localStorage.getItem("jlc-lang"); if (sl) state.lang = sl;
+    var st = localStorage.getItem("jlc-theme"); if (st) state.theme = st;
+  } catch (e) {}
+
+  function pick(v) { if (v == null) return ""; return typeof v === "string" ? v : (v[state.lang] || v.pt || v.en || ""); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  function renderPapers() {
+    var base = (state.manifest && state.manifest.base) || BASE;
+    var list = (state.manifest && state.manifest.papers && state.manifest.papers.length) ? state.manifest.papers : FALLBACK;
+    var altLabel = state.lang === "pt" ? "EN" : "PT";
+    var readLabel = state.lang === "pt" ? "Ler" : "Read";
+    var html = list.map(function (p) {
+      var ptUrl = p.url || (p.slug ? base + p.slug + "/" : "#");
+      var enUrl = p.urlEn || (p.slug ? base + p.slug + "/en/" : ptUrl);
+      var hasEn = p.hasEn !== false;
+      var primary = (state.lang === "pt" || !hasEn) ? ptUrl : enUrl;
+      var alt = state.lang === "pt" ? enUrl : ptUrl;
+      var altBtn = hasEn ? '<a class="plink alt" href="' + esc(alt) + '" target="_blank" rel="noopener">' + altLabel + '</a>' : "";
+      return '<article class="paper">' +
+        '<div class="ptag">' + esc(pick(p.tag)) + '</div>' +
+        '<h3>' + esc(pick(p.title)) + '</h3>' +
+        '<p>' + esc(pick(p.dek)) + '</p>' +
+        '<div class="plangs"><a class="plink" href="' + esc(primary) + '" target="_blank" rel="noopener">' + readLabel + ' →</a>' + altBtn + '</div>' +
+        '</article>';
+    }).join("");
+    document.getElementById("papersList").innerHTML = html;
+  }
+
+  function renderI18n() {
+    var t = I18N[state.lang];
+    document.documentElement.lang = state.lang;
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute("data-i18n");
+      if (key === "themeLabel") continue;
+      if (t[key] != null) nodes[i].textContent = t[key];
+    }
+    document.getElementById("langBtn").textContent = t.langBtn;
+    document.getElementById("themeBtn").textContent = state.theme === "light" ? t.themeLabelLight : t.themeLabelDark;
+    // creds
+    document.getElementById("credsList").innerHTML = t.creds.map(function (c) { return "<span>" + esc(c) + "</span>"; }).join("");
+    // expertise
+    document.getElementById("expList").innerHTML = t.exp.map(function (e) {
+      return "<div><h3>" + esc(e.area) + "</h3><p>" + esc(e.line) + "</p></div>";
+    }).join("");
+  }
+
+  function applyTheme() { document.documentElement.setAttribute("data-theme", state.theme); }
+
+  function renderAll() { applyTheme(); renderI18n(); renderPapers(); }
+
+  document.getElementById("langBtn").addEventListener("click", function () {
+    state.lang = state.lang === "pt" ? "en" : "pt";
+    try { localStorage.setItem("jlc-lang", state.lang); } catch (e) {}
+    renderAll();
+  });
+  document.getElementById("themeBtn").addEventListener("click", function () {
+    state.theme = state.theme === "light" ? "dark" : "light";
+    try { localStorage.setItem("jlc-theme", state.theme); } catch (e) {}
+    renderAll();
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+  renderAll();
+
+  // live papers: read papers.json from the same directory, then the repo root
+  var urls = ["papers.json", BASE + "papers.json"];
+  (function tryNext(i) {
+    if (i >= urls.length) return;
+    fetch(urls[i], { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        if (data && data.papers && data.papers.length) { state.manifest = data; renderPapers(); }
+        else tryNext(i + 1);
+      })
+      .catch(function () { tryNext(i + 1); });
+  })(0);
+})();
+</script>
 </body>
 </html>
