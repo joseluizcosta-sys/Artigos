@@ -1,0 +1,17 @@
+<svg width="560" height="200" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="JC Costa logo">
+  <title>JC Costa horizontal logo</title>
+  <defs><clipPath id="bh"><rect x="20" y="30" width="140" height="140" rx="28"/></clipPath></defs>
+  <rect x="20" y="30" width="140" height="140" rx="28" fill="#0F2A52"/>
+  <g clip-path="url(#bh)">
+    <path d="M20 170 L69 107 L97 138 L125 96 L160 142 L160 170 Z" fill="#1C457E"/>
+    <path d="M20 170 L58 128 L86 152 L118 117 L160 159 L160 170 Z" fill="#2D6CDF" opacity="0.55"/>
+  </g>
+  <g stroke="#7FB0FF" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M69 72 V114 a14 14 0 0 1 -14 14"/>
+    <path d="M125 66 a27 27 0 1 0 0 46"/>
+  </g>
+  <circle cx="125" cy="66" r="5" fill="#EAF2FF"/>
+  <circle cx="69" cy="72" r="4.5" fill="#5B8DEF"/>
+  <text x="190" y="108" font-family="Georgia, 'Times New Roman', serif" font-size="44" font-weight="500" fill="#0F2A52">JC Costa</text>
+  <text x="192" y="138" font-family="Arial, Helvetica, sans-serif" font-size="13" letter-spacing="3" fill="#2D6CDF">AI · AUTOMATION · PRODUCTIVITY</text>
+</svg>

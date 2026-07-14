@@ -1,0 +1,15 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="JC Costa monogram with mountain">
+  <title>JC Costa logo icon</title>
+  <defs><clipPath id="badge"><rect x="28" y="28" width="200" height="200" rx="40"/></clipPath></defs>
+  <rect x="28" y="28" width="200" height="200" rx="40" fill="#0F2A52"/>
+  <g clip-path="url(#badge)">
+    <path d="M28 228 L98 138 L138 183 L178 123 L228 188 L228 228 Z" fill="#1C457E"/>
+    <path d="M28 228 L83 168 L123 203 L168 153 L228 213 L228 228 Z" fill="#2D6CDF" opacity="0.55"/>
+  </g>
+  <g stroke="#7FB0FF" stroke-width="6" fill="none" stroke-linecap="round">
+    <path d="M98 88 V148 a20 20 0 0 1 -20 20"/>
+    <path d="M178 80 a38 38 0 1 0 0 64"/>
+  </g>
+  <circle cx="178" cy="80" r="7" fill="#EAF2FF"/>
+  <circle cx="98" cy="88" r="6" fill="#5B8DEF"/>
+</svg>
