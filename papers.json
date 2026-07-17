@@ -2,6 +2,22 @@
   "base": "https://joseluizcosta-sys.github.io/Artigos/",
   "papers": [
     {
+      "slug": "da-contencao-a-resolucao",
+      "hasEn": true,
+      "tag": {
+        "pt": "White Paper · Julho 2026",
+        "en": "White Paper · July 2026"
+      },
+      "title": {
+        "pt": "Da Contenção à Resolução",
+        "en": "From Deflection to Resolution"
+      },
+      "dek": {
+        "pt": "O que a IA agêntica muda — e o que não muda — na gestão de contact centers. O caso Klarna completo (ascensão e reversão), Octopus Energy, o novo painel de métricas e um roteiro de implementação para gestores de CC/CX.",
+        "en": "What agentic AI changes — and what it doesn't — in contact center management. The complete Klarna case (rise and reversal), Octopus Energy, the new metrics dashboard and an implementation roadmap for CC/CX leaders."
+      }
+    },
+    {
       "slug": "o-conselho-das-maquinas",
       "hasEn": true,
       "tag": {

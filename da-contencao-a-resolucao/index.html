@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Da Contenção à Resolução — O que a IA agêntica muda na gestão de contact centers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --paper:      #F1ECE0;
+      --paper-2:    #E8E1D1;
+      --card:       #FAF6EC;
+      --ink:        #1A1E1B;
+      --ink-soft:   #34382F;
+      --slate:      #6A6B5F;
+      --faint:      #9A9886;
+      --crop:       #C18E20;
+      --crop-deep:  #9A6E13;
+      --accept:     #2F6553;
+      --reject:     #A12B22;
+      --line:       rgba(26,30,27,.16);
+      --line-soft:  rgba(26,30,27,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      background-image: linear-gradient(var(--line-soft) 1px, transparent 1px);
+      background-size: 100% 30px;
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .lang-nav {
+      position: fixed; top: 0; right: 0;
+      padding: 14px 24px;
+      display: flex; gap: 6px;
+      z-index: 100;
+    }
+    .lang-nav a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; padding: 4px 10px; border-radius: 3px;
+      border: 1px solid transparent; color: var(--faint); transition: all .18s;
+    }
+    .lang-nav a.active { color: var(--ink); border-color: var(--line); background: var(--card); }
+    .lang-nav a:hover:not(.active) { color: var(--slate); }
+
+    header { max-width: 760px; margin: 0 auto; padding: 100px 28px 52px; }
+
+    .meta {
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em;
+      color: var(--faint); margin-bottom: 28px;
+      display: flex; flex-wrap: wrap; gap: 4px 0; align-items: center;
+    }
+    .meta a { color: var(--faint); text-decoration: none; }
+    .meta a:hover { color: var(--crop); }
+    .meta .sep { margin: 0 8px; opacity: .5; }
+
+    h1 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 700;
+      line-height: 1.08; letter-spacing: -.02em; color: var(--ink); margin: 0 0 18px;
+    }
+    .deck {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.15rem;
+      font-style: italic; color: var(--slate); line-height: 1.55; margin-bottom: 36px;
+    }
+    .lede {
+      font-size: 1.05rem; color: var(--ink-soft); line-height: 1.75;
+      border-left: 2.5px solid var(--crop); padding-left: 20px;
+    }
+
+    main { max-width: 760px; margin: 0 auto; padding: 0 28px 80px; }
+
+    p { color: var(--ink-soft); margin: 0 0 22px; }
+    strong { color: var(--ink); font-weight: 600; }
+    em { font-style: italic; }
+
+    h2 {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.5rem;
+      font-weight: 700; color: var(--ink); margin: 40px 0 16px; letter-spacing: -.01em;
+    }
+    h2 .eyebrow {
+      display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      font-weight: 500; text-transform: uppercase; letter-spacing: .14em;
+      color: var(--crop); margin-bottom: 10px;
+    }
+    h3.sub {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.02rem;
+      font-weight: 600; color: var(--ink); margin: 34px 0 12px;
+    }
+
+    .pull-quote {
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 28px 0; margin: 44px 0;
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.2rem;
+      font-style: italic; color: var(--ink); line-height: 1.5;
+    }
+    .pull-quote cite {
+      display: block; font-style: normal; font-family: 'IBM Plex Mono', monospace;
+      font-size: .75rem; color: var(--faint); margin-top: 14px; letter-spacing: .04em;
+    }
+
+    .toggle-block {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 24px; margin: 40px 0;
+    }
+    .toggle-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin-bottom: 14px;
+    }
+    .tabs {
+      display: flex; background: var(--paper-2); border-radius: 4px;
+      padding: 3px; gap: 3px; margin-bottom: 22px;
+    }
+    .tab {
+      flex: 1; padding: 8px 14px; border: none; border-radius: 3px;
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .82rem;
+      font-weight: 500; cursor: pointer; background: transparent;
+      color: var(--faint); transition: all .18s;
+    }
+    .tab.active { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px var(--line); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .tab-content p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .88rem; margin-bottom: 10px; color: var(--ink-soft);
+    }
+    .tab-content p:last-child { margin: 0; }
+
+    .badge {
+      display: inline-block; font-family: 'IBM Plex Mono', monospace;
+      font-size: .68rem; font-weight: 500; text-transform: uppercase;
+      letter-spacing: .07em; padding: 2px 8px; border-radius: 3px; margin-bottom: 12px;
+    }
+    .badge-reject { background: rgba(161,43,34,.1); color: var(--reject); }
+    .badge-accept { background: rgba(47,101,83,.1); color: var(--accept); }
+    .badge-crop   { background: rgba(193,142,32,.1); color: var(--crop-deep); }
+
+    .mec-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px; margin: 36px 0;
+    }
+    .mec-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 5px; padding: 18px 16px;
+    }
+    .mec-card h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .85rem; font-weight: 600; color: var(--ink);
+      margin: 0 0 8px;
+    }
+    .mec-card p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .78rem; color: var(--slate); margin: 0; line-height: 1.5;
+    }
+    .mec-num {
+      font-family: 'IBM Plex Mono', monospace; font-size: .65rem;
+      color: var(--crop); letter-spacing: .08em; display: block; margin-bottom: 8px;
+    }
+
+    .convex-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 36px 0; }
+    .conv-card { border-radius: 5px; padding: 20px; }
+    .conv-card.concave { background: rgba(161,43,34,.06); border: 1px solid rgba(161,43,34,.2); }
+    .conv-card.convex  { background: rgba(47,101,83,.06); border: 1px solid rgba(47,101,83,.2); }
+    .conv-card h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .88rem; font-weight: 600; margin: 0 0 10px;
+    }
+    .conv-card.concave h3 { color: var(--reject); }
+    .conv-card.convex  h3 { color: var(--accept); }
+    .conv-card p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .8rem; color: var(--slate); margin: 0 0 6px; line-height: 1.5;
+    }
+    .conv-card p:last-child { margin: 0; }
+    .conv-label {
+      display: inline-block; font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem; font-weight: 500; text-transform: uppercase;
+      letter-spacing: .06em; padding: 2px 8px; border-radius: 3px; margin-bottom: 12px;
+    }
+    .conv-card.concave .conv-label { background: rgba(161,43,34,.1); color: var(--reject); }
+    .conv-card.convex  .conv-label { background: rgba(47,101,83,.1);  color: var(--accept); }
+
+    .hidra-grid { display: flex; flex-direction: column; gap: 14px; margin: 36px 0; }
+    .hidra-item { display: flex; gap: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; }
+    .hidra-item .m-num {
+      font-family: 'IBM Plex Mono', monospace; font-size: .8rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 3px; font-weight: 500;
+    }
+    .hidra-item strong { display: block; font-size: .92rem; margin-bottom: 4px; }
+    .hidra-item p { margin: 0; font-size: .84rem; color: var(--slate); line-height: 1.55; }
+
+    .roadmap {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 24px 26px; margin: 40px 0;
+    }
+    .roadmap .toggle-label { margin-bottom: 16px; }
+    .roadmap ol {
+      list-style: none; counter-reset: rm; padding: 0; margin: 0;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 20px;
+    }
+    .roadmap li { counter-increment: rm; display: flex; gap: 9px; }
+    .roadmap li::before {
+      content: counter(rm, decimal-leading-zero);
+      font-family: 'IBM Plex Mono', monospace; font-size: .66rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 2px; font-weight: 500;
+    }
+    .roadmap a.rm-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: .8rem; color: var(--ink); text-decoration: none;
+      display: inline-flex; align-items: baseline; gap: 5px; line-height: 1.25;
+    }
+    .roadmap a.rm-title:hover { color: var(--crop-deep); }
+    .roadmap a.rm-title .arw { color: var(--crop); font-size: .72rem; }
+    .roadmap p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .68rem; color: var(--slate); margin: 4px 0 0; line-height: 1.4;
+    }
+
+    .callout {
+      background: var(--card); border: 1px solid var(--line);
+      border-left: 3px solid var(--crop); border-radius: 0 5px 5px 0;
+      padding: 20px 24px; margin: 36px 0;
+    }
+    .callout p { margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 1.05rem; color: var(--ink); }
+
+    /* ── Charts ── */
+    .chart-block {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 24px 26px; margin: 36px 0;
+    }
+    .chart-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .88rem;
+      font-weight: 600; color: var(--ink); margin: 0 0 4px;
+    }
+    .chart-note {
+      font-family: 'IBM Plex Mono', monospace; font-size: .66rem;
+      color: var(--faint); letter-spacing: .03em; margin: 14px 0 0; line-height: 1.5;
+    }
+    .bars { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
+    .bar-row { display: grid; grid-template-columns: 150px 1fr 74px; gap: 12px; align-items: center; }
+    .bar-label {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .76rem;
+      color: var(--slate); line-height: 1.3; text-align: right;
+    }
+    .bar-track { background: var(--paper-2); border-radius: 3px; height: 22px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 3px; }
+    .bar-fill.gold  { background: var(--crop); }
+    .bar-fill.green { background: var(--accept); }
+    .bar-fill.red   { background: var(--reject); }
+    .bar-fill.grey  { background: var(--faint); }
+    .bar-val {
+      font-family: 'IBM Plex Mono', monospace; font-size: .74rem;
+      font-weight: 500; color: var(--ink);
+    }
+
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 10px; margin: 36px 0;
+    }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 5px; padding: 16px 14px; text-align: center;
+    }
+    .stat-card .num {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: 1.5rem; color: var(--crop-deep); line-height: 1.1; margin-bottom: 6px;
+    }
+    .stat-card .lab {
+      font-family: 'IBM Plex Mono', monospace; font-size: .6rem;
+      text-transform: uppercase; letter-spacing: .06em; color: var(--slate); line-height: 1.4;
+    }
+
+    /* ── Metrics table ── */
+    table.metrics {
+      width: 100%; border-collapse: collapse; margin: 36px 0;
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .8rem;
+      background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+    }
+    table.metrics th {
+      font-family: 'IBM Plex Mono', monospace; font-size: .64rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .1em; text-align: left;
+      padding: 14px 16px; border-bottom: 1px solid var(--line);
+    }
+    table.metrics th.old { color: var(--reject); }
+    table.metrics th.new { color: var(--accept); }
+    table.metrics td {
+      padding: 12px 16px; border-bottom: 1px solid var(--line-soft);
+      color: var(--slate); line-height: 1.5; vertical-align: top; width: 50%;
+    }
+    table.metrics td strong { font-size: .8rem; }
+    table.metrics tr:last-child td { border-bottom: none; }
+
+    .fn {
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
+      color: var(--crop); vertical-align: super; cursor: default;
+    }
+    .ref {
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
+      color: var(--crop-deep); vertical-align: super;
+    }
+
+    .bottom {
+      border-top: 1px solid var(--line); margin-top: 72px; padding-top: 28px;
+      display: flex; flex-direction: column; gap: 32px;
+    }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .14em; color: var(--faint); margin: 0 0 14px;
+    }
+    .bottom ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .bottom li { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .8rem; color: var(--slate); line-height: 1.55; }
+    .bottom a { color: var(--crop-deep); text-decoration: none; }
+    .bottom a:hover { text-decoration: underline; }
+
+    .article-note {
+      font-family: 'IBM Plex Mono', monospace; font-size: .72rem;
+      color: var(--faint); letter-spacing: .04em; margin-top: 28px;
+    }
+
+    @media (max-width: 600px) {
+      .mec-grid    { grid-template-columns: 1fr; }
+      .convex-grid { grid-template-columns: 1fr; }
+      .roadmap ol  { grid-template-columns: 1fr; gap: 14px; }
+      .stat-grid   { grid-template-columns: 1fr 1fr; }
+      .bar-row     { grid-template-columns: 100px 1fr 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="lang-nav">
+  <a href="./index.html" class="active">PT</a>
+  <a href="en/index.html">EN</a>
+</nav>
+
+<header>
+  <div class="meta">White Paper<span class="sep">·</span>Julho 2026</div>
+
+  <h1>Da Contenção à Resolução</h1>
+  <div class="deck">O que a IA agêntica muda — e o que não muda — na gestão de contact centers</div>
+
+  <p class="lede">Por uma década, a automação no atendimento foi medida por <em>deflection</em>: quantas interações o bot impediu de chegar ao humano. Essa métrica gerou economia contábil — e desistência silenciosa de clientes exaustos. A IA agêntica inverte a lógica: o sistema deixa de <em>informar</em> como resolver e passa a <em>executar</em> a resolução. Este paper examina a evidência disponível — incluindo o caso Klarna em sua versão completa, com a reversão de 2025 que a maioria das análises omite — e propõe aos gestores de CC/CX um novo painel de métricas e um roteiro de implementação.</p>
+</header>
+
+<main>
+
+  <div class="roadmap">
+    <div class="toggle-label">O que será abordado — seis passos</div>
+    <ol>
+      <li><div>
+        <a class="rm-title" href="#s01">O Problema com a Contenção <span class="arw">→</span></a>
+        <p>Por que o deflection premiava exatamente o comportamento que destrói valor — e onde o custo se escondia.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s02">O que Muda com a IA Agêntica <span class="arw">→</span></a>
+        <p>Compreensão semântica e execução de ações via tool use — e a diferença entre RAG e function calling.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s03">A Evidência Empírica <span class="arw">→</span></a>
+        <p>Os dados macro (Gartner, McKinsey, QJE), dois casos reais — Klarna e Octopus Energy — e o mercado que já cobra por resolução.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s04">Riscos e Gargalos <span class="arw">→</span></a>
+        <p>Os 40% de projetos que a Gartner prevê cancelados, agent washing, responsabilidade legal e o paradoxo do volume residual.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s05">O Novo Painel de Métricas <span class="arw">→</span></a>
+        <p>Seis indicadores que substituem a contenção como KPI central — com sugestão de dashboard e o recontato como teste ácido.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s06">Roteiro de Implementação <span class="arw">→</span></a>
+        <p>Seis passos práticos, do mapa de resolubilidade ao teste anti-agent-washing do fornecedor.</p>
+      </div></li>
+    </ol>
+  </div>
+
+  <!-- 01 -->
+  <h2 id="s01">
+    <span class="eyebrow">01 — O ponto de partida</span>
+    O problema com a contenção
+  </h2>
+
+  <p>A lógica financeira do <em>customer deflection</em> era linear: cada interação desviada do agente humano representava economia direta. O incentivo era compreensível — o custo de mão de obra pode representar até 95% dos custos de um contact center, segundo o Gartner<span class="ref">[1]</span>.</p>
+
+  <p>O efeito colateral foi o design de labirintos digitais: URAs profundas, bots de árvore de decisão e FAQs circulares cujo sucesso era medido pela ausência de transferência ao humano. Três distorções resultaram desse modelo:</p>
+
+  <div class="mec-grid">
+    <div class="mec-card">
+      <span class="mec-num">01</span>
+      <h3>Contenção mascarava abandono</h3>
+      <p>Um cliente que desiste após três tentativas frustradas conta como "contido" no dashboard — e como detrator no NPS. A métrica premiava exatamente o comportamento que destrói valor.</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">02</span>
+      <h3>O custo era transferido, não eliminado</h3>
+      <p>Interações mal resolvidas retornavam como rechamadas, reclamações em órgãos de defesa do consumidor e churn — custos que não apareciam na linha "economia com automação".</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">03</span>
+      <h3>A rigidez limitava o escopo</h3>
+      <p>Bots de árvore de decisão falhavam diante de qualquer intenção composta ("quero cancelar a compra, mas manter a assinatura premium"). Fora do roteiro, restava transferir — ou frustrar.</p>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <h2 id="s02">
+    <span class="eyebrow">02 — A anatomia da mudança</span>
+    O que muda com a IA agêntica
+  </h2>
+
+  <p>A IA agêntica difere dos bots de roteiro em duas capacidades que, combinadas, viabilizam a resolução de ponta a ponta: <strong>compreensão semântica de intenções compostas</strong> — LLMs interpretam intenção e contexto em linguagem natural, sem depender de palavras-chave ou fluxos pré-mapeados — e <strong>execução de ações via ferramentas</strong> (<em>tool use</em>).</p>
+
+  <p>Vale separar dois mecanismos que costumam ser confundidos: por meio de <em>function calling</em>, o agente de IA aciona sistemas transacionais — CRM, gateway de pagamento, logística — para executar a ação, e não apenas descrever como o cliente deveria executá-la. Complementarmente, o RAG (<em>Retrieval-Augmented Generation</em>) fundamenta as respostas na base de conhecimento e nas políticas da empresa, reduzindo alucinação. São coisas distintas: <strong>RAG garante que o agente <em>saiba</em> corretamente; tool use garante que ele <em>faça</em>.</strong></p>
+
+  <div class="convex-grid">
+    <div class="conv-card concave">
+      <span class="conv-label">Bot de árvore de decisão</span>
+      <h3>Informa — e só dentro do roteiro</h3>
+      <p>Fluxos rígidos "se A, então B". Intenção fora do mapa = transferência ou frustração.</p>
+      <p>Métrica de sucesso: contenção. O problema do cliente continua existindo.</p>
+    </div>
+    <div class="conv-card convex">
+      <span class="conv-label">Agente de IA (agêntico)</span>
+      <h3>Entende — e executa</h3>
+      <p>Interpreta a intenção composta, consulta os sistemas e executa a ação: processa o reembolso, altera a fatura, reagenda a entrega.</p>
+      <p>Métrica de sucesso: resolução confirmada pela ausência de recontato.</p>
+    </div>
+  </div>
+
+  <p>O Gartner formalizou essa transição em março de 2025, ao prever que a IA agêntica resolverá autonomamente 80% dos problemas comuns de atendimento até 2029, com redução de 30% nos custos operacionais<span class="ref">[2]</span>. A previsão anterior da mesma consultoria — redução de US$ 80 bilhões em custos de mão de obra de contact centers no ano de 2026<span class="ref">[1]</span> — referia-se ainda à IA conversacional; a agêntica amplia o escopo da automação de <em>informar</em> para <em>transacionar</em>.</p>
+
+  <div class="chart-block">
+    <p class="chart-title">A trajetória da automação no atendimento (Gartner)</p>
+    <div class="bars">
+      <div class="bar-row">
+        <span class="bar-label">2022 — interações automatizadas por IA</span>
+        <div class="bar-track"><div class="bar-fill grey" style="width:4%"></div></div>
+        <span class="bar-val">1,6%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">2026 — interações de agente automatizadas (previsão)</span>
+        <div class="bar-track"><div class="bar-fill gold" style="width:12.5%"></div></div>
+        <span class="bar-val">10%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">2029 — problemas comuns resolvidos autonomamente (previsão)</span>
+        <div class="bar-track"><div class="bar-fill green" style="width:100%"></div></div>
+        <span class="bar-val">80%</span>
+      </div>
+    </div>
+    <p class="chart-note">As duas primeiras barras medem % do total de interações (Gartner, 2022); a terceira mede % dos problemas comuns (Gartner, 2025) — escopos distintos, mesma direção. Fontes: [1][2].</p>
+  </div>
+
+  <!-- 03 -->
+  <h2 id="s03">
+    <span class="eyebrow">03 — A evidência empírica</span>
+    O que os dados e os casos reais mostram
+  </h2>
+
+  <h3 class="sub">O efeito produtividade: IA como copiloto</h3>
+
+  <p>O estudo mais rigoroso disponível sobre IA generativa em atendimento — Brynjolfsson, Li e Raymond, publicado no <em>Quarterly Journal of Economics</em> — acompanhou 5.172 agentes de suporte com acesso a um assistente de IA. Resultado: aumento médio de 15% na produtividade (problemas resolvidos por hora), com ganho concentrado nos agentes menos experientes, que melhoraram velocidade <em>e</em> qualidade<span class="ref">[3]</span>.</p>
+
+  <p>Duas leituras importam para o gestor. Primeira: o ganho é real e mensurável. Segunda: <strong>o estudo mede IA como copiloto do humano, não como agente autônomo</strong> — evidência de <em>augmentation</em>, não de substituição. É o regime de operação do caso Octopus Energy, adiante.</p>
+
+  <p>A McKinsey estima que cerca de 75% do valor potencial da IA generativa se concentra em quatro áreas, sendo operações de atendimento ao cliente uma das principais<span class="ref">[4]</span> — o que explica por que o contact center virou o principal laboratório corporativo da tecnologia.</p>
+
+  <h3 class="sub">Caso Klarna: a tese provada duas vezes</h3>
+
+  <p>A Klarna é uma fintech sueca de pagamentos e compras, referência global no modelo <em>Buy Now, Pay Later</em>: intermedia o checkout entre consumidores e centenas de milhares de varejistas, operando funções de crédito, pagamento e pós-venda — o que faz do seu atendimento uma operação massiva, multilíngue e essencialmente transacional (reembolsos, devoluções, disputas de cobrança). Foi esse perfil que a tornou o primeiro laboratório aberto da IA agêntica em escala: em fevereiro de 2024, lançou um assistente baseado em LLMs integrado aos seus sistemas transacionais, cobrindo 23 mercados, 24/7, em mais de 35 idiomas<span class="ref">[5]</span>.</p>
+
+  <div class="toggle-block">
+    <div class="toggle-label">Um caso, três leituras</div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab(this,'ascensao')">A ascensão (2024)</button>
+      <button class="tab" onclick="switchTab(this,'reversao')">A reversão (2025)</button>
+      <button class="tab" onclick="switchTab(this,'leitura')">A leitura correta</button>
+    </div>
+    <div id="tab-ascensao" class="tab-content active">
+      <span class="badge badge-accept">Resolução em escala</span>
+      <p><strong>2,3 milhões de conversas no primeiro mês — dois terços de todos os chats.</strong></p>
+      <p>O assistente realizou o trabalho equivalente a 700 agentes em tempo integral. O tempo de resolução caiu de 11 para menos de 2 minutos, e as consultas repetidas caíram 25% — indício de resolução efetiva, não de deflexão: o assistente não explicava a política de reembolso, ele processava o reembolso. A Klarna estimou US$ 40 milhões de melhoria de resultado em 2024.</p>
+    </div>
+    <div id="tab-reversao" class="tab-content">
+      <span class="badge badge-reject">A correção de curso</span>
+      <p><strong>"Focamos demais em custo. O resultado foi qualidade menor."</strong></p>
+      <p>Em maio de 2025, o CEO Sebastian Siemiatkowski admitiu publicamente o excesso — e a Klarna voltou a contratar agentes humanos, após reclamações de respostas genéricas e falhas em casos complexos. A empresa migrou para um modelo híbrido: IA nas demandas rotineiras de alto volume, humanos nas escalações, casos complexos e clientes de alto valor.</p>
+    </div>
+    <div id="tab-leitura" class="tab-content">
+      <span class="badge badge-crop">O que o caso ensina</span>
+      <p><strong>A reversão não refuta a tese da resolução — ela a confirma pelo contraexemplo.</strong></p>
+      <p>O erro da Klarna foi recair na lógica da era da contenção: otimizar headcount (deflexão de custo) em vez de otimizar resolução com qualidade. Quando a métrica voltou a ser "quantos humanos eliminamos", a qualidade caiu e o custo retornou por outras vias. Gestores que citam apenas os números de 2024 contam metade da história; os que citam apenas a reversão de 2025 contam a outra metade.</p>
+    </div>
+  </div>
+
+  <div class="chart-block">
+    <p class="chart-title">Klarna — tempo médio até a resolução do problema</p>
+    <div class="bars">
+      <div class="bar-row">
+        <span class="bar-label">Antes (fluxo com agentes)</span>
+        <div class="bar-track"><div class="bar-fill grey" style="width:100%"></div></div>
+        <span class="bar-val">11 min</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Com o assistente de IA</span>
+        <div class="bar-track"><div class="bar-fill green" style="width:18%"></div></div>
+        <span class="bar-val">&lt; 2 min</span>
+      </div>
+    </div>
+    <p class="chart-note">Primeiro mês de operação, fev. 2024. Fonte: [5].</p>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="num">2,3 mi</div><div class="lab">conversas no 1º mês</div></div>
+    <div class="stat-card"><div class="num">2/3</div><div class="lab">de todos os chats de atendimento</div></div>
+    <div class="stat-card"><div class="num">−25%</div><div class="lab">em consultas repetidas</div></div>
+    <div class="stat-card"><div class="num">700</div><div class="lab">agentes FTE equivalentes</div></div>
+  </div>
+
+  <h3 class="sub">Caso Octopus Energy: o regime copiloto com supervisão</h3>
+
+  <p>A Octopus Energy, fornecedora de energia do Reino Unido, implantou IA generativa (ferramenta Magic Ink, da plataforma Kraken) para ler, interpretar e redigir respostas a e-mails de clientes, com acesso aos dados de consumo e faturamento. O regime de operação é predominantemente de <strong>copiloto com revisão humana</strong>: a IA redige, o agente revisa e envia<span class="ref">[8]</span>.</p>
+
+  <p>Os resultados divulgados: a IA passou a participar da resposta de cerca de metade dos e-mails recebidos, e as mensagens redigidas por IA atingiram satisfação de 80%, contra 65% das redigidas por humanos nas mesmas tarefas rotineiras<span class="ref">[9]</span>.</p>
+
+  <div class="chart-block">
+    <p class="chart-title">Octopus Energy — satisfação do cliente por origem da resposta (e-mails rotineiros)</p>
+    <div class="bars">
+      <div class="bar-row">
+        <span class="bar-label">Respostas redigidas por humanos</span>
+        <div class="bar-track"><div class="bar-fill grey" style="width:65%"></div></div>
+        <span class="bar-val">65%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Respostas redigidas pela IA</span>
+        <div class="bar-track"><div class="bar-fill green" style="width:80%"></div></div>
+        <span class="bar-val">80%</span>
+      </div>
+    </div>
+    <p class="chart-note">Trial inicial divulgado pela empresa (dados não auditados). Fontes: [8][9].</p>
+  </div>
+
+  <p><strong>Ressalvas de método:</strong> os números de CSAT vêm de um trial inicial divulgado pela própria empresa, não de auditoria independente. E o caso demonstra o valor do regime <em>copiloto</em> — consistente com os achados do estudo do QJE<span class="ref">[3]</span> — mais do que da autonomia plena. É, ainda assim, evidência relevante: precisão técnica e acesso a dados em tempo real geraram experiência superior à resposta genérica de contenção.</p>
+
+  <h3 class="sub">O mercado já precifica a resolução</h3>
+
+  <p>O sinal mais forte de que a transição é estrutural não vem dos white papers — vem dos modelos de cobrança. O Fin, da Intercom, exibe <em>Resolution Rate</em> e <em>Automation Rate</em> como métricas-título do seu dashboard de performance e é vendido por <em>outcome-based pricing</em>: o cliente só paga quando a IA de fato resolve, nunca por conversa contida — com resolução média divulgada de 76% em mais de 12 mil clientes<span class="ref">[11]</span>. A Sierra, de Bret Taylor, foi além: cobra literalmente por resolução, capturando parte da economia de cada interação resolvida (que custaria US$ 10–20 com um humano), e publica seus casos nessa métrica — Ramp com 90% dos casos resolvidos, SoFi com +33 pontos de NPS<span class="ref">[12][13]</span>.</p>
+
+  <p>Quando os fornecedores de referência passam a <strong>ser pagos por resolução</strong>, e não por conversa contida, o alinhamento de incentivos que este paper propõe deixa de ser tese e vira modelo de negócio. Uma nota para o gestor: nenhum deles expõe nativamente o recontato em 7 dias como KPI central, nem a taxa de escalação com contexto preservado — essas duas métricas seguem sendo responsabilidade do seu desenho de operação, não do fornecedor.</p>
+
+  <!-- 04 -->
+  <h2 id="s04">
+    <span class="eyebrow">04 — O contraditório</span>
+    Riscos e gargalos que o entusiasmo esconde
+  </h2>
+
+  <p>A mesma Gartner que projeta 80% de resolução autônoma até 2029 previu, em junho de 2025, que <strong>mais de 40% dos projetos de IA agêntica serão cancelados até o fim de 2027</strong> — por custos crescentes, valor de negócio pouco claro e controles de risco insuficientes. A consultoria estimou ainda que, dos milhares de fornecedores que alegam capacidades "agênticas", apenas cerca de 130 as possuem de fato — o restante pratica <em>agent washing</em>: chatbots e RPA rebatizados<span class="ref">[10]</span>.</p>
+
+  <p>Para o gestor de CC/CX, quatro riscos concretos:</p>
+
+  <div class="hidra-grid">
+    <div class="hidra-item">
+      <span class="m-num">01</span>
+      <div>
+        <strong>Responsabilidade legal pelo que o agente diz e faz</strong>
+        <p>Em 2024, um tribunal canadense condenou a Air Canada a honrar uma política de reembolso inventada por seu chatbot, rejeitando o argumento de que o bot seria "entidade separada". Com IA agêntica, o risco escala: o agente não apenas informa errado — ele <em>executa</em> errado, com efeito transacional imediato.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">02</span>
+      <div>
+        <strong>Qualidade da integração é o gargalo real</strong>
+        <p>IA agêntica sem APIs confiáveis para CRM, pagamentos e logística é um chatbot caro. O trabalho pesado do projeto está na camada de dados e integração, não no modelo.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">03</span>
+      <div>
+        <strong>Governança de ações autônomas</strong>
+        <p>Que ações o agente pode executar sem aprovação humana? Até que valor de reembolso? Com que trilha de auditoria? Sem essas respostas formalizadas antes do go-live, o projeto entra na estatística dos 40%.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">04</span>
+      <div>
+        <strong>O paradoxo do volume residual</strong>
+        <p>Quanto mais a IA resolve o rotineiro, mais complexo e emocionalmente carregado é o que sobra para o humano — exigindo agentes mais qualificados, melhor remunerados e com ferramentas melhores. O modelo híbrido pós-reversão da Klarna reconhece exatamente isso.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <h2 id="s05">
+    <span class="eyebrow">05 — A medida</span>
+    O novo painel de métricas
+  </h2>
+
+  <p>A transição exige aposentar a contenção como KPI central e adotar métricas de resolução:</p>
+
+  <table class="metrics">
+    <tr><th class="old">Era da contenção</th><th class="new">Era da resolução</th></tr>
+    <tr>
+      <td>Taxa de contenção / deflection</td>
+      <td><strong>Resolução autônoma no primeiro contato</strong> — FCR da IA, confirmado pela ausência de recontato</td>
+    </tr>
+    <tr>
+      <td>Chamadas evitadas</td>
+      <td><strong>Taxa de recontato em 7 dias</strong> — o teste ácido: cliente resolvido não volta</td>
+    </tr>
+    <tr>
+      <td>Custo por chamada evitada</td>
+      <td><strong>Custo por resolução</strong> — incluindo rechamadas e escalações do fluxo</td>
+    </tr>
+    <tr>
+      <td>CSAT agregado do canal</td>
+      <td><strong>CSAT segmentado por fluxo</strong> — IA autônoma vs. copiloto vs. humano, na mesma tarefa</td>
+    </tr>
+    <tr>
+      <td>Tempo médio de atendimento (TMA)</td>
+      <td><strong>Tempo até a resolução</strong> — da primeira interação à confirmação da ação executada</td>
+    </tr>
+    <tr>
+      <td>—</td>
+      <td><strong>Taxa de escalação com contexto preservado</strong> — transferência para humano sem o cliente repetir tudo</td>
+    </tr>
+  </table>
+
+  <p>A queda de 25% em consultas repetidas da Klarna<span class="ref">[5]</span> é o exemplo canônico da métrica que importa: mede se o problema deixou de existir, não se o cliente deixou de aparecer.</p>
+
+  <h3 class="sub">Como isso vira uma tela</h3>
+
+  <p>Abaixo, uma sugestão de painel operacional com as seis métricas em uma única visão: a linha de cima mostra o <strong>resultado</strong> (resolução, recontato, custo), a de baixo mostra a <strong>saúde do sistema</strong> (tempo, escalação, auditoria). Os dois gráficos carregam as decisões de gestão.</p>
+
+  <div class="chart-block">
+    <p class="chart-title">Painel da era da resolução — visão semanal</p>
+    <p class="chart-note" style="margin:2px 0 0;">números ilustrativos, para referência de estrutura</p>
+
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin:20px 0 10px;">
+      <div class="stat-card"><div class="num">62%</div><div class="lab">resolução autônoma no 1º contato</div><div class="lab" style="color:var(--accept);margin-top:4px;">▲ +5 p.p. vs. mês anterior</div></div>
+      <div class="stat-card"><div class="num">8,4%</div><div class="lab">recontato em 7 dias</div><div class="lab" style="color:var(--accept);margin-top:4px;">▼ −1,8 p.p. · meta ≤ 10%</div></div>
+      <div class="stat-card"><div class="num">R$ 4,10</div><div class="lab">custo por resolução</div><div class="lab" style="margin-top:4px;">inclui rechamadas e escalações</div></div>
+    </div>
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin:0 0 24px;">
+      <div class="stat-card"><div class="num">2,4 min</div><div class="lab">tempo até a resolução</div><div class="lab" style="margin-top:4px;">da 1ª interação à ação confirmada</div></div>
+      <div class="stat-card"><div class="num">91%</div><div class="lab">escalação com contexto preservado</div><div class="lab" style="color:var(--reject);margin-top:4px;">abaixo da meta de 95%</div></div>
+      <div class="stat-card"><div class="num">100%</div><div class="lab">ações autônomas auditadas</div><div class="lab" style="margin-top:4px;">trilha de auditoria por ação</div></div>
+    </div>
+
+    <p class="chart-title" style="margin-top:8px;">Recontato em 7 dias — o teste ácido</p>
+    <svg viewBox="0 0 640 195" width="100%" role="img" aria-label="Linha do recontato em 7 dias caindo de 14,9% para 8,4% em oito semanas, cruzando a meta de 10%" style="margin-top:10px;">
+      <line x1="50" y1="114" x2="610" y2="114" stroke="var(--faint)" stroke-dasharray="6 4" stroke-width="1.5"/>
+      <text x="610" y="104" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--faint)">meta 10%</text>
+      <polyline points="60,45 137,57 214,69 291,86 368,99 445,111 522,127 599,136" fill="none" stroke="var(--crop)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="60" cy="45" r="3.5" fill="var(--crop)"/>
+      <circle cx="599" cy="136" r="4.5" fill="var(--accept)"/>
+      <text x="60" y="30" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--slate)">14,9%</text>
+      <text x="599" y="160" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="var(--accept)">8,4%</text>
+      <text x="60" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">S22</text>
+      <text x="214" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">S24</text>
+      <text x="368" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">S26</text>
+      <text x="522" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">S28</text>
+    </svg>
+
+    <p class="chart-title" style="margin-top:28px;">CSAT segmentado por fluxo — na mesma tarefa</p>
+    <p class="chart-note" style="margin:4px 0 0;"><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--crop);margin-right:4px;"></span>IA autônoma&nbsp;&nbsp;<span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--accept);margin-right:4px;"></span>copiloto (IA + humano)&nbsp;&nbsp;<span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--faint);margin-right:4px;"></span>humano puro</p>
+
+    <p style="font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink);margin:18px 0 8px;">Transacional (reembolso, 2ª via, reagendamento)</p>
+    <div class="bars" style="margin:0;gap:8px;">
+      <div class="bar-row"><span class="bar-label">IA autônoma</span><div class="bar-track"><div class="bar-fill gold" style="width:88%"></div></div><span class="bar-val">88%</span></div>
+      <div class="bar-row"><span class="bar-label">copiloto</span><div class="bar-track"><div class="bar-fill green" style="width:84%"></div></div><span class="bar-val">84%</span></div>
+      <div class="bar-row"><span class="bar-label">humano puro</span><div class="bar-track"><div class="bar-fill grey" style="width:79%"></div></div><span class="bar-val">79%</span></div>
+    </div>
+
+    <p style="font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink);margin:18px 0 8px;">Consultiva (dúvida de fatura, elegibilidade)</p>
+    <div class="bars" style="margin:0;gap:8px;">
+      <div class="bar-row"><span class="bar-label">IA autônoma</span><div class="bar-track"><div class="bar-fill gold" style="width:74%"></div></div><span class="bar-val">74%</span></div>
+      <div class="bar-row"><span class="bar-label">copiloto</span><div class="bar-track"><div class="bar-fill green" style="width:82%"></div></div><span class="bar-val">82%</span></div>
+      <div class="bar-row"><span class="bar-label">humano puro</span><div class="bar-track"><div class="bar-fill grey" style="width:77%"></div></div><span class="bar-val">77%</span></div>
+    </div>
+
+    <p style="font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink);margin:18px 0 8px;">Complexa / emocional (disputa, reclamação grave)</p>
+    <div class="bars" style="margin:0;gap:8px;">
+      <div class="bar-row"><span class="bar-label">IA autônoma</span><div class="bar-track"><div class="bar-fill gold" style="width:41%"></div></div><span class="bar-val">41%</span></div>
+      <div class="bar-row"><span class="bar-label">copiloto</span><div class="bar-track"><div class="bar-fill green" style="width:68%"></div></div><span class="bar-val">68%</span></div>
+      <div class="bar-row"><span class="bar-label">humano puro</span><div class="bar-track"><div class="bar-fill grey" style="width:86%"></div></div><span class="bar-val">86%</span></div>
+    </div>
+
+    <p class="chart-note">A leitura do CSAT por fluxo, na mesma tarefa, é o que alimenta o mapa de resolubilidade do passo 01 do roteiro: onde a IA autônoma lidera, amplie a autonomia; onde o copiloto vence, mantenha o humano no circuito; onde o humano lidera com folga, blinde o fluxo contra automação prematura.</p>
+  </div>
+
+  <!-- 06 -->
+  <h2 id="s06">
+    <span class="eyebrow">06 — A prática</span>
+    Roteiro de implementação
+  </h2>
+
+  <div class="hidra-grid">
+    <div class="hidra-item">
+      <span class="m-num">01</span>
+      <div>
+        <strong>Mapeie por resolubilidade, não por volume</strong>
+        <p>Classifique as demandas em três grupos: resolução autônoma viável (transacional, regras claras), copiloto (julgamento humano com apoio de IA), humano puro (complexo, emocional, alto valor). Comece pelo primeiro — e o caso Octopus sugere que o segundo entrega ROI rápido com risco baixo.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">02</span>
+      <div>
+        <strong>Resolva a integração antes do modelo</strong>
+        <p>Inventário de APIs: o agente conseguirá consultar <em>e escrever</em> no CRM, pagamentos e logística? Sem escrita, não há resolução — há FAQ sofisticado.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">03</span>
+      <div>
+        <strong>Defina a governança de ações</strong>
+        <p>Matriz de autonomia (o que executa sozinho, o que exige aprovação, limites de valor), trilha de auditoria por ação e responsável humano nomeado pelo comportamento do agente.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">04</span>
+      <div>
+        <strong>Piloto com grupo de controle</strong>
+        <p>Mesmo tipo de demanda, fluxo IA vs. fluxo humano, medindo o painel da seção 05 — especialmente recontato em 7 dias. Sem contrafactual, o resultado do piloto é opinião.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">05</span>
+      <div>
+        <strong>Reinvista no humano residual</strong>
+        <p>Redimensione perfil, senioridade e remuneração da equipe que ficará com os casos complexos. Garanta escalação com contexto completo.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">06</span>
+      <div>
+        <strong>Teste o fornecedor contra o agent washing</strong>
+        <p>Exija demonstração de execução transacional real nos seus sistemas, em sandbox, antes de assinar. "Agêntico" no material de vendas não é evidência.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conclusão -->
+  <h2>
+    <span class="eyebrow">Conclusão</span>
+    O ROI que importa
+  </h2>
+
+  <p>A pergunta que definiu a última década — "quantas chamadas evitamos?" — media a capacidade da empresa de se esconder do cliente. A pergunta que define a próxima — "quantos problemas resolvemos sem fricção?" — mede a capacidade de servi-lo.</p>
+
+  <p>A IA agêntica torna a segunda pergunta tecnicamente respondível em escala. Mas os casos examinados impõem uma condição: <strong>a tecnologia potencializa o desenho de serviço que encontra.</strong> Aplicada sobre a lógica da contenção — como na primeira fase da Klarna — ela automatiza a destruição de valor com eficiência inédita. Aplicada sobre fluxos bem desenhados, com integração transacional, governança de ações e métricas de resolução, ela converte o contact center de centro de custo espremível em ativo de retenção.</p>
+
+  <div class="callout">
+    <p>O ROI real não está nas chamadas que evitamos. Está nos clientes que permanecem porque seus problemas deixaram de existir em segundos — e nos humanos, mais qualificados, cuidando do que a máquina ainda não alcança.</p>
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom">
+    <div>
+      <p class="section-label">Referências</p>
+      <ul>
+        <li>[1] Gartner (2022). <em>Gartner Predicts Conversational AI Will Reduce Contact Center Agent Labor Costs by $80 Billion in 2026.</em> <a href="https://www.gartner.com/en/newsroom/press-releases/2022-08-31-gartner-predicts-conversational-ai-will-reduce-contac" target="_blank">Link</a></li>
+        <li>[2] Gartner (2025). <em>Gartner Predicts Agentic AI Will Autonomously Resolve 80% of Common Customer Service Issues Without Human Intervention by 2029.</em> <a href="https://www.gartner.com/en/newsroom/press-releases/2025-03-05-gartner-predicts-agentic-ai-will-autonomously-resolve-80-percent-of-common-customer-service-issues-without-human-intervention-by-20290" target="_blank">Link</a></li>
+        <li>[3] Brynjolfsson, E.; Li, D.; Raymond, L. (2025). <em>Generative AI at Work.</em> The Quarterly Journal of Economics, 140(2), 889–942 (NBER WP 31161, 2023). <a href="https://academic.oup.com/qje/article/140/2/889/7990658" target="_blank">QJE</a></li>
+        <li>[4] McKinsey & Company (2023). <em>The economic potential of generative AI: The next productivity frontier.</em> <a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier" target="_blank">Link</a></li>
+        <li>[5] Klarna (2024). <em>Klarna AI assistant handles two-thirds of customer service chats in its first month.</em> <a href="https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/" target="_blank">Link</a></li>
+        <li>[6] Forbes (2025). <em>Klarna Reverses AI Push, Says Customers Prefer Human Support.</em> <a href="https://www.forbes.com/sites/quickerbettertech/2025/05/18/business-tech-news-klarna-reverses-on-ai-says-customers-like-talking-to-people/" target="_blank">Link</a></li>
+        <li>[7] Entrepreneur (2025). <em>Klarna Is Hiring Customer Service Agents After AI Couldn't Cut It.</em> <a href="https://www.entrepreneur.com/business-news/klarna-ceo-reverses-course-by-hiring-more-humans-not-ai/491396" target="_blank">Link</a></li>
+        <li>[8] techUK. <em>Case Study: Kraken Tech's generative AI tool for customer service (Octopus Energy).</em> <a href="https://www.techuk.org/resource/case-study-kraken-tech-s-generative-ai-tool-for-customer-service.html" target="_blank">Link</a></li>
+        <li>[9] Octopus Energy (2023). <em>Octopus Energy's AI trial wins customer approval.</em> <a href="https://octopus.energy/press/more-news-press-releases/octopus-energy-s-ai-trial-wins-customer-approval/" target="_blank">Link</a></li>
+        <li>[10] CX Today / Gartner (2025). <em>Agentic AI: 80% of Customer Problems Solved Without Human Help by 2029</em> — inclui a previsão de cancelamento de &gt;40% dos projetos agênticos até 2027 e a estimativa de agent washing. <a href="https://www.cxtoday.com/contact-center/agentic-ai-gartner-predicts-80-of-customer-problems-solved-without-human-help-by-2029/" target="_blank">Link</a></li>
+        <li>[11] Intercom. <em>Monitor Fin's performance</em> e <em>Fin AI Agent outcomes</em> (dashboard de Resolution Rate e outcome-based pricing). <a href="https://www.intercom.com/help/en/articles/11390083-monitor-fin-s-performance-with-clarity-and-confidence" target="_blank">Dashboard</a> · <a href="https://www.intercom.com/help/en/articles/8205718-fin-ai-agent-outcomes" target="_blank">Pricing</a> · <a href="https://fin.ai/" target="_blank">fin.ai</a></li>
+        <li>[12] Cheeky Pint / Sierra (2025). <em>Bret Taylor of Sierra on AI agents, outcome-based pricing, and the OpenAI board.</em> <a href="https://cheekypint.substack.com/p/bret-taylor-of-sierra-on-ai-agents" target="_blank">Link</a></li>
+        <li>[13] TechCrunch (2025). <em>Bret Taylor's Sierra reaches $100M ARR in under two years.</em> <a href="https://techcrunch.com/2025/11/21/bret-taylors-sierra-reaches-100m-arr-in-under-two-years/" target="_blank">Link</a></li>
+        <li><em>Moffatt v. Air Canada</em>, 2024 BCCRT 149 (British Columbia Civil Resolution Tribunal). <a href="https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html" target="_blank">CanLII</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="article-note">Argumento autoral com base nas fontes listadas · Todos os números citados foram verificados nas fontes primárias em julho de 2026</p>
+
+</main>
+
+<script>
+  function switchTab(btn, id) {
+    btn.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    btn.closest('.toggle-block').querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
