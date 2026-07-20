@@ -351,13 +351,13 @@
   <h1>Da Contenção à Resolução</h1>
   <div class="deck">O que a IA agêntica muda — e o que não muda — na gestão de contact centers</div>
 
-  <p class="lede">Por uma década, a automação no atendimento foi medida por <em>deflection</em>: quantas interações o bot impediu de chegar ao humano. Essa métrica gerou economia contábil — e desistência silenciosa de clientes exaustos. A IA agêntica inverte a lógica: o sistema deixa de <em>informar</em> como resolver e passa a <em>executar</em> a resolução. Este paper examina a evidência disponível — incluindo o caso Klarna em sua versão completa, com a reversão de 2025 que a maioria das análises omite — e propõe aos gestores de CC/CX um novo painel de métricas e um roteiro de implementação.</p>
+  <p class="lede">Por uma década, a automação no atendimento foi medida por <em>deflection</em>: quantas interações o bot impediu de chegar ao humano. Essa métrica gerou economia contábil — e desistência silenciosa de clientes exaustos. A IA agêntica inverte a lógica: o sistema deixa de <em>informar</em> como resolver e passa a <em>executar</em> a resolução. Este paper é dirigido ao <strong>gestor de operação de CC/CX</strong> que precisa construir e defender o caso de negócio dessa transição — e declara suas regras de leitura: hierarquia explícita de evidência, uma tese formulada em termos falseáveis e um roteiro em que a integração, não o modelo, é o centro do projeto.</p>
 </header>
 
 <main>
 
   <div class="roadmap">
-    <div class="toggle-label">O que será abordado — seis passos</div>
+    <div class="toggle-label">O que será abordado — sete passos</div>
     <ol>
       <li><div>
         <a class="rm-title" href="#s01">O Problema com a Contenção <span class="arw">→</span></a>
@@ -365,23 +365,27 @@
       </div></li>
       <li><div>
         <a class="rm-title" href="#s02">O que Muda com a IA Agêntica <span class="arw">→</span></a>
-        <p>Compreensão semântica e execução de ações via tool use — e a diferença entre RAG e function calling.</p>
+        <p>Tool use vs. RAG, a tese em forma falseável — e como ler as duas previsões da Gartner sem seleção de estatística.</p>
       </div></li>
       <li><div>
-        <a class="rm-title" href="#s03">A Evidência Empírica <span class="arw">→</span></a>
-        <p>Os dados macro (Gartner, McKinsey, QJE), dois casos reais — Klarna e Octopus Energy — e o mercado que já cobra por resolução.</p>
+        <a class="rm-title" href="#s03">A Evidência, em Hierarquia <span class="arw">→</span></a>
+        <p>Três níveis de evidência declarados; Klarna e Octopus lidos pelo que estabelecem — e pelo que não estabelecem.</p>
       </div></li>
       <li><div>
-        <a class="rm-title" href="#s04">Riscos e Gargalos <span class="arw">→</span></a>
-        <p>Os 40% de projetos que a Gartner prevê cancelados, agent washing, responsabilidade legal e o paradoxo do volume residual.</p>
+        <a class="rm-title" href="#s04">Integração Antes do Modelo <span class="arw">→</span></a>
+        <p>O núcleo do projeto: checklist mínimo de sistemas, catálogo de ações, rollback e SLA de API.</p>
       </div></li>
       <li><div>
-        <a class="rm-title" href="#s05">O Novo Painel de Métricas <span class="arw">→</span></a>
+        <a class="rm-title" href="#s05">Riscos e Governança <span class="arw">→</span></a>
+        <p>Responsabilidade legal, agent washing e o paradoxo do volume residual.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s06">O Novo Painel de Métricas <span class="arw">→</span></a>
         <p>Seis indicadores que substituem a contenção como KPI central — com sugestão de dashboard e o recontato como teste ácido.</p>
       </div></li>
       <li><div>
-        <a class="rm-title" href="#s06">Roteiro de Implementação <span class="arw">→</span></a>
-        <p>Seis passos práticos, do mapa de resolubilidade ao teste anti-agent-washing do fornecedor.</p>
+        <a class="rm-title" href="#s07">Custo e Roteiro <span class="arw">→</span></a>
+        <p>A linha de TCO e payback que faltava — e cinco passos de implementação.</p>
       </div></li>
     </ol>
   </div>
@@ -439,7 +443,13 @@
     </div>
   </div>
 
+  <div class="callout">
+    <p><strong>A tese, em forma falseável:</strong> em demandas transacionais com integração de escrita nos sistemas, governança de ações e supervisão de qualidade, um agente de IA eleva a resolução no primeiro contato e reduz o recontato <em>sem queda de CSAT</em> frente ao fluxo humano equivalente. Se, cumpridas essas condições, o recontato ou o CSAT piorarem no piloto controlado, a tese está errada — não "mal aplicada".</p>
+  </div>
+
   <p>O Gartner formalizou essa transição em março de 2025, ao prever que a IA agêntica resolverá autonomamente 80% dos problemas comuns de atendimento até 2029, com redução de 30% nos custos operacionais<span class="ref">[2]</span>. A previsão anterior da mesma consultoria — redução de US$ 80 bilhões em custos de mão de obra de contact centers no ano de 2026<span class="ref">[1]</span> — referia-se ainda à IA conversacional; a agêntica amplia o escopo da automação de <em>informar</em> para <em>transacionar</em>.</p>
+
+  <p>Há uma aparente contradição na própria Gartner que precisa ser resolvida, não apenas citada: a consultoria prevê 80% de resolução autônoma até 2029 <em>e</em> o cancelamento de mais de 40% dos projetos agênticos até 2027<span class="ref">[10]</span>. As duas previsões não competem — descrevem coisas diferentes. A primeira é o teto da tecnologia entre as operações que sobreviverem à curva de implementação; a segunda é a mortalidade ao longo dessa curva. Lidas em conjunto, dizem que a adoção não será distribuída: será concentrada em quem resolver integração e governança. <strong>Para efeito de planejamento, prevalece a segunda</strong> — trate os 40% como cenário-base do seu projeto e desenhe para não entrar nele. É esse o critério que organiza as seções 04 e 07.</p>
 
   <div class="chart-block">
     <p class="chart-title">A trajetória da automação no atendimento (Gartner)</p>
@@ -465,19 +475,39 @@
 
   <!-- 03 -->
   <h2 id="s03">
-    <span class="eyebrow">03 — A evidência empírica</span>
-    O que os dados e os casos reais mostram
+    <span class="eyebrow">03 — A evidência, em hierarquia</span>
+    O que os dados e os casos reais mostram — e com que peso
   </h2>
 
-  <h3 class="sub">O efeito produtividade: IA como copiloto</h3>
+  <p>Antes dos números, a regra de leitura: nem toda evidência pesa igual, e misturar os níveis é o erro mais comum do debate sobre IA em atendimento. Este paper usa três níveis e nomeia o nível de cada fonte ao citá-la:</p>
+
+  <div class="mec-grid">
+    <div class="mec-card">
+      <span class="mec-num">NÍVEL A</span>
+      <h3>Estudo revisado por pares</h3>
+      <p>Metodologia auditável, grupo de controle, publicação científica. Neste paper: o estudo do QJE. Sustenta conclusões de causa e magnitude.</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">NÍVEL B</span>
+      <h3>Projeção de consultoria</h3>
+      <p>Gartner, McKinsey. Útil como direção e ordem de grandeza; não é medição — é previsão, com o histórico de acerto irregular que previsões têm.</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">NÍVEL C</span>
+      <h3>Dado da própria empresa, não auditado</h3>
+      <p>Klarna, Octopus, Intercom, Sierra. Ilustra que um mecanismo é operacionalmente possível; não prova magnitude nem generaliza.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">O efeito produtividade: IA como copiloto <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· nível A</span></h3>
 
   <p>O estudo mais rigoroso disponível sobre IA generativa em atendimento — Brynjolfsson, Li e Raymond, publicado no <em>Quarterly Journal of Economics</em> — acompanhou 5.172 agentes de suporte com acesso a um assistente de IA. Resultado: aumento médio de 15% na produtividade (problemas resolvidos por hora), com ganho concentrado nos agentes menos experientes, que melhoraram velocidade <em>e</em> qualidade<span class="ref">[3]</span>.</p>
 
   <p>Duas leituras importam para o gestor. Primeira: o ganho é real e mensurável. Segunda: <strong>o estudo mede IA como copiloto do humano, não como agente autônomo</strong> — evidência de <em>augmentation</em>, não de substituição. É o regime de operação do caso Octopus Energy, adiante.</p>
 
-  <p>A McKinsey estima que cerca de 75% do valor potencial da IA generativa se concentra em quatro áreas, sendo operações de atendimento ao cliente uma das principais<span class="ref">[4]</span> — o que explica por que o contact center virou o principal laboratório corporativo da tecnologia.</p>
+  <p>A McKinsey estima que cerca de 75% do valor potencial da IA generativa se concentra em quatro áreas, sendo operações de atendimento ao cliente uma das principais<span class="ref">[4]</span> (nível B) — o que explica por que o contact center virou o principal laboratório corporativo da tecnologia.</p>
 
-  <h3 class="sub">Caso Klarna: a tese provada duas vezes</h3>
+  <h3 class="sub">Caso Klarna: ascensão e reversão <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· nível C</span></h3>
 
   <p>A Klarna é uma fintech sueca de pagamentos e compras, referência global no modelo <em>Buy Now, Pay Later</em>: intermedia o checkout entre consumidores e centenas de milhares de varejistas, operando funções de crédito, pagamento e pós-venda — o que faz do seu atendimento uma operação massiva, multilíngue e essencialmente transacional (reembolsos, devoluções, disputas de cobrança). Foi esse perfil que a tornou o primeiro laboratório aberto da IA agêntica em escala: em fevereiro de 2024, lançou um assistente baseado em LLMs integrado aos seus sistemas transacionais, cobrindo 23 mercados, 24/7, em mais de 35 idiomas<span class="ref">[5]</span>.</p>
 
@@ -486,7 +516,7 @@
     <div class="tabs">
       <button class="tab active" onclick="switchTab(this,'ascensao')">A ascensão (2024)</button>
       <button class="tab" onclick="switchTab(this,'reversao')">A reversão (2025)</button>
-      <button class="tab" onclick="switchTab(this,'leitura')">A leitura correta</button>
+      <button class="tab" onclick="switchTab(this,'leitura')">O que o caso estabelece</button>
     </div>
     <div id="tab-ascensao" class="tab-content active">
       <span class="badge badge-accept">Resolução em escala</span>
@@ -499,9 +529,9 @@
       <p>Em maio de 2025, o CEO Sebastian Siemiatkowski admitiu publicamente o excesso — e a Klarna voltou a contratar agentes humanos, após reclamações de respostas genéricas e falhas em casos complexos. A empresa migrou para um modelo híbrido: IA nas demandas rotineiras de alto volume, humanos nas escalações, casos complexos e clientes de alto valor.</p>
     </div>
     <div id="tab-leitura" class="tab-content">
-      <span class="badge badge-crop">O que o caso ensina</span>
-      <p><strong>A reversão não refuta a tese da resolução — ela a confirma pelo contraexemplo.</strong></p>
-      <p>O erro da Klarna foi recair na lógica da era da contenção: otimizar headcount (deflexão de custo) em vez de otimizar resolução com qualidade. Quando a métrica voltou a ser "quantos humanos eliminamos", a qualidade caiu e o custo retornou por outras vias. Gestores que citam apenas os números de 2024 contam metade da história; os que citam apenas a reversão de 2025 contam a outra metade.</p>
+      <span class="badge badge-crop">O que o caso estabelece — e o que não</span>
+      <p><strong>O caso não prova a tese deste paper. Estabelece dois fatos e um limite.</strong></p>
+      <p>Fato 1: a fase de 2024 mostra que resolução autônoma transacional em escala é operacionalmente possível (nível C — números da própria empresa). Fato 2: a reversão de 2025 estabelece uma condição de contorno — nos casos complexos e nuançados, com o corte simultâneo do quadro humano, a qualidade caiu; o escopo de autonomia ultrapassou a fronteira de resolubilidade. O limite: não há dados públicos pós-reversão que permitam afirmar que o modelo híbrido atual é superior. Uma leitura que trate qualquer desfecho como confirmação não é análise — por isso a tese deste paper está formulada em termos falseáveis na seção 02, e o instrumento para testá-la é o piloto controlado do roteiro, não este caso.</p>
     </div>
   </div>
 
@@ -529,7 +559,7 @@
     <div class="stat-card"><div class="num">700</div><div class="lab">agentes FTE equivalentes</div></div>
   </div>
 
-  <h3 class="sub">Caso Octopus Energy: o regime copiloto com supervisão</h3>
+  <h3 class="sub">Caso Octopus Energy: o regime copiloto com supervisão <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· nível C</span></h3>
 
   <p>A Octopus Energy, fornecedora de energia do Reino Unido, implantou IA generativa (ferramenta Magic Ink, da plataforma Kraken) para ler, interpretar e redigir respostas a e-mails de clientes, com acesso aos dados de consumo e faturamento. O regime de operação é predominantemente de <strong>copiloto com revisão humana</strong>: a IA redige, o agente revisa e envia<span class="ref">[8]</span>.</p>
 
@@ -554,7 +584,7 @@
 
   <p><strong>Ressalvas de método:</strong> os números de CSAT vêm de um trial inicial divulgado pela própria empresa, não de auditoria independente. E o caso demonstra o valor do regime <em>copiloto</em> — consistente com os achados do estudo do QJE<span class="ref">[3]</span> — mais do que da autonomia plena. É, ainda assim, evidência relevante: precisão técnica e acesso a dados em tempo real geraram experiência superior à resposta genérica de contenção.</p>
 
-  <h3 class="sub">O mercado já precifica a resolução</h3>
+  <h3 class="sub">O mercado já precifica a resolução <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· nível C</span></h3>
 
   <p>O sinal mais forte de que a transição é estrutural não vem dos white papers — vem dos modelos de cobrança. O Fin, da Intercom, exibe <em>Resolution Rate</em> e <em>Automation Rate</em> como métricas-título do seu dashboard de performance e é vendido por <em>outcome-based pricing</em>: o cliente só paga quando a IA de fato resolve, nunca por conversa contida — com resolução média divulgada de 76% em mais de 12 mil clientes<span class="ref">[11]</span>. A Sierra, de Bret Taylor, foi além: cobra literalmente por resolução, capturando parte da economia de cada interação resolvida (que custaria US$ 10–20 com um humano), e publica seus casos nessa métrica — Ramp com 90% dos casos resolvidos, SoFi com +33 pontos de NPS<span class="ref">[12][13]</span>.</p>
 
@@ -562,13 +592,68 @@
 
   <!-- 04 -->
   <h2 id="s04">
-    <span class="eyebrow">04 — O contraditório</span>
-    Riscos e gargalos que o entusiasmo esconde
+    <span class="eyebrow">04 — O núcleo do projeto</span>
+    Integração antes do modelo
+  </h2>
+
+  <p>Se este paper tivesse que ser reduzido a uma única recomendação prática, seria esta: <strong>o projeto de IA agêntica é um projeto de integração que usa um modelo — não um projeto de modelo que precisa de integrações.</strong> IA agêntica sem APIs confiáveis de escrita em CRM, pagamentos e logística é um chatbot caro. É na camada de dados e integração que os projetos morrem, e é nela que os 40% previstos pela Gartner se decidem.</p>
+
+  <p>A diferença entre informar e executar é a diferença entre uma API de leitura e uma API de escrita — e escrita em sistemas transacionais traz exigências que o piloto de chatbot nunca enfrentou: uma ação executada errada não é uma resposta ruim, é um reembolso duplicado, uma fatura alterada, uma entrega cancelada. Antes de escolher fornecedor ou modelo, a operação precisa responder ao checklist mínimo abaixo. Cada item sem resposta é escopo que deve ficar fora da autonomia no go-live:</p>
+
+  <div class="hidra-grid">
+    <div class="hidra-item">
+      <span class="m-num">01</span>
+      <div>
+        <strong>Inventário de sistemas com escrita</strong>
+        <p>Para cada demanda do mapa de resolubilidade: quais APIs de leitura <em>e de escrita</em> a resolução exige? Sem escrita não há resolução — há FAQ sofisticado. Demanda sem API de escrita mapeada fica fora do escopo autônomo.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">02</span>
+      <div>
+        <strong>Catálogo de ações com alçadas</strong>
+        <p>Lista explícita de cada ação executável pelo agente, com parâmetros, limites de valor e o que exige aprovação humana. Se o catálogo não existe por escrito, a autonomia não tem fronteira — tem acidente agendado.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">03</span>
+      <div>
+        <strong>Rollback e compensação</strong>
+        <p>Toda ação autônoma precisa de ação inversa definida: estorno do estorno, reagendamento desfeito, fatura restaurada. Transação sem rota de compensação não entra no escopo autônomo — essa é a regra que separa incidente de crise.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">04</span>
+      <div>
+        <strong>SLA e idempotência de API</strong>
+        <p>Latência compatível com conversa em tempo real (p95, não média) e chamadas idempotentes — o retry de uma ação não pode executá-la duas vezes. Verifique também o comportamento do agente quando a API cai no meio da transação.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">05</span>
+      <div>
+        <strong>Identidade e contexto</strong>
+        <p>Autenticação do cliente antes de qualquer ação de escrita, e transporte do contexto completo entre canais e na escalação ao humano. É o pré-requisito técnico da métrica de escalação com contexto preservado (seção 06).</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">06</span>
+      <div>
+        <strong>Sandbox e trilha de auditoria</strong>
+        <p>Ambiente de teste com dados sintéticos para validar cada ação antes da produção, e log por ação executada: o quê, para quem, quando, sob qual autorização. Sem trilha, não há defesa possível no cenário Air Canada (seção 05).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <h2 id="s05">
+    <span class="eyebrow">05 — O contraditório</span>
+    Riscos e governança que o entusiasmo esconde
   </h2>
 
   <p>A mesma Gartner que projeta 80% de resolução autônoma até 2029 previu, em junho de 2025, que <strong>mais de 40% dos projetos de IA agêntica serão cancelados até o fim de 2027</strong> — por custos crescentes, valor de negócio pouco claro e controles de risco insuficientes. A consultoria estimou ainda que, dos milhares de fornecedores que alegam capacidades "agênticas", apenas cerca de 130 as possuem de fato — o restante pratica <em>agent washing</em>: chatbots e RPA rebatizados<span class="ref">[10]</span>.</p>
 
-  <p>Para o gestor de CC/CX, quatro riscos concretos:</p>
+  <p>Além do gargalo de integração (seção 04), três riscos concretos para o gestor de CC/CX:</p>
 
   <div class="hidra-grid">
     <div class="hidra-item">
@@ -581,19 +666,12 @@
     <div class="hidra-item">
       <span class="m-num">02</span>
       <div>
-        <strong>Qualidade da integração é o gargalo real</strong>
-        <p>IA agêntica sem APIs confiáveis para CRM, pagamentos e logística é um chatbot caro. O trabalho pesado do projeto está na camada de dados e integração, não no modelo.</p>
+        <strong>Governança de ações autônomas</strong>
+        <p>Que ações o agente pode executar sem aprovação humana? Até que valor de reembolso? Com que trilha de auditoria? O checklist da seção 04 é a resposta técnica; a governança é a resposta organizacional — inclusive um responsável humano nomeado pelo comportamento do agente.</p>
       </div>
     </div>
     <div class="hidra-item">
       <span class="m-num">03</span>
-      <div>
-        <strong>Governança de ações autônomas</strong>
-        <p>Que ações o agente pode executar sem aprovação humana? Até que valor de reembolso? Com que trilha de auditoria? Sem essas respostas formalizadas antes do go-live, o projeto entra na estatística dos 40%.</p>
-      </div>
-    </div>
-    <div class="hidra-item">
-      <span class="m-num">04</span>
       <div>
         <strong>O paradoxo do volume residual</strong>
         <p>Quanto mais a IA resolve o rotineiro, mais complexo e emocionalmente carregado é o que sobra para o humano — exigindo agentes mais qualificados, melhor remunerados e com ferramentas melhores. O modelo híbrido pós-reversão da Klarna reconhece exatamente isso.</p>
@@ -601,9 +679,9 @@
     </div>
   </div>
 
-  <!-- 05 -->
-  <h2 id="s05">
-    <span class="eyebrow">05 — A medida</span>
+  <!-- 06 -->
+  <h2 id="s06">
+    <span class="eyebrow">06 — A medida</span>
     O novo painel de métricas
   </h2>
 
@@ -700,53 +778,54 @@
     <p class="chart-note">A leitura do CSAT por fluxo, na mesma tarefa, é o que alimenta o mapa de resolubilidade do passo 01 do roteiro: onde a IA autônoma lidera, amplie a autonomia; onde o copiloto vence, mantenha o humano no circuito; onde o humano lidera com folga, blinde o fluxo contra automação prematura.</p>
   </div>
 
-  <!-- 06 -->
-  <h2 id="s06">
-    <span class="eyebrow">06 — A prática</span>
-    Roteiro de implementação
+  <!-- 07 -->
+  <h2 id="s07">
+    <span class="eyebrow">07 — A prática</span>
+    Custo, payback e roteiro de implementação
   </h2>
+
+  <p>Nenhuma decisão de orçamento se sustenta sem a linha de custo — e ela costuma faltar nos textos sobre IA agêntica. O TCO do projeto tem quatro componentes: <strong>consumo ou licença</strong> (cada vez mais cobrado por resolução, como visto na seção 03); <strong>integração e dados</strong> — tipicamente a maior parcela do investimento inicial, e a mais subestimada; <strong>governança e monitoria contínuas</strong>, que não terminam no go-live; e <strong>requalificação do time residual</strong>, que os business cases quase sempre omitem.</p>
+
+  <div class="callout">
+    <p><strong>A lógica do payback:</strong> o projeto se paga quando (custo humano por resolução − custo total de IA por resolução) × volume migrado supera o investimento de integração dentro do horizonte definido. O cálculo só é honesto se o custo de IA incluir rechamadas, escalações e a monitoria humana do fluxo — o custo por resolução da seção 06, não o custo por conversa do fornecedor.</p>
+  </div>
+
+  <p>Uma nota de transparência: este paper não publica benchmark próprio de TCO — qualquer número de payback de fornecedor deve ser tratado como nível C e refeito com os seus volumes no piloto. É exatamente o que o roteiro abaixo estrutura:</p>
 
   <div class="hidra-grid">
     <div class="hidra-item">
       <span class="m-num">01</span>
       <div>
         <strong>Mapeie por resolubilidade, não por volume</strong>
-        <p>Classifique as demandas em três grupos: resolução autônoma viável (transacional, regras claras), copiloto (julgamento humano com apoio de IA), humano puro (complexo, emocional, alto valor). Comece pelo primeiro — e o caso Octopus sugere que o segundo entrega ROI rápido com risco baixo.</p>
+        <p>Classifique as demandas em três grupos: resolução autônoma viável (transacional, regras claras), copiloto (julgamento humano com apoio de IA), humano puro (complexo, emocional, alto valor). Comece pelo primeiro — e o caso Octopus sugere que o segundo entrega retorno rápido com risco baixo.</p>
       </div>
     </div>
     <div class="hidra-item">
       <span class="m-num">02</span>
       <div>
-        <strong>Resolva a integração antes do modelo</strong>
-        <p>Inventário de APIs: o agente conseguirá consultar <em>e escrever</em> no CRM, pagamentos e logística? Sem escrita, não há resolução — há FAQ sofisticado.</p>
+        <strong>Execute o checklist de integração da seção 04</strong>
+        <p>Sistemas com escrita, catálogo de ações, rollback, SLA de API, identidade e sandbox — antes de escolher modelo ou fornecedor. Item sem resposta é escopo fora da autonomia no go-live.</p>
       </div>
     </div>
     <div class="hidra-item">
       <span class="m-num">03</span>
       <div>
-        <strong>Defina a governança de ações</strong>
-        <p>Matriz de autonomia (o que executa sozinho, o que exige aprovação, limites de valor), trilha de auditoria por ação e responsável humano nomeado pelo comportamento do agente.</p>
+        <strong>Piloto com grupo de controle</strong>
+        <p>Mesmo tipo de demanda, fluxo IA vs. fluxo humano, medindo o painel da seção 06 — especialmente recontato em 7 dias e CSAT na mesma tarefa. É o instrumento que testa a tese falseável da seção 02 na sua operação. Sem contrafactual, o resultado do piloto é opinião.</p>
       </div>
     </div>
     <div class="hidra-item">
       <span class="m-num">04</span>
       <div>
-        <strong>Piloto com grupo de controle</strong>
-        <p>Mesmo tipo de demanda, fluxo IA vs. fluxo humano, medindo o painel da seção 05 — especialmente recontato em 7 dias. Sem contrafactual, o resultado do piloto é opinião.</p>
+        <strong>Reinvista no humano residual</strong>
+        <p>Redimensione perfil, senioridade e remuneração da equipe que ficará com os casos complexos. Garanta escalação com contexto completo — e coloque esse custo no TCO desde o início.</p>
       </div>
     </div>
     <div class="hidra-item">
       <span class="m-num">05</span>
       <div>
-        <strong>Reinvista no humano residual</strong>
-        <p>Redimensione perfil, senioridade e remuneração da equipe que ficará com os casos complexos. Garanta escalação com contexto completo.</p>
-      </div>
-    </div>
-    <div class="hidra-item">
-      <span class="m-num">06</span>
-      <div>
         <strong>Teste o fornecedor contra o agent washing</strong>
-        <p>Exija demonstração de execução transacional real nos seus sistemas, em sandbox, antes de assinar. "Agêntico" no material de vendas não é evidência.</p>
+        <p>Exija demonstração de execução transacional real nos seus sistemas, em sandbox, antes de assinar. "Agêntico" no material de vendas não é evidência — e proposta sem custo por resolução aberto também não.</p>
       </div>
     </div>
   </div>
@@ -759,7 +838,7 @@
 
   <p>A pergunta que definiu a última década — "quantas chamadas evitamos?" — media a capacidade da empresa de se esconder do cliente. A pergunta que define a próxima — "quantos problemas resolvemos sem fricção?" — mede a capacidade de servi-lo.</p>
 
-  <p>A IA agêntica torna a segunda pergunta tecnicamente respondível em escala. Mas os casos examinados impõem uma condição: <strong>a tecnologia potencializa o desenho de serviço que encontra.</strong> Aplicada sobre a lógica da contenção — como na primeira fase da Klarna — ela automatiza a destruição de valor com eficiência inédita. Aplicada sobre fluxos bem desenhados, com integração transacional, governança de ações e métricas de resolução, ela converte o contact center de centro de custo espremível em ativo de retenção.</p>
+  <p>A IA agêntica torna a segunda pergunta tecnicamente respondível em escala. Mas a evidência examinada — pesada pelo seu nível — impõe uma condição: <strong>a tecnologia potencializa o desenho de serviço que encontra.</strong> Aplicada como corte de custo sem supervisão de qualidade, degrada a experiência com eficiência inédita. Aplicada sobre fluxos bem desenhados — integração transacional resolvida, governança de ações, métricas de resolução e um piloto controlado que pode provar a tese errada — ela converte o contact center de centro de custo espremível em ativo de retenção.</p>
 
   <div class="callout">
     <p>O ROI real não está nas chamadas que evitamos. Está nos clientes que permanecem porque seus problemas deixaram de existir em segundos — e nos humanos, mais qualificados, cuidando do que a máquina ainda não alcança.</p>
@@ -788,7 +867,7 @@
     </div>
   </div>
 
-  <p class="article-note">Argumento autoral com base nas fontes listadas · Todos os números citados foram verificados nas fontes primárias em julho de 2026</p>
+  <p class="article-note">Argumento autoral com base nas fontes listadas · Todos os números citados foram verificados nas fontes primárias em julho de 2026 · Nota de posição: estudo independente, sem vínculo comercial com os fornecedores citados; o autor ainda não publica dados de piloto próprio — o roteiro é hipótese de trabalho, e o piloto do passo 03 é o instrumento para testá-la</p>
 
 </main>
 

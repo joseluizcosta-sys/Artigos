@@ -336,13 +336,13 @@
   <h1>From Deflection to Resolution</h1>
   <div class="deck">What agentic AI changes — and what it doesn't — in contact center management</div>
 
-  <p class="lede">For a decade, service automation was measured by <em>deflection</em>: how many interactions the bot kept away from a human agent. That metric produced accounting savings — and the silent surrender of exhausted customers. Agentic AI inverts the logic: the system stops <em>explaining</em> how to solve a problem and starts <em>executing</em> the resolution. This paper examines the available evidence — including the Klarna case in its complete form, with the 2025 reversal most analyses omit — and offers CC/CX leaders a new metrics dashboard and an implementation roadmap.</p>
+  <p class="lede">For a decade, service automation was measured by <em>deflection</em>: how many interactions the bot kept away from a human agent. That metric produced accounting savings — and the silent surrender of exhausted customers. Agentic AI inverts the logic: the system stops <em>explaining</em> how to solve a problem and starts <em>executing</em> the resolution. This paper is written for the <strong>CC/CX operations leader</strong> who must build and defend the business case for this transition — and it declares its reading rules: an explicit evidence hierarchy, a thesis stated in falsifiable terms, and a roadmap in which integration, not the model, is the core of the project.</p>
 </header>
 
 <main>
 
   <div class="roadmap">
-    <div class="toggle-label">What this paper covers — six steps</div>
+    <div class="toggle-label">What this paper covers — seven steps</div>
     <ol>
       <li><div>
         <a class="rm-title" href="#s01">The Problem with Deflection <span class="arw">→</span></a>
@@ -350,23 +350,27 @@
       </div></li>
       <li><div>
         <a class="rm-title" href="#s02">What Agentic AI Changes <span class="arw">→</span></a>
-        <p>Semantic understanding and action execution via tool use — and the difference between RAG and function calling.</p>
+        <p>Tool use vs. RAG, the thesis in falsifiable form — and how to read Gartner's two forecasts without statistic-picking.</p>
       </div></li>
       <li><div>
-        <a class="rm-title" href="#s03">The Empirical Evidence <span class="arw">→</span></a>
-        <p>The macro data (Gartner, McKinsey, QJE), two real cases — Klarna and Octopus Energy — and the market that already charges per resolution.</p>
+        <a class="rm-title" href="#s03">The Evidence, in Hierarchy <span class="arw">→</span></a>
+        <p>Three declared evidence tiers; Klarna and Octopus read for what they establish — and what they don't.</p>
       </div></li>
       <li><div>
-        <a class="rm-title" href="#s04">Risks and Bottlenecks <span class="arw">→</span></a>
-        <p>The 40% of projects Gartner expects to be canceled, agent washing, legal liability and the residual-volume paradox.</p>
+        <a class="rm-title" href="#s04">Integration Before the Model <span class="arw">→</span></a>
+        <p>The core of the project: a minimum checklist of systems, action catalog, rollback and API SLAs.</p>
       </div></li>
       <li><div>
-        <a class="rm-title" href="#s05">The New Metrics Dashboard <span class="arw">→</span></a>
+        <a class="rm-title" href="#s05">Risks and Governance <span class="arw">→</span></a>
+        <p>Legal liability, agent washing and the residual-volume paradox.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s06">The New Metrics Dashboard <span class="arw">→</span></a>
         <p>Six indicators that replace deflection as the central KPI — with a suggested dashboard and recontact as the acid test.</p>
       </div></li>
       <li><div>
-        <a class="rm-title" href="#s06">Implementation Roadmap <span class="arw">→</span></a>
-        <p>Six practical steps, from the resolvability map to the anti-agent-washing vendor test.</p>
+        <a class="rm-title" href="#s07">Cost and Roadmap <span class="arw">→</span></a>
+        <p>The missing TCO and payback line — and five implementation steps.</p>
       </div></li>
     </ol>
   </div>
@@ -424,7 +428,13 @@
     </div>
   </div>
 
+  <div class="callout">
+    <p><strong>The thesis, in falsifiable form:</strong> on transactional demands with write-level system integration, action governance and quality supervision, an AI agent raises first-contact resolution and reduces recontact <em>without a drop in CSAT</em> versus the equivalent human flow. If, under those conditions, recontact or CSAT worsen in a controlled pilot, the thesis is wrong — not "poorly applied".</p>
+  </div>
+
   <p>Gartner formalized this transition in March 2025, predicting that agentic AI will autonomously resolve 80% of common customer service issues by 2029, with a 30% reduction in operational costs<span class="ref">[2]</span>. The firm's earlier forecast — an $80 billion reduction in contact center agent labor costs in the year 2026<span class="ref">[1]</span> — still referred to conversational AI; agentic AI widens automation's scope from <em>informing</em> to <em>transacting</em>.</p>
+
+  <p>There is an apparent contradiction within Gartner itself that needs resolving, not just citing: the firm predicts 80% autonomous resolution by 2029 <em>and</em> the cancellation of over 40% of agentic projects by 2027<span class="ref">[10]</span>. The two forecasts don't compete — they describe different things. The first is the technology's ceiling among operations that survive the implementation curve; the second is the mortality along that curve. Read together, they say adoption won't be distributed: it will concentrate among those who solve integration and governance. <strong>For planning purposes, the second prevails</strong> — treat the 40% as your project's base case and design to stay out of it. That criterion organizes sections 04 and 07.</p>
 
   <div class="chart-block">
     <p class="chart-title">The automation trajectory in customer service (Gartner)</p>
@@ -450,19 +460,39 @@
 
   <!-- 03 -->
   <h2 id="s03">
-    <span class="eyebrow">03 — The empirical evidence</span>
-    What the data and the real cases show
+    <span class="eyebrow">03 — The evidence, in hierarchy</span>
+    What the data and the real cases show — and with what weight
   </h2>
 
-  <h3 class="sub">The productivity effect: AI as copilot</h3>
+  <p>Before the numbers, the reading rule: not all evidence weighs the same, and mixing tiers is the most common error in the debate on AI in customer service. This paper uses three tiers and names the tier of each source as it cites it:</p>
+
+  <div class="mec-grid">
+    <div class="mec-card">
+      <span class="mec-num">TIER A</span>
+      <h3>Peer-reviewed study</h3>
+      <p>Auditable methodology, control group, scientific publication. In this paper: the QJE study. Supports conclusions about cause and magnitude.</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">TIER B</span>
+      <h3>Analyst-firm projection</h3>
+      <p>Gartner, McKinsey. Useful for direction and order of magnitude; not measurement — forecast, with the uneven track record forecasts have.</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">TIER C</span>
+      <h3>Company-disclosed, unaudited</h3>
+      <p>Klarna, Octopus, Intercom, Sierra. Shows a mechanism is operationally possible; proves neither magnitude nor generality.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">The productivity effect: AI as copilot <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· tier A</span></h3>
 
   <p>The most rigorous study available on generative AI in customer support — Brynjolfsson, Li and Raymond, published in the <em>Quarterly Journal of Economics</em> — tracked 5,172 support agents with access to an AI assistant. The result: an average 15% productivity increase (issues resolved per hour), with gains concentrated among less experienced agents, who improved both speed <em>and</em> quality<span class="ref">[3]</span>.</p>
 
   <p>Two readings matter for managers. First: the gain is real and measurable. Second: <strong>the study measures AI as a copilot to the human, not as an autonomous agent</strong> — evidence of <em>augmentation</em>, not substitution. It is the operating regime of the Octopus Energy case, below.</p>
 
-  <p>McKinsey estimates that about 75% of generative AI's potential value concentrates in four areas, with customer operations among the main ones<span class="ref">[4]</span> — which explains why the contact center became the technology's main corporate laboratory.</p>
+  <p>McKinsey estimates that about 75% of generative AI's potential value concentrates in four areas, with customer operations among the main ones<span class="ref">[4]</span> (tier B) — which explains why the contact center became the technology's main corporate laboratory.</p>
 
-  <h3 class="sub">The Klarna case: the thesis proven twice</h3>
+  <h3 class="sub">The Klarna case: rise and reversal <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· tier C</span></h3>
 
   <p>Klarna is a Swedish payments and shopping fintech, a global reference in the <em>Buy Now, Pay Later</em> model: it intermediates checkout between consumers and hundreds of thousands of retailers, handling credit, payment and post-sale functions — which makes its customer service operation massive, multilingual and essentially transactional (refunds, returns, billing disputes). That profile made it agentic AI's first open laboratory at scale: in February 2024, it launched an LLM-based assistant integrated with its transactional systems, covering 23 markets, 24/7, in more than 35 languages<span class="ref">[5]</span>.</p>
 
@@ -471,7 +501,7 @@
     <div class="tabs">
       <button class="tab active" onclick="switchTab(this,'rise')">The rise (2024)</button>
       <button class="tab" onclick="switchTab(this,'reversal')">The reversal (2025)</button>
-      <button class="tab" onclick="switchTab(this,'reading')">The correct reading</button>
+      <button class="tab" onclick="switchTab(this,'reading')">What the case establishes</button>
     </div>
     <div id="tab-rise" class="tab-content active">
       <span class="badge badge-accept">Resolution at scale</span>
@@ -484,9 +514,9 @@
       <p>In May 2025, CEO Sebastian Siemiatkowski publicly admitted the overreach — and Klarna went back to hiring human agents, after complaints about generic answers and failures in complex cases. The company moved to a hybrid model: AI for routine, high-volume demands; humans for escalations, complex cases and high-value customers.</p>
     </div>
     <div id="tab-reading" class="tab-content">
-      <span class="badge badge-crop">What the case teaches</span>
-      <p><strong>The reversal doesn't refute the resolution thesis — it confirms it by counterexample.</strong></p>
-      <p>Klarna's mistake was falling back into deflection-era logic: optimizing headcount (cost deflection) instead of optimizing resolution with quality. When the metric became "how many humans we eliminated", quality dropped and the cost returned through other channels. Managers who cite only the 2024 numbers tell half the story; those who cite only the 2025 reversal tell the other half.</p>
+      <span class="badge badge-crop">What it establishes — and what it doesn't</span>
+      <p><strong>The case does not prove this paper's thesis. It establishes two facts and one limit.</strong></p>
+      <p>Fact 1: the 2024 phase shows that transactional autonomous resolution at scale is operationally possible (tier C — the company's own numbers). Fact 2: the 2025 reversal establishes a boundary condition — on complex, nuanced cases, with the simultaneous cut of the human workforce, quality dropped; the scope of autonomy crossed the resolvability frontier. The limit: no public post-reversal data allows the claim that the current hybrid model is superior. A reading that treats any outcome as confirmation isn't analysis — which is why this paper's thesis is stated in falsifiable terms in section 02, and the instrument to test it is the controlled pilot in the roadmap, not this case.</p>
     </div>
   </div>
 
@@ -514,7 +544,7 @@
     <div class="stat-card"><div class="num">700</div><div class="lab">FTE agents equivalent</div></div>
   </div>
 
-  <h3 class="sub">The Octopus Energy case: the supervised-copilot regime</h3>
+  <h3 class="sub">The Octopus Energy case: the supervised-copilot regime <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· tier C</span></h3>
 
   <p>Octopus Energy, a UK energy supplier, deployed generative AI (the Magic Ink tool, from the Kraken platform) to read, interpret and draft replies to customer emails, with access to consumption and billing data. The operating regime is predominantly <strong>copilot with human review</strong>: the AI drafts, the agent reviews and sends<span class="ref">[8]</span>.</p>
 
@@ -539,7 +569,7 @@
 
   <p><strong>Methodological caveats:</strong> the CSAT numbers come from an initial trial disclosed by the company itself, not an independent audit. And the case demonstrates the value of the <em>copilot</em> regime — consistent with the QJE study's findings<span class="ref">[3]</span> — more than full autonomy. It is nonetheless relevant evidence: technical precision and real-time data access produced a better experience than the generic containment reply.</p>
 
-  <h3 class="sub">The market already prices resolution</h3>
+  <h3 class="sub">The market already prices resolution <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· tier C</span></h3>
 
   <p>The strongest signal that this transition is structural doesn't come from white papers — it comes from pricing models. Intercom's Fin displays <em>Resolution Rate</em> and <em>Automation Rate</em> as the headline metrics of its performance dashboard and is sold via <em>outcome-based pricing</em>: the customer only pays when the AI actually resolves, never for a contained conversation — with a published average resolution rate of 76% across 12,000+ customers<span class="ref">[11]</span>. Bret Taylor's Sierra went further: it literally charges per resolution, capturing part of the savings of each resolved interaction (which would cost $10–20 with a human), and publishes its case studies in that metric — Ramp at 90% of cases resolved, SoFi at +33 NPS points<span class="ref">[12][13]</span>.</p>
 
@@ -547,13 +577,68 @@
 
   <!-- 04 -->
   <h2 id="s04">
-    <span class="eyebrow">04 — The counterargument</span>
-    Risks and bottlenecks the enthusiasm hides
+    <span class="eyebrow">04 — The core of the project</span>
+    Integration before the model
+  </h2>
+
+  <p>If this paper had to be reduced to a single practical recommendation, it would be this: <strong>an agentic AI project is an integration project that uses a model — not a model project that needs integrations.</strong> Agentic AI without reliable write-level APIs into CRM, payments and logistics is an expensive chatbot. The data and integration layer is where projects die, and it is where Gartner's 40% gets decided.</p>
+
+  <p>The difference between informing and executing is the difference between a read API and a write API — and writing to transactional systems brings demands the chatbot pilot never faced: a wrongly executed action is not a bad answer, it is a duplicated refund, an altered bill, a canceled delivery. Before choosing a vendor or a model, the operation must answer the minimum checklist below. Every unanswered item is scope that stays out of autonomy at go-live:</p>
+
+  <div class="hidra-grid">
+    <div class="hidra-item">
+      <span class="m-num">01</span>
+      <div>
+        <strong>System inventory with write access</strong>
+        <p>For each demand on the resolvability map: which read <em>and write</em> APIs does resolution require? Without write access there is no resolution — only a sophisticated FAQ. A demand without a mapped write API stays out of the autonomous scope.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">02</span>
+      <div>
+        <strong>Action catalog with authority limits</strong>
+        <p>An explicit list of every action the agent can execute, with parameters, value limits and what requires human approval. If the catalog doesn't exist in writing, autonomy has no boundary — it has a scheduled accident.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">03</span>
+      <div>
+        <strong>Rollback and compensation</strong>
+        <p>Every autonomous action needs a defined inverse action: refund of the refund, undone rescheduling, restored invoice. A transaction without a compensation path doesn't enter the autonomous scope — that is the rule separating incident from crisis.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">04</span>
+      <div>
+        <strong>API SLAs and idempotency</strong>
+        <p>Latency compatible with real-time conversation (p95, not average) and idempotent calls — a retried action cannot execute twice. Also verify the agent's behavior when the API fails mid-transaction.</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">05</span>
+      <div>
+        <strong>Identity and context</strong>
+        <p>Customer authentication before any write action, and full context transport across channels and into human escalation. It is the technical prerequisite of the preserved-context escalation metric (section 06).</p>
+      </div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">06</span>
+      <div>
+        <strong>Sandbox and audit trail</strong>
+        <p>A test environment with synthetic data to validate each action before production, and a log per executed action: what, for whom, when, under which authorization. Without a trail, there is no defense in the Air Canada scenario (section 05).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <h2 id="s05">
+    <span class="eyebrow">05 — The counterargument</span>
+    Risks and governance the enthusiasm hides
   </h2>
 
   <p>The same Gartner that projects 80% autonomous resolution by 2029 predicted, in June 2025, that <strong>over 40% of agentic AI projects will be canceled by the end of 2027</strong> — due to escalating costs, unclear business value and insufficient risk controls. The firm also estimated that of the thousands of vendors claiming "agentic" capabilities, only about 130 actually have them — the rest practice <em>agent washing</em>: rebranded chatbots and RPA<span class="ref">[10]</span>.</p>
 
-  <p>For the CC/CX manager, four concrete risks:</p>
+  <p>Beyond the integration bottleneck (section 04), three concrete risks for the CC/CX manager:</p>
 
   <div class="hidra-grid">
     <div class="hidra-item">
@@ -566,19 +651,12 @@
     <div class="hidra-item">
       <span class="m-num">02</span>
       <div>
-        <strong>Integration quality is the real bottleneck</strong>
-        <p>Agentic AI without reliable APIs into CRM, payments and logistics is an expensive chatbot. The heavy lifting of the project lies in the data and integration layer, not the model.</p>
+        <strong>Governance of autonomous actions</strong>
+        <p>Which actions can the agent execute without human approval? Up to what refund amount? With what audit trail? The section 04 checklist is the technical answer; governance is the organizational one — including a named human accountable for the agent's behavior.</p>
       </div>
     </div>
     <div class="hidra-item">
       <span class="m-num">03</span>
-      <div>
-        <strong>Governance of autonomous actions</strong>
-        <p>Which actions can the agent execute without human approval? Up to what refund amount? With what audit trail? Without these answers formalized before go-live, the project joins the 40% statistic.</p>
-      </div>
-    </div>
-    <div class="hidra-item">
-      <span class="m-num">04</span>
       <div>
         <strong>The residual-volume paradox</strong>
         <p>The more AI resolves the routine, the more complex and emotionally charged is what remains for humans — demanding more qualified, better-paid agents with better tools. Klarna's post-reversal hybrid model acknowledges exactly this.</p>
@@ -586,9 +664,9 @@
     </div>
   </div>
 
-  <!-- 05 -->
-  <h2 id="s05">
-    <span class="eyebrow">05 — The measure</span>
+  <!-- 06 -->
+  <h2 id="s06">
+    <span class="eyebrow">06 — The measure</span>
     The new metrics dashboard
   </h2>
 
@@ -685,53 +763,54 @@
     <p class="chart-note">Reading CSAT by flow, on the same task, is what feeds the resolvability map in step 01 of the roadmap: where autonomous AI leads, expand autonomy; where the copilot wins, keep the human in the loop; where the human leads by a wide margin, shield the flow from premature automation.</p>
   </div>
 
-  <!-- 06 -->
-  <h2 id="s06">
-    <span class="eyebrow">06 — The practice</span>
-    Implementation roadmap
+  <!-- 07 -->
+  <h2 id="s07">
+    <span class="eyebrow">07 — The practice</span>
+    Cost, payback and implementation roadmap
   </h2>
+
+  <p>No budget decision stands without the cost line — and it is usually missing from texts on agentic AI. The project's TCO has four components: <strong>consumption or license</strong> (increasingly charged per resolution, as seen in section 03); <strong>integration and data</strong> — typically the largest share of the initial investment, and the most underestimated; <strong>ongoing governance and monitoring</strong>, which don't end at go-live; and <strong>reskilling of the residual team</strong>, which business cases almost always omit.</p>
+
+  <div class="callout">
+    <p><strong>The payback logic:</strong> the project pays for itself when (human cost per resolution − total AI cost per resolution) × migrated volume exceeds the integration investment within the defined horizon. The math is only honest if the AI cost includes repeat calls, escalations and human monitoring of the flow — the cost per resolution of section 06, not the vendor's cost per conversation.</p>
+  </div>
+
+  <p>A transparency note: this paper publishes no TCO benchmark of its own — any vendor payback number should be treated as tier C and redone with your volumes in the pilot. That is exactly what the roadmap below structures:</p>
 
   <div class="hidra-grid">
     <div class="hidra-item">
       <span class="m-num">01</span>
       <div>
         <strong>Map by resolvability, not by volume</strong>
-        <p>Classify demands into three groups: viable autonomous resolution (transactional, clear rules), copilot (human judgment with AI support), pure human (complex, emotional, high value). Start with the first — and the Octopus case suggests the second delivers fast ROI at low risk.</p>
+        <p>Classify demands into three groups: viable autonomous resolution (transactional, clear rules), copilot (human judgment with AI support), pure human (complex, emotional, high value). Start with the first — and the Octopus case suggests the second delivers fast returns at low risk.</p>
       </div>
     </div>
     <div class="hidra-item">
       <span class="m-num">02</span>
       <div>
-        <strong>Solve integration before the model</strong>
-        <p>API inventory: will the agent be able to read <em>and write</em> to CRM, payments and logistics? Without write access there is no resolution — only a sophisticated FAQ.</p>
+        <strong>Run the section 04 integration checklist</strong>
+        <p>Systems with write access, action catalog, rollback, API SLAs, identity and sandbox — before choosing a model or vendor. An unanswered item is scope outside autonomy at go-live.</p>
       </div>
     </div>
     <div class="hidra-item">
       <span class="m-num">03</span>
       <div>
-        <strong>Define action governance</strong>
-        <p>Autonomy matrix (what it executes alone, what requires approval, value limits), an audit trail per action and a named human accountable for the agent's behavior.</p>
+        <strong>Pilot with a control group</strong>
+        <p>Same demand type, AI flow vs. human flow, measuring the section 06 dashboard — especially 7-day recontact and CSAT on the same task. It is the instrument that tests section 02's falsifiable thesis in your operation. Without a counterfactual, the pilot's result is an opinion.</p>
       </div>
     </div>
     <div class="hidra-item">
       <span class="m-num">04</span>
       <div>
-        <strong>Pilot with a control group</strong>
-        <p>Same demand type, AI flow vs. human flow, measuring the section 05 dashboard — especially 7-day recontact. Without a counterfactual, the pilot's result is an opinion.</p>
+        <strong>Reinvest in the residual human</strong>
+        <p>Resize the profile, seniority and compensation of the team that will handle complex cases. Guarantee escalation with full context — and put that cost in the TCO from the start.</p>
       </div>
     </div>
     <div class="hidra-item">
       <span class="m-num">05</span>
       <div>
-        <strong>Reinvest in the residual human</strong>
-        <p>Resize the profile, seniority and compensation of the team that will handle complex cases. Guarantee escalation with full context.</p>
-      </div>
-    </div>
-    <div class="hidra-item">
-      <span class="m-num">06</span>
-      <div>
         <strong>Test the vendor against agent washing</strong>
-        <p>Demand a demonstration of real transactional execution in your systems, in a sandbox, before signing. "Agentic" in the sales deck is not evidence.</p>
+        <p>Demand a demonstration of real transactional execution in your systems, in a sandbox, before signing. "Agentic" in the sales deck is not evidence — and neither is a proposal without an open cost per resolution.</p>
       </div>
     </div>
   </div>
@@ -744,7 +823,7 @@
 
   <p>The question that defined the last decade — "how many calls did we avoid?" — measured a company's ability to hide from its customers. The question that defines the next one — "how many problems did we resolve without friction?" — measures its ability to serve them.</p>
 
-  <p>Agentic AI makes the second question technically answerable at scale. But the cases examined impose a condition: <strong>the technology amplifies the service design it finds.</strong> Applied on top of deflection logic — as in Klarna's first phase — it automates value destruction with unprecedented efficiency. Applied on top of well-designed flows, with transactional integration, action governance and resolution metrics, it converts the contact center from a squeezable cost center into a retention asset.</p>
+  <p>Agentic AI makes the second question technically answerable at scale. But the evidence examined — weighed by its tier — imposes a condition: <strong>the technology amplifies the service design it finds.</strong> Applied as cost-cutting without quality supervision, it degrades the experience with unprecedented efficiency. Applied on top of well-designed flows — transactional integration solved, action governance, resolution metrics and a controlled pilot that can prove the thesis wrong — it converts the contact center from a squeezable cost center into a retention asset.</p>
 
   <div class="callout">
     <p>The real ROI is not in the calls we avoided. It is in the customers who stay because their problems ceased to exist in seconds — and in the humans, more qualified, handling what the machine cannot yet reach.</p>
@@ -773,7 +852,7 @@
     </div>
   </div>
 
-  <p class="article-note">Author's argument based on the sources listed · All figures cited were verified against primary sources in July 2026</p>
+  <p class="article-note">Author's argument based on the sources listed · All figures cited were verified against primary sources in July 2026 · Position note: independent study, no commercial ties to the vendors cited; the author does not yet publish own pilot data — the roadmap is a working hypothesis, and the step 03 pilot is the instrument to test it</p>
 
 </main>
 
