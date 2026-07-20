@@ -336,7 +336,7 @@
   <h1>From Deflection to Resolution</h1>
   <div class="deck">What agentic AI changes — and what it doesn't — in contact center management</div>
 
-  <p class="lede">For a decade, service automation was measured by <em>deflection</em>: how many interactions the bot kept away from a human agent. That metric produced accounting savings — and the silent surrender of exhausted customers. Agentic AI inverts the logic: the system stops <em>explaining</em> how to solve a problem and starts <em>executing</em> the resolution. This paper is written for the <strong>CC/CX operations leader</strong> who must build and defend the business case for this transition. Three rules guide it: every source is ranked by how much weight its evidence carries, the central thesis is testable — and we say how to test it —, and the roadmap treats integration, not the AI model, as the real center of the project.</p>
+  <p class="lede">For a decade, service automation was measured by <em>deflection</em>: how many interactions the bot kept away from a human agent. That metric produced accounting savings — and the silent surrender of exhausted customers. Agentic AI inverts the logic: the system stops <em>explaining</em> how to solve a problem and starts <em>executing</em> the resolution — which, done right, converts the contact center from a squeezable cost center into a <strong>retention asset</strong>. This paper is written for the <strong>CC/CX operations leader</strong> who must build and defend the business case for this transition. Three rules guide it: every source is ranked by how much weight its evidence carries, the central thesis is testable — and we say how to test it —, and the roadmap treats integration, not the AI model, as the real center of the project.</p>
 </header>
 
 <main>
@@ -366,7 +366,7 @@
       </div></li>
       <li><div>
         <a class="rm-title" href="#s06">The New Metrics Dashboard <span class="arw">→</span></a>
-        <p>Six indicators that replace deflection as the central KPI — with a suggested dashboard and recontact as the acid test.</p>
+        <p>Six indicators that replace deflection as the central KPI — with recontact as the acid test.</p>
       </div></li>
       <li><div>
         <a class="rm-title" href="#s07">Cost and Roadmap <span class="arw">→</span></a>
@@ -657,7 +657,7 @@
       <span class="m-num">03</span>
       <div>
         <strong>The residual-volume paradox</strong>
-        <p>The more AI resolves the routine, the more complex and emotionally charged is what remains for humans — demanding more qualified, better-paid agents with better tools. Klarna's post-reversal hybrid model acknowledges exactly this.</p>
+        <p>The more AI resolves the routine, the more complex and emotionally charged is what remains for humans — demanding more qualified, better-paid agents with better tools. Klarna's post-reversal hybrid model acknowledges exactly this. There's a structural reason for it, not just an operational one: the QJE study<span class="ref">[3]</span> itself found that the most experienced agents saw small speed gains and a slight quality <em>decline</em> when using AI — the gains concentrated among the less experienced. Automation designed to replace the most expensive agents (typically the most senior) optimizes in the opposite direction from what the data supports.</p>
       </div>
     </div>
   </div>
@@ -699,63 +699,6 @@
   </table>
 
   <p>Klarna's 25% drop in repeat inquiries<span class="ref">[5]</span> is the canonical example of the metric that matters: it measures whether the problem ceased to exist, not whether the customer ceased to appear.</p>
-
-  <h3 class="sub">What this looks like on a screen</h3>
-
-  <p>Below, a suggested operational dashboard with the six metrics in a single view: the top row shows the <strong>outcome</strong> (resolution, recontact, cost), the bottom row shows the <strong>system's health</strong> (time, escalation, audit). The two charts carry the management decisions.</p>
-
-  <div class="chart-block">
-    <p class="chart-title">Resolution-era dashboard — weekly view</p>
-    <p class="chart-note" style="margin:2px 0 0;">illustrative figures, for structural reference</p>
-
-    <div class="stat-grid" style="margin:20px 0 24px;">
-      <div class="stat-card"><div class="num">62%</div><div class="lab">autonomous first-contact resolution</div><div class="lab" style="color:var(--accept);margin-top:4px;">▲ +5 p.p.</div></div>
-      <div class="stat-card"><div class="num">8.4%</div><div class="lab">7-day recontact</div><div class="lab" style="color:var(--accept);margin-top:4px;">▼ target ≤ 10%</div></div>
-      <div class="stat-card"><div class="num">$0.80</div><div class="lab">cost per resolution</div><div class="lab" style="margin-top:4px;">w/ repeat calls, escalations</div></div>
-      <div class="stat-card"><div class="num">2.4 min</div><div class="lab">time to resolution</div><div class="lab" style="margin-top:4px;">to confirmed action</div></div>
-    </div>
-
-    <p class="chart-title" style="margin-top:8px;">7-day recontact — the acid test</p>
-    <svg viewBox="0 0 640 195" width="100%" role="img" aria-label="Line of 7-day recontact falling from 14.9% to 8.4% over eight weeks, crossing the 10% target" style="margin-top:10px;">
-      <line x1="50" y1="114" x2="610" y2="114" stroke="var(--faint)" stroke-dasharray="6 4" stroke-width="1.5"/>
-      <text x="610" y="104" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--faint)">target 10%</text>
-      <polyline points="60,45 137,57 214,69 291,86 368,99 445,111 522,127 599,136" fill="none" stroke="var(--crop)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-      <circle cx="60" cy="45" r="3.5" fill="var(--crop)"/>
-      <circle cx="599" cy="136" r="4.5" fill="var(--accept)"/>
-      <text x="60" y="30" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--slate)">14.9%</text>
-      <text x="599" y="160" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="var(--accept)">8.4%</text>
-      <text x="60" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">W22</text>
-      <text x="214" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">W24</text>
-      <text x="368" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">W26</text>
-      <text x="522" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">W28</text>
-    </svg>
-
-    <p class="chart-title" style="margin-top:28px;">CSAT segmented by flow — same task</p>
-    <p class="chart-note" style="margin:4px 0 0;"><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--crop);margin-right:4px;"></span>autonomous AI&nbsp;&nbsp;<span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--accept);margin-right:4px;"></span>copilot (AI + human)&nbsp;&nbsp;<span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--faint);margin-right:4px;"></span>human only</p>
-
-    <p style="font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink);margin:18px 0 8px;">Transactional (refund, duplicate invoice, rescheduling)</p>
-    <div class="bars" style="margin:0;gap:8px;">
-      <div class="bar-row"><span class="bar-label">autonomous AI</span><div class="bar-track"><div class="bar-fill gold" style="width:88%"></div></div><span class="bar-val">88%</span></div>
-      <div class="bar-row"><span class="bar-label">copilot</span><div class="bar-track"><div class="bar-fill green" style="width:84%"></div></div><span class="bar-val">84%</span></div>
-      <div class="bar-row"><span class="bar-label">human only</span><div class="bar-track"><div class="bar-fill grey" style="width:79%"></div></div><span class="bar-val">79%</span></div>
-    </div>
-
-    <p style="font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink);margin:18px 0 8px;">Advisory (billing question, eligibility)</p>
-    <div class="bars" style="margin:0;gap:8px;">
-      <div class="bar-row"><span class="bar-label">autonomous AI</span><div class="bar-track"><div class="bar-fill gold" style="width:74%"></div></div><span class="bar-val">74%</span></div>
-      <div class="bar-row"><span class="bar-label">copilot</span><div class="bar-track"><div class="bar-fill green" style="width:82%"></div></div><span class="bar-val">82%</span></div>
-      <div class="bar-row"><span class="bar-label">human only</span><div class="bar-track"><div class="bar-fill grey" style="width:77%"></div></div><span class="bar-val">77%</span></div>
-    </div>
-
-    <p style="font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink);margin:18px 0 8px;">Complex / emotional (dispute, serious complaint)</p>
-    <div class="bars" style="margin:0;gap:8px;">
-      <div class="bar-row"><span class="bar-label">autonomous AI</span><div class="bar-track"><div class="bar-fill gold" style="width:41%"></div></div><span class="bar-val">41%</span></div>
-      <div class="bar-row"><span class="bar-label">copilot</span><div class="bar-track"><div class="bar-fill green" style="width:68%"></div></div><span class="bar-val">68%</span></div>
-      <div class="bar-row"><span class="bar-label">human only</span><div class="bar-track"><div class="bar-fill grey" style="width:86%"></div></div><span class="bar-val">86%</span></div>
-    </div>
-
-    <p class="chart-note">Reading CSAT by flow, on the same task, is what feeds the resolvability map in step 01 of the roadmap: where autonomous AI leads, expand autonomy; where the copilot wins, keep the human in the loop; where the human leads by a wide margin, shield the flow from premature automation.</p>
-  </div>
 
   <!-- 07 -->
   <h2 id="s07">

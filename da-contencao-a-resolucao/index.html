@@ -351,7 +351,7 @@
   <h1>Da Contenção à Resolução</h1>
   <div class="deck">O que a IA agêntica muda — e o que não muda — na gestão de contact centers</div>
 
-  <p class="lede">Por uma década, a automação no atendimento foi medida por <em>deflection</em>: quantas interações o bot impediu de chegar ao humano. Essa métrica gerou economia contábil — e desistência silenciosa de clientes exaustos. A IA agêntica inverte a lógica: o sistema deixa de <em>informar</em> como resolver e passa a <em>executar</em> a resolução. Este paper é dirigido ao <strong>gestor de operação de CC/CX</strong> que precisa construir e defender o caso de negócio dessa transição. Três regras guiam a leitura: cada fonte é classificada pelo peso da sua evidência, a tese central é testável — e dizemos como testá-la —, e o roteiro trata a integração, não o modelo de IA, como o verdadeiro centro do projeto.</p>
+  <p class="lede">Por uma década, a automação no atendimento foi medida por <em>deflection</em>: quantas interações o bot impediu de chegar ao humano. Essa métrica gerou economia contábil — e desistência silenciosa de clientes exaustos. A IA agêntica inverte a lógica: o sistema deixa de <em>informar</em> como resolver e passa a <em>executar</em> a resolução — o que, bem feito, converte o contact center de centro de custo espremível em <strong>ativo de retenção</strong>. Este paper é dirigido ao <strong>gestor de operação de CC/CX</strong> que precisa construir e defender o caso de negócio dessa transição. Três regras guiam a leitura: cada fonte é classificada pelo peso da sua evidência, a tese central é testável — e dizemos como testá-la —, e o roteiro trata a integração, não o modelo de IA, como o verdadeiro centro do projeto.</p>
 </header>
 
 <main>
@@ -381,7 +381,7 @@
       </div></li>
       <li><div>
         <a class="rm-title" href="#s06">O Novo Painel de Métricas <span class="arw">→</span></a>
-        <p>Seis indicadores que substituem a contenção como KPI central — com sugestão de dashboard e o recontato como teste ácido.</p>
+        <p>Seis indicadores que substituem a contenção como KPI central — com o recontato como teste ácido.</p>
       </div></li>
       <li><div>
         <a class="rm-title" href="#s07">Custo e Roteiro <span class="arw">→</span></a>
@@ -672,7 +672,7 @@
       <span class="m-num">03</span>
       <div>
         <strong>O paradoxo do volume residual</strong>
-        <p>Quanto mais a IA resolve o rotineiro, mais complexo e emocionalmente carregado é o que sobra para o humano — exigindo agentes mais qualificados, melhor remunerados e com ferramentas melhores. O modelo híbrido pós-reversão da Klarna reconhece exatamente isso.</p>
+        <p>Quanto mais a IA resolve o rotineiro, mais complexo e emocionalmente carregado é o que sobra para o humano — exigindo agentes mais qualificados, melhor remunerados e com ferramentas melhores. O modelo híbrido pós-reversão da Klarna reconhece exatamente isso. Há um motivo estrutural para isso, e não só operacional: o próprio estudo do QJE<span class="ref">[3]</span> encontrou que os agentes mais experientes tiveram ganho pequeno de velocidade e leve <em>queda</em> de qualidade ao usar IA — o ganho se concentrou nos menos experientes. Automação pensada para substituir os agentes mais caros (tipicamente os mais seniores) otimiza na direção oposta à que os dados sustentam.</p>
       </div>
     </div>
   </div>
@@ -714,63 +714,6 @@
   </table>
 
   <p>A queda de 25% em consultas repetidas da Klarna<span class="ref">[5]</span> é o exemplo canônico da métrica que importa: mede se o problema deixou de existir, não se o cliente deixou de aparecer.</p>
-
-  <h3 class="sub">Como isso vira uma tela</h3>
-
-  <p>Abaixo, uma sugestão de painel operacional com as seis métricas em uma única visão: a linha de cima mostra o <strong>resultado</strong> (resolução, recontato, custo), a de baixo mostra a <strong>saúde do sistema</strong> (tempo, escalação, auditoria). Os dois gráficos carregam as decisões de gestão.</p>
-
-  <div class="chart-block">
-    <p class="chart-title">Painel da era da resolução — visão semanal</p>
-    <p class="chart-note" style="margin:2px 0 0;">números ilustrativos, para referência de estrutura</p>
-
-    <div class="stat-grid" style="margin:20px 0 24px;">
-      <div class="stat-card"><div class="num">62%</div><div class="lab">resolução autônoma no 1º contato</div><div class="lab" style="color:var(--accept);margin-top:4px;">▲ +5 p.p.</div></div>
-      <div class="stat-card"><div class="num">8,4%</div><div class="lab">recontato em 7 dias</div><div class="lab" style="color:var(--accept);margin-top:4px;">▼ meta ≤ 10%</div></div>
-      <div class="stat-card"><div class="num">R$ 4,10</div><div class="lab">custo por resolução</div><div class="lab" style="margin-top:4px;">c/ rechamadas e escalações</div></div>
-      <div class="stat-card"><div class="num">2,4 min</div><div class="lab">tempo até a resolução</div><div class="lab" style="margin-top:4px;">à ação confirmada</div></div>
-    </div>
-
-    <p class="chart-title" style="margin-top:8px;">Recontato em 7 dias — o teste ácido</p>
-    <svg viewBox="0 0 640 195" width="100%" role="img" aria-label="Linha do recontato em 7 dias caindo de 14,9% para 8,4% em oito semanas, cruzando a meta de 10%" style="margin-top:10px;">
-      <line x1="50" y1="114" x2="610" y2="114" stroke="var(--faint)" stroke-dasharray="6 4" stroke-width="1.5"/>
-      <text x="610" y="104" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--faint)">meta 10%</text>
-      <polyline points="60,45 137,57 214,69 291,86 368,99 445,111 522,127 599,136" fill="none" stroke="var(--crop)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-      <circle cx="60" cy="45" r="3.5" fill="var(--crop)"/>
-      <circle cx="599" cy="136" r="4.5" fill="var(--accept)"/>
-      <text x="60" y="30" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--slate)">14,9%</text>
-      <text x="599" y="160" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="500" fill="var(--accept)">8,4%</text>
-      <text x="60" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">S22</text>
-      <text x="214" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">S24</text>
-      <text x="368" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">S26</text>
-      <text x="522" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--faint)">S28</text>
-    </svg>
-
-    <p class="chart-title" style="margin-top:28px;">CSAT segmentado por fluxo — na mesma tarefa</p>
-    <p class="chart-note" style="margin:4px 0 0;"><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--crop);margin-right:4px;"></span>IA autônoma&nbsp;&nbsp;<span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--accept);margin-right:4px;"></span>copiloto (IA + humano)&nbsp;&nbsp;<span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--faint);margin-right:4px;"></span>humano puro</p>
-
-    <p style="font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink);margin:18px 0 8px;">Transacional (reembolso, 2ª via, reagendamento)</p>
-    <div class="bars" style="margin:0;gap:8px;">
-      <div class="bar-row"><span class="bar-label">IA autônoma</span><div class="bar-track"><div class="bar-fill gold" style="width:88%"></div></div><span class="bar-val">88%</span></div>
-      <div class="bar-row"><span class="bar-label">copiloto</span><div class="bar-track"><div class="bar-fill green" style="width:84%"></div></div><span class="bar-val">84%</span></div>
-      <div class="bar-row"><span class="bar-label">humano puro</span><div class="bar-track"><div class="bar-fill grey" style="width:79%"></div></div><span class="bar-val">79%</span></div>
-    </div>
-
-    <p style="font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink);margin:18px 0 8px;">Consultiva (dúvida de fatura, elegibilidade)</p>
-    <div class="bars" style="margin:0;gap:8px;">
-      <div class="bar-row"><span class="bar-label">IA autônoma</span><div class="bar-track"><div class="bar-fill gold" style="width:74%"></div></div><span class="bar-val">74%</span></div>
-      <div class="bar-row"><span class="bar-label">copiloto</span><div class="bar-track"><div class="bar-fill green" style="width:82%"></div></div><span class="bar-val">82%</span></div>
-      <div class="bar-row"><span class="bar-label">humano puro</span><div class="bar-track"><div class="bar-fill grey" style="width:77%"></div></div><span class="bar-val">77%</span></div>
-    </div>
-
-    <p style="font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink);margin:18px 0 8px;">Complexa / emocional (disputa, reclamação grave)</p>
-    <div class="bars" style="margin:0;gap:8px;">
-      <div class="bar-row"><span class="bar-label">IA autônoma</span><div class="bar-track"><div class="bar-fill gold" style="width:41%"></div></div><span class="bar-val">41%</span></div>
-      <div class="bar-row"><span class="bar-label">copiloto</span><div class="bar-track"><div class="bar-fill green" style="width:68%"></div></div><span class="bar-val">68%</span></div>
-      <div class="bar-row"><span class="bar-label">humano puro</span><div class="bar-track"><div class="bar-fill grey" style="width:86%"></div></div><span class="bar-val">86%</span></div>
-    </div>
-
-    <p class="chart-note">A leitura do CSAT por fluxo, na mesma tarefa, é o que alimenta o mapa de resolubilidade do passo 01 do roteiro: onde a IA autônoma lidera, amplie a autonomia; onde o copiloto vence, mantenha o humano no circuito; onde o humano lidera com folga, blinde o fluxo contra automação prematura.</p>
-  </div>
 
   <!-- 07 -->
   <h2 id="s07">
