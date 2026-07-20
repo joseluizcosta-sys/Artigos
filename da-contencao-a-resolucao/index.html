@@ -424,7 +424,7 @@
     O que muda com a IA agêntica
   </h2>
 
-  <p>A IA agêntica difere dos bots de roteiro em duas capacidades que, combinadas, viabilizam a resolução de ponta a ponta: <strong>compreensão semântica de intenções compostas</strong> — LLMs interpretam intenção e contexto em linguagem natural, sem depender de palavras-chave ou fluxos pré-mapeados — e <strong>execução de ações via ferramentas</strong> (<em>tool use</em>).</p>
+  <p>A IA agêntica difere dos bots de roteiro em duas capacidades que, combinadas, viabilizam a resolução de ponta a ponta: <strong>entende pedidos compostos como um humano entenderia</strong> — interpreta intenção e contexto em linguagem natural, sem depender de palavras-chave ou fluxos pré-mapeados — e <strong>executa ações via ferramentas</strong> (<em>tool use</em>).</p>
 
   <p>Vale separar dois mecanismos que costumam ser confundidos: por meio de <em>function calling</em>, o agente de IA aciona sistemas transacionais — CRM, gateway de pagamento, logística — para executar a ação, e não apenas descrever como o cliente deveria executá-la. Complementarmente, o RAG (<em>Retrieval-Augmented Generation</em>) fundamenta as respostas na base de conhecimento e nas políticas da empresa, reduzindo alucinação. São coisas distintas: <strong>RAG garante que o agente <em>saiba</em> corretamente; tool use garante que ele <em>faça</em>.</strong></p>
 
@@ -449,7 +449,7 @@
 
   <p>O Gartner formalizou essa transição em março de 2025, ao prever que a IA agêntica resolverá autonomamente 80% dos problemas comuns de atendimento até 2029, com redução de 30% nos custos operacionais<span class="ref">[2]</span>. A previsão anterior da mesma consultoria — redução de US$ 80 bilhões em custos de mão de obra de contact centers no ano de 2026<span class="ref">[1]</span> — referia-se ainda à IA conversacional; a agêntica amplia o escopo da automação de <em>informar</em> para <em>transacionar</em>.</p>
 
-  <p>Há uma aparente contradição na própria Gartner que precisa ser resolvida, não apenas citada: a consultoria prevê 80% de resolução autônoma até 2029 <em>e</em> o cancelamento de mais de 40% dos projetos agênticos até 2027<span class="ref">[10]</span>. As duas previsões não competem — descrevem coisas diferentes. A primeira é o teto da tecnologia entre as operações que sobreviverem à curva de implementação; a segunda é a mortalidade ao longo dessa curva. Lidas em conjunto, dizem que a adoção não será distribuída: será concentrada em quem resolver integração e governança. <strong>Para efeito de planejamento, prevalece a segunda</strong> — trate os 40% como cenário-base do seu projeto e desenhe para não entrar nele. É esse o critério que organiza as seções 04 e 07.</p>
+  <p>A mesma Gartner prevê 80% de resolução autônoma até 2029 <em>e</em> o cancelamento de mais de 40% dos projetos agênticos até 2027<span class="ref">[10]</span>. As previsões não competem: a primeira é o teto entre quem sobrevive à curva de implementação; a segunda é a mortalidade nessa curva. <strong>Para efeito de planejamento, prevalece a segunda</strong> — trate os 40% como cenário-base e desenhe para não entrar nele. É o critério das seções 04 e 07.</p>
 
   <div class="chart-block">
     <p class="chart-title">A trajetória da automação no atendimento (Gartner)</p>
@@ -509,7 +509,7 @@
 
   <h3 class="sub">Caso Klarna: ascensão e reversão <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· nível C</span></h3>
 
-  <p>A Klarna é uma fintech sueca de pagamentos e compras, referência global no modelo <em>Buy Now, Pay Later</em>: intermedia o checkout entre consumidores e centenas de milhares de varejistas, operando funções de crédito, pagamento e pós-venda — o que faz do seu atendimento uma operação massiva, multilíngue e essencialmente transacional (reembolsos, devoluções, disputas de cobrança). Foi esse perfil que a tornou o primeiro laboratório aberto da IA agêntica em escala: em fevereiro de 2024, lançou um assistente baseado em LLMs integrado aos seus sistemas transacionais, cobrindo 23 mercados, 24/7, em mais de 35 idiomas<span class="ref">[5]</span>.</p>
+  <p>A Klarna é uma fintech sueca de <em>Buy Now, Pay Later</em>, com atendimento massivo e essencialmente transacional (reembolsos, devoluções, disputas de cobrança) — perfil que a tornou o primeiro laboratório aberto de IA agêntica em escala. Em fevereiro de 2024, lançou um assistente integrado aos seus sistemas transacionais, cobrindo 23 mercados, 24/7, em mais de 35 idiomas<span class="ref">[5]</span>.</p>
 
   <div class="toggle-block">
     <div class="toggle-label">Um caso, três leituras</div>
@@ -530,8 +530,8 @@
     </div>
     <div id="tab-leitura" class="tab-content">
       <span class="badge badge-crop">O que o caso estabelece — e o que não</span>
-      <p><strong>O caso não prova a tese deste paper. Estabelece dois fatos e um limite.</strong></p>
-      <p>Fato 1: a fase de 2024 mostra que resolução autônoma transacional em escala é operacionalmente possível (nível C — números da própria empresa). Fato 2: a reversão de 2025 estabelece uma condição de contorno — nos casos complexos e nuançados, com o corte simultâneo do quadro humano, a qualidade caiu; o escopo de autonomia ultrapassou a fronteira de resolubilidade. O limite: não há dados públicos pós-reversão que permitam afirmar que o modelo híbrido atual é superior. Uma leitura que trate qualquer desfecho como confirmação não é análise — por isso a tese deste paper está formulada em termos falseáveis na seção 02, e o instrumento para testá-la é o piloto controlado do roteiro, não este caso.</p>
+      <p><strong>O caso não prova a tese deste paper — estabelece dois fatos e um limite.</strong></p>
+      <p>Fato 1: a fase de 2024 mostra que resolução autônoma transacional em escala é operacionalmente possível. Fato 2: a reversão de 2025 marca a fronteira — em casos complexos, com o corte simultâneo do quadro humano, a qualidade caiu. Limite: não há dados públicos que provem que o modelo híbrido atual é superior. Tratar qualquer desfecho como confirmação não é análise; por isso a tese está em termos falseáveis (seção 02), e quem a testa é o piloto controlado do roteiro — não este caso.</p>
     </div>
   </div>
 
@@ -586,9 +586,7 @@
 
   <h3 class="sub">O mercado já precifica a resolução <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· nível C</span></h3>
 
-  <p>O sinal mais forte de que a transição é estrutural não vem dos white papers — vem dos modelos de cobrança. O Fin, da Intercom, exibe <em>Resolution Rate</em> e <em>Automation Rate</em> como métricas-título do seu dashboard de performance e é vendido por <em>outcome-based pricing</em>: o cliente só paga quando a IA de fato resolve, nunca por conversa contida — com resolução média divulgada de 76% em mais de 12 mil clientes<span class="ref">[11]</span>. A Sierra, de Bret Taylor, foi além: cobra literalmente por resolução, capturando parte da economia de cada interação resolvida (que custaria US$ 10–20 com um humano), e publica seus casos nessa métrica — Ramp com 90% dos casos resolvidos, SoFi com +33 pontos de NPS<span class="ref">[12][13]</span>.</p>
-
-  <p>Quando os fornecedores de referência passam a <strong>ser pagos por resolução</strong>, e não por conversa contida, o alinhamento de incentivos que este paper propõe deixa de ser tese e vira modelo de negócio. Uma nota para o gestor: nenhum deles expõe nativamente o recontato em 7 dias como KPI central, nem a taxa de escalação com contexto preservado — essas duas métricas seguem sendo responsabilidade do seu desenho de operação, não do fornecedor.</p>
+  <p>O sinal mais forte de que a transição é estrutural vem dos modelos de cobrança: a Intercom (Fin) vende por <em>outcome-based pricing</em> — só cobra quando a IA resolve, com 76% de resolução média divulgada em 12 mil+ clientes<span class="ref">[11]</span> — e a Sierra, de Bret Taylor, cobra literalmente por resolução entregue, capturando parte da economia de cada interação (Ramp com 90% resolvido, SoFi com +33 NPS)<span class="ref">[12][13]</span>. Quando o fornecedor é pago por resolução, o alinhamento de incentivos deste paper vira modelo de negócio — mas nenhum dos dois expõe nativamente o recontato em 7 dias nem a escalação com contexto preservado: seguem sendo responsabilidade do seu desenho de operação.</p>
 
   <!-- 04 -->
   <h2 id="s04">
@@ -725,15 +723,11 @@
     <p class="chart-title">Painel da era da resolução — visão semanal</p>
     <p class="chart-note" style="margin:2px 0 0;">números ilustrativos, para referência de estrutura</p>
 
-    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin:20px 0 10px;">
-      <div class="stat-card"><div class="num">62%</div><div class="lab">resolução autônoma no 1º contato</div><div class="lab" style="color:var(--accept);margin-top:4px;">▲ +5 p.p. vs. mês anterior</div></div>
-      <div class="stat-card"><div class="num">8,4%</div><div class="lab">recontato em 7 dias</div><div class="lab" style="color:var(--accept);margin-top:4px;">▼ −1,8 p.p. · meta ≤ 10%</div></div>
-      <div class="stat-card"><div class="num">R$ 4,10</div><div class="lab">custo por resolução</div><div class="lab" style="margin-top:4px;">inclui rechamadas e escalações</div></div>
-    </div>
-    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin:0 0 24px;">
-      <div class="stat-card"><div class="num">2,4 min</div><div class="lab">tempo até a resolução</div><div class="lab" style="margin-top:4px;">da 1ª interação à ação confirmada</div></div>
-      <div class="stat-card"><div class="num">91%</div><div class="lab">escalação com contexto preservado</div><div class="lab" style="color:var(--reject);margin-top:4px;">abaixo da meta de 95%</div></div>
-      <div class="stat-card"><div class="num">100%</div><div class="lab">ações autônomas auditadas</div><div class="lab" style="margin-top:4px;">trilha de auditoria por ação</div></div>
+    <div class="stat-grid" style="margin:20px 0 24px;">
+      <div class="stat-card"><div class="num">62%</div><div class="lab">resolução autônoma no 1º contato</div><div class="lab" style="color:var(--accept);margin-top:4px;">▲ +5 p.p.</div></div>
+      <div class="stat-card"><div class="num">8,4%</div><div class="lab">recontato em 7 dias</div><div class="lab" style="color:var(--accept);margin-top:4px;">▼ meta ≤ 10%</div></div>
+      <div class="stat-card"><div class="num">R$ 4,10</div><div class="lab">custo por resolução</div><div class="lab" style="margin-top:4px;">c/ rechamadas e escalações</div></div>
+      <div class="stat-card"><div class="num">2,4 min</div><div class="lab">tempo até a resolução</div><div class="lab" style="margin-top:4px;">à ação confirmada</div></div>
     </div>
 
     <p class="chart-title" style="margin-top:8px;">Recontato em 7 dias — o teste ácido</p>
@@ -784,7 +778,7 @@
     Custo, payback e roteiro de implementação
   </h2>
 
-  <p>Nenhuma decisão de orçamento se sustenta sem a linha de custo — e ela costuma faltar nos textos sobre IA agêntica. O TCO do projeto tem quatro componentes: <strong>consumo ou licença</strong> (cada vez mais cobrado por resolução, como visto na seção 03); <strong>integração e dados</strong> — tipicamente a maior parcela do investimento inicial, e a mais subestimada; <strong>governança e monitoria contínuas</strong>, que não terminam no go-live; e <strong>requalificação do time residual</strong>, que os business cases quase sempre omitem.</p>
+  <p>Nenhuma decisão de orçamento se sustenta sem a linha de custo. O TCO tem quatro componentes: <strong>consumo ou licença</strong> (cada vez mais cobrado por resolução — seção 03); <strong>integração e dados</strong> — a maior parcela do investimento, e a mais subestimada; <strong>governança e monitoria contínuas</strong>; e <strong>requalificação do time residual</strong>, quase sempre omitida nos business cases.</p>
 
   <div class="callout">
     <p><strong>A lógica do payback:</strong> o projeto se paga quando (custo humano por resolução − custo total de IA por resolução) × volume migrado supera o investimento de integração dentro do horizonte definido. O cálculo só é honesto se o custo de IA incluir rechamadas, escalações e a monitoria humana do fluxo — o custo por resolução da seção 06, não o custo por conversa do fornecedor.</p>
@@ -811,7 +805,7 @@
       <span class="m-num">03</span>
       <div>
         <strong>Piloto com grupo de controle</strong>
-        <p>Mesmo tipo de demanda, fluxo IA vs. fluxo humano, medindo o painel da seção 06 — especialmente recontato em 7 dias e CSAT na mesma tarefa. É o instrumento que testa a tese falseável da seção 02 na sua operação. Sem contrafactual, o resultado do piloto é opinião.</p>
+        <p>Fluxo IA vs. fluxo humano na mesma demanda, medindo o painel da seção 06 — especialmente recontato em 7 dias. É o instrumento que testa a tese falseável da seção 02 na sua operação; sem contrafactual, o resultado é opinião.</p>
       </div>
     </div>
     <div class="hidra-item">

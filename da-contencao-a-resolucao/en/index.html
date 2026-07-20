@@ -409,7 +409,7 @@
     What agentic AI changes
   </h2>
 
-  <p>Agentic AI differs from scripted bots in two capabilities that, combined, enable end-to-end resolution: <strong>semantic understanding of compound intents</strong> — LLMs interpret intent and context in natural language, without depending on keywords or pre-mapped flows — and <strong>action execution via tools</strong> (<em>tool use</em>).</p>
+  <p>Agentic AI differs from scripted bots in two capabilities that, combined, enable end-to-end resolution: <strong>understands compound requests the way a person would</strong> — interprets intent and context in natural language, without depending on keywords or pre-mapped flows — and <strong>executes actions via tools</strong> (<em>tool use</em>).</p>
 
   <p>Two mechanisms that are often conflated deserve separating: through <em>function calling</em>, the AI agent operates transactional systems — CRM, payment gateway, logistics — to execute the action, rather than describing how the customer should do it. Complementarily, RAG (<em>Retrieval-Augmented Generation</em>) grounds responses in the company's knowledge base and policies, reducing hallucination. They are distinct things: <strong>RAG ensures the agent <em>knows</em> correctly; tool use ensures it <em>acts</em>.</strong></p>
 
@@ -434,7 +434,7 @@
 
   <p>Gartner formalized this transition in March 2025, predicting that agentic AI will autonomously resolve 80% of common customer service issues by 2029, with a 30% reduction in operational costs<span class="ref">[2]</span>. The firm's earlier forecast — an $80 billion reduction in contact center agent labor costs in the year 2026<span class="ref">[1]</span> — still referred to conversational AI; agentic AI widens automation's scope from <em>informing</em> to <em>transacting</em>.</p>
 
-  <p>There is an apparent contradiction within Gartner itself that needs resolving, not just citing: the firm predicts 80% autonomous resolution by 2029 <em>and</em> the cancellation of over 40% of agentic projects by 2027<span class="ref">[10]</span>. The two forecasts don't compete — they describe different things. The first is the technology's ceiling among operations that survive the implementation curve; the second is the mortality along that curve. Read together, they say adoption won't be distributed: it will concentrate among those who solve integration and governance. <strong>For planning purposes, the second prevails</strong> — treat the 40% as your project's base case and design to stay out of it. That criterion organizes sections 04 and 07.</p>
+  <p>The same Gartner predicts 80% autonomous resolution by 2029 <em>and</em> the cancellation of over 40% of agentic projects by 2027<span class="ref">[10]</span>. The forecasts don't compete: the first is the ceiling among those who survive the implementation curve; the second is the mortality along that curve. <strong>For planning purposes, the second prevails</strong> — treat the 40% as your project's base case and design to stay out of it. That's the criterion behind sections 04 and 07.</p>
 
   <div class="chart-block">
     <p class="chart-title">The automation trajectory in customer service (Gartner)</p>
@@ -494,7 +494,7 @@
 
   <h3 class="sub">The Klarna case: rise and reversal <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· tier C</span></h3>
 
-  <p>Klarna is a Swedish payments and shopping fintech, a global reference in the <em>Buy Now, Pay Later</em> model: it intermediates checkout between consumers and hundreds of thousands of retailers, handling credit, payment and post-sale functions — which makes its customer service operation massive, multilingual and essentially transactional (refunds, returns, billing disputes). That profile made it agentic AI's first open laboratory at scale: in February 2024, it launched an LLM-based assistant integrated with its transactional systems, covering 23 markets, 24/7, in more than 35 languages<span class="ref">[5]</span>.</p>
+  <p>Klarna is a Swedish <em>Buy Now, Pay Later</em> fintech, with massive, essentially transactional customer service (refunds, returns, billing disputes) — a profile that made it agentic AI's first open laboratory at scale. In February 2024, it launched an assistant integrated with its transactional systems, covering 23 markets, 24/7, in more than 35 languages<span class="ref">[5]</span>.</p>
 
   <div class="toggle-block">
     <div class="toggle-label">One case, three readings</div>
@@ -515,8 +515,8 @@
     </div>
     <div id="tab-reading" class="tab-content">
       <span class="badge badge-crop">What it establishes — and what it doesn't</span>
-      <p><strong>The case does not prove this paper's thesis. It establishes two facts and one limit.</strong></p>
-      <p>Fact 1: the 2024 phase shows that transactional autonomous resolution at scale is operationally possible (tier C — the company's own numbers). Fact 2: the 2025 reversal establishes a boundary condition — on complex, nuanced cases, with the simultaneous cut of the human workforce, quality dropped; the scope of autonomy crossed the resolvability frontier. The limit: no public post-reversal data allows the claim that the current hybrid model is superior. A reading that treats any outcome as confirmation isn't analysis — which is why this paper's thesis is stated in falsifiable terms in section 02, and the instrument to test it is the controlled pilot in the roadmap, not this case.</p>
+      <p><strong>The case does not prove this paper's thesis — it establishes two facts and one limit.</strong></p>
+      <p>Fact 1: the 2024 phase shows transactional autonomous resolution at scale is operationally possible. Fact 2: the 2025 reversal marks the frontier — on complex cases, with the simultaneous cut of the human workforce, quality dropped. Limit: no public data proves the current hybrid model is superior. Treating any outcome as confirmation isn't analysis; that's why the thesis is stated in falsifiable terms (section 02), and the controlled pilot in the roadmap — not this case — is what tests it.</p>
     </div>
   </div>
 
@@ -571,9 +571,7 @@
 
   <h3 class="sub">The market already prices resolution <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--crop);">· tier C</span></h3>
 
-  <p>The strongest signal that this transition is structural doesn't come from white papers — it comes from pricing models. Intercom's Fin displays <em>Resolution Rate</em> and <em>Automation Rate</em> as the headline metrics of its performance dashboard and is sold via <em>outcome-based pricing</em>: the customer only pays when the AI actually resolves, never for a contained conversation — with a published average resolution rate of 76% across 12,000+ customers<span class="ref">[11]</span>. Bret Taylor's Sierra went further: it literally charges per resolution, capturing part of the savings of each resolved interaction (which would cost $10–20 with a human), and publishes its case studies in that metric — Ramp at 90% of cases resolved, SoFi at +33 NPS points<span class="ref">[12][13]</span>.</p>
-
-  <p>When the reference vendors start <strong>getting paid per resolution</strong>, rather than per contained conversation, the incentive alignment this paper proposes stops being a thesis and becomes a business model. One note for managers: neither natively exposes 7-day recontact as a central KPI, nor the escalation-with-preserved-context rate — those two metrics remain the responsibility of your operation's design, not the vendor's.</p>
+  <p>The strongest signal that this transition is structural comes from pricing models: Intercom's Fin sells via <em>outcome-based pricing</em> — only charging when the AI resolves, with a published average resolution rate of 76% across 12,000+ customers<span class="ref">[11]</span> — and Bret Taylor's Sierra literally charges per resolution delivered, capturing part of the savings of each interaction (Ramp at 90% resolved, SoFi at +33 NPS)<span class="ref">[12][13]</span>. When the vendor gets paid per resolution, the incentive alignment this paper proposes becomes a business model — but neither natively exposes 7-day recontact nor escalation with preserved context: those remain the responsibility of your operation's design.</p>
 
   <!-- 04 -->
   <h2 id="s04">
@@ -710,15 +708,11 @@
     <p class="chart-title">Resolution-era dashboard — weekly view</p>
     <p class="chart-note" style="margin:2px 0 0;">illustrative figures, for structural reference</p>
 
-    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin:20px 0 10px;">
-      <div class="stat-card"><div class="num">62%</div><div class="lab">autonomous first-contact resolution</div><div class="lab" style="color:var(--accept);margin-top:4px;">▲ +5 p.p. vs. previous month</div></div>
-      <div class="stat-card"><div class="num">8.4%</div><div class="lab">7-day recontact</div><div class="lab" style="color:var(--accept);margin-top:4px;">▼ −1.8 p.p. · target ≤ 10%</div></div>
-      <div class="stat-card"><div class="num">$0.80</div><div class="lab">cost per resolution</div><div class="lab" style="margin-top:4px;">includes repeat calls and escalations</div></div>
-    </div>
-    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin:0 0 24px;">
-      <div class="stat-card"><div class="num">2.4 min</div><div class="lab">time to resolution</div><div class="lab" style="margin-top:4px;">first interaction to confirmed action</div></div>
-      <div class="stat-card"><div class="num">91%</div><div class="lab">escalation with preserved context</div><div class="lab" style="color:var(--reject);margin-top:4px;">below the 95% target</div></div>
-      <div class="stat-card"><div class="num">100%</div><div class="lab">autonomous actions audited</div><div class="lab" style="margin-top:4px;">audit trail per action</div></div>
+    <div class="stat-grid" style="margin:20px 0 24px;">
+      <div class="stat-card"><div class="num">62%</div><div class="lab">autonomous first-contact resolution</div><div class="lab" style="color:var(--accept);margin-top:4px;">▲ +5 p.p.</div></div>
+      <div class="stat-card"><div class="num">8.4%</div><div class="lab">7-day recontact</div><div class="lab" style="color:var(--accept);margin-top:4px;">▼ target ≤ 10%</div></div>
+      <div class="stat-card"><div class="num">$0.80</div><div class="lab">cost per resolution</div><div class="lab" style="margin-top:4px;">w/ repeat calls, escalations</div></div>
+      <div class="stat-card"><div class="num">2.4 min</div><div class="lab">time to resolution</div><div class="lab" style="margin-top:4px;">to confirmed action</div></div>
     </div>
 
     <p class="chart-title" style="margin-top:8px;">7-day recontact — the acid test</p>
@@ -769,7 +763,7 @@
     Cost, payback and implementation roadmap
   </h2>
 
-  <p>No budget decision stands without the cost line — and it is usually missing from texts on agentic AI. The project's TCO has four components: <strong>consumption or license</strong> (increasingly charged per resolution, as seen in section 03); <strong>integration and data</strong> — typically the largest share of the initial investment, and the most underestimated; <strong>ongoing governance and monitoring</strong>, which don't end at go-live; and <strong>reskilling of the residual team</strong>, which business cases almost always omit.</p>
+  <p>No budget decision stands without the cost line. TCO has four components: <strong>consumption or license</strong> (increasingly charged per resolution — section 03); <strong>integration and data</strong> — the largest share of the investment, and the most underestimated; <strong>ongoing governance and monitoring</strong>; and <strong>reskilling of the residual team</strong>, almost always omitted from business cases.</p>
 
   <div class="callout">
     <p><strong>The payback logic:</strong> the project pays for itself when (human cost per resolution − total AI cost per resolution) × migrated volume exceeds the integration investment within the defined horizon. The math is only honest if the AI cost includes repeat calls, escalations and human monitoring of the flow — the cost per resolution of section 06, not the vendor's cost per conversation.</p>
@@ -796,7 +790,7 @@
       <span class="m-num">03</span>
       <div>
         <strong>Pilot with a control group</strong>
-        <p>Same demand type, AI flow vs. human flow, measuring the section 06 dashboard — especially 7-day recontact and CSAT on the same task. It is the instrument that tests section 02's falsifiable thesis in your operation. Without a counterfactual, the pilot's result is an opinion.</p>
+        <p>AI flow vs. human flow on the same demand, measuring the section 06 dashboard — especially 7-day recontact. It is the instrument that tests section 02's falsifiable thesis in your operation; without a counterfactual, the result is an opinion.</p>
       </div>
     </div>
     <div class="hidra-item">
