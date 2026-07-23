@@ -193,7 +193,13 @@
       display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
       clip-path: polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%, 13% 50%);
       margin-left: -13px;
+      border: 0; margin-top: 0; margin-bottom: 0; font: inherit;
+      cursor: pointer; text-align: left; appearance: none; -webkit-appearance: none;
+      opacity: .48; transition: opacity .18s ease;
     }
+    .chevron-step:hover { opacity: .78; }
+    .chevron-step.is-active { opacity: 1; }
+    .chevron-step:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
     .chevron-step:first-child {
       clip-path: polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%);
       margin-left: 0;
@@ -212,6 +218,9 @@
       text-transform: uppercase; letter-spacing: .12em; color: var(--faint);
       margin: 0 0 14px;
     }
+    .flow-detail-item { display: none; }
+    .flow-detail-item.is-active { display: block; animation: flowFade .25s ease; }
+    @keyframes flowFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
     .roadmap {
       background: var(--card); border: 1px solid var(--line);
@@ -570,63 +579,59 @@
 
   <p>Para quem está operando — não apenas construindo — um sistema de IA em produção, a manutenção da engenharia de contexto deveria ser tratada como rotina de observabilidade, com os seguintes pontos de verificação recorrentes:</p>
 
-  <div class="chevron-flow">
-    <div class="chevron-step" style="background:var(--crop)">
+  <div class="chevron-flow" id="checklistFlow">
+    <button type="button" class="chevron-step is-active" data-step="1" aria-pressed="true" style="background:var(--crop)">
       <span class="chevron-num">01</span>
       <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-6"/></svg>
       <span class="chevron-label">Consumo de tokens</span>
-    </div>
-    <div class="chevron-step" style="background:var(--accept)">
+    </button>
+    <button type="button" class="chevron-step" data-step="2" aria-pressed="false" style="background:var(--accept)">
       <span class="chevron-num">02</span>
       <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg>
       <span class="chevron-label">Ferramentas ativas</span>
-    </div>
-    <div class="chevron-step" style="background:var(--crop-deep)">
+    </button>
+    <button type="button" class="chevron-step" data-step="3" aria-pressed="false" style="background:var(--crop-deep)">
       <span class="chevron-num">03</span>
       <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 5-2 6-2 6h18s-2-1-2-6a7 7 0 0 0-7-7Z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
       <span class="chevron-label">Teto de orçamento</span>
-    </div>
-    <div class="chevron-step" style="background:var(--slate)">
+    </button>
+    <button type="button" class="chevron-step" data-step="4" aria-pressed="false" style="background:var(--slate)">
       <span class="chevron-num">04</span>
       <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg>
       <span class="chevron-label">Histórico de decisões</span>
-    </div>
-    <div class="chevron-step" style="background:var(--ink-soft)">
+    </button>
+    <button type="button" class="chevron-step" data-step="5" aria-pressed="false" style="background:var(--ink-soft)">
       <span class="chevron-num">05</span>
       <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 12l4 9M16 3l4 9-4 9"/></svg>
       <span class="chevron-label">Instruções: teste</span>
-    </div>
+    </button>
   </div>
 
-  <p class="flow-caption">Detalhe de cada ponto de verificação</p>
+  <p class="flow-caption">Clique em uma etapa para ver o detalhe</p>
 
-  <div class="flow">
-    <div class="flow-step">
-      <span class="flow-num">01</span>
+  <div class="flow-detail-group" id="checklistDetail">
+    <div class="flow-step flow-detail-item is-active" data-step="1">
+      <span class="flow-num" style="background:var(--crop)">01</span>
       <h3>Medir o crescimento do consumo de tokens</h3>
       <p>Por sessão/tarefa ao longo do tempo. Um crescimento não linear é sinal de loop ou de acúmulo de contexto sem poda.</p>
     </div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-step">
-      <span class="flow-num">02</span>
+    <div class="flow-step flow-detail-item" data-step="2">
+      <span class="flow-num" style="background:var(--accept)">02</span>
       <h3>Auditar o número de ferramentas ativas</h3>
       <p>Expostas a cada agente; manter entre 10 e 15 como ponto de partida — validando esse número no seu próprio sistema —, com o restante disponível sob demanda via roteamento.</p>
     </div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-step">
-      <span class="flow-num">03</span>
+    <div class="flow-step flow-detail-item" data-step="3">
+      <span class="flow-num" style="background:var(--crop-deep)">03</span>
       <h3>Definir teto de orçamento com corte automático — não apenas alerta</h3>
       <p>Alerta sozinho não impede a perda: um agente em loop pode gerar custo por dias sem que ninguém intervenha a tempo se o único mecanismo for notificação, não interrupção automática.</p>
     </div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-step">
-      <span class="flow-num">04</span>
+    <div class="flow-step flow-detail-item" data-step="4">
+      <span class="flow-num" style="background:var(--slate)">04</span>
       <h3>Revisar periodicamente o histórico de decisões do agente</h3>
       <p>Em busca de sinais de envenenamento — objetivos fixados incorretamente a partir de uma alucinação anterior que ninguém corrigiu.</p>
     </div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-step">
-      <span class="flow-num">05</span>
+    <div class="flow-step flow-detail-item" data-step="5">
+      <span class="flow-num" style="background:var(--ink-soft)">05</span>
       <h3>Testar instruções fragmentadas versus consolidadas</h3>
       <p>A diferença de performance entre múltiplos turnos e um único prompt coeso mede o quanto o seu sistema é vulnerável a choque de contexto.</p>
     </div>
@@ -714,6 +719,29 @@
   <p class="article-note">Argumento autoral com base nas fontes listadas · As fontes [2], [6] e [8] são citadas de forma pontual e delimitada — pela formulação específica que trazem, não como base da tese central do texto · Nota de posição: estudo independente, sem vínculo comercial com as empresas ou consultorias citadas</p>
 
 </main>
+
+<script>
+(function () {
+  var group = document.getElementById('checklistFlow');
+  var detail = document.getElementById('checklistDetail');
+  if (!group || !detail) return;
+  var steps = group.querySelectorAll('.chevron-step');
+  var items = detail.querySelectorAll('.flow-detail-item');
+  steps.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = btn.getAttribute('data-step');
+      steps.forEach(function (s) {
+        var active = s === btn;
+        s.classList.toggle('is-active', active);
+        s.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      items.forEach(function (it) {
+        it.classList.toggle('is-active', it.getAttribute('data-step') === target);
+      });
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
