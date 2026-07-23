@@ -343,6 +343,22 @@
       font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
       font-size: 1.5rem; color: var(--crop-deep); line-height: 1.1; margin-bottom: 6px;
     }
+    .stat-card .model-list {
+      list-style: none; margin: 14px auto 0; padding: 0; max-width: 340px;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 16px;
+      text-align: left;
+    }
+    .stat-card .model-list li {
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
+      color: var(--slate); line-height: 1.4;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .model-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
+      color: var(--card); font-family: 'IBM Plex Mono', monospace;
+      font-size: .56rem; font-weight: 600;
+    }
     .stat-card .lab {
       font-family: 'IBM Plex Mono', monospace; font-size: .6rem;
       text-transform: uppercase; letter-spacing: .06em; color: var(--slate); line-height: 1.4;
@@ -469,9 +485,23 @@
 
   <p>Researchers at the Stanford Digital Economy Lab measured, in a 2026 study that analyzed eight frontier models on agentic coding tasks, that this kind of task consumes up to 1,000 times more tokens than a common chat interaction — with variance of up to 30x between two identical runs of the same task<span class="ref">[3]</span>. More telling still: spending more tokens doesn't translate into more accuracy. Performance tends to saturate — and sometimes worsen — past a certain cost. Throwing more context at the problem isn't a solution; it can instead be the symptom of a system that's out of control.</p>
 
-  <div class="stat-grid" style="grid-template-columns:repeat(2,1fr);max-width:420px;">
+  <div class="stat-grid" style="grid-template-columns:repeat(2,1fr);">
     <div class="stat-card"><div class="num">1,000x</div><div class="lab">more tokens than a common chat</div></div>
     <div class="stat-card"><div class="num">30x</div><div class="lab">variance between identical runs</div></div>
+    <div class="stat-card" style="grid-column:1 / -1;">
+      <div class="num">8 models</div>
+      <div class="lab">at the frontier, analyzed in the study</div>
+      <ul class="model-list">
+        <li><span class="model-badge" style="background:var(--crop)">A</span>Claude Sonnet 3.7</li>
+        <li><span class="model-badge" style="background:var(--crop)">A</span>Claude Sonnet 4</li>
+        <li><span class="model-badge" style="background:var(--crop)">A</span>Claude Sonnet 4.5</li>
+        <li><span class="model-badge" style="background:var(--accept)">O</span>GPT-5</li>
+        <li><span class="model-badge" style="background:var(--accept)">O</span>GPT-5.2</li>
+        <li><span class="model-badge" style="background:var(--crop-deep)">G</span>Gemini 3 Pro (Preview)</li>
+        <li><span class="model-badge" style="background:var(--slate)">Q</span>Qwen3-Coder 480B</li>
+        <li><span class="model-badge" style="background:var(--ink-soft)">M</span>Kimi K2</li>
+      </ul>
+    </div>
   </div>
 
   <p>This extreme variability isn't a weak-model problem. It's a badly managed context problem — the same kind of disorganized information buildup that, instead of teaching the system judgment, makes it lose the ability to solve even the routine tasks it already mastered. Context Engineering — as a discipline of continuous maintenance, not a one-time architecture decision — exists to prevent exactly this kind of breakdown. It isn't just good operating practice: it's the infrastructure that decides whether the intelligence-to-judgment crossing described above ends in real capability or in expensive, silent collapse.</p>

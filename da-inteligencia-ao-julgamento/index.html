@@ -343,6 +343,22 @@
       font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
       font-size: 1.5rem; color: var(--crop-deep); line-height: 1.1; margin-bottom: 6px;
     }
+    .stat-card .model-list {
+      list-style: none; margin: 14px auto 0; padding: 0; max-width: 340px;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 16px;
+      text-align: left;
+    }
+    .stat-card .model-list li {
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
+      color: var(--slate); line-height: 1.4;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .model-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
+      color: var(--card); font-family: 'IBM Plex Mono', monospace;
+      font-size: .56rem; font-weight: 600;
+    }
     .stat-card .lab {
       font-family: 'IBM Plex Mono', monospace; font-size: .6rem;
       text-transform: uppercase; letter-spacing: .06em; color: var(--slate); line-height: 1.4;
@@ -469,9 +485,23 @@
 
   <p>Pesquisadores do Stanford Digital Economy Lab mediram, em estudo de 2026 que analisou oito modelos de fronteira em tarefas agênticas de codificação, que esse tipo de tarefa consome até 1.000 vezes mais tokens do que uma interação comum de chat — com variação de até 30x entre duas execuções idênticas da mesma tarefa<span class="ref">[3]</span>. Mais revelador ainda: gastar mais tokens não se traduz em mais acurácia. O desempenho tende a saturar — e às vezes piorar — a partir de um certo custo. Jogar mais contexto no problema não é solução; pode ser, ao contrário, o sintoma de um sistema sem controle.</p>
 
-  <div class="stat-grid" style="grid-template-columns:repeat(2,1fr);max-width:420px;">
+  <div class="stat-grid" style="grid-template-columns:repeat(2,1fr);">
     <div class="stat-card"><div class="num">1.000x</div><div class="lab">mais tokens que uma conversa comum</div></div>
     <div class="stat-card"><div class="num">30x</div><div class="lab">de variação entre execuções idênticas</div></div>
+    <div class="stat-card" style="grid-column:1 / -1;">
+      <div class="num">8 modelos</div>
+      <div class="lab">de fronteira analisados no estudo</div>
+      <ul class="model-list">
+        <li><span class="model-badge" style="background:var(--crop)">A</span>Claude Sonnet 3.7</li>
+        <li><span class="model-badge" style="background:var(--crop)">A</span>Claude Sonnet 4</li>
+        <li><span class="model-badge" style="background:var(--crop)">A</span>Claude Sonnet 4.5</li>
+        <li><span class="model-badge" style="background:var(--accept)">O</span>GPT-5</li>
+        <li><span class="model-badge" style="background:var(--accept)">O</span>GPT-5.2</li>
+        <li><span class="model-badge" style="background:var(--crop-deep)">G</span>Gemini 3 Pro (Preview)</li>
+        <li><span class="model-badge" style="background:var(--slate)">Q</span>Qwen3-Coder 480B</li>
+        <li><span class="model-badge" style="background:var(--ink-soft)">M</span>Kimi K2</li>
+      </ul>
+    </div>
   </div>
 
   <p>Essa variabilidade extrema não é um problema de modelo fraco. É um problema de contexto mal gerido — o mesmo tipo de acúmulo desorganizado de informação que, em vez de ensinar julgamento ao sistema, o faz perder a capacidade de resolver até as tarefas de rotina que já dominava. Engenharia de Contexto — como disciplina de manutenção contínua, não como decisão de arquitetura tomada uma vez — existe para prevenir exatamente essa quebra. Ela não é só uma boa prática operacional: é a infraestrutura que decide se a travessia de inteligência para julgamento, descrita acima, termina em capacidade real ou em colapso caro e silencioso.</p>
