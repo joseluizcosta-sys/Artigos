@@ -286,6 +286,27 @@
       font-weight: 500; color: var(--ink);
     }
 
+    .stack-bar { margin-top: 18px; }
+    .stack-track {
+      display: flex; width: 100%; height: 34px; border-radius: 4px; overflow: hidden;
+      background: var(--paper-2);
+    }
+    .stack-seg { display: flex; align-items: center; justify-content: center; height: 100%; }
+    .stack-seg.gold { background: var(--crop); }
+    .stack-seg.grey { background: var(--slate); }
+    .stack-seg-val {
+      font-family: 'IBM Plex Mono', monospace; font-size: .74rem;
+      font-weight: 500; color: var(--card);
+    }
+    .stack-legend { display: flex; gap: 22px; margin-top: 12px; flex-wrap: wrap; }
+    .stack-legend-item {
+      display: flex; align-items: center; gap: 7px;
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .76rem; color: var(--slate);
+    }
+    .stack-legend-item .dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+    .stack-legend-item .dot.gold { background: var(--crop); }
+    .stack-legend-item .dot.grey { background: var(--slate); }
+
     .stat-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 10px; margin: 36px 0;
@@ -643,7 +664,7 @@
     The third pillar: why data is the next move
   </h2>
 
-  <p>The industry tends to describe its own infrastructure in three layers: compute, model and data. That's the same split guiding the $1.7 billion fund Andreessen Horowitz dedicated to AI infrastructure in February 2026 — the firm's stated thesis is to invest across three core pillars: "compute innovation, data infrastructure, and foundational model development"<span class="ref">[6]</span>. The first two pillars have already had their cycle of capital and attention: 2023 and 2024 were dominated by the race for compute power; 2024 and 2025, by the race among model labs.</p>
+  <p>The industry tends to describe its own infrastructure in three layers: compute, model and data. That's the same split guiding the $1.7 billion fund Andreessen Horowitz dedicated to AI infrastructure in February 2026 — the firm's stated thesis is to invest across three core pillars: "compute innovation, data infrastructure, and foundational model development"<span class="ref">[6]</span>. Two of the three pillars have already had their cycle of capital and attention — compute (2023-2024) and models (2024-2025) —, leaving data infrastructure as the pillar still awaiting its moment, despite sitting in the middle of the firm's own list.</p>
 
   <p>What the market's own investors point to as the 2026 frontier is the third pillar — and that's exactly what this piece describes.</p>
 
@@ -654,16 +675,14 @@
 
   <div class="chart-block">
     <p class="chart-title">Where corporate knowledge lives</p>
-    <div class="bars">
-      <div class="bar-row">
-        <span class="bar-label">Unstructured data</span>
-        <div class="bar-track"><div class="bar-fill gold" style="width:80%"></div></div>
-        <span class="bar-val">80%</span>
+    <div class="stack-bar">
+      <div class="stack-track">
+        <div class="stack-seg gold" style="width:80%"><span class="stack-seg-val">80%</span></div>
+        <div class="stack-seg grey" style="width:20%"><span class="stack-seg-val">20%</span></div>
       </div>
-      <div class="bar-row">
-        <span class="bar-label">Structured data</span>
-        <div class="bar-track"><div class="bar-fill grey" style="width:20%"></div></div>
-        <span class="bar-val">20%</span>
+      <div class="stack-legend">
+        <span class="stack-legend-item"><i class="dot gold"></i>Unstructured data</span>
+        <span class="stack-legend-item"><i class="dot grey"></i>Structured data</span>
       </div>
     </div>
     <p class="chart-note">PDFs, screenshots, videos, logs, emails — the "unstructured universe" cited by Jennifer Li (a16z). Source: [7].</p>

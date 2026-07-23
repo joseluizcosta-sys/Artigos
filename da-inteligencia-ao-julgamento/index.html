@@ -286,6 +286,27 @@
       font-weight: 500; color: var(--ink);
     }
 
+    .stack-bar { margin-top: 18px; }
+    .stack-track {
+      display: flex; width: 100%; height: 34px; border-radius: 4px; overflow: hidden;
+      background: var(--paper-2);
+    }
+    .stack-seg { display: flex; align-items: center; justify-content: center; height: 100%; }
+    .stack-seg.gold { background: var(--crop); }
+    .stack-seg.grey { background: var(--slate); }
+    .stack-seg-val {
+      font-family: 'IBM Plex Mono', monospace; font-size: .74rem;
+      font-weight: 500; color: var(--card);
+    }
+    .stack-legend { display: flex; gap: 22px; margin-top: 12px; flex-wrap: wrap; }
+    .stack-legend-item {
+      display: flex; align-items: center; gap: 7px;
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .76rem; color: var(--slate);
+    }
+    .stack-legend-item .dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+    .stack-legend-item .dot.gold { background: var(--crop); }
+    .stack-legend-item .dot.grey { background: var(--slate); }
+
     .stat-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 10px; margin: 36px 0;
@@ -643,7 +664,7 @@
     O terceiro pilar: por que dados é o próximo movimento
   </h2>
 
-  <p>A indústria costuma descrever a própria infraestrutura em três camadas: computação, modelo e dados. É a mesma divisão que orienta o fundo de US$ 1,7 bilhão que a Andreessen Horowitz dedicou a infraestrutura de IA em fevereiro de 2026 — a tese declarada da firma é investir em três pilares centrais: "inovação em computação, infraestrutura de dados e desenvolvimento de modelos fundacionais"<span class="ref">[6]</span>. Os dois primeiros pilares já tiveram seu ciclo de capital e atenção: 2023 e 2024 foram dominados pela corrida por poder computacional; 2024 e 2025, pela corrida entre laboratórios de modelo.</p>
+  <p>A indústria costuma descrever a própria infraestrutura em três camadas: computação, modelo e dados. É a mesma divisão que orienta o fundo de US$ 1,7 bilhão que a Andreessen Horowitz dedicou a infraestrutura de IA em fevereiro de 2026 — a tese declarada da firma é investir em três pilares centrais: "inovação em computação, infraestrutura de dados e desenvolvimento de modelos fundacionais"<span class="ref">[6]</span>. Dois dos três pilares já tiveram seu ciclo de capital e atenção — computação (2023-2024) e modelos (2024-2025) —, deixando infraestrutura de dados como o pilar que ainda aguarda seu momento, apesar de aparecer no meio da própria lista da firma.</p>
 
   <p>O que os próprios investidores desse mercado apontam como a fronteira de 2026 é o terceiro pilar — e é exatamente o que este texto descreve.</p>
 
@@ -654,16 +675,14 @@
 
   <div class="chart-block">
     <p class="chart-title">Onde vive o conhecimento corporativo</p>
-    <div class="bars">
-      <div class="bar-row">
-        <span class="bar-label">Dados não estruturados</span>
-        <div class="bar-track"><div class="bar-fill gold" style="width:80%"></div></div>
-        <span class="bar-val">80%</span>
+    <div class="stack-bar">
+      <div class="stack-track">
+        <div class="stack-seg gold" style="width:80%"><span class="stack-seg-val">80%</span></div>
+        <div class="stack-seg grey" style="width:20%"><span class="stack-seg-val">20%</span></div>
       </div>
-      <div class="bar-row">
-        <span class="bar-label">Dados estruturados</span>
-        <div class="bar-track"><div class="bar-fill grey" style="width:20%"></div></div>
-        <span class="bar-val">20%</span>
+      <div class="stack-legend">
+        <span class="stack-legend-item"><i class="dot gold"></i>Dados não estruturados</span>
+        <span class="stack-legend-item"><i class="dot grey"></i>Dados estruturados</span>
       </div>
     </div>
     <p class="chart-note">PDFs, screenshots, vídeos, logs, e-mails — o "universo não estruturado" citado por Jennifer Li (a16z). Fonte: [7].</p>
