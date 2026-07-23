@@ -151,6 +151,30 @@
       color: var(--crop); letter-spacing: .08em; display: block; margin-bottom: 8px;
     }
 
+    .mec-card-body { display: flex; gap: 26px; align-items: flex-start; }
+    .mec-card-text { flex: 1 1 56%; min-width: 0; }
+    .mec-card-chart { flex: 0 0 200px; }
+    .mec-card .chart-note { margin: 14px 0 0; }
+    .vbars { display: flex; align-items: flex-end; gap: 16px; height: 130px; }
+    .vbar-col { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; }
+    .vbar-val {
+      font-family: 'IBM Plex Mono', monospace; font-size: .66rem;
+      font-weight: 500; color: var(--ink); margin-bottom: 6px;
+    }
+    .vbar-track {
+      width: 100%; max-width: 44px; background: var(--paper-2);
+      border-radius: 3px 3px 0 0; height: 100%; display: flex; align-items: flex-end; overflow: hidden;
+    }
+    .vbar-fill { width: 100%; border-radius: 3px 3px 0 0; }
+    .vbar-fill.gold  { background: var(--crop); }
+    .vbar-fill.green { background: var(--accept); }
+    .vbar-fill.red   { background: var(--reject); }
+    .vbar-fill.grey  { background: var(--faint); }
+    .vbar-label {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .62rem;
+      color: var(--slate); text-align: center; margin-top: 8px; line-height: 1.25;
+    }
+
     .hidra-grid { display: flex; flex-direction: column; gap: 14px; margin: 36px 0; }
     .hidra-item { display: flex; gap: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; }
     .hidra-item .m-num {
@@ -362,6 +386,9 @@
         flex-direction: row; align-items: center; padding: 12px 16px;
       }
       .chevron-icon { width: 18px; height: 18px; flex-shrink: 0; }
+      .mec-card-body { flex-direction: column; }
+      .mec-card-chart { flex: 1 1 auto; width: 100%; }
+      .vbars { justify-content: center; }
     }
   </style>
 </head>
@@ -471,78 +498,87 @@
 
   <p>The technical literature on the topic, synthesizing research from Google DeepMind, Microsoft and Salesforce, documents four distinct failures — each with numerical thresholds that serve as production monitoring triggers<span class="ref">[4]</span>.</p>
 
-  <div class="mec-grid" style="grid-template-columns:repeat(2,1fr);">
+  <div class="mec-grid" style="grid-template-columns:1fr;">
     <div class="mec-card">
       <span class="mec-num">01 — POISONING</span>
       <h3>Context poisoning</h3>
-      <p>A hallucination enters the conversation history and gets referenced as fact, reinforcing an incorrect goal across multiple turns. Formally studied by DeepMind on the Gemini 2.5 agent. Doesn't resolve on its own — requires active detection, because it compounds.</p>
+      <p>A hallucination enters the conversation history and gets referenced as fact, reinforcing an incorrect goal across multiple turns. Formally studied by DeepMind on the Gemini 2.5 agent. Doesn't resolve on its own — requires active detection, because it compounds. Worth distinguishing: this is internal, unintentional poisoning — the system contaminates itself with its own hallucination. It differs from the security literature on deliberate poisoning attacks, where an external actor injects malicious data to compromise the model. Same name, different mechanism.</p>
     </div>
+
     <div class="mec-card">
       <span class="mec-num">02 — DISTRACTION</span>
-      <h3>Context distraction</h3>
-      <p>Very large context windows make the model over-emphasize repeated or irrelevant information. The effect intensifies from ~100k tokens on Gemini Pro, and as early as ~32k tokens on smaller models like LLaMA 3 405B. Caveat: these numbers come from specific benchmarks and don't form a comparable curve across models — treat them as a starting point for calibration, not an engineering constant.</p>
+      <div class="mec-card-body">
+        <div class="mec-card-text">
+          <h3>Context distraction</h3>
+          <p>Very large context windows make the model over-emphasize repeated or irrelevant information. The effect intensifies from ~100k tokens on Gemini Pro, and as early as ~32k tokens on smaller models like LLaMA 3 405B.</p>
+        </div>
+        <div class="mec-card-chart">
+          <div class="vbars">
+            <div class="vbar-col">
+              <span class="vbar-val">~100k</span>
+              <div class="vbar-track"><div class="vbar-fill gold" style="height:100%"></div></div>
+              <span class="vbar-label">Gemini Pro</span>
+            </div>
+            <div class="vbar-col">
+              <span class="vbar-val">~32k</span>
+              <div class="vbar-track"><div class="vbar-fill red" style="height:32%"></div></div>
+              <span class="vbar-label">LLaMA 3 405B</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="chart-note">Tokens at which the distraction effect intensifies. Numbers from specific benchmarks, not a comparable curve across models — a starting point for calibration, not an engineering constant. Source: [4].</p>
     </div>
+
     <div class="mec-card">
       <span class="mec-num">03 — CONFUSION</span>
-      <h3>Context confusion</h3>
-      <p>Too many available tools make the model call the wrong one. A quantized LLaMA 3 failed with 46 simultaneous tools, but performed well with 19. This range comes from a single experiment with a quantized model — treat it as an initial hypothesis to validate on your own system, not a fixed limit.</p>
+      <div class="mec-card-body">
+        <div class="mec-card-text">
+          <h3>Context confusion</h3>
+          <p>Too many available tools make the model call the wrong one. A quantized LLaMA 3 failed with 46 simultaneous tools, but performed well with 19.</p>
+        </div>
+        <div class="mec-card-chart">
+          <div class="vbars">
+            <div class="vbar-col">
+              <span class="vbar-val">19</span>
+              <div class="vbar-track"><div class="vbar-fill green" style="height:41%"></div></div>
+              <span class="vbar-label">Performed well</span>
+            </div>
+            <div class="vbar-col">
+              <span class="vbar-val">46</span>
+              <div class="vbar-track"><div class="vbar-fill red" style="height:100%"></div></div>
+              <span class="vbar-label">Failed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="chart-note">Range from a single experiment with a quantized model — treat it as an initial hypothesis to validate on your own system, not a fixed limit. Source: [4].</p>
     </div>
+
     <div class="mec-card">
       <span class="mec-num">04 — CLASH</span>
-      <h3>Context clash</h3>
-      <p>Conflicting instructions in the same window produce inconsistent outputs — the most severe of the four failures. Fragmenting instructions across turns, instead of one coherent prompt, dropped accuracy from 98% to 64% in one specific test — don't assume that drop as a universal benchmark; test it on your own pipeline.</p>
+      <div class="mec-card-body">
+        <div class="mec-card-text">
+          <h3>Context clash</h3>
+          <p>Conflicting instructions in the same window produce inconsistent outputs — the most severe of the four failures. Fragmenting instructions across turns, instead of one coherent prompt, dropped accuracy from 98% to 64% in one specific test.</p>
+        </div>
+        <div class="mec-card-chart">
+          <div class="vbars">
+            <div class="vbar-col">
+              <span class="vbar-val">98%</span>
+              <div class="vbar-track"><div class="vbar-fill green" style="height:98%"></div></div>
+              <span class="vbar-label">Single prompt</span>
+            </div>
+            <div class="vbar-col">
+              <span class="vbar-val">64%</span>
+              <div class="vbar-track"><div class="vbar-fill red" style="height:64%"></div></div>
+              <span class="vbar-label">Fragmented</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="chart-note">Microsoft and Salesforce experiment, one specific task and model — don't assume that drop as a universal benchmark; test it on your own pipeline. Source: [4].</p>
     </div>
-  </div>
-
-  <div class="chart-block">
-    <p class="chart-title">Distraction — the ceiling varies by model</p>
-    <div class="bars">
-      <div class="bar-row">
-        <span class="bar-label">Gemini Pro (larger window)</span>
-        <div class="bar-track"><div class="bar-fill gold" style="width:100%"></div></div>
-        <span class="bar-val">~100k tokens</span>
-      </div>
-      <div class="bar-row">
-        <span class="bar-label">LLaMA 3 405B (smaller window)</span>
-        <div class="bar-track"><div class="bar-fill red" style="width:32%"></div></div>
-        <span class="bar-val">~32k tokens</span>
-      </div>
-    </div>
-    <p class="chart-note">The point at which the distraction effect intensifies. More context isn't always better — the limit depends on the model. Starting-point heuristic, not an engineering constant. Source: [4].</p>
-  </div>
-
-  <div class="chart-block">
-    <p class="chart-title">Confusion — the simultaneous-tool limit before failure</p>
-    <div class="bars">
-      <div class="bar-row">
-        <span class="bar-label">Performed well</span>
-        <div class="bar-track"><div class="bar-fill green" style="width:41%"></div></div>
-        <span class="bar-val">19 tools</span>
-      </div>
-      <div class="bar-row">
-        <span class="bar-label">Failed</span>
-        <div class="bar-track"><div class="bar-fill red" style="width:100%"></div></div>
-        <span class="bar-val">46 tools</span>
-      </div>
-    </div>
-    <p class="chart-note">Quantized LLaMA 3, single experiment — doesn't necessarily generalize to frontier models. Treat as an initial hypothesis to validate. Source: [4].</p>
-  </div>
-
-  <div class="chart-block">
-    <p class="chart-title">Clash — accuracy drops with fragmented instructions</p>
-    <div class="bars">
-      <div class="bar-row">
-        <span class="bar-label">Single, coherent prompt</span>
-        <div class="bar-track"><div class="bar-fill green" style="width:98%"></div></div>
-        <span class="bar-val">98%</span>
-      </div>
-      <div class="bar-row">
-        <span class="bar-label">Instructions fragmented across turns</span>
-        <div class="bar-track"><div class="bar-fill red" style="width:64%"></div></div>
-        <span class="bar-val">64%</span>
-      </div>
-    </div>
-    <p class="chart-note">Microsoft and Salesforce experiment, one specific task and model — not an expected degradation rate for any system. Test it on your own pipeline. Source: [4].</p>
   </div>
 
   <!-- 05 -->

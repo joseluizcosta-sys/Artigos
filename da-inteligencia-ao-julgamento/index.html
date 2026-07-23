@@ -151,6 +151,30 @@
       color: var(--crop); letter-spacing: .08em; display: block; margin-bottom: 8px;
     }
 
+    .mec-card-body { display: flex; gap: 26px; align-items: flex-start; }
+    .mec-card-text { flex: 1 1 56%; min-width: 0; }
+    .mec-card-chart { flex: 0 0 200px; }
+    .mec-card .chart-note { margin: 14px 0 0; }
+    .vbars { display: flex; align-items: flex-end; gap: 16px; height: 130px; }
+    .vbar-col { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; }
+    .vbar-val {
+      font-family: 'IBM Plex Mono', monospace; font-size: .66rem;
+      font-weight: 500; color: var(--ink); margin-bottom: 6px;
+    }
+    .vbar-track {
+      width: 100%; max-width: 44px; background: var(--paper-2);
+      border-radius: 3px 3px 0 0; height: 100%; display: flex; align-items: flex-end; overflow: hidden;
+    }
+    .vbar-fill { width: 100%; border-radius: 3px 3px 0 0; }
+    .vbar-fill.gold  { background: var(--crop); }
+    .vbar-fill.green { background: var(--accept); }
+    .vbar-fill.red   { background: var(--reject); }
+    .vbar-fill.grey  { background: var(--faint); }
+    .vbar-label {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .62rem;
+      color: var(--slate); text-align: center; margin-top: 8px; line-height: 1.25;
+    }
+
     .hidra-grid { display: flex; flex-direction: column; gap: 14px; margin: 36px 0; }
     .hidra-item { display: flex; gap: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; }
     .hidra-item .m-num {
@@ -362,6 +386,9 @@
         flex-direction: row; align-items: center; padding: 12px 16px;
       }
       .chevron-icon { width: 18px; height: 18px; flex-shrink: 0; }
+      .mec-card-body { flex-direction: column; }
+      .mec-card-chart { flex: 1 1 auto; width: 100%; }
+      .vbars { justify-content: center; }
     }
   </style>
 </head>
@@ -471,78 +498,87 @@
 
   <p>A literatura técnica sobre o tema, sintetizando pesquisa do Google DeepMind, Microsoft e Salesforce, documenta quatro falhas distintas — cada uma com limiares numéricos que servem de gatilho de monitoramento em produção<span class="ref">[4]</span>.</p>
 
-  <div class="mec-grid" style="grid-template-columns:repeat(2,1fr);">
+  <div class="mec-grid" style="grid-template-columns:1fr;">
     <div class="mec-card">
       <span class="mec-num">01 — ENVENENAMENTO</span>
       <h3>Context poisoning</h3>
-      <p>Uma alucinação entra no histórico da conversa e passa a ser referenciada como fato, reforçando um objetivo incorreto ao longo de múltiplos turnos. Estudado pelo DeepMind no agente Gemini 2.5. Não se resolve sozinho — exige detecção ativa, porque se acumula.</p>
+      <p>Uma alucinação entra no histórico da conversa e passa a ser referenciada como fato, reforçando um objetivo incorreto ao longo de múltiplos turnos. Estudado pelo DeepMind no agente Gemini 2.5. Não se resolve sozinho — exige detecção ativa, porque se acumula. Vale a distinção: este é um envenenamento interno e não intencional — o próprio sistema se autocontamina com a própria alucinação. É diferente da literatura de segurança sobre ataques de poisoning deliberados, em que um agente externo injeta dados maliciosos para comprometer o modelo. Mesmo nome, mecanismos diferentes.</p>
     </div>
+
     <div class="mec-card">
       <span class="mec-num">02 — DISTRAÇÃO</span>
-      <h3>Context distraction</h3>
-      <p>Janelas de contexto muito grandes fazem o modelo sobre-enfatizar informação repetida ou irrelevante. O efeito se intensifica a partir de ~100 mil tokens no Gemini Pro, e já a partir de ~32 mil tokens em modelos menores como LLaMA 3 405B. Ressalva: esses números vêm de benchmarks específicos e não formam uma curva comparável entre modelos — servem como ponto de partida para calibração, não como constante de engenharia.</p>
+      <div class="mec-card-body">
+        <div class="mec-card-text">
+          <h3>Context distraction</h3>
+          <p>Janelas de contexto muito grandes fazem o modelo sobre-enfatizar informação repetida ou irrelevante. O efeito se intensifica a partir de ~100 mil tokens no Gemini Pro, e já a partir de ~32 mil tokens em modelos menores como LLaMA 3 405B.</p>
+        </div>
+        <div class="mec-card-chart">
+          <div class="vbars">
+            <div class="vbar-col">
+              <span class="vbar-val">~100k</span>
+              <div class="vbar-track"><div class="vbar-fill gold" style="height:100%"></div></div>
+              <span class="vbar-label">Gemini Pro</span>
+            </div>
+            <div class="vbar-col">
+              <span class="vbar-val">~32k</span>
+              <div class="vbar-track"><div class="vbar-fill red" style="height:32%"></div></div>
+              <span class="vbar-label">LLaMA 3 405B</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="chart-note">Tokens a partir dos quais o efeito de distração se intensifica. Números de benchmarks específicos, não uma curva comparável entre modelos — ponto de partida para calibração, não constante de engenharia. Fonte: [4].</p>
     </div>
+
     <div class="mec-card">
       <span class="mec-num">03 — CONFUSÃO</span>
-      <h3>Context confusion</h3>
-      <p>Excesso de ferramentas disponíveis faz o modelo invocar a ferramenta errada. Um LLaMA 3 quantizado falhou com 46 ferramentas simultâneas, mas performou bem com 19. Esse intervalo vem de um único experimento com modelo quantizado — trate como hipótese inicial a validar no seu próprio sistema, não como limite fixo.</p>
+      <div class="mec-card-body">
+        <div class="mec-card-text">
+          <h3>Context confusion</h3>
+          <p>Excesso de ferramentas disponíveis faz o modelo invocar a ferramenta errada. Um LLaMA 3 quantizado falhou com 46 ferramentas simultâneas, mas performou bem com 19.</p>
+        </div>
+        <div class="mec-card-chart">
+          <div class="vbars">
+            <div class="vbar-col">
+              <span class="vbar-val">19</span>
+              <div class="vbar-track"><div class="vbar-fill green" style="height:41%"></div></div>
+              <span class="vbar-label">Performou bem</span>
+            </div>
+            <div class="vbar-col">
+              <span class="vbar-val">46</span>
+              <div class="vbar-track"><div class="vbar-fill red" style="height:100%"></div></div>
+              <span class="vbar-label">Falhou</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="chart-note">Intervalo de um único experimento com modelo quantizado — trate como hipótese inicial a validar no seu próprio sistema, não como limite fixo. Fonte: [4].</p>
     </div>
+
     <div class="mec-card">
       <span class="mec-num">04 — CHOQUE</span>
-      <h3>Context clash</h3>
-      <p>Instruções conflitantes na mesma janela levam a saídas inconsistentes — a falha mais severa das quatro. Fragmentar instruções em vários turnos, em vez de um prompt único, derrubou a acurácia de 98% para 64% num teste específico — não assuma essa queda como referência universal; teste no seu próprio pipeline.</p>
+      <div class="mec-card-body">
+        <div class="mec-card-text">
+          <h3>Context clash</h3>
+          <p>Instruções conflitantes na mesma janela levam a saídas inconsistentes — a falha mais severa das quatro. Fragmentar instruções em vários turnos, em vez de um prompt único, derrubou a acurácia de 98% para 64% num teste específico.</p>
+        </div>
+        <div class="mec-card-chart">
+          <div class="vbars">
+            <div class="vbar-col">
+              <span class="vbar-val">98%</span>
+              <div class="vbar-track"><div class="vbar-fill green" style="height:98%"></div></div>
+              <span class="vbar-label">Prompt único</span>
+            </div>
+            <div class="vbar-col">
+              <span class="vbar-val">64%</span>
+              <div class="vbar-track"><div class="vbar-fill red" style="height:64%"></div></div>
+              <span class="vbar-label">Fragmentado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="chart-note">Experimento da Microsoft e Salesforce, uma tarefa e um modelo específicos — não assuma essa queda como referência universal; teste no seu próprio pipeline. Fonte: [4].</p>
     </div>
-  </div>
-
-  <div class="chart-block">
-    <p class="chart-title">Distração — o teto varia por modelo</p>
-    <div class="bars">
-      <div class="bar-row">
-        <span class="bar-label">Gemini Pro (janela grande)</span>
-        <div class="bar-track"><div class="bar-fill gold" style="width:100%"></div></div>
-        <span class="bar-val">~100k tokens</span>
-      </div>
-      <div class="bar-row">
-        <span class="bar-label">LLaMA 3 405B (janela menor)</span>
-        <div class="bar-track"><div class="bar-fill red" style="width:32%"></div></div>
-        <span class="bar-val">~32k tokens</span>
-      </div>
-    </div>
-    <p class="chart-note">Ponto a partir do qual o efeito de distração se intensifica. Mais contexto não é sempre melhor — o limite depende do modelo. Heurística de ponto de partida, não constante de engenharia. Fonte: [4].</p>
-  </div>
-
-  <div class="chart-block">
-    <p class="chart-title">Confusão — o limite de ferramentas simultâneas antes da falha</p>
-    <div class="bars">
-      <div class="bar-row">
-        <span class="bar-label">Performou bem</span>
-        <div class="bar-track"><div class="bar-fill green" style="width:41%"></div></div>
-        <span class="bar-val">19 ferramentas</span>
-      </div>
-      <div class="bar-row">
-        <span class="bar-label">Falhou</span>
-        <div class="bar-track"><div class="bar-fill red" style="width:100%"></div></div>
-        <span class="bar-val">46 ferramentas</span>
-      </div>
-    </div>
-    <p class="chart-note">LLaMA 3 quantizado, experimento único — não necessariamente generaliza para modelos de fronteira. Trate como hipótese inicial a validar no seu sistema. Fonte: [4].</p>
-  </div>
-
-  <div class="chart-block">
-    <p class="chart-title">Choque — acurácia despenca com instruções fragmentadas</p>
-    <div class="bars">
-      <div class="bar-row">
-        <span class="bar-label">Prompt único e coeso</span>
-        <div class="bar-track"><div class="bar-fill green" style="width:98%"></div></div>
-        <span class="bar-val">98%</span>
-      </div>
-      <div class="bar-row">
-        <span class="bar-label">Instruções fragmentadas em turnos</span>
-        <div class="bar-track"><div class="bar-fill red" style="width:64%"></div></div>
-        <span class="bar-val">64%</span>
-      </div>
-    </div>
-    <p class="chart-note">Experimento da Microsoft e Salesforce, uma tarefa e um modelo específicos — não uma taxa de degradação esperada em qualquer sistema. Teste no seu próprio pipeline. Fonte: [4].</p>
   </div>
 
   <!-- 05 -->
