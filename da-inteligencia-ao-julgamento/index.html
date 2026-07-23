@@ -303,7 +303,7 @@
       </div></li>
       <li><div>
         <a class="rm-title" href="#s02">Por que Isso Quebra sem Manutenção <span class="arw">→</span></a>
-        <p>O loop de 11 dias que gerou uma fatura de US$ 47 mil — e por que não é um problema de modelo fraco.</p>
+        <p>Um estudo de Stanford mediu até 1.000x mais consumo de tokens em tarefas agênticas — e por que gastar mais nem sempre significa mais acurácia.</p>
       </div></li>
       <li><div>
         <a class="rm-title" href="#s03">O que é Engenharia de Contexto <span class="arw">→</span></a>
@@ -347,20 +347,18 @@
 
   <!-- 02 -->
   <h2 id="s02">
-    <span class="eyebrow">02 — O incidente</span>
+    <span class="eyebrow">02 — O sintoma</span>
     Por que isso quebra sem manutenção
   </h2>
 
-  <p>Em novembro de 2025, um pipeline de agentes em produção — dois agentes LangChain trocando mensagens entre si, sem teto de orçamento nem condição de parada — entrou em loop e rodou por 11 dias seguidos. Ninguém percebeu até o extrato de cobrança chegar. Pesquisadores de Stanford, olhando para o problema de forma mais ampla, mediram até onde essa imprevisibilidade pode escalar em tarefas agênticas comuns<span class="ref">[3]</span>.</p>
+  <p>Pesquisadores do Stanford Digital Economy Lab mediram, em estudo de 2026 que analisou oito modelos de fronteira em tarefas agênticas de codificação, que esse tipo de tarefa consome até 1.000 vezes mais tokens do que uma interação comum de chat — com variação de até 30x entre duas execuções idênticas da mesma tarefa<span class="ref">[3]</span>. Mais revelador ainda: gastar mais tokens não se traduz em mais acurácia. O desempenho tende a saturar — e às vezes piorar — a partir de um certo custo. Jogar mais contexto no problema não é solução; pode ser, ao contrário, o sintoma de um sistema sem controle.</p>
 
-  <div class="stat-grid">
-    <div class="stat-card"><div class="num">11 dias</div><div class="lab">de loop ininterrupto</div></div>
-    <div class="stat-card"><div class="num">US$ 47 mil</div><div class="lab">na fatura, sem ninguém perceber</div></div>
+  <div class="stat-grid" style="grid-template-columns:repeat(2,1fr);max-width:420px;">
     <div class="stat-card"><div class="num">1.000x</div><div class="lab">mais tokens que uma conversa comum</div></div>
     <div class="stat-card"><div class="num">30x</div><div class="lab">de variação entre execuções idênticas</div></div>
   </div>
 
-  <p>Esse não é um problema de modelo fraco. É um problema de contexto mal gerido — o mesmo tipo de acúmulo desorganizado de informação que, em vez de ensinar julgamento ao sistema, o faz perder a capacidade de resolver até as tarefas de rotina que já dominava. Engenharia de Contexto — como disciplina de manutenção contínua, não como decisão de arquitetura tomada uma vez — existe para prevenir exatamente essa quebra. Ela não é só uma boa prática operacional: é a infraestrutura que decide se a travessia de inteligência para julgamento, descrita acima, termina em capacidade real ou em colapso caro e silencioso.</p>
+  <p>Essa variabilidade extrema não é um problema de modelo fraco. É um problema de contexto mal gerido — o mesmo tipo de acúmulo desorganizado de informação que, em vez de ensinar julgamento ao sistema, o faz perder a capacidade de resolver até as tarefas de rotina que já dominava. Engenharia de Contexto — como disciplina de manutenção contínua, não como decisão de arquitetura tomada uma vez — existe para prevenir exatamente essa quebra. Ela não é só uma boa prática operacional: é a infraestrutura que decide se a travessia de inteligência para julgamento, descrita acima, termina em capacidade real ou em colapso caro e silencioso.</p>
 
   <!-- 03 -->
   <h2 id="s03">
@@ -393,17 +391,17 @@
     <div class="mec-card">
       <span class="mec-num">02 — DISTRAÇÃO</span>
       <h3>Context distraction</h3>
-      <p>Janelas de contexto muito grandes fazem o modelo sobre-enfatizar informação repetida ou irrelevante. O efeito se intensifica a partir de ~100 mil tokens no Gemini Pro, e já a partir de ~32 mil tokens em modelos menores como LLaMA 3 405B.</p>
+      <p>Janelas de contexto muito grandes fazem o modelo sobre-enfatizar informação repetida ou irrelevante. O efeito se intensifica a partir de ~100 mil tokens no Gemini Pro, e já a partir de ~32 mil tokens em modelos menores como LLaMA 3 405B. Ressalva: esses números vêm de benchmarks específicos e não formam uma curva comparável entre modelos — servem como ponto de partida para calibração, não como constante de engenharia.</p>
     </div>
     <div class="mec-card">
       <span class="mec-num">03 — CONFUSÃO</span>
       <h3>Context confusion</h3>
-      <p>Excesso de ferramentas disponíveis faz o modelo invocar a ferramenta errada. Um LLaMA 3 quantizado falhou com 46 ferramentas simultâneas, mas performou bem com 19. Recomenda-se manter entre 10 e 15 ferramentas ativas por agente.</p>
+      <p>Excesso de ferramentas disponíveis faz o modelo invocar a ferramenta errada. Um LLaMA 3 quantizado falhou com 46 ferramentas simultâneas, mas performou bem com 19. Esse intervalo vem de um único experimento com modelo quantizado — trate como hipótese inicial a validar no seu próprio sistema, não como limite fixo.</p>
     </div>
     <div class="mec-card">
       <span class="mec-num">04 — CHOQUE</span>
       <h3>Context clash</h3>
-      <p>Instruções conflitantes na mesma janela levam a saídas inconsistentes — a falha mais severa das quatro. Fragmentar instruções ao longo de vários turnos, em vez de um prompt único e coeso, derrubou a acurácia de 98% para 64% num dos testes.</p>
+      <p>Instruções conflitantes na mesma janela levam a saídas inconsistentes — a falha mais severa das quatro. Fragmentar instruções em vários turnos, em vez de um prompt único, derrubou a acurácia de 98% para 64% num teste específico — não assuma essa queda como referência universal; teste no seu próprio pipeline.</p>
     </div>
   </div>
 
@@ -421,7 +419,7 @@
         <span class="bar-val">~32k tokens</span>
       </div>
     </div>
-    <p class="chart-note">Ponto a partir do qual o efeito de distração se intensifica. Mais contexto não é sempre melhor — o limite depende do modelo. Fonte: [4].</p>
+    <p class="chart-note">Ponto a partir do qual o efeito de distração se intensifica. Mais contexto não é sempre melhor — o limite depende do modelo. Heurística de ponto de partida, não constante de engenharia. Fonte: [4].</p>
   </div>
 
   <div class="chart-block">
@@ -438,7 +436,7 @@
         <span class="bar-val">46 ferramentas</span>
       </div>
     </div>
-    <p class="chart-note">LLaMA 3 quantizado, mesmo teste. Recomendação prática da literatura: manter entre 10 e 15 ferramentas ativas por agente. Fonte: [4].</p>
+    <p class="chart-note">LLaMA 3 quantizado, experimento único — não necessariamente generaliza para modelos de fronteira. Trate como hipótese inicial a validar no seu sistema. Fonte: [4].</p>
   </div>
 
   <div class="chart-block">
@@ -455,7 +453,7 @@
         <span class="bar-val">64%</span>
       </div>
     </div>
-    <p class="chart-note">Experimento da Microsoft e Salesforce sobre choque de contexto (context clash). Fonte: [4].</p>
+    <p class="chart-note">Experimento da Microsoft e Salesforce, uma tarefa e um modelo específicos — não uma taxa de degradação esperada em qualquer sistema. Teste no seu próprio pipeline. Fonte: [4].</p>
   </div>
 
   <!-- 05 -->
@@ -507,6 +505,10 @@
     Checklist operacional de manutenção
   </h2>
 
+  <div class="callout">
+    <p>Um aviso antes do checklist: os limiares numéricos citados nas seções anteriores (tokens, contagem de ferramentas, queda de acurácia) vêm de estudos específicos, com modelos e condições particulares — funcionam como heurísticas de ponto de partida, não como regras fixas de engenharia. Meça cada um no seu próprio sistema antes de fixar um limite operacional; um número importado de um benchmark alheio, sem validação local, é decoração, não controle.</p>
+  </div>
+
   <p>Para quem está operando — não apenas construindo — um sistema de IA em produção, a manutenção da engenharia de contexto deveria ser tratada como rotina de observabilidade, com os seguintes pontos de verificação recorrentes:</p>
 
   <div class="hidra-grid">
@@ -518,12 +520,12 @@
     <div class="hidra-item">
       <span class="m-num">02</span>
       <div><strong>Auditar o número de ferramentas ativas</strong>
-      <p>Expostas a cada agente; manter entre 10 e 15, com o restante disponível sob demanda via roteamento.</p></div>
+      <p>Expostas a cada agente; manter entre 10 e 15 como ponto de partida — validando esse número no seu próprio sistema —, com o restante disponível sob demanda via roteamento.</p></div>
     </div>
     <div class="hidra-item">
       <span class="m-num">03</span>
       <div><strong>Definir teto de orçamento com corte automático — não apenas alerta</strong>
-      <p>O caso dos US$ 47 mil aconteceu justamente porque havia alerta de orçamento configurado, mas nenhum mecanismo de corte automático o executou<span class="ref">[3]</span>.</p></div>
+      <p>Alerta sozinho não impede a perda: um agente em loop pode gerar custo por dias sem que ninguém intervenha a tempo se o único mecanismo for notificação, não interrupção automática.</p></div>
     </div>
     <div class="hidra-item">
       <span class="m-num">04</span>
@@ -540,7 +542,7 @@
   <!-- 07 -->
   <h2 id="s07">
     <span class="eyebrow">07 — O próximo movimento</span>
-    O terceiro pilar: por que dados é a fronteira de 2026
+    O terceiro pilar: por que dados é o próximo movimento
   </h2>
 
   <p>A indústria costuma descrever a própria infraestrutura em três camadas: computação, modelo e dados. É a mesma divisão que orienta o fundo de US$ 1,7 bilhão que a Andreessen Horowitz dedicou a infraestrutura de IA em fevereiro de 2026 — a tese declarada da firma é investir em três pilares centrais: "inovação em computação, infraestrutura de dados e desenvolvimento de modelos fundacionais"<span class="ref">[6]</span>. Os dois primeiros pilares já tiveram seu ciclo de capital e atenção: 2023 e 2024 foram dominados pela corrida por poder computacional; 2024 e 2025, pela corrida entre laboratórios de modelo.</p>
@@ -573,29 +575,29 @@
 
   <p>Em outras palavras: a mesma indústria que financiou a corrida por modelo e computação está apontando, agora, para onde este texto já estava — dados e contexto, não mais o modelo em si, são o gargalo que decide se um sistema de IA funciona em produção.</p>
 
-  <!-- Conclusão -->
+  <!-- Provocação Final -->
   <h2>
-    <span class="eyebrow">Conclusão</span>
-    O profissional que sobe de camada junto com a IA
+    <span class="eyebrow">Fechamento</span>
+    Provocação Final
   </h2>
 
   <p>A travessia de inteligência para julgamento não é um evento — é um processo contínuo, e o combustível desse processo é exatamente o tipo de contexto que este texto descreveu: histórico de decisões, correções, nuances acumuladas ao longo do tempo. Um sistema que gerencia mal esse contexto não apenas deixa de evoluir para o julgamento — ele regride, perde precisão nas próprias tarefas de rotina que já executava bem. Os quatro modos de falha documentados aqui não são obstáculos técnicos menores: são exatamente o que separa uma IA que acumula experiência de uma que acumula ruído.</p>
 
+  <p>Andrej Karpathy, um dos arquitetos originais da OpenAI, tem uma analogia que circula amplamente para resumir o porquê — ainda que a formulação exata abaixo venha de cobertura de terceiros, não de uma declaração primária dele<span class="ref">[8]</span>:</p>
+
   <div class="pull-quote">
     "O LLM é como a CPU, e sua janela de contexto é como a RAM."
-    <cite>Andrej Karpathy, um dos arquitetos originais da OpenAI</cite>
+    <cite>Atribuído a Andrej Karpathy — formulação de cobertura de terceiros, não declaração primária</cite>
   </div>
 
-  <p>Assim como ninguém deixaria uma CPU rodar com lixo aleatório carregado na RAM, não se pode esperar que um sistema de IA funcione de forma confiável sem alguém projetando deliberadamente o que entra nessa janela<span class="ref">[8]</span>.</p>
+  <p>É a memória de trabalho do modelo. Assim como ninguém deixaria uma CPU rodar com lixo aleatório carregado na RAM, não se pode esperar que um sistema de IA funcione de forma confiável sem alguém projetando deliberadamente o que entra nessa janela.</p>
 
-  <p>Esse alguém já tem nome de cargo: Context Engineer. O termo começou a aparecer em discussões sérias de IA no fim de 2025; no início de 2026, a Gartner já havia publicado uma definição formal da disciplina — "projetar e estruturar os dados, fluxos de trabalho e ambiente relevantes para que sistemas de IA compreendam intenção, tomem melhores decisões e entreguem resultados contextuais alinhados ao negócio, sem depender de prompts manuais." O mercado já reconhece essa competência como especialização própria dentro da engenharia de IA, distinta tanto do generalista quanto do antigo "prompt engineer" — com remuneração consistentemente acima da média da área, ainda que a faixa exata varie muito por país, empresa e senioridade<span class="ref">[8]</span>.</p>
+  <p>Esse alguém já tem nome de cargo em algumas empresas — Context Engineer —, formalizado pela Gartner no início de 2026<span class="ref">[8]</span>. Mas o cargo importa menos do que a responsabilidade: quem assume essa função, nomeada ou não formalmente, ocupa uma posição estratégica para o funcionamento correto dos mecanismos de IA — porque o pilar de dados e contexto só sustenta a travessia de inteligência para julgamento se houver dono.</p>
 
-  <p>O detalhe mais importante, porém, não é o salário — é o que a própria Gartner recomenda às empresas: nomear um líder ou equipe de engenharia de contexto integrado à governança operacional da IA, não apenas à equipe técnica<span class="ref">[8]</span>. Isso amarra a competência descrita neste texto à estratégia de negócio: o perfil mais valioso nessa função não é quem só sabe configurar um pipeline de RAG, é quem entende o problema de negócio a fundo o suficiente para saber que informação o modelo realmente precisa para decidir bem — conhecimento de domínio pesa aqui mais do que a maioria espera.</p>
-
-  <p>Isso fecha o argumento central deste texto. A travessia de inteligência para julgamento só acontece se o contexto for gerido com disciplina — e quem gerencia essa disciplina não é um técnico de bastidor, é quem passa a decidir, com base no negócio, o que a IA deve lembrar, esquecer e priorizar. É esse o argumento de Ethan Mollick em <em>Co-Intelligence</em>: o valor humano se desloca para a supervisão e o julgamento sobre o que a IA produz, não para competir em velocidade de execução com ela<span class="ref">[9]</span>.</p>
+  <p>Julien Bek, no mesmo artigo da Sequoia Capital citado na abertura deste texto, defende uma tese ambiciosa: serviços serão o novo software — boa parte do trabalho de serviço profissional, eventualmente absorvida por sistemas de IA operando com autonomia real<span class="ref">[2]</span>. Pode estar certo, no longo prazo. Mas essa tese descreve um horizonte que a maioria das empresas ainda não alcançou: enquanto se debate Services as Software, muitos projetos de IA em produção ainda são encerrados sem conclusão, e boa parte das organizações ainda engatinha para transformar uso de IA em ganho real de produtividade ou em benefício de negócio mensurável.</p>
 
   <div class="callout">
-    <p>Na prática de 2026, esse deslocamento já tem descrição de cargo, faixa salarial e lugar reservado na mesa onde a estratégia é decidida — não só onde ela é executada. A régua se move nos dois lados ao mesmo tempo: a IA sobe de capacidade sobre o pilar de dados, o profissional que administra esse pilar sobe de camada junto com ela.</p>
+    <p>Só o tempo vai dizer se — e quais — serviços serão de fato substituídos por software nesse formato. Até lá, o que faz sentido é pavimentar o caminho: fortalecer o terceiro pilar, aprimorando a disciplina que decide se um sistema de IA em produção acumula julgamento ou acumula ruído — a Engenharia de Contexto.</p>
   </div>
 
   <!-- Bottom -->
@@ -605,14 +607,13 @@
       <ul>
         <li>[1] Susskind, R.; Susskind, D. (2015/2022). <em>The Future of the Professions: How Technology Will Transform the Work of Human Experts.</em> Oxford University Press.</li>
         <li>[2] Bek, J. (2026). <em>Services: The New Software.</em> Sequoia Capital, 5 de março de 2026. Citado aqui apenas pela formulação da tese de convergência entre inteligência e julgamento, não pela discussão de mercado do artigo. <a href="https://sequoiacap.com/article/services-the-new-software/" target="_blank">Link</a></li>
-        <li>[3] <em>The $47,000 Agent Loop: Why Token Budget Alerts Aren't Budget Enforcement.</em> DEV Community, 2026; pesquisa da Stanford University sobre consumo de tokens em tarefas agênticas. <a href="https://dev.to/waxell/the-47000-agent-loop-why-token-budget-alerts-arent-budget-enforcement-389i" target="_blank">Link</a></li>
+        <li>[3] Brynjolfsson, E.; Pentland, S.; Pei, J. et al. (2026). <em>How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks.</em> Stanford Digital Economy Lab. <a href="https://arxiv.org/abs/2604.22750" target="_blank">arXiv:2604.22750</a></li>
         <li>[4] Farooq, H.; Rajwani, J. (2025). <em>Understanding Context Engineering.</em> The Production Gap (Substack), 13 de julho de 2025 — síntese de pesquisa do Google DeepMind (Gemini 2.5), Microsoft e Salesforce sobre modos de falha em janelas de contexto. <a href="https://boringbot.substack.com/p/understanding-context-engineering" target="_blank">Link</a></li>
         <li>[5] Lütke, T. <a href="https://x.com/tobi/status/1935533422589399127" target="_blank">Publicação no X</a>, 19 de junho de 2025; Anthropic (2025). <em>Effective context engineering for AI agents.</em> <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank">Link</a></li>
         <li>[6] Andreessen Horowitz — fundo de infraestrutura de IA de US$ 1,7 bilhão liderado por Jennifer Li, anunciado em fevereiro de 2026, reportado por BitcoinWorld/CryptoRank. Citação de segunda mão sobre a tese declarada da a16z, não de material publicado diretamente pela firma. <a href="https://cryptorank.io/news/feed/a1fa2-a16z-ai-infrastructure-fund-2025" target="_blank">Link</a></li>
         <li>[7] a16z New Media (2025). <em>Big Ideas 2026: Part 1.</em> 9 de dezembro de 2025 — previsões de Jennifer Li e Jason Cui, sócios da equipe de Infraestrutura da a16z. <a href="https://www.a16z.news/p/big-ideas-2026-part-1" target="_blank">Link</a></li>
         <li>[8] <em>What Is a Context Engineer? The AI Job Title Replacing Prompt Engineers in 2026.</em> The Interview Guys, atualizado em 25 de junho de 2026 — inclui a citação de Andrej Karpathy e a definição formal da Gartner. Fonte secundária de carreira/recrutamento, não um relatório primário da Gartner nem uma declaração direta de Karpathy. <a href="https://blog.theinterviewguys.com/what-is-a-context-engineer/" target="_blank">Link</a></li>
-        <li>[9] Mollick, E. (2024). <em>Co-Intelligence: Living and Working with AI.</em> Portfolio/Penguin.</li>
-        <li>Leitura complementar: Willison, S. <em>Context engineering.</em> Junho de 2025. <a href="https://simonwillison.net/2025/Jun/27/context-engineering/" target="_blank">Link</a> — e as discussões de Andrej Karpathy e Harrison Chase (LangChain) sobre a distinção entre prompt engineering e context engineering.</li>
+        <li>Leituras complementares: Willison, S. <em>Context engineering.</em> Junho de 2025. <a href="https://simonwillison.net/2025/Jun/27/context-engineering/" target="_blank">Link</a> — as discussões de Andrej Karpathy e Harrison Chase (LangChain) sobre a distinção entre prompt engineering e context engineering — e Mollick, E. (2024). <em>Co-Intelligence: Living and Working with AI.</em> Portfolio/Penguin.</li>
       </ul>
     </div>
   </div>
