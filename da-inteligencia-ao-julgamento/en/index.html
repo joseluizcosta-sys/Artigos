@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Intelligence to Judgment — Context Engineering and What AI Still Can't Do Alone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --paper:      #F1ECE0;
+      --paper-2:    #E8E1D1;
+      --card:       #FAF6EC;
+      --ink:        #1A1E1B;
+      --ink-soft:   #34382F;
+      --slate:      #6A6B5F;
+      --faint:      #9A9886;
+      --crop:       #C18E20;
+      --crop-deep:  #9A6E13;
+      --accept:     #2F6553;
+      --reject:     #A12B22;
+      --line:       rgba(26,30,27,.16);
+      --line-soft:  rgba(26,30,27,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      background-image: linear-gradient(var(--line-soft) 1px, transparent 1px);
+      background-size: 100% 30px;
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .lang-nav {
+      position: fixed; top: 0; right: 0;
+      padding: 14px 24px;
+      display: flex; gap: 6px;
+      z-index: 100;
+    }
+    .lang-nav a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; padding: 4px 10px; border-radius: 3px;
+      border: 1px solid transparent; color: var(--faint); transition: all .18s;
+    }
+    .lang-nav a.active { color: var(--ink); border-color: var(--line); background: var(--card); }
+    .lang-nav a:hover:not(.active) { color: var(--slate); }
+
+    header { max-width: 760px; margin: 0 auto; padding: 100px 28px 52px; }
+
+    .meta {
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em;
+      color: var(--faint); margin-bottom: 28px;
+      display: flex; flex-wrap: wrap; gap: 4px 0; align-items: center;
+    }
+    .meta a { color: var(--faint); text-decoration: none; }
+    .meta a:hover { color: var(--crop); }
+    .meta .sep { margin: 0 8px; opacity: .5; }
+
+    h1 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 700;
+      line-height: 1.08; letter-spacing: -.02em; color: var(--ink); margin: 0 0 18px;
+    }
+    .deck {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.15rem;
+      font-style: italic; color: var(--slate); line-height: 1.55; margin-bottom: 36px;
+    }
+    .lede {
+      font-size: 1.05rem; color: var(--ink-soft); line-height: 1.75;
+      border-left: 2.5px solid var(--crop); padding-left: 20px;
+    }
+
+    main { max-width: 760px; margin: 0 auto; padding: 0 28px 80px; }
+
+    p { color: var(--ink-soft); margin: 0 0 22px; }
+    strong { color: var(--ink); font-weight: 600; }
+    em { font-style: italic; }
+
+    h2 {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.5rem;
+      font-weight: 700; color: var(--ink); margin: 40px 0 16px; letter-spacing: -.01em;
+    }
+    h2 .eyebrow {
+      display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      font-weight: 500; text-transform: uppercase; letter-spacing: .14em;
+      color: var(--crop); margin-bottom: 10px;
+    }
+    h3.sub {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.02rem;
+      font-weight: 600; color: var(--ink); margin: 34px 0 12px;
+    }
+
+    .pull-quote {
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 28px 0; margin: 44px 0;
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.2rem;
+      font-style: italic; color: var(--ink); line-height: 1.5;
+    }
+    .pull-quote cite {
+      display: block; font-style: normal; font-family: 'IBM Plex Mono', monospace;
+      font-size: .75rem; color: var(--faint); margin-top: 14px; letter-spacing: .04em;
+    }
+
+    .toggle-block {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 24px; margin: 40px 0;
+    }
+    .toggle-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin-bottom: 14px;
+    }
+
+    .badge {
+      display: inline-block; font-family: 'IBM Plex Mono', monospace;
+      font-size: .68rem; font-weight: 500; text-transform: uppercase;
+      letter-spacing: .07em; padding: 2px 8px; border-radius: 3px; margin-bottom: 12px;
+    }
+    .badge-reject { background: rgba(161,43,34,.1); color: var(--reject); }
+    .badge-accept { background: rgba(47,101,83,.1); color: var(--accept); }
+    .badge-crop   { background: rgba(193,142,32,.1); color: var(--crop-deep); }
+
+    .mec-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px; margin: 36px 0;
+    }
+    .mec-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 5px; padding: 18px 16px;
+    }
+    .mec-card h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .85rem; font-weight: 600; color: var(--ink);
+      margin: 0 0 8px;
+    }
+    .mec-card p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .78rem; color: var(--slate); margin: 0; line-height: 1.5;
+    }
+    .mec-num {
+      font-family: 'IBM Plex Mono', monospace; font-size: .65rem;
+      color: var(--crop); letter-spacing: .08em; display: block; margin-bottom: 8px;
+    }
+
+    .hidra-grid { display: flex; flex-direction: column; gap: 14px; margin: 36px 0; }
+    .hidra-item { display: flex; gap: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; }
+    .hidra-item .m-num {
+      font-family: 'IBM Plex Mono', monospace; font-size: .8rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 3px; font-weight: 500;
+    }
+    .hidra-item strong { display: block; font-size: .92rem; margin-bottom: 4px; }
+    .hidra-item p { margin: 0; font-size: .84rem; color: var(--slate); line-height: 1.55; }
+
+    .roadmap {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 24px 26px; margin: 40px 0;
+    }
+    .roadmap .toggle-label { margin-bottom: 16px; }
+    .roadmap ol {
+      list-style: none; counter-reset: rm; padding: 0; margin: 0;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 20px;
+    }
+    .roadmap li { counter-increment: rm; display: flex; gap: 9px; }
+    .roadmap li::before {
+      content: counter(rm, decimal-leading-zero);
+      font-family: 'IBM Plex Mono', monospace; font-size: .66rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 2px; font-weight: 500;
+    }
+    .roadmap a.rm-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: .8rem; color: var(--ink); text-decoration: none;
+      display: inline-flex; align-items: baseline; gap: 5px; line-height: 1.25;
+    }
+    .roadmap a.rm-title:hover { color: var(--crop-deep); }
+    .roadmap a.rm-title .arw { color: var(--crop); font-size: .72rem; }
+    .roadmap p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: .68rem; color: var(--slate); margin: 4px 0 0; line-height: 1.4;
+    }
+
+    .callout {
+      background: var(--card); border: 1px solid var(--line);
+      border-left: 3px solid var(--crop); border-radius: 0 5px 5px 0;
+      padding: 20px 24px; margin: 36px 0;
+    }
+    .callout p { margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 1.05rem; color: var(--ink); }
+
+    /* ── Charts ── */
+    .chart-block {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 6px; padding: 24px 26px; margin: 36px 0;
+    }
+    .chart-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .88rem;
+      font-weight: 600; color: var(--ink); margin: 0 0 4px;
+    }
+    .chart-note {
+      font-family: 'IBM Plex Mono', monospace; font-size: .66rem;
+      color: var(--faint); letter-spacing: .03em; margin: 14px 0 0; line-height: 1.5;
+    }
+    .bars { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
+    .bar-row { display: grid; grid-template-columns: 150px 1fr 74px; gap: 12px; align-items: center; }
+    .bar-label {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .76rem;
+      color: var(--slate); line-height: 1.3; text-align: right;
+    }
+    .bar-track { background: var(--paper-2); border-radius: 3px; height: 22px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 3px; }
+    .bar-fill.gold  { background: var(--crop); }
+    .bar-fill.green { background: var(--accept); }
+    .bar-fill.red   { background: var(--reject); }
+    .bar-fill.grey  { background: var(--faint); }
+    .bar-val {
+      font-family: 'IBM Plex Mono', monospace; font-size: .74rem;
+      font-weight: 500; color: var(--ink);
+    }
+
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 10px; margin: 36px 0;
+    }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 5px; padding: 16px 14px; text-align: center;
+    }
+    .stat-card .num {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: 1.5rem; color: var(--crop-deep); line-height: 1.1; margin-bottom: 6px;
+    }
+    .stat-card .lab {
+      font-family: 'IBM Plex Mono', monospace; font-size: .6rem;
+      text-transform: uppercase; letter-spacing: .06em; color: var(--slate); line-height: 1.4;
+    }
+
+    .fn {
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
+      color: var(--crop); vertical-align: super; cursor: default;
+    }
+    .ref {
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
+      color: var(--crop-deep); vertical-align: super;
+    }
+
+    .bottom {
+      border-top: 1px solid var(--line); margin-top: 72px; padding-top: 28px;
+      display: flex; flex-direction: column; gap: 32px;
+    }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .14em; color: var(--faint); margin: 0 0 14px;
+    }
+    .bottom ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .bottom li { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .8rem; color: var(--slate); line-height: 1.55; }
+    .bottom a { color: var(--crop-deep); text-decoration: none; }
+    .bottom a:hover { text-decoration: underline; }
+
+    .article-note {
+      font-family: 'IBM Plex Mono', monospace; font-size: .72rem;
+      color: var(--faint); letter-spacing: .04em; margin-top: 28px;
+    }
+
+    @media (max-width: 600px) {
+      .mec-grid    { grid-template-columns: 1fr !important; }
+      .roadmap ol  { grid-template-columns: 1fr; gap: 14px; }
+      .stat-grid   { grid-template-columns: 1fr 1fr; }
+      .bar-row     { grid-template-columns: 100px 1fr 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="lang-nav">
+  <a href="../index.html">PT</a>
+  <a href="./index.html" class="active">EN</a>
+</nav>
+
+<header>
+  <div class="meta">White Paper<span class="sep">·</span>July 2026</div>
+
+  <h1>From Intelligence to Judgment</h1>
+  <div class="deck">What AI still can't do on its own — and why Context Engineering decides whether it gets there, or breaks trying</div>
+
+  <p class="lede">Every profession has a boundary between rule-based work and instinct-based work. That boundary is migrating toward the machine — but only when an AI system can accumulate, organize and use human experience without breaking in the process. Most production AI projects fail exactly there: not because the model is weak, but because nobody maintained the context it was accumulating. This piece documents the four failure modes silently eroding AI systems, the maintenance cycle that prevents them, and why the AI infrastructure industry itself now points to data and context — not the model — as the 2026 frontier.</p>
+</header>
+
+<main>
+
+  <div class="roadmap">
+    <div class="toggle-label">What's covered — seven steps</div>
+    <ol>
+      <li><div>
+        <a class="rm-title" href="#s01">From Intelligence to Judgment <span class="arw">→</span></a>
+        <p>Why the boundary between rule and instinct is migrating toward the machine — and what that has to do with proprietary data.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s02">Why It Breaks Without Maintenance <span class="arw">→</span></a>
+        <p>The 11-day loop that generated a $47,000 bill — and why it's not a weak-model problem.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s03">What Is Context Engineering <span class="arw">→</span></a>
+        <p>The definition, the origin of the term, and why it isn't an architecture choice made once.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s04">The Four Failure Modes <span class="arw">→</span></a>
+        <p>Poisoning, distraction, confusion and clash — with the numerical thresholds that serve as production monitoring triggers.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s05">The Maintenance Cycle <span class="arw">→</span></a>
+        <p>Five techniques, two categories: what gets decided once and what runs on every interaction.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s06">Operational Checklist <span class="arw">→</span></a>
+        <p>Five recurring checkpoints for whoever operates — not just builds — AI systems in production.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s07">The Third Pillar <span class="arw">→</span></a>
+        <p>Why the AI infrastructure industry itself now points to data as the 2026 frontier.</p>
+      </div></li>
+    </ol>
+  </div>
+
+  <!-- 01 -->
+  <h2 id="s01">
+    <span class="eyebrow">01 — The boundary</span>
+    From intelligence to judgment
+  </h2>
+
+  <p>Richard and Daniel Susskind, in <em>The Future of the Professions</em>, describe a boundary that runs through every profession: on one side, routine cognitive work — complex, but reducible to rules; on the other, judgment — experience, instinct, sensitivity to nuance, built over years of practice<span class="ref">[1]</span>. That boundary isn't fixed. It moves as technology advances, and the Susskinds' thesis is that it will keep migrating toward the machine — not because judgment stops existing, but because part of what we call judgment today will prove, with enough data, more mappable than it looked.</p>
+
+  <div class="pull-quote">
+    "Today's judgement will become tomorrow's intelligence."
+    <cite>Julien Bek, Sequoia Capital — 2026</cite>
+  </div>
+
+  <p>That's a recent, specific way of articulating the same idea<span class="ref">[2]</span>. The logic is simple to state: as an AI system accumulates proprietary data about how human experts decide — the history of corrections, the reasoning behind each choice, the specific context of each case — it starts recognizing patterns that used to take years of practice to see. What was instinct gradually becomes recognizable rule.</p>
+
+  <p>The problem is that this migration doesn't happen automatically. It depends on a specific technical capability: accumulating, organizing and using this growing volume of human experience without the system breaking in the process. And that's exactly where most production AI projects fail — not because the model is weak, but because nobody maintained the context it was accumulating.</p>
+
+  <!-- 02 -->
+  <h2 id="s02">
+    <span class="eyebrow">02 — The incident</span>
+    Why it breaks without maintenance
+  </h2>
+
+  <p>In November 2025, a production agent pipeline — two LangChain agents exchanging messages with each other, no budget cap, no stop condition — entered a loop and ran for 11 straight days. Nobody noticed until the bill arrived. Stanford researchers, looking at the problem more broadly, measured just how far this unpredictability can scale in common agentic tasks<span class="ref">[3]</span>.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="num">11 days</div><div class="lab">of uninterrupted loop</div></div>
+    <div class="stat-card"><div class="num">$47k</div><div class="lab">on the bill, nobody noticed</div></div>
+    <div class="stat-card"><div class="num">1,000x</div><div class="lab">more tokens than a common chat</div></div>
+    <div class="stat-card"><div class="num">30x</div><div class="lab">variance between identical runs</div></div>
+  </div>
+
+  <p>This isn't a weak-model problem. It's a badly managed context problem — the same kind of disorganized information buildup that, instead of teaching the system judgment, makes it lose the ability to solve even the routine tasks it already mastered. Context Engineering — as a discipline of continuous maintenance, not a one-time architecture decision — exists to prevent exactly this kind of breakdown. It isn't just good operating practice: it's the infrastructure that decides whether the intelligence-to-judgment crossing described above ends in real capability or in expensive, silent collapse.</p>
+
+  <!-- 03 -->
+  <h2 id="s03">
+    <span class="eyebrow">03 — The definition</span>
+    What is Context Engineering
+  </h2>
+
+  <p>Context Engineering is the art and science of providing the right information, in the right format, at the right time, so a language model can plausibly solve a task<span class="ref">[4]</span>. The term was popularized by Tobi Lütke, CEO of Shopify, who described it as "the art of providing all the context for the task to be plausibly solvable by the LLM"<span class="ref">[5]</span>.</p>
+
+  <p>The concept goes beyond prompt engineering — which handles only the formatting of instructions — to take on the dynamic management of the model's entire context window: conversation history, available tools, real-time retrieved data, and knowledge of the environment the agent operates in. Anthropic describes the discipline's central problem as "optimizing the utility of those tokens against the inherent constraints of LLMs, in order to consistently achieve a desired outcome"<span class="ref">[5]</span>.</p>
+
+  <div class="callout">
+    <p>The point that usually goes unnoticed: this isn't an architecture choice made once, at system design time. An agent that works well in month 1 can silently degrade by month 6 — precisely the volume of experience that, well managed, should be teaching the system judgment.</p>
+  </div>
+
+  <!-- 04 -->
+  <h2 id="s04">
+    <span class="eyebrow">04 — The diagnosis</span>
+    The four failure modes
+  </h2>
+
+  <p>The technical literature on the topic, synthesizing research from Google DeepMind, Microsoft and Salesforce, documents four distinct failures — each with numerical thresholds that serve as production monitoring triggers<span class="ref">[4]</span>.</p>
+
+  <div class="mec-grid" style="grid-template-columns:repeat(2,1fr);">
+    <div class="mec-card">
+      <span class="mec-num">01 — POISONING</span>
+      <h3>Context poisoning</h3>
+      <p>A hallucination enters the conversation history and gets referenced as fact, reinforcing an incorrect goal across multiple turns. Formally studied by DeepMind on the Gemini 2.5 agent. Doesn't resolve on its own — requires active detection, because it compounds.</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">02 — DISTRACTION</span>
+      <h3>Context distraction</h3>
+      <p>Very large context windows make the model over-emphasize repeated or irrelevant information. The effect intensifies from ~100k tokens on Gemini Pro, and as early as ~32k tokens on smaller models like LLaMA 3 405B.</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">03 — CONFUSION</span>
+      <h3>Context confusion</h3>
+      <p>Too many available tools make the model call the wrong one. A quantized LLaMA 3 failed with 46 simultaneous tools, but performed well with 19. Practical guidance: keep 10 to 15 active tools per agent.</p>
+    </div>
+    <div class="mec-card">
+      <span class="mec-num">04 — CLASH</span>
+      <h3>Context clash</h3>
+      <p>Conflicting instructions in the same window produce inconsistent outputs — the most severe of the four failures. Fragmenting instructions across multiple turns, instead of one coherent prompt, dropped accuracy from 98% to 64% in one test.</p>
+    </div>
+  </div>
+
+  <div class="chart-block">
+    <p class="chart-title">Distraction — the ceiling varies by model</p>
+    <div class="bars">
+      <div class="bar-row">
+        <span class="bar-label">Gemini Pro (larger window)</span>
+        <div class="bar-track"><div class="bar-fill gold" style="width:100%"></div></div>
+        <span class="bar-val">~100k tokens</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">LLaMA 3 405B (smaller window)</span>
+        <div class="bar-track"><div class="bar-fill red" style="width:32%"></div></div>
+        <span class="bar-val">~32k tokens</span>
+      </div>
+    </div>
+    <p class="chart-note">The point at which the distraction effect intensifies. More context isn't always better — the limit depends on the model. Source: [4].</p>
+  </div>
+
+  <div class="chart-block">
+    <p class="chart-title">Confusion — the simultaneous-tool limit before failure</p>
+    <div class="bars">
+      <div class="bar-row">
+        <span class="bar-label">Performed well</span>
+        <div class="bar-track"><div class="bar-fill green" style="width:41%"></div></div>
+        <span class="bar-val">19 tools</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Failed</span>
+        <div class="bar-track"><div class="bar-fill red" style="width:100%"></div></div>
+        <span class="bar-val">46 tools</span>
+      </div>
+    </div>
+    <p class="chart-note">Quantized LLaMA 3, same test. Practical literature guidance: keep 10 to 15 active tools per agent. Source: [4].</p>
+  </div>
+
+  <div class="chart-block">
+    <p class="chart-title">Clash — accuracy drops with fragmented instructions</p>
+    <div class="bars">
+      <div class="bar-row">
+        <span class="bar-label">Single, coherent prompt</span>
+        <div class="bar-track"><div class="bar-fill green" style="width:98%"></div></div>
+        <span class="bar-val">98%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Instructions fragmented across turns</span>
+        <div class="bar-track"><div class="bar-fill red" style="width:64%"></div></div>
+        <span class="bar-val">64%</span>
+      </div>
+    </div>
+    <p class="chart-note">Microsoft and Salesforce experiment on context clash. Source: [4].</p>
+  </div>
+
+  <!-- 05 -->
+  <h2 id="s05">
+    <span class="eyebrow">05 — The prevention</span>
+    The maintenance cycle: five techniques, two categories
+  </h2>
+
+  <p>Context engineering uses five techniques — not three, as simplified takes on the topic tend to present it. They split into <strong>architecture</strong> techniques, decided once when the system is built, and <strong>continuous maintenance</strong> techniques, executed on every interaction, throughout the system's entire operating life.</p>
+
+  <h3 class="sub">Architecture (initial setup)</h3>
+  <div class="hidra-grid">
+    <div class="hidra-item">
+      <span class="m-num">01</span>
+      <div><strong>RAG (Retrieval Augmented Generation)</strong>
+      <p>Filters and injects only the knowledge strictly relevant to the current decision, instead of overloading the model with everything available.</p></div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">02</span>
+      <div><strong>Context quarantine and multi-agent systems</strong>
+      <p>Splits information into isolated lanes for specialized agents, preventing conflicting instructions from coexisting in the same space — the structural defense against context clash.</p></div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">03</span>
+      <div><strong>Context offloading / memory systems</strong>
+      <p>Stores knowledge outside the immediate window, allowing long-term retention without exhausting the token limit.</p></div>
+    </div>
+  </div>
+
+  <h3 class="sub">Continuous maintenance (day-to-day operation)</h3>
+  <div class="hidra-grid">
+    <div class="hidra-item">
+      <span class="m-num">04</span>
+      <div><strong>Pruning</strong>
+      <p>Actively removes outdated or irrelevant information from the context window as the conversation progresses. Mature RAG systems do this in multiple stages.</p></div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">05</span>
+      <div><strong>Summarization</strong>
+      <p>As the token limit approaches, compresses accumulated history into condensed representations. Requires careful control — poorly calibrated, it reintroduces distraction and confusion.</p></div>
+    </div>
+  </div>
+
+  <p>The first three techniques keep the system from starting out badly designed. The last two are what keeps a well-designed system from rotting with use — and, not by coincidence, they're the same two that decide whether experience accumulated over time turns into useful judgment or into noise.</p>
+
+  <!-- 06 -->
+  <h2 id="s06">
+    <span class="eyebrow">06 — The practice</span>
+    Operational maintenance checklist
+  </h2>
+
+  <p>For whoever is operating — not just building — an AI system in production, context engineering maintenance should be treated as an observability routine, with the following recurring checkpoints:</p>
+
+  <div class="hidra-grid">
+    <div class="hidra-item">
+      <span class="m-num">01</span>
+      <div><strong>Measure token consumption growth</strong>
+      <p>Per session/task over time. Non-linear growth is a sign of a loop or of context buildup without pruning.</p></div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">02</span>
+      <div><strong>Audit the number of active tools</strong>
+      <p>Exposed to each agent; keep 10 to 15, with the rest available on demand through routing.</p></div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">03</span>
+      <div><strong>Set a budget cap with automatic cutoff — not just an alert</strong>
+      <p>The $47,000 case happened precisely because a budget alert was configured, but no automatic cutoff mechanism executed it<span class="ref">[3]</span>.</p></div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">04</span>
+      <div><strong>Periodically review the agent's decision history</strong>
+      <p>Looking for signs of poisoning — goals incorrectly fixed from an earlier hallucination nobody corrected.</p></div>
+    </div>
+    <div class="hidra-item">
+      <span class="m-num">05</span>
+      <div><strong>Test fragmented versus consolidated instructions</strong>
+      <p>The performance gap between multiple turns and a single coherent prompt measures how vulnerable your system is to context clash.</p></div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <h2 id="s07">
+    <span class="eyebrow">07 — The next move</span>
+    The third pillar: why data is the 2026 frontier
+  </h2>
+
+  <p>The industry tends to describe its own infrastructure in three layers: compute, model and data. That's the same split guiding the $1.7 billion fund Andreessen Horowitz dedicated to AI infrastructure in February 2026 — the firm's stated thesis is to invest across three core pillars: "compute innovation, data infrastructure, and foundational model development"<span class="ref">[6]</span>. The first two pillars have already had their cycle of capital and attention: 2023 and 2024 were dominated by the race for compute power; 2024 and 2025, by the race among model labs.</p>
+
+  <p>What the market's own investors point to as the 2026 frontier is the third pillar — and that's exactly what this piece describes.</p>
+
+  <div class="pull-quote">
+    "The limiting factor for AI companies is now data entropy: the steady decay of freshness, structure and truth inside the unstructured universe where 80% of corporate knowledge now lives."
+    <cite>Jennifer Li, Andreessen Horowitz — Big Ideas 2026</cite>
+  </div>
+
+  <div class="chart-block">
+    <p class="chart-title">Where corporate knowledge lives</p>
+    <div class="bars">
+      <div class="bar-row">
+        <span class="bar-label">Unstructured data</span>
+        <div class="bar-track"><div class="bar-fill gold" style="width:80%"></div></div>
+        <span class="bar-val">80%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Structured data</span>
+        <div class="bar-track"><div class="bar-fill grey" style="width:20%"></div></div>
+        <span class="bar-val">20%</span>
+      </div>
+    </div>
+    <p class="chart-note">PDFs, screenshots, videos, logs, emails — the "unstructured universe" cited by Jennifer Li (a16z). Source: [7].</p>
+  </div>
+
+  <p>Jason Cui, from the same team, is more direct about the mechanism: the industry's central problem in 2026 is "how AI agents navigate 'the context problem': continuously accessing the right data context and semantic layers in order to build robust applications"<span class="ref">[7]</span>.</p>
+
+  <p>In other words: the same industry that funded the race for model and compute is now pointing to where this piece already was — data and context, not the model itself, are the bottleneck that decides whether an AI system works in production.</p>
+
+  <!-- Conclusion -->
+  <h2>
+    <span class="eyebrow">Conclusion</span>
+    The professional who moves up a layer alongside the AI
+  </h2>
+
+  <p>The crossing from intelligence to judgment isn't an event — it's a continuous process, and the fuel for that process is exactly the kind of context this piece described: decision history, corrections, nuances accumulated over time. A system that mismanages that context doesn't just fail to advance toward judgment — it regresses, losing precision even on the routine tasks it already mastered. The four failure modes documented here aren't minor technical obstacles: they're exactly what separates an AI that accumulates experience from one that accumulates noise.</p>
+
+  <div class="pull-quote">
+    "The LLM is like the CPU, and its context window is like RAM."
+    <cite>Andrej Karpathy, one of OpenAI's original architects</cite>
+  </div>
+
+  <p>Just as no one would let a CPU run with random garbage loaded into RAM, you can't expect an AI system to perform reliably without someone deliberately engineering what goes into that window<span class="ref">[8]</span>.</p>
+
+  <p>That someone already has a job title: Context Engineer. The title started appearing in serious AI discussions in late 2025; by early 2026, Gartner had already published a formal definition of the discipline — "designing and structuring the relevant data, workflows and environment so AI systems can understand intent, make better decisions and deliver contextual, enterprise-aligned outcomes, without relying on manual prompts." The market already recognizes this competency as its own specialization within AI engineering, distinct from both the generalist and the earlier "prompt engineer" — with pay consistently above the field average, even though the exact range varies widely by country, company and seniority<span class="ref">[8]</span>.</p>
+
+  <p>The most important detail, though, isn't the pay — it's what Gartner itself recommends to companies: appoint a context engineering lead or team integrated with AI's operational governance, not just with the technical team<span class="ref">[8]</span>. That ties the competency described in this piece directly to business strategy: the most valuable profile in this role isn't someone who just knows how to configure a RAG pipeline — it's someone who understands the business problem deeply enough to know what information the model actually needs to decide well. Domain knowledge matters more here than most expect.</p>
+
+  <p>That closes this piece's central argument. The crossing from intelligence to judgment only happens if context is managed with discipline — and whoever manages that discipline isn't a backstage technician, but the person who gets to decide, based on the business, what the AI should remember, forget and prioritize. That's Ethan Mollick's argument in <em>Co-Intelligence</em>: human value shifts toward supervision and judgment over what the AI produces, not toward competing with it on execution speed<span class="ref">[9]</span>.</p>
+
+  <div class="callout">
+    <p>In 2026 practice, that shift already has a job description, a pay range, and a reserved seat at the table where strategy gets decided — not just where it gets executed. The bar moves on both sides at once: AI climbs in capability on top of the data pillar, and the professional who manages that pillar climbs a layer alongside it.</p>
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom">
+    <div>
+      <p class="section-label">References</p>
+      <ul>
+        <li>[1] Susskind, R.; Susskind, D. (2015/2022). <em>The Future of the Professions: How Technology Will Transform the Work of Human Experts.</em> Oxford University Press.</li>
+        <li>[2] Bek, J. (2026). <em>Services: The New Software.</em> Sequoia Capital, March 5, 2026. Cited here only for its specific formulation of the intelligence-judgment convergence thesis, not for the article's market discussion. <a href="https://sequoiacap.com/article/services-the-new-software/" target="_blank">Link</a></li>
+        <li>[3] <em>The $47,000 Agent Loop: Why Token Budget Alerts Aren't Budget Enforcement.</em> DEV Community, 2026; Stanford University research on token consumption in agentic tasks. <a href="https://dev.to/waxell/the-47000-agent-loop-why-token-budget-alerts-arent-budget-enforcement-389i" target="_blank">Link</a></li>
+        <li>[4] Farooq, H.; Rajwani, J. (2025). <em>Understanding Context Engineering.</em> The Production Gap (Substack), July 13, 2025 — synthesis of research from Google DeepMind (Gemini 2.5), Microsoft and Salesforce on context window failure modes. <a href="https://boringbot.substack.com/p/understanding-context-engineering" target="_blank">Link</a></li>
+        <li>[5] Lütke, T. <a href="https://x.com/tobi/status/1935533422589399127" target="_blank">Post on X</a>, June 19, 2025; Anthropic (2025). <em>Effective context engineering for AI agents.</em> <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank">Link</a></li>
+        <li>[6] Andreessen Horowitz — $1.7 billion AI infrastructure fund led by Jennifer Li, announced February 2026, reported by BitcoinWorld/CryptoRank. Secondhand citation of a16z's stated thesis, not material published directly by the firm. <a href="https://cryptorank.io/news/feed/a1fa2-a16z-ai-infrastructure-fund-2025" target="_blank">Link</a></li>
+        <li>[7] a16z New Media (2025). <em>Big Ideas 2026: Part 1.</em> December 9, 2025 — predictions from Jennifer Li and Jason Cui, partners on a16z's Infrastructure team. <a href="https://www.a16z.news/p/big-ideas-2026-part-1" target="_blank">Link</a></li>
+        <li>[8] <em>What Is a Context Engineer? The AI Job Title Replacing Prompt Engineers in 2026.</em> The Interview Guys, updated June 25, 2026 — includes the Andrej Karpathy quote and Gartner's formal definition. Secondary career/recruiting source, not a primary Gartner report or a direct Karpathy statement. <a href="https://blog.theinterviewguys.com/what-is-a-context-engineer/" target="_blank">Link</a></li>
+        <li>[9] Mollick, E. (2024). <em>Co-Intelligence: Living and Working with AI.</em> Portfolio/Penguin.</li>
+        <li>Further reading: Willison, S. <em>Context engineering.</em> June 2025. <a href="https://simonwillison.net/2025/Jun/27/context-engineering/" target="_blank">Link</a> — and the discussions from Andrej Karpathy and Harrison Chase (LangChain) on the distinction between prompt engineering and context engineering.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="article-note">Author's argument grounded in the sources listed · Sources [2], [6] and [8] are cited narrowly and specifically — for the particular formulation they offer, not as the basis of the piece's central thesis · Position note: independent work, no commercial ties to the companies or consultancies cited</p>
+
+</main>
+
+</body>
+</html>

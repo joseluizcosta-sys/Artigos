@@ -2,6 +2,22 @@
   "base": "https://joseluizcosta-sys.github.io/Artigos/",
   "papers": [
     {
+      "slug": "da-inteligencia-ao-julgamento",
+      "hasEn": true,
+      "tag": {
+        "pt": "White Paper · Julho 2026",
+        "en": "White Paper · July 2026"
+      },
+      "title": {
+        "pt": "Da Inteligência ao Julgamento",
+        "en": "From Intelligence to Judgment"
+      },
+      "dek": {
+        "pt": "O que a IA ainda não sabe fazer sozinha — e por que Engenharia de Contexto decide se ela chega lá. Os quatro modos de falha que corroem sistemas de IA em silêncio, o ciclo de manutenção que os previne, e por que dados é a fronteira de 2026.",
+        "en": "What AI still can't do on its own — and why Context Engineering decides whether it gets there. The four failure modes silently eroding AI systems, the maintenance cycle that prevents them, and why data is the 2026 frontier."
+      }
+    },
+    {
       "slug": "da-contencao-a-resolucao",
       "hasEn": true,
       "tag": {
