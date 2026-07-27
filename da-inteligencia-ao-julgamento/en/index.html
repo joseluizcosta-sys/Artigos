@@ -370,8 +370,13 @@
     }
     .ref {
       font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
-      color: var(--crop-deep); vertical-align: super;
+      color: var(--crop-deep); vertical-align: super; text-decoration: none;
     }
+    .ref:hover { text-decoration: underline; }
+    main p a:not(.ref) { color: var(--crop-deep); text-decoration: none; }
+    main p a:not(.ref):hover { text-decoration: underline; }
+    .chart-note a { color: inherit; text-decoration: none; }
+    .chart-note a:hover { text-decoration: underline; }
 
     .bottom {
       border-top: 1px solid var(--line); margin-top: 72px; padding-top: 28px;
@@ -416,12 +421,12 @@
 </nav>
 
 <header>
-  <div class="meta">White Paper<span class="sep">·</span>July 2026</div>
+  <div class="meta">White Paper<span class="sep">·</span>August 2026</div>
 
   <h1>From Intelligence to Judgment</h1>
   <div class="deck">What AI still can't do on its own — and why Context Engineering decides whether it gets there, or breaks trying</div>
 
-  <p class="lede">Every profession has a boundary between rule-based work and instinct-based work. That boundary is migrating toward the machine — but only when an AI system can accumulate, organize and use human experience without breaking in the process. Most production AI projects fail exactly there: not because the model is weak, but because nobody maintained the context it was accumulating. This piece documents the four failure modes silently eroding AI systems, the maintenance cycle that prevents them, and why the AI infrastructure industry itself now points to data and context — not the model — as the 2026 frontier.</p>
+  <p class="lede">Every profession has a boundary between rule-based work and instinct-based work. That boundary is migrating toward the machine — but only when an AI system can accumulate, organize and use human experience without breaking in the process. Most production AI projects fail exactly there: not because the model is weak, but because nobody maintained the context it was accumulating. This piece documents the four failure modes silently eroding AI systems, the maintenance cycle that prevents them, and why the AI infrastructure industry itself now points to data and context — not the model — as the 2026 frontier. At bottom, this crossing from intelligence to judgment isn't an event — it's a continuous process: a system that mismanages that context doesn't just fail to advance, it regresses.</p>
 </header>
 
 <main>
@@ -466,16 +471,16 @@
     From intelligence to judgment
   </h2>
 
-  <p>Richard and Daniel Susskind, in <em>The Future of the Professions</em>, describe a boundary that runs through every profession: on one side, routine cognitive work — complex, but reducible to rules; on the other, judgment — experience, instinct, sensitivity to nuance, built over years of practice<span class="ref">[1]</span>. That boundary isn't fixed. It moves as technology advances, and the Susskinds' thesis is that it will keep migrating toward the machine — not because judgment stops existing, but because part of what we call judgment today will prove, with enough data, more mappable than it looked.</p>
+  <p>Richard and Daniel Susskind — father and son; the former, a British lawyer and one of the leading authorities on legal technology, the latter, an economist at Oxford —, in <em>The Future of the Professions</em>, describe a boundary that runs through every profession: on one side, routine cognitive work — complex, but reducible to rules; on the other, judgment — experience, instinct, sensitivity to nuance, built over years of practice<a class="ref" href="#ref1">[1]</a>. That boundary isn't fixed. It moves as technology advances, and the Susskinds' thesis is that it will keep migrating toward the machine — not because judgment stops existing, but because part of what we call judgment today will prove, with enough data, more mappable than it looked.</p>
 
   <div class="pull-quote">
     "Today's judgement will become tomorrow's intelligence."
     <cite>Julien Bek, Sequoia Capital — 2026</cite>
   </div>
 
-  <p>That's a recent, specific way of articulating the same idea<span class="ref">[2]</span>. The logic is simple to state: as an AI system accumulates proprietary data about how human experts decide — the history of corrections, the reasoning behind each choice, the specific context of each case — it starts recognizing patterns that used to take years of practice to see. What was instinct gradually becomes recognizable rule.</p>
+  <p>The Bek quote above is a recent, specific way of articulating the same idea<a class="ref" href="#ref2">[2]</a>. The logic is simple to state: as an AI system accumulates data about how human experts decide — the history of corrections, the reasoning behind each choice, the specific context of each case — it starts recognizing patterns that used to take years of practice to see. What was instinct gradually becomes recognizable rule.</p>
 
-  <p>The problem is that this migration doesn't happen automatically. It depends on a specific technical capability: accumulating, organizing and using this growing volume of human experience without the system breaking in the process. And that's exactly where most production AI projects fail — not because the model is weak, but because nobody maintained the context it was accumulating.</p>
+  <p>This migration will depend on a specific technical capability: accumulating, organizing and using this growing volume of human experience without the system breaking in the process. And that's exactly where most production AI projects fail — not because the model is weak, but because nobody maintained the context it was accumulating.</p>
 
   <!-- 02 -->
   <h2 id="s02">
@@ -483,7 +488,7 @@
     Why it breaks without maintenance
   </h2>
 
-  <p>Researchers at the Stanford Digital Economy Lab measured, in a 2026 study that analyzed eight frontier models on agentic coding tasks, that this kind of task consumes up to 1,000 times more tokens than a common chat interaction — with variance of up to 30x between two identical runs of the same task<span class="ref">[3]</span>. More telling still: spending more tokens doesn't translate into more accuracy. Performance tends to saturate — and sometimes worsen — past a certain cost. Throwing more context at the problem isn't a solution; it can instead be the symptom of a system that's out of control.</p>
+  <p>Researchers at the Stanford Digital Economy Lab measured, in a 2026 study that analyzed eight frontier models on agentic coding tasks, that this kind of task consumes up to 1,000 times more tokens than a common chat interaction — with variance of up to 30x between two identical runs of the same task<a class="ref" href="#ref3">[3]</a>. More telling still: spending more tokens doesn't translate into more accuracy. Performance tends to saturate — and sometimes worsen — past a certain cost. Throwing more context at the problem isn't a solution; it can instead be the symptom of a system that's out of control.</p>
 
   <div class="stat-grid" style="grid-template-columns:repeat(2,1fr);">
     <div class="stat-card"><div class="num">1,000x</div><div class="lab">more tokens than a common chat</div></div>
@@ -509,9 +514,9 @@
     What is Context Engineering
   </h2>
 
-  <p>Context Engineering is the art and science of providing the right information, in the right format, at the right time, so a language model can plausibly solve a task<span class="ref">[4]</span>. The term was popularized by Tobi Lütke, CEO of Shopify, who described it as "the art of providing all the context for the task to be plausibly solvable by the LLM"<span class="ref">[5]</span>.</p>
+  <p>Context Engineering is the art and science of providing the right information, in the right format, at the right time, so a language model can plausibly solve a task<a class="ref" href="#ref4">[4]</a>. The term was popularized by Tobi Lütke, CEO of Shopify, who described it as "the art of providing all the context for the task to be plausibly solvable by the LLM"<a class="ref" href="#ref5">[5]</a>.</p>
 
-  <p>The concept goes beyond prompt engineering — which handles only the formatting of instructions — to take on the dynamic management of the model's entire context window: conversation history, available tools, real-time retrieved data, and knowledge of the environment the agent operates in. Anthropic describes the discipline's central problem as "optimizing the utility of those tokens against the inherent constraints of LLMs, in order to consistently achieve a desired outcome"<span class="ref">[5]</span>.</p>
+  <p>The concept goes beyond prompt engineering — which handles only the formatting of instructions — to take on the dynamic management of the model's entire context window: conversation history, available tools, real-time retrieved data, and knowledge of the environment the agent operates in. Anthropic describes the discipline's central problem as "optimizing the utility of those tokens against the inherent constraints of LLMs, in order to consistently achieve a desired outcome"<a class="ref" href="#ref5">[5]</a>.</p>
 
   <div class="callout">
     <p>The point that usually goes unnoticed: this isn't an architecture choice made once, at system design time. An agent that works well in month 1 can silently degrade by month 6 — precisely the volume of experience that, well managed, should be teaching the system judgment.</p>
@@ -523,7 +528,7 @@
     The four failure modes
   </h2>
 
-  <p>The technical literature on the topic, synthesizing research from Google DeepMind, Microsoft and Salesforce, documents four distinct failures — each with numerical thresholds that serve as production monitoring triggers<span class="ref">[4]</span>.</p>
+  <p>The technical literature on the topic, synthesizing research from Google DeepMind, Microsoft and Salesforce, documents four distinct failures — each with numerical thresholds that serve as production monitoring triggers<a class="ref" href="#ref4">[4]</a>. This synthesis covers the most cited studies on the topic, but it isn't exhaustive: other independent studies document each of these four failure modes with their own methodologies — see <a href="#more-on-the-topic">"More on the Topic"</a> in the references, at the end of this piece.</p>
 
   <div class="mec-grid" style="grid-template-columns:1fr;">
     <div class="mec-card">
@@ -554,7 +559,7 @@
           </div>
         </div>
       </div>
-      <p class="chart-note">Tokens at which the distraction effect intensifies. Numbers from specific benchmarks, not a comparable curve across models — a starting point for calibration, not an engineering constant. Source: [4].</p>
+      <p class="chart-note">Tokens at which the distraction effect intensifies. Numbers from specific benchmarks, not a comparable curve across models — a starting point for calibration, not an engineering constant. Source: <a href="#ref4">[4]</a>.</p>
     </div>
 
     <div class="mec-card">
@@ -579,7 +584,7 @@
           </div>
         </div>
       </div>
-      <p class="chart-note">Range from a single experiment with a quantized model — treat it as an initial hypothesis to validate on your own system, not a fixed limit. Source: [4].</p>
+      <p class="chart-note">Range from a single experiment with a quantized model — treat it as an initial hypothesis to validate on your own system, not a fixed limit. Source: <a href="#ref4">[4]</a>.</p>
     </div>
 
     <div class="mec-card">
@@ -604,7 +609,7 @@
           </div>
         </div>
       </div>
-      <p class="chart-note">Microsoft and Salesforce experiment, one specific task and model — don't assume that drop as a universal benchmark; test it on your own pipeline. Source: [4].</p>
+      <p class="chart-note">Microsoft and Salesforce experiment, one specific task and model — don't assume that drop as a universal benchmark; test it on your own pipeline. Source: <a href="#ref4">[4]</a>.</p>
     </div>
   </div>
 
@@ -727,7 +732,7 @@
     The third pillar: why data is the next move
   </h2>
 
-  <p>The industry tends to describe its own infrastructure in three layers: compute, model and data. That's the same split guiding the $1.7 billion fund Andreessen Horowitz dedicated to AI infrastructure in February 2026 — the firm's stated thesis is to invest across three core pillars: "compute innovation, data infrastructure, and foundational model development"<span class="ref">[6]</span>. Two of the three pillars have already had their cycle of capital and attention — compute (2023-2024) and models (2024-2025) —, leaving data infrastructure as the pillar still awaiting its moment, despite sitting in the middle of the firm's own list.</p>
+  <p>The industry tends to describe its own infrastructure in three layers: compute, model and data. That's the same split guiding the $1.7 billion fund Andreessen Horowitz dedicated to AI infrastructure in February 2026 — the firm's stated thesis is to invest across three core pillars: "compute innovation, data infrastructure, and foundational model development"<a class="ref" href="#ref6">[6]</a>. Two of the three pillars have already had their cycle of capital and attention — compute (2023-2024) and models (2024-2025) —, leaving data infrastructure as the pillar still awaiting its moment, despite sitting in the middle of the firm's own list.</p>
 
   <p>What the market's own investors point to as the 2026 frontier is the third pillar — and that's exactly what this piece describes.</p>
 
@@ -748,10 +753,10 @@
         <span class="stack-legend-item"><i class="dot grey"></i>Structured data</span>
       </div>
     </div>
-    <p class="chart-note">PDFs, screenshots, videos, logs, emails — the "unstructured universe" cited by Jennifer Li (a16z). Source: [7].</p>
+    <p class="chart-note">PDFs, screenshots, videos, logs, emails — the "unstructured universe" cited by Jennifer Li (a16z). Source: <a href="#ref7">[7]</a>.</p>
   </div>
 
-  <p>Jason Cui, from the same team, is more direct about the mechanism: the industry's central problem in 2026 is "how AI agents navigate 'the context problem': continuously accessing the right data context and semantic layers in order to build robust applications"<span class="ref">[7]</span>.</p>
+  <p>Jason Cui, from the same team, is more direct about the mechanism: the industry's central problem in 2026 is "how AI agents navigate 'the context problem': continuously accessing the right data context and semantic layers in order to build robust applications"<a class="ref" href="#ref7">[7]</a>.</p>
 
   <p>In other words: the same industry that funded the race for model and compute is now pointing to where this piece already was — data and context, not the model itself, are the bottleneck that decides whether an AI system works in production.</p>
 
@@ -763,7 +768,7 @@
 
   <p>The crossing from intelligence to judgment isn't an event — it's a continuous process, and the fuel for that process is exactly the kind of context this piece described: decision history, corrections, nuances accumulated over time. A system that mismanages that context doesn't just fail to advance toward judgment — it regresses, losing precision even on the routine tasks it already mastered. The four failure modes documented here aren't minor technical obstacles: they're exactly what separates an AI that accumulates experience from one that accumulates noise.</p>
 
-  <p>Andrej Karpathy, one of OpenAI's original architects, has an analogy that circulates widely to sum up why — though the exact wording below comes from third-party coverage, not a primary statement from him<span class="ref">[8]</span>:</p>
+  <p>Andrej Karpathy, one of OpenAI's original architects, has an analogy that circulates widely to sum up why — though the exact wording below comes from third-party coverage, not a primary statement from him<a class="ref" href="#ref8">[8]</a>:</p>
 
   <div class="pull-quote">
     "The LLM is like the CPU, and its context window is like RAM."
@@ -772,9 +777,9 @@
 
   <p>It's the model's working memory. Just as no one would let a CPU run with random garbage loaded into RAM, you can't expect an AI system to perform reliably without someone deliberately engineering what goes into that window.</p>
 
-  <p>That someone already has a job title at some companies — Context Engineer — formalized by Gartner in early 2026<span class="ref">[8]</span>. But the title matters less than the responsibility: whoever takes on that function, formally named or not, holds a strategic position for these AI mechanisms to work correctly — because the data-and-context pillar only sustains the intelligence-to-judgment crossing if someone owns it.</p>
+  <p>That someone already has a job title at some companies — Context Engineer — formalized by Gartner in early 2026<a class="ref" href="#ref8">[8]</a>. But the title matters less than the responsibility: whoever takes on that function, formally named or not, holds a strategic position for these AI mechanisms to work correctly — because the data-and-context pillar only sustains the intelligence-to-judgment crossing if someone owns it.</p>
 
-  <p>Julien Bek, in the same Sequoia Capital article cited at the opening of this piece, makes an ambitious argument: services will be the new software — much of professional service work eventually absorbed by AI systems operating with real autonomy<span class="ref">[2]</span>. He may well be right, in the long run. But that thesis describes a horizon most companies haven't reached yet: while Services as Software gets debated, plenty of production AI projects still get shut down without a conclusion, and plenty of organizations are still crawling toward turning AI use into real productivity gains or measurable business benefit.</p>
+  <p>Julien Bek, in the same Sequoia Capital article cited at the opening of this piece, makes an ambitious argument: services will be the new software — much of professional service work eventually absorbed by AI systems operating with real autonomy<a class="ref" href="#ref2">[2]</a>. He may well be right, in the long run. But that thesis describes a horizon most companies haven't reached yet: while Services as Software gets debated, plenty of production AI projects still get shut down without a conclusion, and plenty of organizations are still crawling toward turning AI use into real productivity gains or measurable business benefit.</p>
 
   <div class="callout">
     <p>Only time will tell whether — and which — services actually get replaced by software in this form. Until then, what makes sense is paving the road: strengthening the third pillar, sharpening the discipline that decides whether a production AI system accumulates judgment or accumulates noise — Context Engineering.</p>
@@ -785,15 +790,26 @@
     <div>
       <p class="section-label">References</p>
       <ul>
-        <li>[1] Susskind, R.; Susskind, D. (2015/2022). <em>The Future of the Professions: How Technology Will Transform the Work of Human Experts.</em> Oxford University Press.</li>
-        <li>[2] Bek, J. (2026). <em>Services: The New Software.</em> Sequoia Capital, March 5, 2026. Cited here only for its specific formulation of the intelligence-judgment convergence thesis, not for the article's market discussion. <a href="https://sequoiacap.com/article/services-the-new-software/" target="_blank">Link</a></li>
-        <li>[3] Brynjolfsson, E.; Pentland, S.; Pei, J. et al. (2026). <em>How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks.</em> Stanford Digital Economy Lab. <a href="https://arxiv.org/abs/2604.22750" target="_blank">arXiv:2604.22750</a></li>
-        <li>[4] Farooq, H.; Rajwani, J. (2025). <em>Understanding Context Engineering.</em> The Production Gap (Substack), July 13, 2025 — synthesis of research from Google DeepMind (Gemini 2.5), Microsoft and Salesforce on context window failure modes. <a href="https://boringbot.substack.com/p/understanding-context-engineering" target="_blank">Link</a></li>
-        <li>[5] Lütke, T. <a href="https://x.com/tobi/status/1935533422589399127" target="_blank">Post on X</a>, June 19, 2025; Anthropic (2025). <em>Effective context engineering for AI agents.</em> <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank">Link</a></li>
-        <li>[6] Andreessen Horowitz — $1.7 billion AI infrastructure fund led by Jennifer Li, announced February 2026, reported by BitcoinWorld/CryptoRank. Secondhand citation of a16z's stated thesis, not material published directly by the firm. <a href="https://cryptorank.io/news/feed/a1fa2-a16z-ai-infrastructure-fund-2025" target="_blank">Link</a></li>
-        <li>[7] a16z New Media (2025). <em>Big Ideas 2026: Part 1.</em> December 9, 2025 — predictions from Jennifer Li and Jason Cui, partners on a16z's Infrastructure team. <a href="https://www.a16z.news/p/big-ideas-2026-part-1" target="_blank">Link</a></li>
-        <li>[8] <em>What Is a Context Engineer? The AI Job Title Replacing Prompt Engineers in 2026.</em> The Interview Guys, updated June 25, 2026 — includes the Andrej Karpathy quote and Gartner's formal definition. Secondary career/recruiting source, not a primary Gartner report or a direct Karpathy statement. <a href="https://blog.theinterviewguys.com/what-is-a-context-engineer/" target="_blank">Link</a></li>
+        <li id="ref1">[1] Susskind, R.; Susskind, D. (2015/2022). <em>The Future of the Professions: How Technology Will Transform the Work of Human Experts.</em> Oxford University Press.</li>
+        <li id="ref2">[2] Bek, J. (2026). <em>Services: The New Software.</em> Sequoia Capital, March 5, 2026. Cited here only for its specific formulation of the intelligence-judgment convergence thesis, not for the article's market discussion. <a href="https://sequoiacap.com/article/services-the-new-software/" target="_blank">Link</a></li>
+        <li id="ref3">[3] Brynjolfsson, E.; Pentland, S.; Pei, J. et al. (2026). <em>How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks.</em> Stanford Digital Economy Lab. <a href="https://arxiv.org/abs/2604.22750" target="_blank">arXiv:2604.22750</a></li>
+        <li id="ref4">[4] Farooq, H.; Rajwani, J. (2025). <em>Understanding Context Engineering.</em> The Production Gap (Substack), July 13, 2025 — synthesis of research from Google DeepMind (Gemini 2.5), Microsoft and Salesforce on context window failure modes. <a href="https://boringbot.substack.com/p/understanding-context-engineering" target="_blank">Link</a></li>
+        <li id="ref5">[5] Lütke, T. <a href="https://x.com/tobi/status/1935533422589399127" target="_blank">Post on X</a>, June 19, 2025; Anthropic (2025). <em>Effective context engineering for AI agents.</em> <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank">Link</a></li>
+        <li id="ref6">[6] Andreessen Horowitz — $1.7 billion AI infrastructure fund led by Jennifer Li, announced February 2026, reported by BitcoinWorld/CryptoRank. Secondhand citation of a16z's stated thesis, not material published directly by the firm. <a href="https://cryptorank.io/news/feed/a1fa2-a16z-ai-infrastructure-fund-2025" target="_blank">Link</a></li>
+        <li id="ref7">[7] a16z New Media (2025). <em>Big Ideas 2026: Part 1.</em> December 9, 2025 — predictions from Jennifer Li and Jason Cui, partners on a16z's Infrastructure team. <a href="https://www.a16z.news/p/big-ideas-2026-part-1" target="_blank">Link</a></li>
+        <li id="ref8">[8] <em>What Is a Context Engineer? The AI Job Title Replacing Prompt Engineers in 2026.</em> The Interview Guys, updated June 25, 2026 — includes the Andrej Karpathy quote and Gartner's formal definition. Secondary career/recruiting source, not a primary Gartner report or a direct Karpathy statement. <a href="https://blog.theinterviewguys.com/what-is-a-context-engineer/" target="_blank">Link</a></li>
         <li>Further reading: Willison, S. <em>Context engineering.</em> June 2025. <a href="https://simonwillison.net/2025/Jun/27/context-engineering/" target="_blank">Link</a> — the discussions from Andrej Karpathy and Harrison Chase (LangChain) on the distinction between prompt engineering and context engineering — and Mollick, E. (2024). <em>Co-Intelligence: Living and Working with AI.</em> Portfolio/Penguin.</li>
+      </ul>
+    </div>
+
+    <div id="more-on-the-topic">
+      <p class="section-label">More on the Topic</p>
+      <ul>
+        <li>On context poisoning: Lin, X. et al. (2025). <em>LLM-based Agents Suffer from Hallucinations: A Survey of Taxonomy, Methods, and Directions.</em> <a href="https://arxiv.org/abs/2509.18970" target="_blank">arXiv:2509.18970</a> — a broad survey of hallucination in AI agents, with its own taxonomy of where it originates in the agent's workflow.</li>
+        <li>On context distraction: Liu, N. F. et al. (2023/2024). <em>Lost in the Middle: How Language Models Use Long Contexts.</em> Stanford / UC Berkeley / Samaya AI, TACL. <a href="https://arxiv.org/abs/2307.03172" target="_blank">arXiv:2307.03172</a> — the original study documenting performance loss when relevant information sits in the middle of a long context window.</li>
+        <li>On context distraction: Hong, K.; Troynikov, A.; Huber, J. (2025). <em>Context Rot: How Increasing Input Tokens Impacts LLM Performance.</em> Chroma Research. <a href="https://research.trychroma.com/context-rot" target="_blank">Link</a> — tests 18 frontier models and shows degradation with long context isn't uniform.</li>
+        <li>On context confusion: Repantis, V.; Gawde, A.; Singh, H.; Blackwell II, J. (2026). <em>How Many Tools Should an LLM Agent See? A Chance-Corrected Answer.</em> Meta Platforms. <a href="https://arxiv.org/abs/2605.24660" target="_blank">arXiv:2605.24660</a></li>
+        <li>On context clash: Laban, P.; Hayashi, H.; Zhou, Y.; Neville, J. (2025). <em>LLMs Get Lost In Multi-Turn Conversation.</em> Microsoft Research / Salesforce Research. <a href="https://arxiv.org/abs/2505.06120" target="_blank">arXiv:2505.06120</a> — likely the primary source behind the "Microsoft and Salesforce" data point cited in reference [4] above.</li>
       </ul>
     </div>
   </div>

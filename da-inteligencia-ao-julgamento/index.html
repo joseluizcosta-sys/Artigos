@@ -370,8 +370,13 @@
     }
     .ref {
       font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
-      color: var(--crop-deep); vertical-align: super;
+      color: var(--crop-deep); vertical-align: super; text-decoration: none;
     }
+    .ref:hover { text-decoration: underline; }
+    main p a:not(.ref) { color: var(--crop-deep); text-decoration: none; }
+    main p a:not(.ref):hover { text-decoration: underline; }
+    .chart-note a { color: inherit; text-decoration: none; }
+    .chart-note a:hover { text-decoration: underline; }
 
     .bottom {
       border-top: 1px solid var(--line); margin-top: 72px; padding-top: 28px;
@@ -416,12 +421,12 @@
 </nav>
 
 <header>
-  <div class="meta">White Paper<span class="sep">·</span>Julho 2026</div>
+  <div class="meta">White Paper<span class="sep">·</span>Agosto 2026</div>
 
   <h1>Da Inteligência ao Julgamento</h1>
   <div class="deck">O que a IA ainda não sabe fazer sozinha — e por que Engenharia de Contexto decide se ela chega lá, ou quebra tentando</div>
 
-  <p class="lede">Toda profissão tem uma fronteira entre trabalho de regra e trabalho de instinto. Essa fronteira está migrando na direção da máquina — mas só quando um sistema de IA consegue acumular, organizar e usar experiência humana sem quebrar no processo. A maioria dos projetos de IA em produção falha exatamente aí: não por modelo fraco, mas por contexto mal gerido. Este texto documenta os quatro modos de falha que corroem sistemas de IA em silêncio, o ciclo de manutenção que os previne, e por que a própria indústria de infraestrutura de IA já aponta dados e contexto — não mais o modelo — como a fronteira de 2026.</p>
+  <p class="lede">Toda profissão tem uma fronteira entre trabalho de regra e trabalho de instinto. Essa fronteira está migrando na direção da máquina — mas só quando um sistema de IA consegue acumular, organizar e usar experiência humana sem quebrar no processo. A maioria dos projetos de IA em produção falha exatamente aí: não por modelo fraco, mas por contexto mal gerido. Este texto documenta os quatro modos de falha que corroem sistemas de IA em silêncio, o ciclo de manutenção que os previne, e por que a própria indústria de infraestrutura de IA já aponta dados e contexto — não mais o modelo — como a fronteira de 2026. No fundo, essa travessia de inteligência para julgamento não é um evento — é um processo contínuo: um sistema que gerencia mal esse contexto não apenas deixa de evoluir, ele regride.</p>
 </header>
 
 <main>
@@ -466,16 +471,16 @@
     Da inteligência ao julgamento
   </h2>
 
-  <p>Richard e Daniel Susskind, em <em>The Future of the Professions</em>, descrevem uma fronteira que atravessa toda profissão: de um lado, trabalho cognitivo de rotina — complexo, mas redutível a regras; do outro, julgamento — experiência, instinto, sensibilidade a nuances de contexto, construídos ao longo de anos de prática<span class="ref">[1]</span>. Essa fronteira não é fixa. Ela se move conforme a tecnologia avança, e a tese dos Susskind é que ela vai continuar migrando na direção da máquina — não porque o julgamento deixe de existir, mas porque parte do que hoje chamamos de julgamento vai se revelar, com dados suficientes, mais mapeável do que parecia.</p>
+  <p>Richard e Daniel Susskind — pai e filho; o primeiro, advogado britânico e uma das maiores autoridades em tecnologia jurídica, o segundo, economista em Oxford —, em <em>The Future of the Professions</em>, descrevem uma fronteira que atravessa toda profissão: de um lado, trabalho cognitivo de rotina — complexo, mas redutível a regras; do outro, julgamento — experiência, instinto, sensibilidade a nuances de contexto, construídos ao longo de anos de prática<a class="ref" href="#ref1">[1]</a>. Essa fronteira não é fixa. Ela se move conforme a tecnologia avança, e a tese dos Susskind é que ela vai continuar migrando na direção da máquina — não porque o julgamento deixe de existir, mas porque parte do que hoje chamamos de julgamento vai se revelar, com dados suficientes, mais mapeável do que parecia.</p>
 
   <div class="pull-quote">
     "O julgamento de hoje é a inteligência de amanhã."
     <cite>Julien Bek, Sequoia Capital — 2026</cite>
   </div>
 
-  <p>É uma forma recente e específica de articular a mesma ideia<span class="ref">[2]</span>. A lógica é simples de enunciar: à medida que um sistema de IA acumula dados proprietários sobre como especialistas humanos decidem — o histórico de correções, o raciocínio por trás de cada escolha, o contexto específico de cada caso —, ele começa a reconhecer padrões que antes exigiam anos de prática para se enxergar. O que era instinto vira, aos poucos, regra reconhecível.</p>
+  <p>A citação acima de Bek é uma forma recente e específica de articular a mesma ideia<a class="ref" href="#ref2">[2]</a>. A lógica é simples de enunciar: à medida que um sistema de IA acumula dados sobre como especialistas humanos decidem — o histórico de correções, o raciocínio por trás de cada escolha, o contexto específico de cada caso —, ele começa a reconhecer padrões que antes exigiam anos de prática para se enxergar. O que era instinto vira, aos poucos, regra reconhecível.</p>
 
-  <p>O problema é que essa migração não acontece automaticamente. Ela depende de uma capacidade técnica específica: a de acumular, organizar e usar esse volume crescente de experiência humana sem que o sistema quebre no processo. E é exatamente aí que a maioria dos projetos de IA em produção falha — não porque o modelo seja fraco, mas porque ninguém cuidou do contexto que ele estava acumulando.</p>
+  <p>Essa migração dependerá de uma capacidade técnica específica: a de acumular, organizar e usar esse volume crescente de experiência humana sem que o sistema quebre no processo. E é exatamente aí que a maioria dos projetos de IA em produção falha — não porque o modelo seja fraco, mas porque ninguém cuidou do contexto que ele estava acumulando.</p>
 
   <!-- 02 -->
   <h2 id="s02">
@@ -483,7 +488,7 @@
     Por que isso quebra sem manutenção
   </h2>
 
-  <p>Pesquisadores do Stanford Digital Economy Lab mediram, em estudo de 2026 que analisou oito modelos de fronteira em tarefas agênticas de codificação, que esse tipo de tarefa consome até 1.000 vezes mais tokens do que uma interação comum de chat — com variação de até 30x entre duas execuções idênticas da mesma tarefa<span class="ref">[3]</span>. Mais revelador ainda: gastar mais tokens não se traduz em mais acurácia. O desempenho tende a saturar — e às vezes piorar — a partir de um certo custo. Jogar mais contexto no problema não é solução; pode ser, ao contrário, o sintoma de um sistema sem controle.</p>
+  <p>Pesquisadores do Stanford Digital Economy Lab mediram, em estudo de 2026 que analisou oito modelos de fronteira em tarefas agênticas de codificação, que esse tipo de tarefa consome até 1.000 vezes mais tokens do que uma interação comum de chat — com variação de até 30x entre duas execuções idênticas da mesma tarefa<a class="ref" href="#ref3">[3]</a>. Mais revelador ainda: gastar mais tokens não se traduz em mais acurácia. O desempenho tende a saturar — e às vezes piorar — a partir de um certo custo. Jogar mais contexto no problema não é solução; pode ser, ao contrário, o sintoma de um sistema sem controle.</p>
 
   <div class="stat-grid" style="grid-template-columns:repeat(2,1fr);">
     <div class="stat-card"><div class="num">1.000x</div><div class="lab">mais tokens que uma conversa comum</div></div>
@@ -509,9 +514,9 @@
     O que é Engenharia de Contexto
   </h2>
 
-  <p>Engenharia de Contexto é a arte e a ciência de fornecer a informação certa, no formato certo e no momento exato, para que um modelo de linguagem consiga resolver plausivelmente uma tarefa<span class="ref">[4]</span>. O termo foi popularizado por Tobi Lütke, CEO da Shopify, que o descreveu como "a arte de fornecer todo o contexto necessário para que a tarefa seja plausivelmente solucionável pelo modelo"<span class="ref">[5]</span>.</p>
+  <p>Engenharia de Contexto é a arte e a ciência de fornecer a informação certa, no formato certo e no momento exato, para que um modelo de linguagem consiga resolver plausivelmente uma tarefa<a class="ref" href="#ref4">[4]</a>. O termo foi popularizado por Tobi Lütke, CEO da Shopify, que o descreveu como "a arte de fornecer todo o contexto necessário para que a tarefa seja plausivelmente solucionável pelo modelo"<a class="ref" href="#ref5">[5]</a>.</p>
 
-  <p>O conceito vai além da engenharia de prompt — que cuida apenas da formatação das instruções — para assumir a gestão dinâmica de toda a janela de contexto do modelo: histórico da conversa, ferramentas disponíveis, dados recuperados em tempo real e conhecimento do ambiente em que o agente opera. A Anthropic descreve o problema central da disciplina como "otimizar a utilidade desses tokens contra as restrições inerentes dos LLMs, para alcançar consistentemente um resultado desejado"<span class="ref">[5]</span>.</p>
+  <p>O conceito vai além da engenharia de prompt — que cuida apenas da formatação das instruções — para assumir a gestão dinâmica de toda a janela de contexto do modelo: histórico da conversa, ferramentas disponíveis, dados recuperados em tempo real e conhecimento do ambiente em que o agente opera. A Anthropic descreve o problema central da disciplina como "otimizar a utilidade desses tokens contra as restrições inerentes dos LLMs, para alcançar consistentemente um resultado desejado"<a class="ref" href="#ref5">[5]</a>.</p>
 
   <div class="callout">
     <p>O ponto que costuma passar despercebido: isso não é uma escolha de arquitetura que se faz uma vez, na concepção do sistema. Um agente que funciona bem no mês 1 pode degradar silenciosamente no mês 6 — justamente o volume de experiência que, bem gerido, deveria estar ensinando julgamento ao sistema.</p>
@@ -523,7 +528,7 @@
     Os quatro modos de falha
   </h2>
 
-  <p>A literatura técnica sobre o tema, sintetizando pesquisa do Google DeepMind, Microsoft e Salesforce, documenta quatro falhas distintas — cada uma com limiares numéricos que servem de gatilho de monitoramento em produção<span class="ref">[4]</span>.</p>
+  <p>A literatura técnica sobre o tema, sintetizando pesquisa do Google DeepMind, Microsoft e Salesforce, documenta quatro falhas distintas — cada uma com limiares numéricos que servem de gatilho de monitoramento em produção<a class="ref" href="#ref4">[4]</a>. Esta síntese cobre os estudos mais citados sobre o tema, mas não é exaustiva: outros estudos independentes documentam cada um desses quatro modos de falha com metodologias próprias — ver <a href="#mais-sobre-o-tema">"Mais sobre o Tema"</a> nas referências, ao final deste texto.</p>
 
   <div class="mec-grid" style="grid-template-columns:1fr;">
     <div class="mec-card">
@@ -554,7 +559,7 @@
           </div>
         </div>
       </div>
-      <p class="chart-note">Tokens a partir dos quais o efeito de distração se intensifica. Números de benchmarks específicos, não uma curva comparável entre modelos — ponto de partida para calibração, não constante de engenharia. Fonte: [4].</p>
+      <p class="chart-note">Tokens a partir dos quais o efeito de distração se intensifica. Números de benchmarks específicos, não uma curva comparável entre modelos — ponto de partida para calibração, não constante de engenharia. Fonte: <a href="#ref4">[4]</a>.</p>
     </div>
 
     <div class="mec-card">
@@ -579,7 +584,7 @@
           </div>
         </div>
       </div>
-      <p class="chart-note">Intervalo de um único experimento com modelo quantizado — trate como hipótese inicial a validar no seu próprio sistema, não como limite fixo. Fonte: [4].</p>
+      <p class="chart-note">Intervalo de um único experimento com modelo quantizado — trate como hipótese inicial a validar no seu próprio sistema, não como limite fixo. Fonte: <a href="#ref4">[4]</a>.</p>
     </div>
 
     <div class="mec-card">
@@ -604,7 +609,7 @@
           </div>
         </div>
       </div>
-      <p class="chart-note">Experimento da Microsoft e Salesforce, uma tarefa e um modelo específicos — não assuma essa queda como referência universal; teste no seu próprio pipeline. Fonte: [4].</p>
+      <p class="chart-note">Experimento da Microsoft e Salesforce, uma tarefa e um modelo específicos — não assuma essa queda como referência universal; teste no seu próprio pipeline. Fonte: <a href="#ref4">[4]</a>.</p>
     </div>
   </div>
 
@@ -727,7 +732,7 @@
     O terceiro pilar: por que dados é o próximo movimento
   </h2>
 
-  <p>A indústria costuma descrever a própria infraestrutura em três camadas: computação, modelo e dados. É a mesma divisão que orienta o fundo de US$ 1,7 bilhão que a Andreessen Horowitz dedicou a infraestrutura de IA em fevereiro de 2026 — a tese declarada da firma é investir em três pilares centrais: "inovação em computação, infraestrutura de dados e desenvolvimento de modelos fundacionais"<span class="ref">[6]</span>. Dois dos três pilares já tiveram seu ciclo de capital e atenção — computação (2023-2024) e modelos (2024-2025) —, deixando infraestrutura de dados como o pilar que ainda aguarda seu momento, apesar de aparecer no meio da própria lista da firma.</p>
+  <p>A indústria costuma descrever a própria infraestrutura em três camadas: computação, modelo e dados. É a mesma divisão que orienta o fundo de US$ 1,7 bilhão que a Andreessen Horowitz dedicou a infraestrutura de IA em fevereiro de 2026 — a tese declarada da firma é investir em três pilares centrais: "inovação em computação, infraestrutura de dados e desenvolvimento de modelos fundacionais"<a class="ref" href="#ref6">[6]</a>. Dois dos três pilares já tiveram seu ciclo de capital e atenção — computação (2023-2024) e modelos (2024-2025) —, deixando infraestrutura de dados como o pilar que ainda aguarda seu momento, apesar de aparecer no meio da própria lista da firma.</p>
 
   <p>O que os próprios investidores desse mercado apontam como a fronteira de 2026 é o terceiro pilar — e é exatamente o que este texto descreve.</p>
 
@@ -748,10 +753,10 @@
         <span class="stack-legend-item"><i class="dot grey"></i>Dados estruturados</span>
       </div>
     </div>
-    <p class="chart-note">PDFs, screenshots, vídeos, logs, e-mails — o "universo não estruturado" citado por Jennifer Li (a16z). Fonte: [7].</p>
+    <p class="chart-note">PDFs, screenshots, vídeos, logs, e-mails — o "universo não estruturado" citado por Jennifer Li (a16z). Fonte: <a href="#ref7">[7]</a>.</p>
   </div>
 
-  <p>Jason Cui, da mesma equipe, é mais direto sobre o mecanismo: o problema central da indústria em 2026 é "como agentes de IA navegam o 'problema do contexto' — acessar continuamente o contexto de dados certo e as camadas semânticas certas para construir aplicações robustas"<span class="ref">[7]</span>.</p>
+  <p>Jason Cui, da mesma equipe, é mais direto sobre o mecanismo: o problema central da indústria em 2026 é "como agentes de IA navegam o 'problema do contexto' — acessar continuamente o contexto de dados certo e as camadas semânticas certas para construir aplicações robustas"<a class="ref" href="#ref7">[7]</a>.</p>
 
   <p>Em outras palavras: a mesma indústria que financiou a corrida por modelo e computação está apontando, agora, para onde este texto já estava — dados e contexto, não mais o modelo em si, são o gargalo que decide se um sistema de IA funciona em produção.</p>
 
@@ -763,7 +768,7 @@
 
   <p>A travessia de inteligência para julgamento não é um evento — é um processo contínuo, e o combustível desse processo é exatamente o tipo de contexto que este texto descreveu: histórico de decisões, correções, nuances acumuladas ao longo do tempo. Um sistema que gerencia mal esse contexto não apenas deixa de evoluir para o julgamento — ele regride, perde precisão nas próprias tarefas de rotina que já executava bem. Os quatro modos de falha documentados aqui não são obstáculos técnicos menores: são exatamente o que separa uma IA que acumula experiência de uma que acumula ruído.</p>
 
-  <p>Andrej Karpathy, um dos arquitetos originais da OpenAI, tem uma analogia que circula amplamente para resumir o porquê — ainda que a formulação exata abaixo venha de cobertura de terceiros, não de uma declaração primária dele<span class="ref">[8]</span>:</p>
+  <p>Andrej Karpathy, um dos arquitetos originais da OpenAI, tem uma analogia que circula amplamente para resumir o porquê — ainda que a formulação exata abaixo venha de cobertura de terceiros, não de uma declaração primária dele<a class="ref" href="#ref8">[8]</a>:</p>
 
   <div class="pull-quote">
     "O LLM é como a CPU, e sua janela de contexto é como a RAM."
@@ -772,9 +777,9 @@
 
   <p>É a memória de trabalho do modelo. Assim como ninguém deixaria uma CPU rodar com lixo aleatório carregado na RAM, não se pode esperar que um sistema de IA funcione de forma confiável sem alguém projetando deliberadamente o que entra nessa janela.</p>
 
-  <p>Esse alguém já tem nome de cargo em algumas empresas — Context Engineer —, formalizado pela Gartner no início de 2026<span class="ref">[8]</span>. Mas o cargo importa menos do que a responsabilidade: quem assume essa função, nomeada ou não formalmente, ocupa uma posição estratégica para o funcionamento correto dos mecanismos de IA — porque o pilar de dados e contexto só sustenta a travessia de inteligência para julgamento se houver dono.</p>
+  <p>Esse alguém já tem nome de cargo em algumas empresas — Context Engineer —, formalizado pela Gartner no início de 2026<a class="ref" href="#ref8">[8]</a>. Mas o cargo importa menos do que a responsabilidade: quem assume essa função, nomeada ou não formalmente, ocupa uma posição estratégica para o funcionamento correto dos mecanismos de IA — porque o pilar de dados e contexto só sustenta a travessia de inteligência para julgamento se houver dono.</p>
 
-  <p>Julien Bek, no mesmo artigo da Sequoia Capital citado na abertura deste texto, defende uma tese ambiciosa: serviços serão o novo software — boa parte do trabalho de serviço profissional, eventualmente absorvida por sistemas de IA operando com autonomia real<span class="ref">[2]</span>. Pode estar certo, no longo prazo. Mas essa tese descreve um horizonte que a maioria das empresas ainda não alcançou: enquanto se debate Services as Software, muitos projetos de IA em produção ainda são encerrados sem conclusão, e boa parte das organizações ainda engatinha para transformar uso de IA em ganho real de produtividade ou em benefício de negócio mensurável.</p>
+  <p>Julien Bek, no mesmo artigo da Sequoia Capital citado na abertura deste texto, defende uma tese ambiciosa: serviços serão o novo software — boa parte do trabalho de serviço profissional, eventualmente absorvida por sistemas de IA operando com autonomia real<a class="ref" href="#ref2">[2]</a>. Pode estar certo, no longo prazo. Mas essa tese descreve um horizonte que a maioria das empresas ainda não alcançou: enquanto se debate Services as Software, muitos projetos de IA em produção ainda são encerrados sem conclusão, e boa parte das organizações ainda engatinha para transformar uso de IA em ganho real de produtividade ou em benefício de negócio mensurável.</p>
 
   <div class="callout">
     <p>Só o tempo vai dizer se — e quais — serviços serão de fato substituídos por software nesse formato. Até lá, o que faz sentido é pavimentar o caminho: fortalecer o terceiro pilar, aprimorando a disciplina que decide se um sistema de IA em produção acumula julgamento ou acumula ruído — a Engenharia de Contexto.</p>
@@ -785,15 +790,26 @@
     <div>
       <p class="section-label">Referências</p>
       <ul>
-        <li>[1] Susskind, R.; Susskind, D. (2015/2022). <em>The Future of the Professions: How Technology Will Transform the Work of Human Experts.</em> Oxford University Press.</li>
-        <li>[2] Bek, J. (2026). <em>Services: The New Software.</em> Sequoia Capital, 5 de março de 2026. Citado aqui apenas pela formulação da tese de convergência entre inteligência e julgamento, não pela discussão de mercado do artigo. <a href="https://sequoiacap.com/article/services-the-new-software/" target="_blank">Link</a></li>
-        <li>[3] Brynjolfsson, E.; Pentland, S.; Pei, J. et al. (2026). <em>How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks.</em> Stanford Digital Economy Lab. <a href="https://arxiv.org/abs/2604.22750" target="_blank">arXiv:2604.22750</a></li>
-        <li>[4] Farooq, H.; Rajwani, J. (2025). <em>Understanding Context Engineering.</em> The Production Gap (Substack), 13 de julho de 2025 — síntese de pesquisa do Google DeepMind (Gemini 2.5), Microsoft e Salesforce sobre modos de falha em janelas de contexto. <a href="https://boringbot.substack.com/p/understanding-context-engineering" target="_blank">Link</a></li>
-        <li>[5] Lütke, T. <a href="https://x.com/tobi/status/1935533422589399127" target="_blank">Publicação no X</a>, 19 de junho de 2025; Anthropic (2025). <em>Effective context engineering for AI agents.</em> <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank">Link</a></li>
-        <li>[6] Andreessen Horowitz — fundo de infraestrutura de IA de US$ 1,7 bilhão liderado por Jennifer Li, anunciado em fevereiro de 2026, reportado por BitcoinWorld/CryptoRank. Citação de segunda mão sobre a tese declarada da a16z, não de material publicado diretamente pela firma. <a href="https://cryptorank.io/news/feed/a1fa2-a16z-ai-infrastructure-fund-2025" target="_blank">Link</a></li>
-        <li>[7] a16z New Media (2025). <em>Big Ideas 2026: Part 1.</em> 9 de dezembro de 2025 — previsões de Jennifer Li e Jason Cui, sócios da equipe de Infraestrutura da a16z. <a href="https://www.a16z.news/p/big-ideas-2026-part-1" target="_blank">Link</a></li>
-        <li>[8] <em>What Is a Context Engineer? The AI Job Title Replacing Prompt Engineers in 2026.</em> The Interview Guys, atualizado em 25 de junho de 2026 — inclui a citação de Andrej Karpathy e a definição formal da Gartner. Fonte secundária de carreira/recrutamento, não um relatório primário da Gartner nem uma declaração direta de Karpathy. <a href="https://blog.theinterviewguys.com/what-is-a-context-engineer/" target="_blank">Link</a></li>
+        <li id="ref1">[1] Susskind, R.; Susskind, D. (2015/2022). <em>The Future of the Professions: How Technology Will Transform the Work of Human Experts.</em> Oxford University Press.</li>
+        <li id="ref2">[2] Bek, J. (2026). <em>Services: The New Software.</em> Sequoia Capital, 5 de março de 2026. Citado aqui apenas pela formulação da tese de convergência entre inteligência e julgamento, não pela discussão de mercado do artigo. <a href="https://sequoiacap.com/article/services-the-new-software/" target="_blank">Link</a></li>
+        <li id="ref3">[3] Brynjolfsson, E.; Pentland, S.; Pei, J. et al. (2026). <em>How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks.</em> Stanford Digital Economy Lab. <a href="https://arxiv.org/abs/2604.22750" target="_blank">arXiv:2604.22750</a></li>
+        <li id="ref4">[4] Farooq, H.; Rajwani, J. (2025). <em>Understanding Context Engineering.</em> The Production Gap (Substack), 13 de julho de 2025 — síntese de pesquisa do Google DeepMind (Gemini 2.5), Microsoft e Salesforce sobre modos de falha em janelas de contexto. <a href="https://boringbot.substack.com/p/understanding-context-engineering" target="_blank">Link</a></li>
+        <li id="ref5">[5] Lütke, T. <a href="https://x.com/tobi/status/1935533422589399127" target="_blank">Publicação no X</a>, 19 de junho de 2025; Anthropic (2025). <em>Effective context engineering for AI agents.</em> <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank">Link</a></li>
+        <li id="ref6">[6] Andreessen Horowitz — fundo de infraestrutura de IA de US$ 1,7 bilhão liderado por Jennifer Li, anunciado em fevereiro de 2026, reportado por BitcoinWorld/CryptoRank. Citação de segunda mão sobre a tese declarada da a16z, não de material publicado diretamente pela firma. <a href="https://cryptorank.io/news/feed/a1fa2-a16z-ai-infrastructure-fund-2025" target="_blank">Link</a></li>
+        <li id="ref7">[7] a16z New Media (2025). <em>Big Ideas 2026: Part 1.</em> 9 de dezembro de 2025 — previsões de Jennifer Li e Jason Cui, sócios da equipe de Infraestrutura da a16z. <a href="https://www.a16z.news/p/big-ideas-2026-part-1" target="_blank">Link</a></li>
+        <li id="ref8">[8] <em>What Is a Context Engineer? The AI Job Title Replacing Prompt Engineers in 2026.</em> The Interview Guys, atualizado em 25 de junho de 2026 — inclui a citação de Andrej Karpathy e a definição formal da Gartner. Fonte secundária de carreira/recrutamento, não um relatório primário da Gartner nem uma declaração direta de Karpathy. <a href="https://blog.theinterviewguys.com/what-is-a-context-engineer/" target="_blank">Link</a></li>
         <li>Leituras complementares: Willison, S. <em>Context engineering.</em> Junho de 2025. <a href="https://simonwillison.net/2025/Jun/27/context-engineering/" target="_blank">Link</a> — as discussões de Andrej Karpathy e Harrison Chase (LangChain) sobre a distinção entre prompt engineering e context engineering — e Mollick, E. (2024). <em>Co-Intelligence: Living and Working with AI.</em> Portfolio/Penguin.</li>
+      </ul>
+    </div>
+
+    <div id="mais-sobre-o-tema">
+      <p class="section-label">Mais sobre o Tema</p>
+      <ul>
+        <li>Sobre envenenamento de contexto: Lin, X. et al. (2025). <em>LLM-based Agents Suffer from Hallucinations: A Survey of Taxonomy, Methods, and Directions.</em> <a href="https://arxiv.org/abs/2509.18970" target="_blank">arXiv:2509.18970</a> — survey abrangente sobre alucinação em agentes de IA, com taxonomia própria dos pontos de origem no fluxo do agente.</li>
+        <li>Sobre distração de contexto: Liu, N. F. et al. (2023/2024). <em>Lost in the Middle: How Language Models Use Long Contexts.</em> Stanford / UC Berkeley / Samaya AI, TACL. <a href="https://arxiv.org/abs/2307.03172" target="_blank">arXiv:2307.03172</a> — o estudo original que documentou a perda de desempenho quando a informação relevante está no meio de uma janela de contexto longa.</li>
+        <li>Sobre distração de contexto: Hong, K.; Troynikov, A.; Huber, J. (2025). <em>Context Rot: How Increasing Input Tokens Impacts LLM Performance.</em> Chroma Research. <a href="https://research.trychroma.com/context-rot" target="_blank">Link</a> — testa 18 modelos de fronteira e mostra que degradação com contexto longo não é uniforme.</li>
+        <li>Sobre confusão de contexto: Repantis, V.; Gawde, A.; Singh, H.; Blackwell II, J. (2026). <em>How Many Tools Should an LLM Agent See? A Chance-Corrected Answer.</em> Meta Platforms. <a href="https://arxiv.org/abs/2605.24660" target="_blank">arXiv:2605.24660</a></li>
+        <li>Sobre choque de contexto: Laban, P.; Hayashi, H.; Zhou, Y.; Neville, J. (2025). <em>LLMs Get Lost In Multi-Turn Conversation.</em> Microsoft Research / Salesforce Research. <a href="https://arxiv.org/abs/2505.06120" target="_blank">arXiv:2505.06120</a> — provavelmente a fonte primária por trás do dado de "Microsoft e Salesforce" citado na referência [4] acima.</li>
       </ul>
     </div>
   </div>
