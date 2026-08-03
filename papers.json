@@ -2,6 +2,22 @@
   "base": "https://joseluizcosta-sys.github.io/Artigos/",
   "papers": [
     {
+      "slug": "quem-vai-ser-o-senior-de-2035",
+      "hasEn": true,
+      "tag": {
+        "pt": "White Paper · Agosto 2026",
+        "en": "White Paper · August 2026"
+      },
+      "title": {
+        "pt": "Quem vai ser o sênior de 2035?",
+        "en": "Who Will Be the Experts of 2035?"
+      },
+      "dek": {
+        "pt": "A IA absorveu parte do trabalho que formava especialistas. Três estudos de larga escala que se contradizem, um modelo econômico do IESE, e a distinção que decide o resultado: substituir o novato ou ampliar o que ele consegue fazer.",
+        "en": "AI absorbed part of the work that used to train specialists. Three large-scale studies that contradict each other, an economic model from IESE, and the distinction that decides the outcome: replacing the novice or augmenting what they can do."
+      }
+    },
+    {
       "slug": "da-inteligencia-ao-julgamento",
       "hasEn": true,
       "tag": {

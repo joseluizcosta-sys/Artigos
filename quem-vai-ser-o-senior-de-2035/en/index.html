@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who will be the experts of 2035? — AI and the training of specialists</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --paper:      #F1ECE0;
+      --paper-2:    #E8E1D1;
+      --card:       #FAF6EC;
+      --ink:        #1A1E1B;
+      --ink-soft:   #34382F;
+      --slate:      #6A6B5F;
+      --faint:      #9A9886;
+      --crop:       #C18E20;
+      --crop-deep:  #9A6E13;
+      --accept:     #2F6553;
+      --reject:     #A12B22;
+      --line:       rgba(26,30,27,.16);
+      --line-soft:  rgba(26,30,27,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      background-image: linear-gradient(var(--line-soft) 1px, transparent 1px);
+      background-size: 100% 30px;
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .lang-nav { position: fixed; top: 0; right: 0; padding: 14px 24px; display: flex; gap: 6px; z-index: 100; }
+    .lang-nav a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; padding: 4px 10px; border-radius: 3px;
+      border: 1px solid transparent; color: var(--faint); transition: all .18s;
+    }
+    .lang-nav a.active { color: var(--ink); border-color: var(--line); background: var(--card); }
+    .lang-nav a:hover:not(.active) { color: var(--slate); }
+
+    header { max-width: 760px; margin: 0 auto; padding: 100px 28px 52px; }
+
+    .meta {
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em;
+      color: var(--faint); margin-bottom: 28px; display: flex; flex-wrap: wrap; gap: 4px 0; align-items: center;
+    }
+    .meta .sep { margin: 0 8px; opacity: .5; }
+
+    h1 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 700;
+      line-height: 1.08; letter-spacing: -.02em; color: var(--ink); margin: 0 0 18px;
+    }
+    .deck {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.15rem;
+      font-style: italic; color: var(--slate); line-height: 1.55; margin-bottom: 36px;
+    }
+    .lede { font-size: 1.05rem; color: var(--ink-soft); line-height: 1.75; border-left: 2.5px solid var(--crop); padding-left: 20px; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 0 28px 80px; }
+
+    p { color: var(--ink-soft); margin: 0 0 22px; }
+    strong { color: var(--ink); font-weight: 600; }
+    em { font-style: italic; }
+
+    h2 {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.5rem;
+      font-weight: 700; color: var(--ink); margin: 40px 0 16px; letter-spacing: -.01em;
+    }
+    h2 .eyebrow {
+      display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      font-weight: 500; text-transform: uppercase; letter-spacing: .14em;
+      color: var(--crop); margin-bottom: 10px;
+    }
+    h3.sub {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.02rem;
+      font-weight: 600; color: var(--ink); margin: 34px 0 12px;
+    }
+
+    .roadmap { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 24px 26px; margin: 40px 0; }
+    .toggle-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin-bottom: 16px;
+    }
+    .roadmap ol { list-style: none; counter-reset: rm; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 20px; }
+    .roadmap li { counter-increment: rm; display: flex; gap: 9px; }
+    .roadmap li::before {
+      content: counter(rm, decimal-leading-zero);
+      font-family: 'IBM Plex Mono', monospace; font-size: .66rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 2px; font-weight: 500;
+    }
+    .roadmap a.rm-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: .8rem; color: var(--ink); text-decoration: none;
+      display: inline-flex; align-items: baseline; gap: 5px; line-height: 1.25;
+    }
+    .roadmap a.rm-title:hover { color: var(--crop-deep); }
+    .roadmap a.rm-title .arw { color: var(--crop); font-size: .72rem; }
+    .roadmap p { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .68rem; color: var(--slate); margin: 4px 0 0; line-height: 1.4; }
+
+    .callout {
+      background: var(--card); border: 1px solid var(--line);
+      border-left: 3px solid var(--crop); border-radius: 0 5px 5px 0;
+      padding: 20px 24px; margin: 36px 0;
+    }
+    .callout p { margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 1.05rem; color: var(--ink); }
+    .callout.caveat { border-left-color: var(--reject); }
+    .callout.caveat p { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .86rem; color: var(--slate); line-height: 1.6; }
+    .callout.caveat strong { color: var(--ink); }
+
+    .pull-quote {
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 28px 0; margin: 44px 0;
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.2rem;
+      font-style: italic; color: var(--ink); line-height: 1.5;
+    }
+    .pull-quote cite {
+      display: block; font-style: normal; font-family: 'IBM Plex Mono', monospace;
+      font-size: .75rem; color: var(--faint); margin-top: 14px; letter-spacing: .04em;
+    }
+
+    .tbl-wrap { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 20px 22px; margin: 36px 0; overflow-x: auto; }
+    .tbl-title { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .88rem; font-weight: 600; color: var(--ink); margin: 0 0 14px; }
+    table { width: 100%; border-collapse: collapse; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .8rem; }
+    th {
+      text-align: left; font-weight: 600; color: var(--ink); padding: 9px 12px 9px 0;
+      border-bottom: 1px solid var(--line); font-size: .72rem;
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    td { padding: 11px 12px 11px 0; color: var(--slate); border-bottom: 1px solid var(--line-soft); line-height: 1.5; vertical-align: top; }
+    td strong { color: var(--ink); }
+    tr:last-child td { border-bottom: 0; }
+    td.danger { color: var(--reject); }
+    td.danger strong { color: var(--reject); }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 36px 0; }
+    .stat-card { background: var(--card); border: 1px solid var(--line); border-radius: 5px; padding: 16px 14px; text-align: center; }
+    .stat-card .num {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: 1.5rem; color: var(--crop-deep); line-height: 1.1; margin-bottom: 6px;
+    }
+    .stat-card .lab {
+      font-family: 'IBM Plex Mono', monospace; font-size: .6rem;
+      text-transform: uppercase; letter-spacing: .06em; color: var(--slate); line-height: 1.4;
+    }
+
+    ol.steps { counter-reset: st; list-style: none; padding: 0; margin: 26px 0; }
+    ol.steps li { counter-increment: st; display: flex; gap: 12px; margin-bottom: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .86rem; color: var(--slate); line-height: 1.55; }
+    ol.steps li::before {
+      content: counter(st, decimal-leading-zero);
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 3px; font-weight: 500;
+    }
+
+    .ref { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--crop-deep); vertical-align: super; text-decoration: none; }
+    .ref:hover { text-decoration: underline; }
+    main p a:not(.ref) { color: var(--crop-deep); text-decoration: none; }
+    main p a:not(.ref):hover { text-decoration: underline; }
+
+    .bottom { border-top: 1px solid var(--line); margin-top: 72px; padding-top: 28px; display: flex; flex-direction: column; gap: 32px; }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .14em; color: var(--faint); margin: 0 0 14px;
+    }
+    .bottom ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .bottom li { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .8rem; color: var(--slate); line-height: 1.55; }
+    .bottom a { color: var(--crop-deep); text-decoration: none; }
+    .bottom a:hover { text-decoration: underline; }
+
+    .article-note { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; color: var(--faint); letter-spacing: .04em; margin-top: 28px; line-height: 1.6; }
+
+    @media (max-width: 600px) {
+      .roadmap ol { grid-template-columns: 1fr; gap: 14px; }
+      .stat-grid  { grid-template-columns: 1fr 1fr; }
+      table { font-size: .74rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="lang-nav">
+  <a href="../index.html">PT</a>
+  <a href="./index.html" class="active">EN</a>
+</nav>
+
+<header>
+  <div class="meta">White Paper<span class="sep">·</span>August 2026</div>
+
+  <h1>Who will be the experts of 2035?</h1>
+  <div class="deck">AI absorbed part of the work that used to train specialists — how to keep young professionals exposed to expert human judgment</div>
+
+  <p class="lede">For decades, training a specialist was an automatic by-product of the entry-level job. Nobody had to design it: the junior did the repetitive work, made mistakes next to someone who knew better, and in three or four years had become a different person. The mechanism was invisible because it ran on its own. Generative AI has absorbed part of that work — and the available evidence is more contradictory, and more interesting, than the headlines suggest.</p>
+</header>
+
+<main>
+
+  <div class="roadmap">
+    <div class="toggle-label">What this covers — seven sections</div>
+    <ol>
+      <li><div>
+        <a class="rm-title" href="#s01">The rung that used to exist <span class="arw">→</span></a>
+        <p>How specialists were trained before — and why frontline customer support is the extreme case, with official data on what is shrinking.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s02">What the data shows <span class="arw">→</span></a>
+        <p>Three large-scale datasets. Two point to declining junior employment; the third points the other way.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s03">Why the rung mattered <span class="arw">→</span></a>
+        <p>The IESE economic model, the three learning regimes, and the distinction between replacing and augmenting the novice.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s04">Why delegating doesn't train <span class="arw">→</span></a>
+        <p>Causal evidence from 1,222 participants: the persistence cost concentrates among those who receive the finished answer.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s05">Considerations <span class="arw">→</span></a>
+        <p>What the evidence does not support: the interest-rate confounder, source bias, and the absence of Brazilian data.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s06">What to do <span class="arw">→</span></a>
+        <p>The formative-value matrix, the cutting principle, the copilot as an ambiguous mentor, and five questions for the executive committee.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s07">Closing provocation <span class="arw">→</span></a>
+        <p>The answer in one sentence, what remains open, and the question left for the reader.</p>
+      </div></li>
+    </ol>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="num">−9%</div><div class="lab">Junior employment at adopting firms, six quarters</div></div>
+    <div class="stat-card"><div class="num">−16%</div><div class="lab">Workers aged 22–25, most exposed occupations</div></div>
+    <div class="stat-card"><div class="num">+12%</div><div class="lab">Entry-level at high-intensity AI adopters</div></div>
+    <div class="stat-card"><div class="num">0.05–0.35</div><div class="lab">Percentage points of annual growth at risk</div></div>
+  </div>
+
+  <h2 id="s01"><span class="eyebrow">01 — The origin</span>The rung that used to exist</h2>
+
+  <p>Entry-level work always meant low pay, repetitive tasks and little prestige. Document review, code debugging, spreadsheet checking, ticket triage, data gathering. It was the condition for entering the labour market, and everyone understood it as a condition.</p>
+
+  <p>Except it was never only a condition. <strong>The repetitive work of early career was the vehicle for a transfer that nobody ever put in a contract:</strong> the novice watched the expert decide, made mistakes on a scale where mistakes were cheap, and absorbed what no manual contained. Judgment on exceptions. When to distrust the data. Which rules exist on paper and which ones hold in practice.</p>
+
+  <p>That content has a name in the economics literature — <strong>tacit knowledge</strong> — and an inconvenient property: it is embodied in the person and not verifiable by third parties<a href="#ref4" class="ref">[4]</a>. You cannot write "you will transfer your tacit knowledge to me" into a contract and enforce delivery. It passes through proximity or it does not pass at all.</p>
+
+  <h3 class="sub">The extreme case: tier-one support</h3>
+
+  <p><strong>Tier one is the first layer of customer support</strong> — whoever takes the contact before any specialist. It answers frequent questions, checks order status, makes simple account changes, and escalates to tier two anything requiring technical knowledge or authority. It is scripted work by design, with controlled handle time and low autonomy. And for decades it was the entry door for an entire generation of supervisors, quality monitors, operations managers and CX directors.</p>
+
+  <p>The U.S. government's own occupational handbook describes the training mechanism without using that word: customer service representatives receive two to four weeks of training and <em>"often receive guidance from an experienced worker for the first few weeks of employment"</em><a href="#ref5" class="ref">[5]</a>.</p>
+
+  <p><strong>What the official data shows — and what it doesn't.</strong> The Bureau of Labor Statistics records 2.81 million customer service representatives in the United States in 2024 and projects a 5% decline through 2034, a net loss of 153,700 positions, explicitly attributed to the automation of simple tasks by self-service systems and apps<a href="#ref5" class="ref">[5]</a>. But the same document carries the counterweight: even in decline, the occupation is projected to open about <strong>341,700 positions per year</strong> over the decade, all to replace people who leave. The layer shrinks; it does not close.</p>
+
+  <p><strong>What reported journalism documents.</strong> A Bloomberg story from July 2026 names the target precisely: <em>"Jobs focused on this simplest aspect of customer support — often called tier one — are on the chopping block, while companies are expected to retain workers trained to handle more complex interactions"</em><a href="#ref6" class="ref">[6]</a>. The piece documents Microsoft trimming its customer service workforce from roughly 50,000 to 40,000 across staff and contractors — with Judson Althoff stating in April that AI saves the company around $750 million a year — and Brinks Home going from about 800 to 400 positions after cutting call volume by two thirds, partly through reassignment and mostly through natural attrition. Forrester analyst Kate Leggett estimates that almost half of customer service roles will be <strong>impacted</strong> by 2030. Impacted, not eliminated — the distinction tends to disappear in the retelling.</p>
+
+  <div class="callout caveat">
+    <p><strong>The caveat the industry would rather not hear</strong>, from the same story: salespeople at several technology companies told Bloomberg that they routinely pitch call-centre AI tools as a way of lowering labour costs — which undercuts the common claim that AI primarily exists to make workers more productive.</p>
+  </div>
+
+  <h2 id="s02"><span class="eyebrow">02 — The evidence</span>What the employment data shows — and where it contradicts itself</h2>
+
+  <p>Three large-scale datasets, and they do not agree.</p>
+
+  <p><strong>The first tracks 62 million workers across 285,000 U.S. firms between 2015 and 2025</strong><a href="#ref1" class="ref">[1]</a>. The authors identify generative-AI adoption through text analysis of job postings and compare employment by seniority against non-adopting firms.</p>
+
+  <p>From 2015 to 2022, adopters and non-adopters followed parallel trends. Starting in the first quarter of 2023, adopters break away: junior employment falls <strong>about 9% after six quarters</strong> relative to controls. Senior employment shows no break in trend. The decline concentrates in high-exposure roles and disappears in low-exposure ones. The mechanism is <strong>slower hiring</strong> — separations did not rise and promotions stayed stable. And the effect is strongest in the middle of the distribution: candidates from mid-tier institutions saw the steepest relative declines.</p>
+
+  <p><strong>The second uses administrative data from the largest payroll software provider in the United States</strong><a href="#ref2" class="ref">[2]</a>. Workers aged 22 to 25 in the most exposed occupations experienced a <strong>16%</strong> relative employment decline, controlling for firm-level shocks, while employment for experienced workers remained stable or kept growing. Adjustment happens through employment rather than compensation. The results survive excluding technology firms and occupations amenable to remote work.</p>
+
+  <div class="callout">
+    <p>And the finding that carries this entire paper: <strong>the declines concentrate in occupations where AI is more likely to automate, rather than augment, human labour.</strong></p>
+  </div>
+
+  <p><strong>The third contradicts the first two.</strong> Analysis by Ramp Economics Lab with workforce data from Revelio Labs, covering more than <strong>21,000 U.S. employers</strong>, finds that firms investing heavily in AI grow headcount by 10% over the two years following adoption — and entry-level hiring grows faster still, by <strong>12%</strong><a href="#ref3" class="ref">[3]</a>.</p>
+
+  <p>The possible reconciliation lies in the definition of "heavily": the gain appears among firms adopting with high intensity — spend per employee in the first months, multiple models, agents and APIs rather than simple chat subscriptions.</p>
+
+  <div class="callout caveat">
+    <p><strong>Relevant caveat:</strong> Ramp is a corporate card company and the data comes from its own customers' spending. Firms spending heavily on AI through that channel tend to be well-capitalised and growing — a plausible and uncontrolled selection bias.</p>
+  </div>
+
+  <h2 id="s03"><span class="eyebrow">03 — The theory</span>Why the rung mattered</h2>
+
+  <p>Enrique Ide, an economist at IESE Business School, published a model in 2025 that formalises the intergenerational transmission of knowledge at work<a href="#ref4" class="ref">[4]</a>. The structure is simple: <strong>at any moment two groups coexist inside the firm — those still learning and those who already know.</strong> Production requires expert knowledge <strong>and</strong> the execution of routine tasks, and the latter can be performed by novices <strong>or by machines</strong>. In performing routine tasks, the novice interacts with an expert, observes their skill and absorbs it. It is the formalisation of the apprenticeship arrangement: <strong>the novice accepts lower wages in exchange for the opportunity to learn.</strong></p>
+
+  <div class="tbl-wrap">
+    <p class="tbl-title">The model's three long-run regimes</p>
+    <table>
+      <thead><tr><th>Regime</th><th>Condition</th><th>Outcome</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Learning breakdown</strong></td><td>Extensive automation</td><td>Novice–expert interactions severely restricted, tacit knowledge eroded, stagnation</td></tr>
+        <tr><td><strong>Constrained learning</strong></td><td>Moderate automation</td><td>Some interactions persist, positive but limited growth</td></tr>
+        <tr><td><strong>Full learning</strong></td><td>Expensive automation</td><td>Frequent interactions, robust transmission, maximum growth</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>This is not a smooth gradient. These are basins of attraction — and moving from one to another is hard to reverse, because the stock of experts capable of training is itself the result of the previous generation.</p>
+
+  <p><strong>The order-of-magnitude calculation.</strong> The author derives an expression for the reduction in the steady-state growth rate and computes it with parameters from the literature: a 2% annual baseline growth rate and the premise that roughly two thirds of long-run growth comes from the diffusion of tacit knowledge. Across the two scenarios tested — 5% and 30% of entry-level tasks automated — the result is a reduction of <strong>0.05 to 0.35 percentage points in the annual growth rate of U.S. per capita output</strong>.</p>
+
+  <p><strong>A note on the structure, because it reads oddly at first.</strong> The model parameterises a career as two stages of twenty years each: twenty learning, twenty being a source of learning for others. This does not claim that anyone spends two decades as a junior, nor that careers have only two rungs. It is a modelling simplification — a forty-year career split in half between the phase in which competence is absorbed and the phase in which it is transmitted.</p>
+
+  <div class="callout caveat">
+    <p><strong>Method caveats, and they are the author's own:</strong> the exercise "is neither a formal calibration nor a forecast", and "deliberately abstracts from compensating factors, such as the emergence of new junior-level roles or AI's potential to stimulate innovation". Ide also explicitly assumes that AI adoption takes the exclusive form of automation — a premise he justifies with early evidence, but a premise nonetheless.</p>
+  </div>
+
+  <p><strong>And there is a second, more uncomfortable result:</strong> the competitive equilibrium features <strong>socially excessive automation</strong> of early-career tasks. Each firm automates the dose that is rational for itself. Collectively they automate too much, because nobody internalises the cost of training the whole market's future experts.</p>
+
+  <h3 class="sub">The distinction that decides everything</h3>
+
+  <div class="pull-quote">
+    The trade-off does not apply to all technological advances. Improvements in technologies that <em>augment</em> routine labour — that raise the novice's productivity rather than replacing the novice's work — deliver immediate productivity benefits while simultaneously reinforcing the transmission of knowledge.
+    <cite>Ide (2025), Automation, AI, and the Intergenerational Transmission of Knowledge</cite>
+  </div>
+
+  <p>Automating the novice's task erodes training. Augmenting what the novice can do does not. It is the same technology in two opposite configurations — and the choice between them is a design decision, not a technological one.</p>
+
+  <p><strong>This has stopped being theory alone.</strong> The payroll study finds exactly that pattern in the data: employment declines concentrate in occupations where AI tends to automate rather than augment<a href="#ref2" class="ref">[2]</a>. Theoretical model and administrative data pointing at the same variable.</p>
+
+  <h3 class="sub">The precedent that isn't about AI</h3>
+
+  <p>The model rests on field evidence that predates generative AI, from Matt Beane's work on learning at work<a href="#ref12" class="ref">[12]</a>. In surgery, the adoption of robotic systems concentrated the operation in the senior surgeon's hands and drastically reduced residents' supervised practice hours. In finance, automated tools took away from junior analysts the building work that used to train them. Beane summarises the traditional mechanism in three words — "see one, do one, teach one" — and observes that formal education delivers what he calls <em>table stakes</em>, the basic qualification; real competence only emerges from practice alongside someone who knows.</p>
+
+  <p><strong>The practical implication:</strong> counting juniors measures the wrong thing. The operational question stops being "how many did we hire" and becomes: do the ones who are here work close to someone who knows, on problems that still require judgment?</p>
+
+  <h3 class="sub">What about mentoring programmes?</h3>
+
+  <p>They exist, and they are common. Formal mentoring, graduate programmes, internal academies and development tracks are established practice in any sizeable company.</p>
+
+  <p><strong>The problem is what those programmes measure.</strong> They typically track hiring volume, participation, programme completion and time to productivity — <strong>input and completion</strong> metrics. None of them answers the question the economic model raises: how many hours of real production does this professional spend alongside someone at the top of the firm's competence?</p>
+
+  <p>A <em>Harvard Business Review</em> article from July 2026 reaches the same conclusion by another route: AI is automating the very work that trained people, and the response requires <strong>redesigning mentoring — making tacit knowledge explicit and embedding learning into daily work</strong>, to replace the developmental opportunities automation removed<a href="#ref7" class="ref">[7]</a>.</p>
+
+  <div class="callout caveat">
+    <p><strong>Caveat:</strong> I read the summary and opening of that article; the full text sits behind a subscription. And it is an opinion piece by a career coach, not a study. It counts as convergence of diagnosis, not as evidence.</p>
+  </div>
+
+  <p>The defensible claim, then, is not "nobody measures". It is: <strong>existing programmes measure participation and completion, and the variable the theory identifies as decisive — productive proximity to the best — appears in no management dashboard I was able to find.</strong></p>
+
+  <h2 id="s04"><span class="eyebrow">04 — The mechanism</span>Why delegating doesn't train</h2>
+
+  <p>There is a second, individual mechanism, and on this one there is recent causal evidence. The study's framing states its case up front:</p>
+
+  <div class="pull-quote">
+    People often optimize for long-term goals in collaboration: a mentor or companion doesn't just answer questions, but also scaffolds learning, tracks progress, and prioritizes the other person's growth over immediate results. In contrast, current AI systems are fundamentally short-sighted collaborators — optimized for providing instant and complete responses, without ever saying no.
+    <cite>Liu, Christian, Dumbalska, Bakker &amp; Dubey (2026)</cite>
+  </div>
+
+  <p>These are three randomised experiments, <strong>N = 1,222</strong>, with the second replicating the results and ruling out confounds. The finding: AI assistance <strong>improves immediate performance</strong> and, afterwards, <strong>reduces persistence and impairs unassisted performance</strong>. Assisted people give up sooner when they return to working alone. The effects emerge after roughly <strong>ten minutes</strong> of interaction<a href="#ref8" class="ref">[8]</a>.</p>
+
+  <p>And the detail that changes the recommendation: <strong>the persistence cost concentrates among those who obtain the direct solution.</strong> It is not AI use that erodes — it is receiving the finished answer. The authors explain the mechanism: AI conditions people to expect immediate answers, denying them the experience of working through difficulty on their own. And they close by noting that persistence is foundational to skill acquisition and one of the strongest predictors of long-term learning.</p>
+
+  <div class="callout caveat">
+    <p><strong>Method caveat:</strong> the tasks involve mathematical reasoning and reading comprehension, in short interventions in a controlled setting. Extrapolating from ten laboratory minutes to three years of professional formation is a leap the study does not authorise.</p>
+  </div>
+
+  <p>How much of real usage is the kind that substitutes for effort? Public data from the Anthropic Economic Index, for May 2026, shows observed usage split almost evenly: <strong>51.4% classified as augmentation and 48.6% as automation</strong><a href="#ref9" class="ref">[9]</a>.</p>
+
+  <div class="callout caveat">
+    <p><strong>Mandatory caveats:</strong> the index describes <strong>tasks</strong>, not people or jobs — the correct formulation is "AI is used for tasks commonly done by a given occupation", never "that occupation uses AI". There is no time series: it is a snapshot of one period and supports no claim about trend. And it covers one specific assistant, not the market.</p>
+  </div>
+
+  <p><strong>And this is where the arguments meet.</strong> The augmentation–automation distinction, which in the index is a descriptive classification of usage, is in Ide's model the variable separating full learning from breakdown — and in the payroll study it is where employment declines concentrate. Three independent sources, the same dividing line.</p>
+
+  <p>For a trained professional, delegating is pure gain. For someone still being trained, it is the rung being skipped.</p>
+
+  <h2 id="s05"><span class="eyebrow">05 — The limits</span>Considerations</h2>
+
+  <p><strong>What the researchers themselves say.</strong> The authors of the 62-million-worker study record that their findings "do not necessarily imply immediate task automation", that a plausible alternative is firms making forward-looking adjustments in response to expectations formed after the release of GPT-3.5, that "if firms have overreacted, the decline may be temporary" — and that their data <strong>does not allow them to directly test that mechanism</strong><a href="#ref1" class="ref">[1]</a>.</p>
+
+  <p><strong>The economic confounder was tested — and partly set aside.</strong> In a February 2026 note, the authors of the payroll study responded to the objection that interest rates, not AI, explain the decline<a href="#ref10" class="ref">[10]</a>. Crossing occupational interest-rate exposure with AI exposure, they find that the most AI-exposed occupations are on average <strong>less</strong> exposed to interest rates — construction is the inverse example. And splitting occupations above and below the median of interest-rate exposure, in both groups the most AI-exposed decline more.</p>
+
+  <p><strong>But the timing changes under stricter controls.</strong> With firm-time fixed effects, the decline only becomes significant <strong>in 2024</strong> — not in late 2022 or 2023. In the authors' words, the earlier declines are "likely (at least partly) due to some combination of other factors, not just AI". The effect, on the other hand, has grown: about 16% through October 2025 against 13% with data through July, with no reversal.</p>
+
+  <p>Those same authors write, explicitly: <em>"we do not believe that AI is always and everywhere the sole determinant of employment, and we do not encourage others to interpret our results in that way."</em> And they close by acknowledging that, without an experiment comparing a world with AI to one without, the question remains open.</p>
+
+  <p><strong>What companies say about themselves.</strong> In a survey of nearly a thousand U.S. business leaders conducted in February 2026, 21% name AI as the sole reason for eliminating roles, 19% as the primary driver and 26% as one of several contributing factors; 21% report having already frozen entry-level hiring because of AI, and 36% expect to have stopped by year end<a href="#ref11" class="ref">[11]</a>.</p>
+
+  <p><strong>The same survey carries the opposite.</strong> Forty-seven per cent say they are hiring more technical or AI-focused staff, and <strong>48% say they are hiring more workers who can effectively use AI tools</strong>. This is not pure substitution: it is a recomposition of the entry-level profile.</p>
+
+  <div class="callout caveat">
+    <p><strong>Caveat:</strong> this is a survey run by a commercial job-market platform, with direct interest in the narrative and no sampling detail. It supports "companies <strong>say</strong> they decided because of AI", not "companies decided because of AI".</p>
+  </div>
+
+  <p><strong>And there is a data point pointing to expectation.</strong> In July 2026, a survey of nearly two thousand workers in the United States and the United Kingdom found that 62% believed AI was reducing entry-level hiring — but only <strong>31%</strong> reported that it had happened in their own field. Asked about the biggest obstacle in today's market, only <strong>9%</strong> cited AI; pay (30%) and competition (25%) came first<a href="#ref13" class="ref">[13]</a>. Perception at twice the level of experience, and well above the stated priority.</p>
+
+  <p><strong>The gap that bothers me most.</strong> All the evidence cited here is North American or British. I found no equivalent study using Brazilian data. Managers in Brazil are deciding about the structure of their own teams based on research conducted on a different labour market, with a different cost structure, different legislation and a different entry-level education profile.</p>
+
+  <p><strong>What survives all of this is the model's argument</strong>, because it does not depend on the magnitude of the hiring decline. If training degrades when the novice stops working near the expert, uncertainty about how many juniors were hired does not change the recommendation.</p>
+
+  <h2 id="s06"><span class="eyebrow">06 — The response</span>What to do — and who is already doing it</h2>
+
+  <h3 class="sub">First, the formative-value matrix</h3>
+
+  <p>Every task considered for automation is assessed today on two dimensions: <strong>how much it costs</strong> and <strong>how well the machine performs it</strong>. A third is missing — <strong>how much that task trains whoever performs it.</strong> For practical use the first two collapse into one — if it is cheap and the machine does it well, it is automatable — and what remains is a two-entry matrix:</p>
+
+  <div class="tbl-wrap">
+    <p class="tbl-title">Formative-value matrix</p>
+    <table>
+      <thead><tr><th></th><th>Low formative value</th><th>High formative value</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hard to automate</strong></td><td>Stays human out of necessity</td><td>Protected by accident — and fragile</td></tr>
+        <tr><td><strong>Easy to automate</strong></td><td>Automate without hesitation</td><td class="danger"><strong>Blind spot</strong> — immediate saving, deferred cost</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The bottom-right quadrant is the whole thesis. <strong>The tasks easiest to automate tend to be exactly the ones that trained whoever performed them</strong> — repetitive, low-risk, fast-feedback: precisely the properties that make a task good for training someone and good for a machine to do. Automating there is not wrong. It is an intertemporal trade-off currently decided without anyone knowing they are deciding.</p>
+
+  <h3 class="sub">Second, the cutting principle</h3>
+
+  <div class="callout">
+    <p><strong>Automate the mechanical part. Preserve a human step whenever the task teaches diagnosis, prioritisation or consequence.</strong></p>
+  </div>
+
+  <p>And the corollary, now with causal evidence: <strong>AI should give hints, not answers.</strong> The randomised study shows the persistence cost concentrates among those who receive the direct solution<a href="#ref8" class="ref">[8]</a>. This is configurable: write your own analysis before opening the assistant, ask for critique instead of solutions, alternate tasks with and without support.</p>
+
+  <h3 class="sub">Third, the AI copilot as mentor — and why it is ambiguous</h3>
+
+  <p>Ide's model addresses this explicitly, and the answer cuts both ways<a href="#ref4" class="ref">[4]</a>.</p>
+
+  <p><strong>In favour:</strong> copilots offer scalable access to tacit-like expertise previously acquired only through direct experience. They <strong>can partially offset</strong> the erosion, especially by assisting professionals who, as novices, failed to develop adequate skill. It is a democratisation of expertise.</p>
+
+  <p><strong>Against, through two distinct mechanisms:</strong> the copilot's availability <strong>weakens the novice's incentive</strong> to invest in hands-on learning — if the answer is available, effort looks like waste. And by substituting for the learning arrangement the expert used to offer, the copilot <strong>reduces the novice's demand for that arrangement</strong>, eroding the institution of mentoring from the side of the person who would be mentored.</p>
+
+  <p><strong>The reading for decision-makers:</strong> a copilot raises the floor and may lower the ceiling. It makes sense for those past the training window and for those who fell behind. It makes less sense, without restriction, for those in the window where judgment should be under construction — which is precisely where most organisations deploy it first, because that is where the productivity gain shows up fastest.</p>
+
+  <h3 class="sub">Fourth, measure proximity rather than participation</h3>
+
+  <p>Five questions for the executive committee:</p>
+
+  <ol class="steps">
+    <li>Which tasks left entry-level roles over the past two years, and what did each of them train?</li>
+    <li>How many hours per month does someone in training spend working <strong>alongside</strong> a person at the top of the firm's competence, in real production rather than formal training?</li>
+    <li>How many people are our most capable experts training today? And three years ago?</li>
+    <li>What is the time from entry to full autonomy in the role? Is it rising or falling?</li>
+    <li>If half our senior people left within eighteen months, where would the replacements come from?</li>
+  </ol>
+
+  <div class="callout caveat">
+    <p><strong>A warning about question 2:</strong> it is the one that matters and the only one no HR or operations system answers today. Hours of joint production are captured by nobody. Instrumenting it requires a deliberate decision — tagging co-ownership on a ticket, recording the pair on a review, logging shadowing in production. It is new work, and it is the work that separates those who will know the answer from those who will find out too late.</p>
+  </div>
+
+  <h3 class="sub">Who is already doing it</h3>
+
+  <p><strong>Brainlabs</strong>, a roughly 1,000-person U.S. media agency, went from 19 entry-level hires in October 2023 to 64 in its April 2026 cohort — a 237% increase<a href="#ref3" class="ref">[3]</a>. Founder and global CEO Dan Gilbert describes the design: the company has run a training programme since it started, always training new entrants on whichever skill mattered most at the time, and since October 2023 has used those cohorts to teach people to <strong>work alongside AI from day one</strong>, rather than training the old way and bolting AI on afterwards.</p>
+
+  <p>Gilbert explicitly rejects the cost-cutting reading: according to him, the increase did not come from cutting juniors to save on tools, but because juniors properly trained on AI become valuable faster — a first-year strategist who can build and run an AI workflow delivers what used to require a team, which changes what the team is asked to deliver rather than shrinking it.</p>
+
+  <div class="callout caveat">
+    <p><strong>Caveats:</strong> this is the company's own account in a press article, with quotes edited by the journalist, without independent audit and without data on the quality of the professionals trained. And a single case does not establish causation — what gives the example weight is its convergence with the 21,000-employer data cited in Section 02, not the story itself.</p>
+  </div>
+
+  <p><strong>The rule the case suggests:</strong> those who depend on repetitive tasks to train people lose both things when they automate. Those who already trained on purpose lose only the task.</p>
+
+  <h2 id="s07"><span class="eyebrow">07 — What remains</span>Closing provocation</h2>
+
+  <p><strong>The answer:</strong> the expert of 2035 will be whoever worked close to someone who knew, early — and that has stopped being an automatic by-product of the entry-level job and become an explicit design decision.</p>
+
+  <p><strong>Almost everything else remains open.</strong> We do not know whether the contraction in junior hiring is real substitution or an overreaction to expectation; the researchers themselves say they cannot test it. We know interest rates do not explain the pattern, but also that under the strictest controls the effect only appears from 2024. There is a dataset covering 21,000 employers pointing the other way. We do not know what went through the mind of whoever signed the hiring freeze — only what those companies say afterwards. And there is not, as far as I could verify, a single Brazilian study on this.</p>
+
+  <p>What is known is narrower and harder: the transfer of tacit knowledge happens through proximity, it was never in a contract, and the work that sustained it is the first to be automated. Economic theory, payroll data and a randomised experiment converge on the same dividing line — <strong>replacing the novice erodes training; augmenting the novice does not.</strong> It is the same technology, in two opposite configurations.</p>
+
+  <p>And here the question stops being about the market.</p>
+
+  <p>Your operation will run short of senior people at some point. Retirement, resignation, promotion. You probably have a mentoring programme, and it probably reports participation and completion. <strong>The question is not whether the programme exists — it is whether anyone in your company can say, today, how many hours per month each person in training spends producing alongside someone who knows more.</strong> If nobody can answer, the decision has already been made. It just wasn't made by anyone.</p>
+
+  <div class="bottom">
+    <div>
+      <p class="section-label">References</p>
+      <ul>
+        <li id="ref1">[1] Hosseini Maasoum, S. M.; Lichtinger, G. (2025). <em>Generative AI as Seniority-Biased Technological Change: Evidence from U.S. Résumé and Job Posting Data.</em> SSRN, Aug. 2025, rev. Oct. 2025. <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5425555" target="_blank">Link</a></li>
+        <li id="ref2">[2] Brynjolfsson, E.; Chandar, B.; Chen, R. (2025). <em>Canaries in the Coal Mine? Six Facts about the Recent Employment Effects of Artificial Intelligence.</em> Stanford Digital Economy Lab, working paper, rev. 13 Nov. 2025. <a href="https://digitaleconomy.stanford.edu/publication/canaries-in-the-coal-mine-six-facts-about-the-recent-employment-effects-of-artificial-intelligence/" target="_blank">Link</a></li>
+        <li id="ref3">[3] Wells, R. (2026). <em>Will AI Kill Entry-Level Jobs? New Hiring Data Says No.</em> Forbes, 28 Jul. 2026 — contains the Ramp Economics Lab data with Revelio Labs and the Brainlabs case. <a href="https://www.forbes.com/sites/rachelwells/2026/07/28/will-ai-kill-entry-level-jobs-new-hiring-data-says-no/" target="_blank">Link</a></li>
+        <li id="ref4">[4] Ide, E. (2025). <em>Automation, AI, and the Intergenerational Transmission of Knowledge.</em> IESE Business School. arXiv:2507.16078v2, 8 Aug. 2025; also CEPR Discussion Paper DP20940. <a href="https://arxiv.org/abs/2507.16078" target="_blank">Link</a></li>
+        <li id="ref5">[5] U.S. Bureau of Labor Statistics. <em>Occupational Outlook Handbook: Customer Service Representatives.</em> Last modified 28 Aug. 2025. <a href="https://www.bls.gov/ooh/office-and-administrative-support/customer-service-representatives.htm" target="_blank">Link</a></li>
+        <li id="ref6">[6] Bloomberg, via BusinessWorld (2026). <em>AI is replacing call center jobs at Microsoft, Uber, Hyatt.</em> 29 Jul. 2026. <a href="https://bworldonline.com/bloomberg/2026/07/29/766598/ai-is-replacing-call-center-jobs-at-microsoft-uber-hyatt/" target="_blank">Link</a></li>
+        <li id="ref7">[7] Lyons, M. (2026). <em>Why Mentoring Matters More in the AI Era.</em> Harvard Business Review, 24 Jul. 2026. Only the summary and opening were consulted; full text behind subscription. <a href="https://hbr.org/2026/07/why-mentoring-matters-more-in-the-ai-era" target="_blank">Link</a></li>
+        <li id="ref8">[8] Liu, G.; Christian, B.; Dumbalska, T.; Bakker, M. A.; Dubey, R. (2026). <em>AI Assistance Reduces Persistence and Hurts Independent Performance.</em> Carnegie Mellon, Oxford, MIT and UCLA. arXiv:2604.04721v2, 7 Apr. 2026. <a href="https://arxiv.org/abs/2604.04721" target="_blank">Link</a></li>
+        <li id="ref9">[9] Anthropic. <em>Anthropic Economic Index.</em> Data for May 2026. <a href="https://www.anthropic.com/economic-index" target="_blank">Link</a></li>
+        <li id="ref10">[10] Brynjolfsson, E.; Chandar, B.; Chen, R. (2026). <em>Canaries, Interest Rates, and Timing: More on the Recent Drivers of Employment Changes for Young Workers.</em> Stanford Digital Economy Lab, 9 Feb. 2026. <a href="https://digitaleconomy.stanford.edu/news/canaries-interest-rates-and-timinga-more-on-recent-drivers-of-employment-changes-for-young-workers/" target="_blank">Link</a></li>
+        <li id="ref11">[11] Resume.org (2026). <em>1 in 5 Companies Have Stopped Hiring Entry-Level Workers Because of AI.</em> Feb. 2026 survey of nearly 1,000 U.S. business leaders, released 9 Mar. 2026. <a href="https://www.prnewswire.com/news-releases/resumeorg-survey-1-in-5-companies-have-stopped-hiring-entry-level-workers-because-of-ai-302707385.html" target="_blank">Link</a></li>
+        <li id="ref12">[12] Beane, M. (2024). Field research on learning at work in robotic surgery and financial services, cited in [4] as Beane (2024a, 2024b). Second-hand citation — the primary source was not consulted directly.</li>
+        <li id="ref13">[13] Indeed Flex (2026). <em>Nearly Two-Thirds of Workers Believe AI Is Reducing Entry-Level Hiring.</em> Survey of nearly 2,000 workers in the U.S. and U.K., 21 Jul. 2026. <a href="https://www.prnewswire.com/news-releases/nearly-two-thirds-of-workers-believe-ai-is-reducing-entry-level-hiring-according-to-indeed-flex-survey-302830059.html" target="_blank">Link</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="article-note">Original argument built on the sources listed · Sources [3], [7], [11] and [13] come from press outlets or commercial platforms with a declared interest in the subject, and are flagged as such throughout the text · Source [12] is a second-hand citation · Position note: independent study, with no commercial relationship to the companies, consultancies or institutions cited</p>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quem vai ser o sênior de 2035? — A IA e a formação de especialistas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --paper:      #F1ECE0;
+      --paper-2:    #E8E1D1;
+      --card:       #FAF6EC;
+      --ink:        #1A1E1B;
+      --ink-soft:   #34382F;
+      --slate:      #6A6B5F;
+      --faint:      #9A9886;
+      --crop:       #C18E20;
+      --crop-deep:  #9A6E13;
+      --accept:     #2F6553;
+      --reject:     #A12B22;
+      --line:       rgba(26,30,27,.16);
+      --line-soft:  rgba(26,30,27,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      background-image: linear-gradient(var(--line-soft) 1px, transparent 1px);
+      background-size: 100% 30px;
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .lang-nav { position: fixed; top: 0; right: 0; padding: 14px 24px; display: flex; gap: 6px; z-index: 100; }
+    .lang-nav a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; padding: 4px 10px; border-radius: 3px;
+      border: 1px solid transparent; color: var(--faint); transition: all .18s;
+    }
+    .lang-nav a.active { color: var(--ink); border-color: var(--line); background: var(--card); }
+    .lang-nav a:hover:not(.active) { color: var(--slate); }
+
+    header { max-width: 760px; margin: 0 auto; padding: 100px 28px 52px; }
+
+    .meta {
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em;
+      color: var(--faint); margin-bottom: 28px; display: flex; flex-wrap: wrap; gap: 4px 0; align-items: center;
+    }
+    .meta .sep { margin: 0 8px; opacity: .5; }
+
+    h1 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 700;
+      line-height: 1.08; letter-spacing: -.02em; color: var(--ink); margin: 0 0 18px;
+    }
+    .deck {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.15rem;
+      font-style: italic; color: var(--slate); line-height: 1.55; margin-bottom: 36px;
+    }
+    .lede { font-size: 1.05rem; color: var(--ink-soft); line-height: 1.75; border-left: 2.5px solid var(--crop); padding-left: 20px; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 0 28px 80px; }
+
+    p { color: var(--ink-soft); margin: 0 0 22px; }
+    strong { color: var(--ink); font-weight: 600; }
+    em { font-style: italic; }
+
+    h2 {
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.5rem;
+      font-weight: 700; color: var(--ink); margin: 40px 0 16px; letter-spacing: -.01em;
+    }
+    h2 .eyebrow {
+      display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      font-weight: 500; text-transform: uppercase; letter-spacing: .14em;
+      color: var(--crop); margin-bottom: 10px;
+    }
+    h3.sub {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.02rem;
+      font-weight: 600; color: var(--ink); margin: 34px 0 12px;
+    }
+
+    .roadmap { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 24px 26px; margin: 40px 0; }
+    .toggle-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin-bottom: 16px;
+    }
+    .roadmap ol { list-style: none; counter-reset: rm; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 20px; }
+    .roadmap li { counter-increment: rm; display: flex; gap: 9px; }
+    .roadmap li::before {
+      content: counter(rm, decimal-leading-zero);
+      font-family: 'IBM Plex Mono', monospace; font-size: .66rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 2px; font-weight: 500;
+    }
+    .roadmap a.rm-title {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: .8rem; color: var(--ink); text-decoration: none;
+      display: inline-flex; align-items: baseline; gap: 5px; line-height: 1.25;
+    }
+    .roadmap a.rm-title:hover { color: var(--crop-deep); }
+    .roadmap a.rm-title .arw { color: var(--crop); font-size: .72rem; }
+    .roadmap p { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .68rem; color: var(--slate); margin: 4px 0 0; line-height: 1.4; }
+
+    .callout {
+      background: var(--card); border: 1px solid var(--line);
+      border-left: 3px solid var(--crop); border-radius: 0 5px 5px 0;
+      padding: 20px 24px; margin: 36px 0;
+    }
+    .callout p { margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 1.05rem; color: var(--ink); }
+    .callout.caveat { border-left-color: var(--reject); }
+    .callout.caveat p { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .86rem; color: var(--slate); line-height: 1.6; }
+    .callout.caveat strong { color: var(--ink); }
+
+    .pull-quote {
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 28px 0; margin: 44px 0;
+      font-family: 'Newsreader', Georgia, serif; font-size: 1.2rem;
+      font-style: italic; color: var(--ink); line-height: 1.5;
+    }
+    .pull-quote cite {
+      display: block; font-style: normal; font-family: 'IBM Plex Mono', monospace;
+      font-size: .75rem; color: var(--faint); margin-top: 14px; letter-spacing: .04em;
+    }
+
+    .tbl-wrap { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 20px 22px; margin: 36px 0; overflow-x: auto; }
+    .tbl-title { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .88rem; font-weight: 600; color: var(--ink); margin: 0 0 14px; }
+    table { width: 100%; border-collapse: collapse; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .8rem; }
+    th {
+      text-align: left; font-weight: 600; color: var(--ink); padding: 9px 12px 9px 0;
+      border-bottom: 1px solid var(--line); font-size: .72rem;
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    td { padding: 11px 12px 11px 0; color: var(--slate); border-bottom: 1px solid var(--line-soft); line-height: 1.5; vertical-align: top; }
+    td strong { color: var(--ink); }
+    tr:last-child td { border-bottom: 0; }
+    td.danger { color: var(--reject); }
+    td.danger strong { color: var(--reject); }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 36px 0; }
+    .stat-card { background: var(--card); border: 1px solid var(--line); border-radius: 5px; padding: 16px 14px; text-align: center; }
+    .stat-card .num {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: 1.5rem; color: var(--crop-deep); line-height: 1.1; margin-bottom: 6px;
+    }
+    .stat-card .lab {
+      font-family: 'IBM Plex Mono', monospace; font-size: .6rem;
+      text-transform: uppercase; letter-spacing: .06em; color: var(--slate); line-height: 1.4;
+    }
+
+    ol.steps { counter-reset: st; list-style: none; padding: 0; margin: 26px 0; }
+    ol.steps li { counter-increment: st; display: flex; gap: 12px; margin-bottom: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .86rem; color: var(--slate); line-height: 1.55; }
+    ol.steps li::before {
+      content: counter(st, decimal-leading-zero);
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem;
+      color: var(--crop); flex-shrink: 0; padding-top: 3px; font-weight: 500;
+    }
+
+    .ref { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--crop-deep); vertical-align: super; text-decoration: none; }
+    .ref:hover { text-decoration: underline; }
+    main p a:not(.ref) { color: var(--crop-deep); text-decoration: none; }
+    main p a:not(.ref):hover { text-decoration: underline; }
+
+    .bottom { border-top: 1px solid var(--line); margin-top: 72px; padding-top: 28px; display: flex; flex-direction: column; gap: 32px; }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .14em; color: var(--faint); margin: 0 0 14px;
+    }
+    .bottom ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .bottom li { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .8rem; color: var(--slate); line-height: 1.55; }
+    .bottom a { color: var(--crop-deep); text-decoration: none; }
+    .bottom a:hover { text-decoration: underline; }
+
+    .article-note { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; color: var(--faint); letter-spacing: .04em; margin-top: 28px; line-height: 1.6; }
+
+    @media (max-width: 600px) {
+      .roadmap ol { grid-template-columns: 1fr; gap: 14px; }
+      .stat-grid  { grid-template-columns: 1fr 1fr; }
+      table { font-size: .74rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="lang-nav">
+  <a href="./index.html" class="active">PT</a>
+  <a href="en/index.html">EN</a>
+</nav>
+
+<header>
+  <div class="meta">White Paper<span class="sep">·</span>Agosto 2026</div>
+
+  <h1>Quem vai ser o sênior de 2035?</h1>
+  <div class="deck">A IA absorveu parte do trabalho que formava especialistas — como garantir que jovens continuem expostos ao julgamento humano especializado</div>
+
+  <p class="lede">Durante décadas, a formação de um especialista foi subproduto automático do cargo de entrada. Ninguém precisava desenhá-la: o júnior fazia o trabalho repetitivo, errava perto de quem sabia, e em três ou quatro anos tinha virado outra pessoa. O mecanismo era invisível porque funcionava sozinho. A IA generativa absorveu parte desse trabalho — e a evidência disponível é mais contraditória, e mais interessante, do que as manchetes sugerem.</p>
+</header>
+
+<main>
+
+  <div class="roadmap">
+    <div class="toggle-label">O que será abordado — sete seções</div>
+    <ol>
+      <li><div>
+        <a class="rm-title" href="#s01">O degrau que existia <span class="arw">→</span></a>
+        <p>Como se formava um especialista antes — e por que o N1 do atendimento é o caso extremo, com os dados oficiais do que está encolhendo.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s02">O que os dados mostram <span class="arw">→</span></a>
+        <p>Três conjuntos de larga escala. Dois apontam queda no emprego júnior; o terceiro aponta o contrário.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s03">Por que o degrau importava <span class="arw">→</span></a>
+        <p>O modelo econômico do IESE, os três regimes de aprendizado, e a distinção entre substituir e ampliar o novato.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s04">Por que delegar não forma <span class="arw">→</span></a>
+        <p>Evidência causal com 1.222 participantes: o custo de persistência se concentra em quem recebe a resposta pronta.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s05">Considerações <span class="arw">→</span></a>
+        <p>O que a evidência não sustenta: o confundidor dos juros, os vieses de fonte, e a ausência de dado brasileiro.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s06">O que fazer <span class="arw">→</span></a>
+        <p>A matriz de valor formativo, o princípio de corte, o copiloto como mentor ambíguo, e cinco perguntas de comitê.</p>
+      </div></li>
+      <li><div>
+        <a class="rm-title" href="#s07">Provocação final <span class="arw">→</span></a>
+        <p>A resposta em uma frase, o que fica em aberto, e a pergunta que sobra para quem lê.</p>
+      </div></li>
+    </ol>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="num">−9%</div><div class="lab">Emprego júnior em empresas adotantes, seis trimestres</div></div>
+    <div class="stat-card"><div class="num">−16%</div><div class="lab">Trabalhadores de 22 a 25 anos, ocupações expostas</div></div>
+    <div class="stat-card"><div class="num">+12%</div><div class="lab">Entrada em empresas de alta intensidade de IA</div></div>
+    <div class="stat-card"><div class="num">0,05–0,35</div><div class="lab">Ponto percentual de crescimento anual em risco</div></div>
+  </div>
+
+  <!-- 01 -->
+  <h2 id="s01"><span class="eyebrow">01 — A origem</span>O degrau que existia</h2>
+
+  <p>O trabalho de entrada sempre teve remuneração baixa, tarefa repetitiva e pouco prestígio. Revisão de documento, depuração de código, conferência de planilha, triagem de chamado, levantamento de dados. Era a condição para entrar no mercado de trabalho, e todo mundo entendia como condição.</p>
+
+  <p>Só que ele nunca foi só condição. <strong>O trabalho repetitivo de início de carreira era o veículo de uma transferência que ninguém contratava explicitamente:</strong> o novato via o especialista decidir, errava numa escala em que o erro era barato, e absorvia o que não estava em manual nenhum. Julgamento de exceção. Quando desconfiar do dado. Quais regras existem no papel e quais valem na prática.</p>
+
+  <p>Esse conteúdo tem nome na literatura econômica — <strong>conhecimento tácito</strong> — e uma propriedade incômoda: é incorporado à pessoa e não verificável por terceiros<a href="#ref4" class="ref">[4]</a>. Não dá para escrever num contrato "você me transfere seu conhecimento tácito" e cobrar entrega. Ele passa por convivência ou não passa.</p>
+
+  <h3 class="sub">O caso extremo: o N1 do atendimento</h3>
+
+  <p><strong>N1, ou nível 1, é a primeira camada de atendimento</strong> — quem recebe o contato antes de qualquer especialista. Responde dúvida frequente, consulta status de pedido, faz alteração cadastral simples e encaminha ao N2 o que exige conhecimento técnico ou alçada. É trabalho roteirizado por desenho, com script, tempo médio controlado e baixa autonomia. E foi, por décadas, a porta de entrada de uma geração inteira de supervisores, monitores de qualidade, gerentes de operação e diretores de CX.</p>
+
+  <p>O próprio manual ocupacional do governo americano descreve o mecanismo de formação sem usar essa palavra: representantes de atendimento recebem treinamento de duas a quatro semanas e <em>"frequentemente recebem orientação de um trabalhador experiente nas primeiras semanas de emprego"</em><a href="#ref5" class="ref">[5]</a>.</p>
+
+  <p><strong>O que os dados oficiais mostram — e o que não mostram.</strong> O Bureau of Labor Statistics registra 2,81 milhões de representantes de atendimento nos Estados Unidos em 2024 e projeta queda de 5% até 2034, uma perda líquida de 153,7 mil postos, atribuída explicitamente à automação de tarefas simples por autoatendimento e aplicativos<a href="#ref5" class="ref">[5]</a>. Mas o mesmo documento traz o contrapeso: mesmo em declínio, a ocupação deve abrir cerca de <strong>341,7 mil vagas por ano</strong> ao longo da década, todas para repor quem sai. A camada encolhe; ela não fecha.</p>
+
+  <p><strong>O que o jornalismo apurado documenta.</strong> Reportagem da Bloomberg de julho de 2026 nomeia o alvo com precisão: <em>"empregos focados no aspecto mais simples do suporte ao cliente — frequentemente chamado de tier one — estão na guilhotina, enquanto as empresas devem manter trabalhadores treinados para interações mais complexas"</em><a href="#ref6" class="ref">[6]</a>. A matéria documenta a Microsoft reduzindo a força de atendimento de cerca de 50 mil para 40 mil pessoas entre próprios e terceiros — com Judson Althoff declarando em abril economia de cerca de US$ 750 milhões por ano — e a Brinks Home saindo de cerca de 800 para 400 posições depois de derrubar o volume de chamadas em dois terços, parte por realocação e a maior parte por atrito natural. A analista Kate Leggett, da Forrester, estima que quase metade dos papéis de atendimento serão <strong>impactados</strong> até 2030. Impactados, não eliminados — a distinção costuma sumir na citação.</p>
+
+  <div class="callout caveat">
+    <p><strong>A ressalva que o setor não gosta de ouvir</strong>, na mesma reportagem: vendedores de várias empresas de tecnologia disseram à Bloomberg que rotineiramente apresentam ferramentas de IA para call center como forma de reduzir custo de mão de obra — o que contraria a alegação corrente de que a IA serve primariamente para tornar o trabalhador mais produtivo.</p>
+  </div>
+
+  <!-- 02 -->
+  <h2 id="s02"><span class="eyebrow">02 — A evidência</span>O que os dados de emprego mostram — e onde se contradizem</h2>
+
+  <p>Três conjuntos de dados de larga escala, e eles não concordam.</p>
+
+  <p><strong>O primeiro acompanha 62 milhões de trabalhadores em 285 mil empresas americanas entre 2015 e 2025</strong><a href="#ref1" class="ref">[1]</a>. Os autores identificam adoção de IA generativa por análise de texto de vagas e comparam a evolução do emprego por senioridade contra empresas que não adotaram.</p>
+
+  <p>De 2015 a 2022, adotantes e não adotantes seguiram tendências paralelas. A partir do primeiro trimestre de 2023, as adotantes descolam: o emprego júnior cai <strong>cerca de 9% após seis trimestres</strong> frente aos controles. O emprego sênior não mostra quebra de tendência. A queda se concentra nas funções de alta exposição e some nas de baixa. O mecanismo é <strong>admissão mais lenta</strong> — desligamentos não subiram, promoções ficaram estáveis. E o efeito é mais forte no meio da distribuição: candidatos de instituições de prestígio intermediário sofreram as maiores quedas relativas.</p>
+
+  <p><strong>O segundo usa dados administrativos do maior processador de folha de pagamento dos Estados Unidos</strong><a href="#ref2" class="ref">[2]</a>. Trabalhadores de 22 a 25 anos nas ocupações mais expostas tiveram queda relativa de emprego de <strong>16%</strong>, controlando choques em nível de empresa, com emprego dos experientes estável ou crescendo. O ajuste ocorre por emprego, não por remuneração. Os resultados resistem a excluir empresas de tecnologia e ocupações passíveis de trabalho remoto.</p>
+
+  <div class="callout">
+    <p>E o achado que sustenta a peça inteira: <strong>as quedas se concentram nas ocupações em que a IA tende a automatizar, e não a ampliar, o trabalho humano.</strong></p>
+  </div>
+
+  <p><strong>O terceiro contradiz os dois primeiros.</strong> Análise do Ramp Economics Lab com dados de força de trabalho da Revelio Labs, cobrindo mais de <strong>21 mil empregadores americanos</strong>, encontra que empresas que investem pesado em IA crescem headcount em 10% nos dois anos seguintes à adoção — e a contratação de entrada cresce mais rápido ainda, <strong>12%</strong><a href="#ref3" class="ref">[3]</a>.</p>
+
+  <p>A reconciliação possível está na definição de "pesado": o ganho aparece entre empresas que adotam com alta intensidade — gasto por funcionário nos primeiros meses, múltiplos modelos, agentes e APIs, e não assinatura de chat.</p>
+
+  <div class="callout caveat">
+    <p><strong>Ressalva relevante:</strong> a Ramp é uma empresa de cartão corporativo e os dados vêm do gasto dos próprios clientes. Quem gasta muito em IA por esse canal tende a ser empresa capitalizada e em crescimento — viés de seleção plausível e não controlado.</p>
+  </div>
+
+  <!-- 03 -->
+  <h2 id="s03"><span class="eyebrow">03 — A teoria</span>Por que o degrau importava</h2>
+
+  <p>Enrique Ide, economista do IESE Business School, publicou em 2025 um modelo que formaliza a transmissão de conhecimento entre gerações no trabalho<a href="#ref4" class="ref">[4]</a>. A estrutura é simples: <strong>em qualquer momento há dois grupos convivendo na empresa — os que ainda estão aprendendo e os que já sabem.</strong> A produção exige conhecimento especializado <strong>e</strong> a execução de tarefas rotineiras, e essas últimas podem ser feitas por novatos <strong>ou por máquinas</strong>. Ao executar as tarefas rotineiras, o novato interage com um especialista, observa sua competência e a absorve. É a formalização do arranjo de aprendizado: <strong>o novato aceita salário menor em troca de oportunidade de aprender.</strong></p>
+
+  <div class="tbl-wrap">
+    <p class="tbl-title">Os três regimes de longo prazo do modelo</p>
+    <table>
+      <thead><tr><th>Regime</th><th>Condição</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Colapso do aprendizado</strong></td><td>Automação extensa</td><td>Interações novato–especialista muito restritas, erosão do conhecimento tácito, estagnação</td></tr>
+        <tr><td><strong>Aprendizado restrito</strong></td><td>Automação moderada</td><td>Algumas interações persistem, crescimento positivo porém limitado</td></tr>
+        <tr><td><strong>Aprendizado pleno</strong></td><td>Automação cara</td><td>Interações frequentes, transmissão robusta, crescimento máximo</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Não é um gradiente suave. São bacias de atração — e a passagem de uma para outra é difícil de reverter, porque o estoque de especialistas capazes de formar é ele próprio resultado da geração anterior.</p>
+
+  <p><strong>A conta de ordem de grandeza.</strong> O autor deriva uma expressão para a queda na taxa de crescimento de estado estacionário e a calcula com parâmetros da literatura: crescimento base de 2% ao ano e a premissa de que cerca de dois terços do crescimento de longo prazo vêm da difusão de conhecimento tácito. Nos dois cenários que testa — 5% e 30% das tarefas de entrada automatizadas — o resultado é uma redução de <strong>0,05 a 0,35 ponto percentual na taxa anual de crescimento do produto por habitante nos Estados Unidos</strong>.</p>
+
+  <p><strong>Uma nota sobre a estrutura, porque ela estranha à primeira leitura.</strong> O modelo parametriza a carreira em dois estágios de vinte anos cada: vinte aprendendo, vinte sendo fonte de aprendizado para outros. Isso não afirma que alguém passa duas décadas como júnior nem que só existam dois degraus de carreira. É simplificação de modelo — uma carreira de quarenta anos dividida ao meio entre a fase em que se absorve competência e a fase em que se a transmite.</p>
+
+  <div class="callout caveat">
+    <p><strong>Ressalvas de método, e elas são do próprio autor:</strong> o exercício "não é uma calibração formal nem uma previsão", e "abstrai deliberadamente de fatores compensatórios, como o surgimento de novos papéis juniores ou o potencial da IA de estimular inovação". Ide também assume explicitamente que a adoção de IA toma a forma exclusiva de automação — premissa que ele justifica com evidência inicial, mas que é premissa.</p>
+  </div>
+
+  <p><strong>E há um segundo resultado, mais desconfortável:</strong> o equilíbrio competitivo apresenta <strong>automação socialmente excessiva</strong> das tarefas de início de carreira. Cada empresa automatiza a dose racional para si. O conjunto automatiza demais, porque ninguém internaliza o custo de formar os especialistas do mercado inteiro.</p>
+
+  <h3 class="sub">A distinção que decide tudo</h3>
+
+  <div class="pull-quote">
+    O trade-off não se aplica a todo avanço tecnológico. Melhorias em tecnologias que <em>ampliam</em> o trabalho rotineiro — que aumentam a produtividade do novato em vez de substituir o trabalho dele — entregam ganho imediato de produtividade e ao mesmo tempo reforçam a transmissão de conhecimento.
+    <cite>Ide (2025), Automation, AI, and the Intergenerational Transmission of Knowledge</cite>
+  </div>
+
+  <p>Automatizar a tarefa do novato corrói a formação. Ampliar o que o novato consegue fazer, não. É a mesma tecnologia com duas configurações opostas — e a escolha entre elas é de desenho, não de tecnologia.</p>
+
+  <p><strong>Isso deixou de ser só teoria.</strong> O estudo de folha de pagamento encontra exatamente esse padrão nos dados: as quedas de emprego se concentram nas ocupações em que a IA tende a automatizar, e não a ampliar<a href="#ref2" class="ref">[2]</a>. Modelo teórico e dado administrativo apontando para a mesma variável.</p>
+
+  <h3 class="sub">O precedente que não é sobre IA</h3>
+
+  <p>O modelo se apoia em evidência de campo anterior à IA generativa, do trabalho de Matt Beane sobre aprendizado no trabalho<a href="#ref12" class="ref">[12]</a>. Em cirurgia, a adoção de sistemas robóticos concentrou a operação nas mãos do cirurgião sênior e reduziu drasticamente as horas de prática supervisionada dos residentes. Em finanças, ferramentas automatizadas retiraram dos analistas juniores o trabalho de construção que os formava. Beane resume o mecanismo tradicional em três palavras — "veja um, faça um, ensine um" — e observa que a formação escolar entrega o que ele chama de <em>table stakes</em>, a qualificação básica; a competência real só emerge da prática ao lado de quem sabe.</p>
+
+  <p><strong>A implicação prática:</strong> contar juniores é medir a coisa errada. A pergunta operacional deixa de ser "quantos contratamos" e passa a ser: os que estão aqui trabalham perto de quem sabe, em problemas que ainda exigem julgamento?</p>
+
+  <h3 class="sub">E os programas de mentoria?</h3>
+
+  <p>Existem, e são comuns. Mentoria formal, programas de trainee, academias internas e trilhas de desenvolvimento são prática estabelecida em empresa de porte.</p>
+
+  <p><strong>O problema é o que esses programas medem.</strong> Tipicamente acompanham volume de contratação, participação, conclusão de programa e tempo até produtividade — métricas de <strong>insumo e de conclusão</strong>. Nenhuma delas responde à pergunta que o modelo econômico levanta: quantas horas de produção real este profissional passa ao lado de alguém no topo da competência da casa?</p>
+
+  <p>Um artigo da <em>Harvard Business Review</em> de julho de 2026 chega à mesma conclusão por outro caminho: a IA está automatizando o trabalho que treinava as pessoas, e a resposta exige <strong>redesenhar a mentoria — tornando o conhecimento tácito explícito e embutindo o aprendizado no trabalho diário</strong>, para repor as oportunidades de desenvolvimento que a automação retirou<a href="#ref7" class="ref">[7]</a>.</p>
+
+  <div class="callout caveat">
+    <p><strong>Ressalva:</strong> li o resumo e a abertura desse artigo; o texto integral está atrás de assinatura. E é artigo de opinião de uma consultora de carreira, não estudo. Vale como convergência de diagnóstico, não como evidência.</p>
+  </div>
+
+  <p>A afirmação defensável, então, não é "ninguém mede". É: <strong>os programas existentes medem participação e conclusão, e a variável que a teoria aponta como decisiva — convivência produtiva com os melhores — não aparece em painel de gestão nenhum que eu tenha localizado.</strong></p>
+
+  <!-- 04 -->
+  <h2 id="s04"><span class="eyebrow">04 — O mecanismo</span>Por que delegar não forma</h2>
+
+  <p>Há um segundo mecanismo, individual, e sobre ele existe evidência causal recente. O enquadramento do estudo já diz a que veio:</p>
+
+  <div class="pull-quote">
+    Pessoas costumam otimizar para objetivos de longo prazo na colaboração: um mentor não apenas responde perguntas, mas dá andaimes ao aprendizado, acompanha o progresso e prioriza o crescimento do outro sobre o resultado imediato. Em contraste, os sistemas de IA atuais são colaboradores fundamentalmente míopes — otimizados para dar respostas instantâneas e completas, sem nunca dizer não.
+    <cite>Liu, Christian, Dumbalska, Bakker &amp; Dubey (2026)</cite>
+  </div>
+
+  <p>São três experimentos randomizados, <strong>N = 1.222</strong>, com o segundo replicando os resultados e descartando confundidores. O achado: a assistência de IA <strong>melhora o desempenho imediato</strong> e, depois, <strong>reduz a persistência e piora o desempenho sem IA</strong>. As pessoas assistidas desistem mais cedo quando voltam a trabalhar sozinhas. Os efeitos aparecem após cerca de <strong>dez minutos</strong> de interação<a href="#ref8" class="ref">[8]</a>.</p>
+
+  <p>E o detalhe que muda a recomendação: <strong>o custo de persistência se concentra em quem obtém a solução direta.</strong> Não é o uso de IA que corrói — é receber a resposta pronta. Os autores explicam o mecanismo: a IA condiciona as pessoas a esperar respostas imediatas, negando-lhes a experiência de atravessar a dificuldade sozinhas. E fecham observando que a persistência é fundamental para a aquisição de competência e um dos preditores mais fortes de aprendizado de longo prazo.</p>
+
+  <div class="callout caveat">
+    <p><strong>Ressalva de método:</strong> as tarefas são de raciocínio matemático e compreensão de leitura, em intervenções curtas e ambiente controlado. Extrapolar de dez minutos de laboratório para três anos de formação profissional é um salto que o estudo não autoriza.</p>
+  </div>
+
+  <p>Quanto do uso real é do tipo que substitui esforço? Os dados públicos do Anthropic Economic Index, referentes a maio de 2026, mostram o uso observado dividido praticamente ao meio: <strong>51,4% classificado como ampliação e 48,6% como automação</strong><a href="#ref9" class="ref">[9]</a>.</p>
+
+  <div class="callout caveat">
+    <p><strong>Ressalvas obrigatórias:</strong> o índice descreve <strong>tarefas</strong>, não pessoas nem empregos — a formulação correta é "a IA é usada para tarefas comumente feitas por determinada ocupação", nunca "essa ocupação usa IA". Não há série temporal: é retrato de um período e não sustenta afirmação sobre tendência. E cobre um assistente específico, não o mercado.</p>
+  </div>
+
+  <p><strong>E é aqui que os argumentos se encontram.</strong> A distinção entre ampliação e automação, que no índice é classificação descritiva de uso, no modelo de Ide é a variável que separa o aprendizado pleno do colapso — e no estudo de folha de pagamento é onde as quedas de emprego se concentram. Três fontes independentes, a mesma linha divisória.</p>
+
+  <p>Para um profissional formado, delegar é ganho puro. Para quem está se formando, é o degrau sendo pulado.</p>
+
+  <!-- 05 -->
+  <h2 id="s05"><span class="eyebrow">05 — Os limites</span>Considerações</h2>
+
+  <p><strong>O que os próprios pesquisadores dizem.</strong> Os autores do estudo de 62 milhões de trabalhadores registram que seus achados "não implicam necessariamente automação imediata de tarefas", que uma alternativa plausível é as empresas estarem fazendo ajustes prospectivos diante de uma expectativa formada após o lançamento do GPT-3.5, que "se as empresas reagiram em excesso, a queda pode ser temporária" — e que seus dados <strong>não permitem testar diretamente esse mecanismo</strong><a href="#ref1" class="ref">[1]</a>.</p>
+
+  <p><strong>O confundidor econômico foi testado — e parcialmente afastado.</strong> Em nota de fevereiro de 2026, os autores do estudo de folha de pagamento responderam à objeção de que juros, e não IA, explicariam a queda<a href="#ref10" class="ref">[10]</a>. Cruzando exposição ocupacional a juros com exposição a IA, encontram que as ocupações mais expostas à IA são em média <strong>menos</strong> expostas a juros — construção é o exemplo inverso. E separando ocupações acima e abaixo da mediana de exposição a juros, em ambos os grupos as mais expostas à IA caem mais.</p>
+
+  <p><strong>Mas o timing muda com controle mais rigoroso.</strong> Com efeitos fixos de firma-tempo, a queda só se torna significativa <strong>em 2024</strong> — não no fim de 2022 nem em 2023. Nas palavras dos autores, as quedas anteriores "provavelmente se devem, ao menos em parte, a alguma combinação de outros fatores, não só IA". O efeito, por outro lado, cresceu: cerca de 16% até outubro de 2025 contra 13% com dados até julho, sem reversão.</p>
+
+  <p>Os mesmos autores escrevem, explicitamente: <em>"não acreditamos que a IA seja sempre e em toda parte o determinante único do emprego, e não encorajamos que outros interpretem nossos resultados dessa forma."</em> E fecham reconhecendo que, sem um experimento comparando um mundo com IA a um sem, a questão permanece aberta.</p>
+
+  <p><strong>O que as empresas dizem de si mesmas.</strong> Em pesquisa com quase mil líderes empresariais americanos, realizada em fevereiro de 2026, 21% apontam a IA como razão única para eliminar postos, 19% como principal e 26% como um entre vários fatores; 21% declaram já ter congelado contratação de entrada por causa da IA, e 36% projetam ter parado até o fim do ano<a href="#ref11" class="ref">[11]</a>.</p>
+
+  <p><strong>A mesma pesquisa traz o contrário.</strong> Quarenta e sete por cento dizem estar contratando mais gente técnica ou focada em IA, e <strong>48% dizem estar contratando mais trabalhadores que sabem usar bem ferramentas de IA</strong>. Não é substituição pura: é recomposição do perfil de entrada.</p>
+
+  <div class="callout caveat">
+    <p><strong>Ressalva:</strong> é pesquisa conduzida por plataforma comercial do mercado de trabalho, com interesse direto na narrativa e sem detalhamento de amostragem. Sustenta "as empresas <strong>dizem</strong> que decidiram por causa da IA", não "as empresas decidiram por causa da IA".</p>
+  </div>
+
+  <p><strong>E há um dado que aponta para expectativa.</strong> Em julho de 2026, pesquisa com quase dois mil trabalhadores dos Estados Unidos e do Reino Unido encontrou que 62% acreditavam que a IA estava reduzindo a contratação de entrada — mas apenas <strong>31%</strong> relatavam que isso tinha acontecido no próprio campo. E, questionados sobre o maior obstáculo no mercado hoje, só <strong>9%</strong> citaram a IA; remuneração (30%) e concorrência (25%) vieram antes<a href="#ref13" class="ref">[13]</a>. Percepção ao dobro da experiência, e bem acima da prioridade declarada.</p>
+
+  <p><strong>A lacuna que mais me incomoda.</strong> Toda a evidência citada aqui é norte-americana ou britânica. Não localizei estudo equivalente com dados brasileiros. Gestores no Brasil estão decidindo sobre a estrutura das próprias equipes com base em pesquisa feita sobre outro mercado de trabalho, com outra estrutura de custo, outra legislação e outro perfil de escolaridade de entrada.</p>
+
+  <p><strong>O que sobrevive a tudo isso é o argumento do modelo</strong>, porque ele não depende da magnitude da queda de contratação. Se a formação se degrada quando o novato deixa de trabalhar perto do especialista, a incerteza sobre quantos juniores foram contratados não muda a recomendação.</p>
+
+  <!-- 06 -->
+  <h2 id="s06"><span class="eyebrow">06 — A resposta</span>O que fazer — e quem já está fazendo</h2>
+
+  <h3 class="sub">Primeiro, a matriz de valor formativo</h3>
+
+  <p>Toda tarefa candidata à automação é avaliada hoje por duas dimensões: <strong>quanto custa</strong> e <strong>quão bem a máquina executa</strong>. Falta uma terceira — <strong>quanto aquela tarefa forma quem a executa.</strong> Para uso prático, as duas primeiras colapsam numa só — se é barato e a máquina faz bem, é automatizável — e o que resta é uma matriz de duas entradas:</p>
+
+  <div class="tbl-wrap">
+    <p class="tbl-title">Matriz de valor formativo</p>
+    <table>
+      <thead><tr><th></th><th>Baixo valor formativo</th><th>Alto valor formativo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Difícil de automatizar</strong></td><td>Permanece humana por necessidade</td><td>Protegida por acidente — e é frágil</td></tr>
+        <tr><td><strong>Fácil de automatizar</strong></td><td>Automatize sem hesitar</td><td class="danger"><strong>Zona cega</strong> — economia imediata, custo diferido</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>O quadrante inferior direito é a tese inteira. <strong>As tarefas mais fáceis de automatizar tendem a ser as que mais formavam quem as executava</strong> — repetitivas, de baixo risco, com feedback rápido: exatamente as propriedades que fazem uma tarefa boa para treinar alguém e boa para uma máquina fazer. Automatizar ali não é errado. É um trade-off intertemporal que hoje é decidido sem que ninguém saiba que está decidindo.</p>
+
+  <h3 class="sub">Segundo, o princípio de corte</h3>
+
+  <div class="callout">
+    <p><strong>Automatize a parte mecânica. Preserve um passo humano sempre que a tarefa ensina diagnóstico, priorização ou consequência.</strong></p>
+  </div>
+
+  <p>E o corolário, agora com evidência causal: <strong>a IA deve dar pista, não resposta.</strong> O estudo randomizado mostra que o custo de persistência se concentra em quem recebe a solução direta<a href="#ref8" class="ref">[8]</a>. Isso é configurável: escrever a própria análise antes de abrir o assistente, pedir crítica em vez de solução, alternar tarefas com e sem apoio.</p>
+
+  <h3 class="sub">Terceiro, copiloto de IA como mentor — e por que é ambíguo</h3>
+
+  <p>O modelo de Ide trata disso explicitamente, e a resposta é dos dois lados<a href="#ref4" class="ref">[4]</a>.</p>
+
+  <p><strong>A favor:</strong> copilotos oferecem acesso escalável a conhecimento de tipo tácito que antes só se adquiria por experiência direta. Eles <strong>podem compensar parcialmente</strong> a erosão, sobretudo ajudando profissionais que, quando novatos, não conseguiram desenvolver competência adequada. É democratização de expertise.</p>
+
+  <p><strong>Contra, por dois mecanismos distintos:</strong> a disponibilidade do copiloto <strong>enfraquece o incentivo do novato</strong> a investir em aprendizado prático — se a resposta está disponível, o esforço parece desperdício. E, ao substituir o arranjo de aprendizado que o especialista oferecia, o copiloto <strong>reduz a demanda do novato por esse arranjo</strong>, corroendo a própria instituição da mentoria pelo lado de quem seria mentorado.</p>
+
+  <p><strong>A leitura para quem decide:</strong> copiloto melhora o piso e pode rebaixar o teto. Faz sentido para quem já passou da formação e para quem ficou para trás. Faz menos sentido sem restrição para quem está na janela em que deveria estar construindo julgamento — que é precisamente onde a maioria coloca primeiro, porque é onde o ganho aparece mais rápido.</p>
+
+  <h3 class="sub">Quarto, medir convivência e não participação</h3>
+
+  <p>Cinco perguntas para comitê executivo:</p>
+
+  <ol class="steps">
+    <li>Quais tarefas saíram das vagas de entrada nos últimos dois anos, e o que cada uma formava?</li>
+    <li>Quantas horas por mês um profissional em formação passa trabalhando <strong>junto</strong> com alguém no topo da competência da casa, em produção real e não em treinamento formal?</li>
+    <li>Nossos especialistas mais capazes formam quantas pessoas hoje? E há três anos?</li>
+    <li>Qual é o tempo entre entrada e autonomia plena na função? Está subindo ou caindo?</li>
+    <li>Se metade dos nossos seniores saísse em dezoito meses, de onde viriam os substitutos?</li>
+  </ol>
+
+  <div class="callout caveat">
+    <p><strong>Uma advertência sobre a pergunta 2:</strong> ela é a que importa e é a única que nenhum sistema de RH ou de operação responde hoje. Horas de produção conjunta não são capturadas por ninguém. Instrumentá-la exige decisão deliberada — marcar coautoria em chamado, registrar par em revisão, contabilizar acompanhamento em produção. É trabalho novo, e é o trabalho que separa quem vai saber a resposta de quem vai descobrir tarde.</p>
+  </div>
+
+  <h3 class="sub">Quem está fazendo</h3>
+
+  <p><strong>Brainlabs</strong>, agência de mídia americana com cerca de mil pessoas, passou de 19 contratações de entrada em outubro de 2023 para 64 na turma de abril de 2026 — alta de 237%<a href="#ref3" class="ref">[3]</a>. O fundador e CEO global, Dan Gilbert, descreve o desenho: a empresa mantém um programa de formação desde a fundação, sempre treinando quem entra na competência que mais importava em cada época, e desde outubro de 2023 usa as turmas para ensinar as pessoas a <strong>trabalhar ao lado da IA desde o primeiro dia</strong>, em vez de treinar do jeito antigo e acoplar IA depois.</p>
+
+  <p>Gilbert nega expressamente a leitura de corte: segundo ele, o aumento não veio de cortar júnior para economizar em ferramenta, e sim porque juniores bem treinados em IA se tornam valiosos mais rápido — um estrategista de primeiro ano que sabe montar e rodar um fluxo de IA entrega o que antes exigia um time, o que muda o que se pede ao time em vez de encolhê-lo.</p>
+
+  <div class="callout caveat">
+    <p><strong>Ressalvas:</strong> é relato da própria empresa em matéria de imprensa, com as falas editadas pela jornalista, sem auditoria independente e sem dado sobre a qualidade dos profissionais formados. E um caso isolado não estabelece causa — o que dá peso ao exemplo é a convergência com os dados de 21 mil empregadores citados na Seção 02, não a história em si.</p>
+  </div>
+
+  <p><strong>A regra que o caso sugere:</strong> quem depende da tarefa repetitiva para formar gente perde as duas coisas quando automatiza. Quem já formava de propósito perde só a tarefa.</p>
+
+  <!-- 07 -->
+  <h2 id="s07"><span class="eyebrow">07 — O que fica</span>Provocação final</h2>
+
+  <p><strong>A resposta:</strong> o sênior de 2035 será quem trabalhou perto de quem sabe, cedo — e isso deixou de ser subproduto automático do cargo de entrada para virar decisão explícita de desenho.</p>
+
+  <p><strong>O que fica em aberto é quase tudo o mais.</strong> Não sabemos se a retração da contratação júnior é substituição real ou expectativa em excesso; os próprios pesquisadores dizem que não conseguem testar. Sabemos que juros não explicam o padrão, mas também que, com os controles mais rigorosos, o efeito só aparece a partir de 2024. Há um conjunto de dados com 21 mil empregadores apontando na direção oposta. Não sabemos o que passou pela cabeça de quem assinou o congelamento — só o que essas empresas dizem depois. E não existe, até onde consegui verificar, um único estudo brasileiro sobre isso.</p>
+
+  <p>O que se sabe é mais estreito e mais duro: a transferência de conhecimento tácito acontece por convivência, ela nunca esteve num contrato, e o trabalho que a sustentava é o primeiro a ser automatizado. Teoria econômica, dados de folha de pagamento e experimento randomizado convergem numa mesma linha divisória — <strong>substituir o novato corrói a formação; ampliá-lo não.</strong> É a mesma tecnologia, com duas configurações opostas.</p>
+
+  <p>E aqui a pergunta deixa de ser sobre o mercado.</p>
+
+  <p>Sua operação vai ficar sem seniores em algum momento. Aposentadoria, saída, promoção. Você provavelmente tem um programa de mentoria, e ele provavelmente reporta participação e conclusão. <strong>A pergunta não é se o programa existe — é se alguém na sua empresa consegue dizer, hoje, quantas horas por mês cada pessoa em formação passa produzindo ao lado de quem sabe mais.</strong> Se ninguém souber responder, a decisão já foi tomada. Só não foi tomada por ninguém.</p>
+
+  <!-- Bottom -->
+  <div class="bottom">
+    <div>
+      <p class="section-label">Referências</p>
+      <ul>
+        <li id="ref1">[1] Hosseini Maasoum, S. M.; Lichtinger, G. (2025). <em>Generative AI as Seniority-Biased Technological Change: Evidence from U.S. Résumé and Job Posting Data.</em> SSRN, ago. 2025, rev. out. 2025. <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5425555" target="_blank">Link</a></li>
+        <li id="ref2">[2] Brynjolfsson, E.; Chandar, B.; Chen, R. (2025). <em>Canaries in the Coal Mine? Six Facts about the Recent Employment Effects of Artificial Intelligence.</em> Stanford Digital Economy Lab, working paper, rev. 13 nov. 2025. <a href="https://digitaleconomy.stanford.edu/publication/canaries-in-the-coal-mine-six-facts-about-the-recent-employment-effects-of-artificial-intelligence/" target="_blank">Link</a></li>
+        <li id="ref3">[3] Wells, R. (2026). <em>Will AI Kill Entry-Level Jobs? New Hiring Data Says No.</em> Forbes, 28 jul. 2026 — contém os dados do Ramp Economics Lab com a Revelio Labs e o caso Brainlabs. <a href="https://www.forbes.com/sites/rachelwells/2026/07/28/will-ai-kill-entry-level-jobs-new-hiring-data-says-no/" target="_blank">Link</a></li>
+        <li id="ref4">[4] Ide, E. (2025). <em>Automation, AI, and the Intergenerational Transmission of Knowledge.</em> IESE Business School. arXiv:2507.16078v2, 8 ago. 2025; também CEPR Discussion Paper DP20940. <a href="https://arxiv.org/abs/2507.16078" target="_blank">Link</a></li>
+        <li id="ref5">[5] U.S. Bureau of Labor Statistics. <em>Occupational Outlook Handbook: Customer Service Representatives.</em> Última modificação em 28 ago. 2025. <a href="https://www.bls.gov/ooh/office-and-administrative-support/customer-service-representatives.htm" target="_blank">Link</a></li>
+        <li id="ref6">[6] Bloomberg, via BusinessWorld (2026). <em>AI is replacing call center jobs at Microsoft, Uber, Hyatt.</em> 29 jul. 2026. <a href="https://bworldonline.com/bloomberg/2026/07/29/766598/ai-is-replacing-call-center-jobs-at-microsoft-uber-hyatt/" target="_blank">Link</a></li>
+        <li id="ref7">[7] Lyons, M. (2026). <em>Why Mentoring Matters More in the AI Era.</em> Harvard Business Review, 24 jul. 2026. Consultado apenas o resumo e a abertura; texto integral atrás de assinatura. <a href="https://hbr.org/2026/07/why-mentoring-matters-more-in-the-ai-era" target="_blank">Link</a></li>
+        <li id="ref8">[8] Liu, G.; Christian, B.; Dumbalska, T.; Bakker, M. A.; Dubey, R. (2026). <em>AI Assistance Reduces Persistence and Hurts Independent Performance.</em> Carnegie Mellon, Oxford, MIT e UCLA. arXiv:2604.04721v2, 7 abr. 2026. <a href="https://arxiv.org/abs/2604.04721" target="_blank">Link</a></li>
+        <li id="ref9">[9] Anthropic. <em>Anthropic Economic Index.</em> Dados referentes a maio de 2026. <a href="https://www.anthropic.com/economic-index" target="_blank">Link</a></li>
+        <li id="ref10">[10] Brynjolfsson, E.; Chandar, B.; Chen, R. (2026). <em>Canaries, Interest Rates, and Timing: More on the Recent Drivers of Employment Changes for Young Workers.</em> Stanford Digital Economy Lab, 9 fev. 2026. <a href="https://digitaleconomy.stanford.edu/news/canaries-interest-rates-and-timinga-more-on-recent-drivers-of-employment-changes-for-young-workers/" target="_blank">Link</a></li>
+        <li id="ref11">[11] Resume.org (2026). <em>1 in 5 Companies Have Stopped Hiring Entry-Level Workers Because of AI.</em> Pesquisa de fev. 2026 com quase 1.000 líderes empresariais dos EUA, divulgada em 9 mar. 2026. <a href="https://www.prnewswire.com/news-releases/resumeorg-survey-1-in-5-companies-have-stopped-hiring-entry-level-workers-because-of-ai-302707385.html" target="_blank">Link</a></li>
+        <li id="ref12">[12] Beane, M. (2024). Trabalho de campo sobre aprendizado no trabalho em cirurgia robótica e serviços financeiros, citado em [4] como Beane (2024a, 2024b). Citação de segunda mão — a fonte primária não foi consultada diretamente.</li>
+        <li id="ref13">[13] Indeed Flex (2026). <em>Nearly Two-Thirds of Workers Believe AI Is Reducing Entry-Level Hiring.</em> Pesquisa com quase 2.000 trabalhadores dos EUA e do Reino Unido, 21 jul. 2026. <a href="https://www.prnewswire.com/news-releases/nearly-two-thirds-of-workers-believe-ai-is-reducing-entry-level-hiring-according-to-indeed-flex-survey-302830059.html" target="_blank">Link</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="article-note">Argumento autoral com base nas fontes listadas · As fontes [3], [7], [11] e [13] são de veículos de imprensa ou plataformas comerciais com interesse declarado no tema, e estão sinalizadas como tal ao longo do texto · A fonte [12] é citação de segunda mão · Nota de posição: estudo independente, sem vínculo comercial com as empresas, consultorias ou instituições citadas</p>
+
+</main>
+
+</body>
+</html>
