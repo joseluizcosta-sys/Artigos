@@ -156,6 +156,28 @@
       text-transform: uppercase; letter-spacing: .06em; color: var(--slate); line-height: 1.4;
     }
 
+    .chart-block { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 24px 26px; margin: 36px 0; }
+    .chart-title { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .88rem; font-weight: 600; color: var(--ink); margin: 0 0 4px; }
+    .chart-sub { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .74rem; color: var(--slate); margin: 0; }
+    .chart-note { font-family: 'IBM Plex Mono', monospace; font-size: .66rem; color: var(--faint); letter-spacing: .03em; margin: 16px 0 0; line-height: 1.6; }
+    .bars { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+    .bar-row { display: grid; grid-template-columns: 190px 1fr 96px; gap: 12px; align-items: center; }
+    .bar-label { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .74rem; color: var(--slate); line-height: 1.3; text-align: right; }
+    .bar-track { background: var(--paper-2); border-radius: 3px; height: 22px; overflow: hidden; display: flex; justify-content: flex-end; }
+    .bar-fill { height: 100%; border-radius: 3px; }
+    .bar-fill.red { background: var(--reject); }
+    .bar-fill.flat { background: var(--faint); }
+    .bar-val { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; font-weight: 500; color: var(--ink); }
+    .bar-val.flat { color: var(--slate); }
+
+    .tl { display: flex; flex-direction: column; gap: 0; margin-top: 22px; }
+    .tl-row { display: grid; grid-template-columns: 108px 1fr; gap: 14px; align-items: start; padding: 10px 0; border-top: 1px solid var(--line-soft); }
+    .tl-row:first-child { border-top: 0; }
+    .tl-row.key { background: rgba(193,142,32,.07); border-radius: 4px; padding: 12px 10px; margin: 4px -10px; border-top: 0; }
+    .tl-when { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; color: var(--crop-deep); font-weight: 500; padding-top: 1px; }
+    .tl-what { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .78rem; color: var(--slate); line-height: 1.5; }
+    .tl-row.key .tl-what { color: var(--ink); }
+
     ol.steps { counter-reset: st; list-style: none; padding: 0; margin: 26px 0; }
     ol.steps li { counter-increment: st; display: flex; gap: 12px; margin-bottom: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .86rem; color: var(--slate); line-height: 1.55; }
     ol.steps li::before {
@@ -332,6 +354,66 @@
 
   <p>E as quedas se concentram nas ocupações em que a IA tende a automatizar, e não a ampliar, o trabalho humano — o mesmo padrão que o modelo da Seção 01 prevê.</p>
 
+  <div class="chart-block">
+    <p class="chart-title">Quem perde emprego, e quem não perde</p>
+    <p class="chart-sub">Variação relativa frente aos grupos de controle, nos dois estudos</p>
+
+    <div class="bars">
+      <div class="bar-row">
+        <div class="bar-label">Emprego júnior<br>empresas adotantes, 6 trimestres</div>
+        <div class="bar-track"><div class="bar-fill red" style="width:56%"></div></div>
+        <div class="bar-val">−9%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Emprego sênior<br>mesmas empresas</div>
+        <div class="bar-track"><div class="bar-fill flat" style="width:1.5%"></div></div>
+        <div class="bar-val flat">sem quebra</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">22 a 25 anos<br>ocupações mais expostas</div>
+        <div class="bar-track"><div class="bar-fill red" style="width:100%"></div></div>
+        <div class="bar-val">−16%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Trabalhadores experientes<br>mesmas ocupações</div>
+        <div class="bar-track"><div class="bar-fill flat" style="width:1.5%"></div></div>
+        <div class="bar-val flat">estável</div>
+      </div>
+    </div>
+
+    <p class="chart-note">Barras proporcionais entre si · Fontes: [1] para as duas primeiras linhas, [2] para as duas últimas · A comparação é entre grupos etários ou de senioridade dentro de cada estudo, não entre os dois estudos</p>
+  </div>
+
+  <div class="chart-block">
+    <p class="chart-title">Quando o efeito aparece</p>
+    <p class="chart-sub">E por que 2024 é o marco que importa</p>
+
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-when">2015 – 2022</div>
+        <div class="tl-what">Adotantes e não adotantes seguem tendências paralelas de emprego júnior</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">2023 Q1</div>
+        <div class="tl-what">A adoção corporativa de IA generativa escala e as séries começam a divergir</div>
+      </div>
+      <div class="tl-row key">
+        <div class="tl-when">2024</div>
+        <div class="tl-what"><strong>Com os controles mais rigorosos — efeitos fixos de firma-tempo — a queda passa a ser estatisticamente significativa.</strong> Antes disso, o que se vê pode ser efeito de outros fatores</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">jul/2025</div>
+        <div class="tl-what">Efeito medido em 13%</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">out/2025</div>
+        <div class="tl-what">Efeito em 16%, sem sinal de reversão</div>
+      </div>
+    </div>
+
+    <p class="chart-note">Marcos publicados em [1] e [9] · O caminho entre os pontos não está reproduzido porque as séries completas não são divulgadas · A linha de 2024 é a mais relevante: quando se controla por tudo o que acontece dentro de cada empresa ao longo do tempo, o efeito atribuível à exposição à IA só se separa do ruído a partir daquele ano</p>
+  </div>
+
   <h2 id="s03"><span class="eyebrow">03 — O mecanismo</span>Por que delegar não forma</h2>
 
   <p>Há um segundo mecanismo, individual, e sobre ele existe evidência causal recente. O enquadramento do estudo já diz a que veio:</p>
@@ -452,13 +534,21 @@
 
   <p><strong>A resposta:</strong> o sênior de 2035 será quem trabalhou perto de quem sabe, cedo — e isso deixou de ser subproduto automático do cargo de entrada para virar decisão explícita de desenho.</p>
 
-  <p><strong>O que fica em aberto é quase tudo o mais.</strong> Não sabemos se a retração da contratação júnior é substituição real ou expectativa em excesso; os próprios pesquisadores dizem que não conseguem testar. Sabemos que juros não explicam o padrão, mas também que, com os controles mais rigorosos, o efeito só aparece a partir de 2024. Não sabemos o que passou pela cabeça de quem assinou o congelamento — só o que essas empresas dizem depois. E não existe, até onde consegui verificar, um único estudo brasileiro sobre isso.</p>
+  <p><strong>Boa parte das perguntas continua sem resposta.</strong> Não sabemos se a retração da contratação júnior é substituição real ou expectativa em excesso; os próprios pesquisadores dizem que não conseguem testar.</p>
+
+  <p>A explicação alternativa mais forte era a taxa de juros: o aperto monetário entre 2022 e 2024 esfriou a contratação em toda a economia, e isso sozinho poderia produzir o padrão observado. Os autores testaram e descartaram parcialmente — as ocupações mais expostas à IA são, em média, <strong>menos</strong> sensíveis a juros que a média do mercado. Enfraquece a explicação alternativa; não a elimina. E, com os controles mais rigorosos, o efeito atribuível à IA só se torna significativo a partir de 2024.</p>
+
+  <p>Também não sabemos o que passou pela cabeça de quem assinou o congelamento — só o que essas empresas dizem depois. E faltam estudos para o mercado brasileiro.</p>
 
   <p>O que se sabe é mais estreito e mais duro: a transferência de conhecimento tácito acontece por convivência, ela nunca esteve num contrato, e o trabalho que a sustentava é o primeiro a ser automatizado. Teoria econômica, dados de folha de pagamento e experimento randomizado convergem numa mesma linha divisória — <strong>substituir o novato corrói a formação; ampliá-lo não.</strong> É a mesma tecnologia, com duas configurações opostas.</p>
 
   <p>E aqui a pergunta deixa de ser sobre o mercado.</p>
 
-  <p>Sua operação vai ficar sem seniores em algum momento. Aposentadoria, saída, promoção. Você provavelmente tem um programa de mentoria, e ele provavelmente reporta participação e conclusão. <strong>A pergunta não é se o programa existe — é se alguém na sua empresa consegue dizer, hoje, quantas horas por mês cada pessoa em formação passa produzindo ao lado de quem sabe mais.</strong> Se ninguém souber responder, a decisão já foi tomada. Só não foi tomada por ninguém.</p>
+  <p>Sua operação vai ficar sem seniores em algum momento. Aposentadoria, saída, promoção. Você provavelmente tem um programa de mentoria, e ele provavelmente reporta participação e conclusão.</p>
+
+  <div class="callout">
+    <p><strong>Hoje, quais empresas conseguem dizer quantas horas por mês cada pessoa em formação passa exposta a tomada de decisão de negócio baseada em julgamento humano ou experiência adquirida?</strong></p>
+  </div>
 
   <div class="bottom">
     <div>

@@ -156,6 +156,28 @@
       text-transform: uppercase; letter-spacing: .06em; color: var(--slate); line-height: 1.4;
     }
 
+    .chart-block { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 24px 26px; margin: 36px 0; }
+    .chart-title { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .88rem; font-weight: 600; color: var(--ink); margin: 0 0 4px; }
+    .chart-sub { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .74rem; color: var(--slate); margin: 0; }
+    .chart-note { font-family: 'IBM Plex Mono', monospace; font-size: .66rem; color: var(--faint); letter-spacing: .03em; margin: 16px 0 0; line-height: 1.6; }
+    .bars { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+    .bar-row { display: grid; grid-template-columns: 190px 1fr 96px; gap: 12px; align-items: center; }
+    .bar-label { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .74rem; color: var(--slate); line-height: 1.3; text-align: right; }
+    .bar-track { background: var(--paper-2); border-radius: 3px; height: 22px; overflow: hidden; display: flex; justify-content: flex-end; }
+    .bar-fill { height: 100%; border-radius: 3px; }
+    .bar-fill.red { background: var(--reject); }
+    .bar-fill.flat { background: var(--faint); }
+    .bar-val { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; font-weight: 500; color: var(--ink); }
+    .bar-val.flat { color: var(--slate); }
+
+    .tl { display: flex; flex-direction: column; gap: 0; margin-top: 22px; }
+    .tl-row { display: grid; grid-template-columns: 108px 1fr; gap: 14px; align-items: start; padding: 10px 0; border-top: 1px solid var(--line-soft); }
+    .tl-row:first-child { border-top: 0; }
+    .tl-row.key { background: rgba(193,142,32,.07); border-radius: 4px; padding: 12px 10px; margin: 4px -10px; border-top: 0; }
+    .tl-when { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; color: var(--crop-deep); font-weight: 500; padding-top: 1px; }
+    .tl-what { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .78rem; color: var(--slate); line-height: 1.5; }
+    .tl-row.key .tl-what { color: var(--ink); }
+
     ol.steps { counter-reset: st; list-style: none; padding: 0; margin: 26px 0; }
     ol.steps li { counter-increment: st; display: flex; gap: 12px; margin-bottom: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .86rem; color: var(--slate); line-height: 1.55; }
     ol.steps li::before {
@@ -332,6 +354,66 @@
 
   <p>And the declines concentrate in occupations where AI tends to automate, rather than augment, human labour — the same pattern the model in Section 01 predicts.</p>
 
+  <div class="chart-block">
+    <p class="chart-title">Who loses jobs, and who doesn't</p>
+    <p class="chart-sub">Relative change against control groups, in both studies</p>
+
+    <div class="bars">
+      <div class="bar-row">
+        <div class="bar-label">Junior employment<br>adopting firms, 6 quarters</div>
+        <div class="bar-track"><div class="bar-fill red" style="width:56%"></div></div>
+        <div class="bar-val">−9%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Senior employment<br>same firms</div>
+        <div class="bar-track"><div class="bar-fill flat" style="width:1.5%"></div></div>
+        <div class="bar-val flat">no break</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Ages 22–25<br>most exposed occupations</div>
+        <div class="bar-track"><div class="bar-fill red" style="width:100%"></div></div>
+        <div class="bar-val">−16%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Experienced workers<br>same occupations</div>
+        <div class="bar-track"><div class="bar-fill flat" style="width:1.5%"></div></div>
+        <div class="bar-val flat">stable</div>
+      </div>
+    </div>
+
+    <p class="chart-note">Bars proportional to each other · Sources: [1] for the first two rows, [2] for the last two · The comparison is between age or seniority groups within each study, not across studies</p>
+  </div>
+
+  <div class="chart-block">
+    <p class="chart-title">When the effect appears</p>
+    <p class="chart-sub">And why 2024 is the milestone that matters</p>
+
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-when">2015 – 2022</div>
+        <div class="tl-what">Adopters and non-adopters follow parallel junior-employment trends</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">2023 Q1</div>
+        <div class="tl-what">Corporate adoption of generative AI scales and the series begin to diverge</div>
+      </div>
+      <div class="tl-row key">
+        <div class="tl-when">2024</div>
+        <div class="tl-what"><strong>Under the strictest controls — firm-time fixed effects — the decline becomes statistically significant.</strong> Before that, what is visible may be driven by other factors</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Jul 2025</div>
+        <div class="tl-what">Effect measured at 13%</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Oct 2025</div>
+        <div class="tl-what">Effect at 16%, with no sign of reversal</div>
+      </div>
+    </div>
+
+    <p class="chart-note">Milestones published in [1] and [9] · The path between points is not reproduced because the full series are not released · The 2024 row is the most relevant: once you control for everything happening inside each firm over time, the effect attributable to AI exposure only separates from noise from that year onwards</p>
+  </div>
+
   <h2 id="s03"><span class="eyebrow">03 — The mechanism</span>Why delegating doesn't train</h2>
 
   <p>There is a second, individual mechanism, and on this one there is recent causal evidence. The study's framing states its case up front:</p>
@@ -452,13 +534,21 @@
 
   <p><strong>The answer:</strong> the expert of 2035 will be whoever worked close to someone who knew, early — and that has stopped being an automatic by-product of the entry-level job and become an explicit design decision.</p>
 
-  <p><strong>Almost everything else remains open.</strong> We do not know whether the contraction in junior hiring is real substitution or an overreaction to expectation; the researchers themselves say they cannot test it. We know interest rates do not explain the pattern, but also that under the strictest controls the effect only appears from 2024. We do not know what went through the mind of whoever signed the hiring freeze — only what those companies say afterwards. And there is not, as far as I could verify, a single Brazilian study on this.</p>
+  <p><strong>Many of the questions remain unanswered.</strong> We do not know whether the contraction in junior hiring is real substitution or an overreaction to expectation; the researchers themselves say they cannot test it.</p>
+
+  <p>The strongest alternative explanation was interest rates: the monetary tightening between 2022 and 2024 cooled hiring across the whole economy, and that alone could produce the observed pattern. The authors tested it and partly ruled it out — the most AI-exposed occupations are on average <strong>less</strong> sensitive to interest rates than the market average. That weakens the alternative explanation; it does not eliminate it. And under the strictest controls, the effect attributable to AI only becomes significant from 2024.</p>
+
+  <p>We also do not know what went through the mind of whoever signed the hiring freeze — only what those companies say afterwards. And studies on the Brazilian market are missing.</p>
 
   <p>What is known is narrower and harder: the transfer of tacit knowledge happens through proximity, it was never in a contract, and the work that sustained it is the first to be automated. Economic theory, payroll data and a randomised experiment converge on the same dividing line — <strong>replacing the novice erodes training; augmenting the novice does not.</strong> It is the same technology, in two opposite configurations.</p>
 
   <p>And here the question stops being about the market.</p>
 
-  <p>Your operation will run short of senior people at some point. Retirement, resignation, promotion. You probably have a mentoring programme, and it probably reports participation and completion. <strong>The question is not whether the programme exists — it is whether anyone in your company can say, today, how many hours per month each person in training spends producing alongside someone who knows more.</strong> If nobody can answer, the decision has already been made. It just wasn't made by anyone.</p>
+  <p>Your operation will run short of senior people at some point. Retirement, resignation, promotion. You probably have a mentoring programme, and it probably reports participation and completion.</p>
+
+  <div class="callout">
+    <p><strong>Today, which companies can say how many hours per month each person in training spends exposed to business decisions grounded in human judgment or acquired experience?</strong></p>
+  </div>
 
   <div class="bottom">
     <div>
