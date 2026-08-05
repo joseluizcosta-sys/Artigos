@@ -117,6 +117,24 @@
     }
     .callout p { margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 1.05rem; color: var(--ink); }
     .callout.caveat { border-left-color: var(--reject); }
+    .details-block {
+      background: var(--card); border: 1px solid var(--line);
+      border-left: 3px solid var(--crop); border-radius: 0 5px 5px 0;
+      padding: 4px 24px; margin: 30px 0;
+    }
+    .details-block summary {
+      cursor: pointer; list-style: none;
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: .86rem; color: var(--crop-deep); padding: 16px 0;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .details-block summary::-webkit-details-marker { display: none; }
+    .details-block summary::before {
+      content: '▸'; font-size: .8rem; transition: transform .15s ease;
+    }
+    .details-block[open] summary::before { transform: rotate(90deg); }
+    .details-block[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+    .details-block .dblock-body p:last-child { margin-bottom: 0; }
     .callout.caveat p { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .86rem; color: var(--slate); line-height: 1.6; }
     .callout.caveat strong { color: var(--ink); }
 
@@ -303,9 +321,15 @@
 
   <p>This is not a smooth gradient. These are basins of attraction — and moving from one to another is hard to reverse, because the stock of experts capable of training is itself the result of the previous generation.</p>
 
+  <p>The model puts a number on this: in the aggressive scenario, half a century of entry-level automation leaves the U.S. economy roughly <strong>16% smaller per capita</strong> than it would otherwise have been — and the competitive setup, individually rational for each firm, pushes the system to automate more than would be optimal for everyone.</p>
+
+  <details class="details-block">
+    <summary>See the full calculation and the method caveats</summary>
+    <div class="dblock-body">
+
   <p><strong>The order-of-magnitude calculation.</strong> The author derives an expression for the reduction in the steady-state growth rate and computes it with parameters from the literature: a 2% annual baseline growth rate and the premise that roughly two thirds of long-run growth comes from the diffusion of tacit knowledge. Across the two scenarios tested — 5% and 30% of entry-level tasks automated — the result is a reduction of <strong>0.05 to 0.35 percentage points in the annual growth rate of U.S. per capita output</strong>.</p>
 
-  <p><strong>What 0.35 percentage points means over half a century.</strong> It looks marginal because it is a fraction of a point. But it is <strong>18% of baseline growth</strong>, and growth rates compound.</p>
+  <p><strong>What 0.35 percentage points means over half a century.</strong> It looks marginal but it is <strong>18% of baseline growth</strong>, and growth rates compound.</p>
 
   <div class="tbl-wrap">
     <p class="tbl-title">Cumulative output per capita, in the model's two scenarios</p>
@@ -334,6 +358,9 @@
 
   <p>The term is worth unpacking, because it carries the argument. Each firm, on its own, automates the dose that makes sense for itself: the task gets cheaper, output rises, the decision is rational. What none of them pays for is the training of the specialists the whole market will hire ten years from now — because whoever trains does not necessarily retain the person trained. The benefit of training leaks to competitors; the cost of not training arrives later and is shared by everyone. Each individual decision is correct and the aggregate result is more automation than would be optimal for the economy. It is the classic structure of an externality: whoever decides does not bear the cost, which falls on third parties and on the future.</p>
 
+    </div>
+  </details>
+
   <p>The model's most useful point for decision-makers contradicts the fatalistic reading:</p>
 
   <div class="pull-quote">
@@ -348,8 +375,6 @@
   <h3 class="sub">The precedent that isn't about AI</h3>
 
   <p>The model rests on field evidence that predates generative AI, from Matt Beane's work on learning at work<a href="#ref11" class="ref">[11]</a>. In surgery, the adoption of robotic systems concentrated the operation in the senior surgeon's hands and drastically reduced residents' supervised practice hours. In finance, automated tools took away from junior analysts the building work that used to train them. Beane summarises the traditional mechanism in three words — "see one, do one, teach one" — and observes that formal education delivers what he calls <em>table stakes</em>, the basic qualification; real competence only emerges from practice alongside someone who knows.</p>
-
-  <p><strong>The practical implication:</strong> counting juniors measures the wrong thing. The operational question stops being "how many did we hire" and becomes: do the ones who are here work close to someone who knows, on problems that still require judgment?</p>
 
   <h3 class="sub">What about mentoring programmes?</h3>
 
@@ -403,6 +428,12 @@
     <p class="chart-note">Bars proportional to each other · Sources: [1] for the first two rows, [2] for the last two · The comparison is between age or seniority groups within each study, not across studies</p>
   </div>
 
+  <p>The effect only separates from statistical noise in 2024, once the strictest controls are applied — not in 2022, at the launch of ChatGPT, nor in 2023, when adoption began to scale.</p>
+
+  <details class="details-block">
+    <summary>See the full timeline, milestone by milestone</summary>
+    <div class="dblock-body">
+
   <div class="chart-block">
     <p class="chart-title">When the effect appears</p>
     <p class="chart-sub">And why 2024 is the milestone that matters</p>
@@ -433,6 +464,9 @@
     <p class="chart-note">Milestones published in [1] and [9] · The path between points is not reproduced because the full series are not released · The 2024 row is the most relevant: once you control for everything happening inside each firm over time, the effect attributable to AI exposure only separates from noise from that year onwards</p>
   </div>
 
+    </div>
+  </details>
+
   <h2 id="s03"><span class="eyebrow">03 — The mechanism</span>Why delegating doesn't train</h2>
 
   <p>There is a second, individual mechanism, and on this one there is recent causal evidence. The study's framing states its case up front:</p>
@@ -462,6 +496,12 @@
 
   <h2 id="s04"><span class="eyebrow">04 — The limits</span>Considerations</h2>
 
+  <p>The researchers themselves admit the decline may reflect overreaction to expectation rather than real substitution — and they cannot test that hypothesis directly. The strongest confounder, interest rates, was tested and partly set aside: the occupations most exposed to AI are, on average, less sensitive to interest rates. But the effect only becomes statistically significant in 2024, under the strictest controls. And all the evidence here is North American or British — there is no equivalent study using Brazilian data.</p>
+
+  <details class="details-block">
+    <summary>See the robustness tests and what companies say about themselves</summary>
+    <div class="dblock-body">
+
   <p><strong>What the researchers themselves say.</strong> The authors of the 62-million-worker study record that their findings "do not necessarily imply immediate task automation", that a plausible alternative is firms making forward-looking adjustments in response to expectations formed after the release of GPT-3.5, that "if firms have overreacted, the decline may be temporary" — and that their data <strong>does not allow them to directly test that mechanism</strong><a href="#ref1" class="ref">[1]</a>.</p>
 
   <p><strong>The economic confounder was tested — and partly set aside.</strong> In a February 2026 note, the authors of the payroll study responded to the objection that interest rates, not AI, explain the decline<a href="#ref9" class="ref">[9]</a>. Crossing occupational interest-rate exposure with AI exposure, they find that the most AI-exposed occupations are on average <strong>less</strong> exposed to interest rates — construction is the inverse example. And splitting occupations above and below the median of interest-rate exposure, in both groups the most AI-exposed decline more.</p>
@@ -481,6 +521,9 @@
   <p><strong>And there is a data point pointing to expectation.</strong> In July 2026, a survey of nearly two thousand workers in the United States and the United Kingdom found that 62% believed AI was reducing entry-level hiring — but only <strong>31%</strong> reported that it had happened in their own field. Asked about the biggest obstacle in today's market, only <strong>9%</strong> cited AI; pay (30%) and competition (25%) came first<a href="#ref12" class="ref">[12]</a>. Perception at twice the level of experience, and well above the stated priority.</p>
 
   <p><strong>The gap that bothers me most.</strong> All the evidence cited here is North American or British. I found no equivalent study using Brazilian data. Managers in Brazil are deciding about the structure of their own teams based on research conducted on a different labour market, with a different cost structure, different legislation and a different entry-level education profile.</p>
+
+    </div>
+  </details>
 
   <p><strong>What survives all of this is the model's argument</strong>, because it does not depend on the magnitude of the hiring decline. If training degrades when the novice stops working near the expert, uncertainty about how many juniors were hired does not change the recommendation.</p>
 
@@ -539,13 +582,22 @@
 
   <h3 class="sub">Who is already doing it</h3>
 
-  <p><strong>Brainlabs</strong>, a roughly 1,000-person U.S. media agency, went from 19 entry-level hires in October 2023 to 64 in its April 2026 cohort — a 237% increase<a href="#ref13" class="ref">[13]</a>. Founder and global CEO Dan Gilbert describes the design: the company has run a training programme since it started, always training new entrants on whichever skill mattered most at the time, and since October 2023 has used those cohorts to teach people to <strong>work alongside AI from day one</strong>, rather than training the old way and bolting AI on afterwards.</p>
+  <p><strong>Brainlabs</strong>, a roughly 1,000-person U.S. media agency, is the only concrete case found of rising junior hiring over the same period: from 19 entry-level hires in October 2023 to 64 in its April 2026 cohort — a 237% increase<a href="#ref13" class="ref">[13]</a>. The CEO attributes the jump to juniors trained to work with AI from day one, not to cost-cutting.</p>
+
+  <details class="details-block">
+    <summary>See the CEO's account and the method caveats</summary>
+    <div class="dblock-body">
+
+  <p>Founder and global CEO Dan Gilbert describes the design: the company has run a training programme since it started, always training new entrants on whichever skill mattered most at the time, and since October 2023 has used those cohorts to teach people to <strong>work alongside AI from day one</strong>, rather than training the old way and bolting AI on afterwards.</p>
 
   <p>Gilbert explicitly rejects the cost-cutting reading: according to him, the increase did not come from cutting juniors to save on tools, but because juniors properly trained on AI become valuable faster — a first-year strategist who can build and run an AI workflow delivers what used to require a team, which changes what the team is asked to deliver rather than shrinking it.</p>
 
   <div class="callout caveat">
     <p><strong>Caveats:</strong> this is the company's own account in a press article, with quotes edited by the journalist, without independent audit and without data on the quality of the professionals trained. A single case does not establish causation — it works as an illustration of a mechanism compatible with the model, not as a demonstration that it works.</p>
   </div>
+
+    </div>
+  </details>
 
   <p><strong>The rule the case suggests:</strong> those who depend on repetitive tasks to train people lose both things when they automate. Those who already trained on purpose lose only the task.</p>
 

@@ -117,6 +117,24 @@
     }
     .callout p { margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 1.05rem; color: var(--ink); }
     .callout.caveat { border-left-color: var(--reject); }
+    .details-block {
+      background: var(--card); border: 1px solid var(--line);
+      border-left: 3px solid var(--crop); border-radius: 0 5px 5px 0;
+      padding: 4px 24px; margin: 30px 0;
+    }
+    .details-block summary {
+      cursor: pointer; list-style: none;
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+      font-size: .86rem; color: var(--crop-deep); padding: 16px 0;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .details-block summary::-webkit-details-marker { display: none; }
+    .details-block summary::before {
+      content: '▸'; font-size: .8rem; transition: transform .15s ease;
+    }
+    .details-block[open] summary::before { transform: rotate(90deg); }
+    .details-block[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+    .details-block .dblock-body p:last-child { margin-bottom: 0; }
     .callout.caveat p { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .86rem; color: var(--slate); line-height: 1.6; }
     .callout.caveat strong { color: var(--ink); }
 
@@ -223,7 +241,7 @@
   <h1>Quem vai ser o sênior de 2035?</h1>
   <div class="deck">A IA absorveu parte do trabalho que formava especialistas — como garantir que jovens continuem expostos ao julgamento humano especializado</div>
 
-  <p class="lede">Durante décadas, a formação de um especialista foi subproduto automático do cargo de entrada. Ninguém precisava desenhá-la: o júnior fazia o trabalho repetitivo, errava perto de quem sabia, e em três ou quatro anos tinha virado outra pessoa. O mecanismo era invisível porque funcionava sozinho. A IA generativa absorveu parte desse trabalho a partir de 2023 — e a evidência disponível é mais matizada, e mais interessante, do que as manchetes sugerem.</p>
+  <p class="lede">Durante décadas, a formação de um especialista foi subproduto automático do cargo de entrada. Ninguém precisava desenhá-la: o júnior fazia o trabalho repetitivo, errava perto de quem sabia, e assim evoluía como profissional. O mecanismo era invisível porque funcionava sozinho. A IA generativa absorveu parte desse trabalho a partir de 2023 — e a evidência disponível é mais diversa, e mais interessante, do que as manchetes sugerem.</p>
 </header>
 
 <main>
@@ -267,13 +285,13 @@
 
   <h2 id="s01"><span class="eyebrow">01 — A origem</span>O primeiro degrau</h2>
 
-  <p>O trabalho de entrada sempre teve remuneração baixa, tarefa repetitiva e pouco prestígio. Revisão de documento, depuração de código, conferência de planilha, triagem de chamado, levantamento de dados. Era a condição para entrar no mercado de trabalho, e todo mundo entendia como condição.</p>
+  <p>O trabalho de entrada sempre teve remuneração baixa, tarefa repetitiva e pouco prestígio. Revisão de documento, depuração de código, conferência de planilha, triagem de chamado, levantamento de dados. Era a condição para entrar no mercado de trabalho.</p>
 
   <p>Só que ele nunca foi só condição. <strong>O trabalho repetitivo de início de carreira era o veículo de uma transferência que ninguém contratava explicitamente:</strong> o novato via o especialista decidir, errava numa escala em que o erro era barato, e absorvia o que não estava em manual nenhum. Julgamento de exceção. Quando desconfiar do dado. Quais regras existem no papel e quais valem na prática.</p>
 
   <p>Esse conteúdo tem nome na literatura econômica — <strong>conhecimento tácito</strong> — e duas propriedades incômodas: é incorporado à pessoa e não é verificável por terceiros<a href="#ref3" class="ref">[3]</a>. Não dá para escrever num contrato "você me transfere seu conhecimento tácito" e cobrar entrega. Ele passa por convivência ou não passa.</p>
 
-  <h3 class="sub">O caso extremo: o N1 do atendimento</h3>
+  <h3 class="sub">O caso extremo: o Nível 1 do atendimento</h3>
 
   <p><strong>N1, ou nível 1, é a primeira camada de atendimento</strong> — quem recebe o contato antes de qualquer especialista. Responde dúvida frequente, consulta status de pedido, faz alteração cadastral simples e encaminha ao N2 o que exige conhecimento técnico ou alçada. É trabalho roteirizado por desenho, com script, tempo médio controlado e baixa autonomia. E foi, por décadas, a porta de entrada de uma geração inteira de supervisores, monitores de qualidade e gerentes de operação.</p>
 
@@ -303,9 +321,15 @@
 
   <p>Não é um gradiente suave. São bacias de atração — e a passagem de uma para outra é difícil de reverter, porque o estoque de especialistas capazes de formar é ele próprio resultado da geração anterior.</p>
 
+  <p>O modelo traduz isso em número: no cenário agressivo, meio século de automação de entrada deixa a economia americana cerca de <strong>16% menor por habitante</strong> do que teria sido — e o desenho competitivo, isoladamente racional para cada empresa, empurra o sistema para automatizar mais do que seria ótimo para todos.</p>
+
+  <details class="details-block">
+    <summary>Ver a conta completa e as ressalvas de método</summary>
+    <div class="dblock-body">
+
   <p><strong>A conta de ordem de grandeza.</strong> O autor deriva uma expressão para a queda na taxa de crescimento de estado estacionário e a calcula com parâmetros da literatura: crescimento base de 2% ao ano e a premissa de que cerca de dois terços do crescimento de longo prazo vêm da difusão de conhecimento tácito. Nos dois cenários que testa — 5% e 30% das tarefas de entrada automatizadas — o resultado é uma redução de <strong>0,05 a 0,35 ponto percentual na taxa anual de crescimento do produto por habitante nos Estados Unidos</strong>.</p>
 
-  <p><strong>O que 0,35 ponto percentual significa em meio século.</strong> Parece marginal porque é décimo de ponto. Mas é <strong>18% do crescimento base</strong>, e taxa de crescimento compõe.</p>
+  <p><strong>O que 0,35 ponto percentual significa em meio século.</strong> Parece marginal mas é <strong>18% do crescimento base</strong>, e taxa de crescimento compõe.</p>
 
   <div class="tbl-wrap">
     <p class="tbl-title">Produto por habitante acumulado, nos dois cenários do modelo</p>
@@ -334,6 +358,9 @@
 
   <p>Vale destrinchar o termo, porque ele carrega o argumento. Cada empresa, isoladamente, automatiza a dose que faz sentido para si: a tarefa fica mais barata, a produção sobe, a decisão é racional. O que nenhuma delas paga é a formação dos especialistas que o mercado inteiro vai contratar daqui a dez anos — porque quem forma não necessariamente retém a pessoa formada. O benefício de formar vaza para os concorrentes; o custo de não formar chega depois e é dividido por todos. Cada decisão individual está certa e o resultado agregado é mais automação do que seria ótimo para a economia. É a estrutura clássica de uma externalidade: quem decide não arca com o custo, que recai sobre terceiros e sobre o futuro.</p>
 
+    </div>
+  </details>
+
   <p>O ponto mais útil do modelo para quem toma decisão contraria a leitura fatalista:</p>
 
   <div class="pull-quote">
@@ -348,8 +375,6 @@
   <h3 class="sub">O precedente que não é sobre IA</h3>
 
   <p>O modelo se apoia em evidência de campo anterior à IA generativa, do trabalho de Matt Beane sobre aprendizado no trabalho<a href="#ref11" class="ref">[11]</a>. Em cirurgia, a adoção de sistemas robóticos concentrou a operação nas mãos do cirurgião sênior e reduziu drasticamente as horas de prática supervisionada dos residentes. Em finanças, ferramentas automatizadas retiraram dos analistas juniores o trabalho de construção que os formava. Beane resume o mecanismo tradicional em três palavras — "veja um, faça um, ensine um" — e observa que a formação escolar entrega o que ele chama de <em>table stakes</em>, a qualificação básica; a competência real só emerge da prática ao lado de quem sabe.</p>
-
-  <p><strong>A implicação prática:</strong> contar juniores é medir a coisa errada. A pergunta operacional deixa de ser "quantos contratamos" e passa a ser: os que estão aqui trabalham perto de quem sabe, em problemas que ainda exigem julgamento?</p>
 
   <h3 class="sub">E os programas de mentoria?</h3>
 
@@ -403,6 +428,12 @@
     <p class="chart-note">Barras proporcionais entre si · Fontes: [1] para as duas primeiras linhas, [2] para as duas últimas · A comparação é entre grupos etários ou de senioridade dentro de cada estudo, não entre os dois estudos</p>
   </div>
 
+  <p>O efeito só se separa do ruído estatístico em 2024, quando se aplicam os controles mais rigorosos — não em 2022, no lançamento do ChatGPT, nem em 2023, quando a adoção começou a escalar.</p>
+
+  <details class="details-block">
+    <summary>Ver a linha do tempo completa, marco a marco</summary>
+    <div class="dblock-body">
+
   <div class="chart-block">
     <p class="chart-title">Quando o efeito aparece</p>
     <p class="chart-sub">E por que 2024 é o marco que importa</p>
@@ -433,6 +464,9 @@
     <p class="chart-note">Marcos publicados em [1] e [9] · O caminho entre os pontos não está reproduzido porque as séries completas não são divulgadas · A linha de 2024 é a mais relevante: quando se controla por tudo o que acontece dentro de cada empresa ao longo do tempo, o efeito atribuível à exposição à IA só se separa do ruído a partir daquele ano</p>
   </div>
 
+    </div>
+  </details>
+
   <h2 id="s03"><span class="eyebrow">03 — O mecanismo</span>Por que delegar não forma</h2>
 
   <p>Há um segundo mecanismo, individual, e sobre ele existe evidência causal recente. O enquadramento do estudo já diz a que veio:</p>
@@ -462,6 +496,12 @@
 
   <h2 id="s04"><span class="eyebrow">04 — Os limites</span>Considerações</h2>
 
+  <p>Os próprios pesquisadores admitem que a queda pode refletir expectativa em excesso, e não substituição real — e não conseguem testar essa hipótese diretamente. O confundidor mais forte, taxa de juros, foi testado e parcialmente afastado: as ocupações mais expostas à IA são, em média, menos sensíveis a juros. Mas o efeito só se torna estatisticamente significativo em 2024, sob os controles mais rigorosos. E toda a evidência aqui é norte-americana ou britânica — não há estudo equivalente com dados brasileiros.</p>
+
+  <details class="details-block">
+    <summary>Ver os testes de robustez e o que as empresas dizem de si mesmas</summary>
+    <div class="dblock-body">
+
   <p><strong>O que os próprios pesquisadores dizem.</strong> Os autores do estudo de 62 milhões de trabalhadores registram que seus achados "não implicam necessariamente automação imediata de tarefas", que uma alternativa plausível é as empresas estarem fazendo ajustes prospectivos diante de uma expectativa formada após o lançamento do GPT-3.5, que "se as empresas reagiram em excesso, a queda pode ser temporária" — e que seus dados <strong>não permitem testar diretamente esse mecanismo</strong><a href="#ref1" class="ref">[1]</a>.</p>
 
   <p><strong>O confundidor econômico foi testado — e parcialmente afastado.</strong> Em nota de fevereiro de 2026, os autores do estudo de folha de pagamento responderam à objeção de que juros, e não IA, explicariam a queda<a href="#ref9" class="ref">[9]</a>. Cruzando exposição ocupacional a juros com exposição a IA, encontram que as ocupações mais expostas à IA são em média <strong>menos</strong> expostas a juros — construção é o exemplo inverso. E separando ocupações acima e abaixo da mediana de exposição a juros, em ambos os grupos as mais expostas à IA caem mais.</p>
@@ -481,6 +521,9 @@
   <p><strong>E há um dado que aponta para expectativa.</strong> Em julho de 2026, pesquisa com quase dois mil trabalhadores dos Estados Unidos e do Reino Unido encontrou que 62% acreditavam que a IA estava reduzindo a contratação de entrada — mas apenas <strong>31%</strong> relatavam que isso tinha acontecido no próprio campo. E, questionados sobre o maior obstáculo no mercado hoje, só <strong>9%</strong> citaram a IA; remuneração (30%) e concorrência (25%) vieram antes<a href="#ref12" class="ref">[12]</a>. Percepção ao dobro da experiência, e bem acima da prioridade declarada.</p>
 
   <p><strong>A lacuna que mais me incomoda.</strong> Toda a evidência citada aqui é norte-americana ou britânica. Não localizei estudo equivalente com dados brasileiros. Gestores no Brasil estão decidindo sobre a estrutura das próprias equipes com base em pesquisa feita sobre outro mercado de trabalho, com outra estrutura de custo, outra legislação e outro perfil de escolaridade de entrada.</p>
+
+    </div>
+  </details>
 
   <p><strong>O que sobrevive a tudo isso é o argumento do modelo</strong>, porque ele não depende da magnitude da queda de contratação. Se a formação se degrada quando o novato deixa de trabalhar perto do especialista, a incerteza sobre quantos juniores foram contratados não muda a recomendação.</p>
 
@@ -539,13 +582,22 @@
 
   <h3 class="sub">Quem está fazendo</h3>
 
-  <p><strong>Brainlabs</strong>, agência de mídia americana com cerca de mil pessoas, passou de 19 contratações de entrada em outubro de 2023 para 64 na turma de abril de 2026 — alta de 237%<a href="#ref13" class="ref">[13]</a>. O fundador e CEO global, Dan Gilbert, descreve o desenho: a empresa mantém um programa de formação desde a fundação, sempre treinando quem entra na competência que mais importava em cada época, e desde outubro de 2023 usa as turmas para ensinar as pessoas a <strong>trabalhar ao lado da IA desde o primeiro dia</strong>, em vez de treinar do jeito antigo e acoplar IA depois.</p>
+  <p><strong>Brainlabs</strong>, agência de mídia americana com cerca de mil pessoas, é o único caso concreto localizado de alta na contratação júnior no mesmo período: de 19 contratações de entrada em outubro de 2023 para 64 na turma de abril de 2026 — alta de 237%<a href="#ref13" class="ref">[13]</a>. O CEO atribui o salto a juniores treinados para trabalhar com IA desde o primeiro dia, não a corte de custo.</p>
+
+  <details class="details-block">
+    <summary>Ver a fala do CEO e as ressalvas de método</summary>
+    <div class="dblock-body">
+
+  <p>O fundador e CEO global, Dan Gilbert, descreve o desenho: a empresa mantém um programa de formação desde a fundação, sempre treinando quem entra na competência que mais importava em cada época, e desde outubro de 2023 usa as turmas para ensinar as pessoas a <strong>trabalhar ao lado da IA desde o primeiro dia</strong>, em vez de treinar do jeito antigo e acoplar IA depois.</p>
 
   <p>Gilbert nega expressamente a leitura de corte: segundo ele, o aumento não veio de cortar júnior para economizar em ferramenta, e sim porque juniores bem treinados em IA se tornam valiosos mais rápido — um estrategista de primeiro ano que sabe montar e rodar um fluxo de IA entrega o que antes exigia um time, o que muda o que se pede ao time em vez de encolhê-lo.</p>
 
   <div class="callout caveat">
     <p><strong>Ressalvas:</strong> é relato da própria empresa em matéria de imprensa, com as falas editadas pela jornalista, sem auditoria independente e sem dado sobre a qualidade dos profissionais formados. Um caso isolado não estabelece causa — vale como ilustração de um mecanismo compatível com o modelo, não como demonstração de que ele funciona.</p>
   </div>
+
+    </div>
+  </details>
 
   <p><strong>A regra que o caso sugere:</strong> quem depende da tarefa repetitiva para formar gente perde as duas coisas quando automatiza. Quem já formava de propósito perde só a tarefa.</p>
 
