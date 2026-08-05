@@ -138,6 +138,68 @@
     .callout.caveat p { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .86rem; color: var(--slate); line-height: 1.6; }
     .callout.caveat strong { color: var(--ink); }
 
+    .chevron-flow { display: flex; margin: 32px 0 12px; }
+    .chevron-step {
+      flex: 1; min-width: 0; color: var(--card);
+      padding: 16px 10px 16px 20px;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
+      clip-path: polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%, 13% 50%);
+      margin-left: -13px;
+      border: 0; margin-top: 0; margin-bottom: 0; font: inherit;
+      cursor: pointer; text-align: left; appearance: none; -webkit-appearance: none;
+      opacity: .48; transition: opacity .18s ease;
+    }
+    .chevron-step:hover { opacity: .78; }
+    .chevron-step.is-active { opacity: 1; }
+    .chevron-step:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+    .chevron-step:first-child {
+      clip-path: polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%);
+      margin-left: 0;
+    }
+    .chevron-num {
+      font-family: 'IBM Plex Mono', monospace; font-size: .78rem; font-weight: 600;
+      opacity: .85;
+    }
+    .chevron-icon { width: 20px; height: 20px; }
+    .chevron-label {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .68rem;
+      font-weight: 600; line-height: 1.25;
+    }
+    .flow-caption {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: .12em; color: var(--faint);
+      margin: 0 0 14px;
+    }
+    .flow-detail-item { display: none; }
+    .flow-detail-item.is-active { display: block; animation: flowFade .25s ease; }
+    @keyframes flowFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .flow-step {
+      background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+      padding: 22px 24px; margin: 0 0 30px;
+    }
+    .flow-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--crop); color: var(--card);
+      font-family: 'IBM Plex Mono', monospace; font-size: .74rem; font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .flow-step h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif; font-size: .95rem;
+      font-weight: 600; color: var(--ink); margin: 0 0 10px;
+    }
+    .flow-step p, .flow-step .tbl-wrap, .flow-step .callout, .flow-step ol.steps { margin-top: 0; }
+    .flow-step > *:last-child { margin-bottom: 0; }
+
+    @media (max-width: 600px) {
+      .chevron-flow { flex-direction: column; }
+      .chevron-step, .chevron-step:first-child {
+        clip-path: none; margin-left: 0; flex-direction: row; align-items: center;
+        border-bottom: 1px solid rgba(255,255,255,.15);
+      }
+      .chevron-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    }
+
     .pull-quote {
       border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
       padding: 28px 0; margin: 44px 0;
@@ -529,55 +591,79 @@
 
   <h2 id="s05"><span class="eyebrow">05 — A resposta</span>O que fazer — e quem já está fazendo</h2>
 
-  <h3 class="sub">Primeiro, a matriz de valor formativo</h3>
-
-  <p>Toda tarefa candidata à automação é avaliada hoje por duas dimensões: <strong>quanto custa</strong> e <strong>quão bem a máquina executa</strong>. Falta uma terceira — <strong>quanto aquela tarefa forma quem a executa.</strong> Para uso prático, as duas primeiras colapsam numa só — se é barato e a máquina faz bem, é automatizável — e o que resta é uma matriz de duas entradas:</p>
-
-  <div class="tbl-wrap">
-    <p class="tbl-title">Matriz de valor formativo</p>
-    <table>
-      <thead><tr><th></th><th>Baixo valor formativo</th><th>Alto valor formativo</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Difícil de automatizar</strong></td><td>Permanece humana por necessidade</td><td>Protegida por acidente — e é frágil</td></tr>
-        <tr><td><strong>Fácil de automatizar</strong></td><td>Automatize sem hesitar</td><td class="danger"><strong>Zona cega</strong> — economia imediata, custo diferido</td></tr>
-      </tbody>
-    </table>
+  <div class="chevron-flow" id="respostaFlow">
+    <button type="button" class="chevron-step is-active" data-step="1" aria-pressed="true" style="background:var(--crop)">
+      <span class="chevron-num">01</span>
+      <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <span class="chevron-label">A matriz de valor formativo</span>
+    </button>
+    <button type="button" class="chevron-step" data-step="2" aria-pressed="false" style="background:var(--accept)">
+      <span class="chevron-num">02</span>
+      <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+      <span class="chevron-label">O princípio de corte</span>
+    </button>
+    <button type="button" class="chevron-step" data-step="3" aria-pressed="false" style="background:var(--crop-deep)">
+      <span class="chevron-num">03</span>
+      <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+      <span class="chevron-label">Copiloto como mentor</span>
+    </button>
+    <button type="button" class="chevron-step" data-step="4" aria-pressed="false" style="background:var(--slate)">
+      <span class="chevron-num">04</span>
+      <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      <span class="chevron-label">Medir convivência</span>
+    </button>
   </div>
 
-  <p>O quadrante inferior direito é a tese inteira. <strong>As tarefas mais fáceis de automatizar tendem a ser as que mais formavam quem as executava</strong> — repetitivas, de baixo risco, com feedback rápido: exatamente as propriedades que fazem uma tarefa boa para treinar alguém e boa para uma máquina fazer. Automatizar ali não é errado. É um trade-off intertemporal que hoje é decidido sem que ninguém saiba que está decidindo.</p>
+  <p class="flow-caption">Clique em uma etapa para ver o detalhe</p>
 
-  <h3 class="sub">Segundo, o princípio de corte</h3>
-
-  <div class="callout">
-    <p><strong>Automatize a parte mecânica. Preserve um passo humano sempre que a tarefa ensina diagnóstico, priorização ou consequência.</strong></p>
-  </div>
-
-  <p>E o corolário, agora com evidência causal: <strong>a IA deve dar pista, não resposta.</strong> O estudo randomizado mostra que o custo de persistência se concentra em quem recebe a solução direta<a href="#ref7" class="ref">[7]</a>. Isso é configurável: escrever a própria análise antes de abrir o assistente, pedir crítica em vez de solução, alternar tarefas com e sem apoio.</p>
-
-  <h3 class="sub">Terceiro, copiloto de IA como mentor — e por que é ambíguo</h3>
-
-  <p>O modelo de Ide trata disso explicitamente, e a resposta é dos dois lados<a href="#ref3" class="ref">[3]</a>.</p>
-
-  <p><strong>A favor:</strong> copilotos oferecem acesso escalável a conhecimento de tipo tácito que antes só se adquiria por experiência direta. Eles <strong>podem compensar parcialmente</strong> a erosão, sobretudo ajudando profissionais que, quando novatos, não conseguiram desenvolver competência adequada. É democratização de expertise.</p>
-
-  <p><strong>Contra, por dois mecanismos distintos:</strong> a disponibilidade do copiloto <strong>enfraquece o incentivo do novato</strong> a investir em aprendizado prático — se a resposta está disponível, o esforço parece desperdício. E, ao substituir o arranjo de aprendizado que o especialista oferecia, o copiloto <strong>reduz a demanda do novato por esse arranjo</strong>, corroendo a própria instituição da mentoria pelo lado de quem seria mentorado.</p>
-
-  <p><strong>A leitura para quem decide:</strong> copiloto melhora o piso e pode rebaixar o teto. Faz sentido para quem já passou da formação e para quem ficou para trás. Faz menos sentido sem restrição para quem está na janela em que deveria estar construindo julgamento — que é precisamente onde a maioria coloca primeiro, porque é onde o ganho aparece mais rápido.</p>
-
-  <h3 class="sub">Quarto, medir convivência e não participação</h3>
-
-  <p>Cinco perguntas para comitê executivo:</p>
-
-  <ol class="steps">
-    <li>Quais tarefas saíram das vagas de entrada nos últimos dois anos, e o que cada uma formava?</li>
-    <li>Quantas horas por mês um profissional em formação passa trabalhando <strong>junto</strong> com alguém no topo da competência da casa, em produção real e não em treinamento formal?</li>
-    <li>Nossos especialistas mais capazes formam quantas pessoas hoje? E há três anos?</li>
-    <li>Qual é o tempo entre entrada e autonomia plena na função? Está subindo ou caindo?</li>
-    <li>Se metade dos nossos seniores saísse em dezoito meses, de onde viriam os substitutos?</li>
-  </ol>
-
-  <div class="callout caveat">
-    <p><strong>Uma advertência sobre a pergunta 2:</strong> ela é a que importa e é a única que nenhum sistema de RH ou de operação responde hoje. Horas de produção conjunta não são capturadas por ninguém. Instrumentá-la exige decisão deliberada — marcar coautoria em chamado, registrar par em revisão, contabilizar acompanhamento em produção. É trabalho novo, e é o trabalho que separa quem vai saber a resposta de quem vai descobrir tarde.</p>
+  <div class="flow-detail-group" id="respostaDetail">
+    <div class="flow-step flow-detail-item is-active" data-step="1">
+      <span class="flow-num" style="background:var(--crop)">01</span>
+      <h3>A matriz de valor formativo</h3>
+      <p>Toda tarefa candidata à automação é avaliada hoje por duas dimensões: <strong>quanto custa</strong> e <strong>quão bem a máquina executa</strong>. Falta uma terceira — <strong>quanto aquela tarefa forma quem a executa.</strong> Para uso prático, as duas primeiras colapsam numa só — se é barato e a máquina faz bem, é automatizável — e o que resta é uma matriz de duas entradas:</p>
+      <div class="tbl-wrap">
+        <p class="tbl-title">Matriz de valor formativo</p>
+        <table>
+          <thead><tr><th></th><th>Baixo valor formativo</th><th>Alto valor formativo</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Difícil de automatizar</strong></td><td>Permanece humana por necessidade</td><td>Protegida por acidente — e é frágil</td></tr>
+            <tr><td><strong>Fácil de automatizar</strong></td><td>Automatize sem hesitar</td><td class="danger"><strong>Zona cega</strong> — economia imediata, custo diferido</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>O quadrante inferior direito é a tese inteira. <strong>As tarefas mais fáceis de automatizar tendem a ser as que mais formavam quem as executava</strong> — repetitivas, de baixo risco, com feedback rápido: exatamente as propriedades que fazem uma tarefa boa para treinar alguém e boa para uma máquina fazer. Automatizar ali não é errado. É um trade-off intertemporal que hoje é decidido sem que ninguém saiba que está decidindo.</p>
+    </div>
+    <div class="flow-step flow-detail-item" data-step="2">
+      <span class="flow-num" style="background:var(--accept)">02</span>
+      <h3>O princípio de corte</h3>
+      <div class="callout">
+        <p><strong>Automatize a parte mecânica. Preserve um passo humano sempre que a tarefa ensina diagnóstico, priorização ou consequência.</strong></p>
+      </div>
+      <p>E o corolário, agora com evidência causal: <strong>a IA deve dar pista, não resposta.</strong> O estudo randomizado mostra que o custo de persistência se concentra em quem recebe a solução direta<a href="#ref7" class="ref">[7]</a>. Isso é configurável: escrever a própria análise antes de abrir o assistente, pedir crítica em vez de solução, alternar tarefas com e sem apoio.</p>
+    </div>
+    <div class="flow-step flow-detail-item" data-step="3">
+      <span class="flow-num" style="background:var(--crop-deep)">03</span>
+      <h3>Copiloto de IA como mentor — e por que é ambíguo</h3>
+      <p>O modelo de Ide trata disso explicitamente, e a resposta é dos dois lados<a href="#ref3" class="ref">[3]</a>.</p>
+      <p><strong>A favor:</strong> copilotos oferecem acesso escalável a conhecimento de tipo tácito que antes só se adquiria por experiência direta. Eles <strong>podem compensar parcialmente</strong> a erosão, sobretudo ajudando profissionais que, quando novatos, não conseguiram desenvolver competência adequada. É democratização de expertise.</p>
+      <p><strong>Contra, por dois mecanismos distintos:</strong> a disponibilidade do copiloto <strong>enfraquece o incentivo do novato</strong> a investir em aprendizado prático — se a resposta está disponível, o esforço parece desperdício. E, ao substituir o arranjo de aprendizado que o especialista oferecia, o copiloto <strong>reduz a demanda do novato por esse arranjo</strong>, corroendo a própria instituição da mentoria pelo lado de quem seria mentorado.</p>
+      <p><strong>A leitura para quem decide:</strong> copiloto melhora o piso e pode rebaixar o teto. Faz sentido para quem já passou da formação e para quem ficou para trás. Faz menos sentido sem restrição para quem está na janela em que deveria estar construindo julgamento — que é precisamente onde a maioria coloca primeiro, porque é onde o ganho aparece mais rápido.</p>
+    </div>
+    <div class="flow-step flow-detail-item" data-step="4">
+      <span class="flow-num" style="background:var(--slate)">04</span>
+      <h3>Medir convivência, não participação</h3>
+      <p>Cinco perguntas para comitê executivo:</p>
+      <ol class="steps">
+        <li>Quais tarefas saíram das vagas de entrada nos últimos dois anos, e o que cada uma formava?</li>
+        <li>Quantas horas por mês um profissional em formação passa trabalhando <strong>junto</strong> com alguém no topo da competência da casa, em produção real e não em treinamento formal?</li>
+        <li>Nossos especialistas mais capazes formam quantas pessoas hoje? E há três anos?</li>
+        <li>Qual é o tempo entre entrada e autonomia plena na função? Está subindo ou caindo?</li>
+        <li>Se metade dos nossos seniores saísse em dezoito meses, de onde viriam os substitutos?</li>
+      </ol>
+      <div class="callout caveat">
+        <p><strong>Uma advertência sobre a pergunta 2:</strong> ela é a que importa e é a única que nenhum sistema de RH ou de operação responde hoje. Horas de produção conjunta não são capturadas por ninguém. Instrumentá-la exige decisão deliberada — marcar coautoria em chamado, registrar par em revisão, contabilizar acompanhamento em produção. É trabalho novo, e é o trabalho que separa quem vai saber a resposta de quem vai descobrir tarde.</p>
+      </div>
+    </div>
   </div>
 
   <h3 class="sub">Quem está fazendo</h3>
@@ -645,6 +731,29 @@
   <p class="article-note">Argumento autoral com base nas fontes listadas · As fontes [6], [10], [12] e [13] são de veículos de imprensa ou plataformas comerciais com interesse declarado no tema, e estão sinalizadas como tal ao longo do texto · A fonte [11] é citação de segunda mão · Nota de posição: estudo independente, sem vínculo comercial com as empresas, consultorias ou instituições citadas</p>
 
 </main>
+
+<script>
+(function () {
+  var group = document.getElementById('respostaFlow');
+  var detail = document.getElementById('respostaDetail');
+  if (!group || !detail) return;
+  var steps = group.querySelectorAll('.chevron-step');
+  var items = detail.querySelectorAll('.flow-detail-item');
+  steps.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = btn.getAttribute('data-step');
+      steps.forEach(function (s) {
+        var active = s === btn;
+        s.classList.toggle('is-active', active);
+        s.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      items.forEach(function (it) {
+        it.classList.toggle('is-active', it.getAttribute('data-step') === target);
+      });
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
